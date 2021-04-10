@@ -5,10 +5,11 @@
  */
 package traveller;
 
+import traveller.hull.Hull;
 import static traveller.Customization.CUSTOMIZED;
-import traveller.HullDefinitions.Coating;
-import traveller.HullDefinitions.HullConfiguration;
-import traveller.HullDefinitions.HullType;
+import traveller.hull.Definitions.Coating;
+import traveller.hull.Definitions.HullConfiguration;
+import traveller.hull.Definitions.HullType;
 
 /**
  *

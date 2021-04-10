@@ -3,26 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package traveller;
+package traveller.hull;
 
 /**
  *
  * @author PR3J
  */
-public class HullOption {
-    private boolean option = false;
-    private int optTL = 0;
-    private int optValue = 0;
-    private double optUsedTon = 0;
-    private int optCost = 0;
-    private double optCostModf = 0;
+public class Options {
+    static boolean option = false;
+    static int optTL = 0;
+    static int optValue = 0;
+    static double optUsedTon = 0;
+    static int optCost = 0;
+    static double optCostModf = 0;
 
     public boolean setOption(boolean opt) {
-        return this.option = opt;
+        return option = opt;
     }
     
     public boolean isOption() {
         return option;
+    }
+
+    public int maxOptTL(int tl) {
+        return Math.max(optTL, tl);
     }
 
     public int getOptTL() {

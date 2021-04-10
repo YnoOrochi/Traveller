@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package traveller;
+package traveller.hull;
 
-import static traveller.HullDefinitions.Streamlined.*;
+import static traveller.hull.Definitions.Streamlined.*;
 
 /**
  *
  * @author PR3J
  */
-public class HullDefinitions {
+public class Definitions {
     // --------------
     // Constants
     // --------------

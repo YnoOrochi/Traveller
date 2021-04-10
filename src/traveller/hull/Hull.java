@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package traveller;
+package traveller.hull;
 
+import traveller.hull.Definitions;
 import java.util.Arrays;
-import static java.util.Arrays.stream;
-import traveller.HullDefinitions.Coating;
-import traveller.HullDefinitions.HullConfiguration;
-import traveller.HullDefinitions.HullType;
-import traveller.HullDefinitions.Streamlined;
+import traveller.hull.Definitions.Coating;
+import traveller.hull.Definitions.HullConfiguration;
+import traveller.hull.Definitions.HullType;
+import traveller.hull.Definitions.Streamlined;
 
 /**
  *
  * @author PR3J
  */
-class Hull {
+public class Hull {
     // --------------
     // Constants
     // --------------
@@ -88,13 +88,13 @@ class Hull {
     // --------------
     // Coating
     // --------------
-    private HullDefinitions.Coating coating = HullDefinitions.Coating.NONE;
+    private Definitions.Coating coating = Definitions.Coating.NONE;
     
-    public void changeCoating(HullDefinitions.Coating coating) {
+    public void changeCoating(Definitions.Coating coating) {
         this.coating = coating;
     }
     
-    public HullDefinitions.Coating getCoating() {
+    public Definitions.Coating getCoating() {
         return this.coating;
     }
 
