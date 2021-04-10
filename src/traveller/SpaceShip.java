@@ -5,6 +5,7 @@
  */
 package traveller;
 
+import static traveller.Customization.CUSTOMIZED;
 import traveller.HullDefinitions.Coating;
 import traveller.HullDefinitions.HullConfiguration;
 import traveller.HullDefinitions.HullType;
@@ -22,7 +23,7 @@ public class SpaceShip {
     private String name;
     private String version;
     private int tonnage;
-    private boolean custom;             // Custom or Standard Type
+    private Customization custom;             // Custom or Standard Type
     
     // -------------
     // calculated variables
@@ -70,7 +71,7 @@ public class SpaceShip {
     // class alternative constructors
     // -------------
     //
-    public SpaceShip(String name, String version, int tonnage, boolean custom) {
+    public SpaceShip(String name, String version, int tonnage, Customization custom) {
         setName(name);
         setVersion(version);
         setTonnage(tonnage);
@@ -119,11 +120,11 @@ public class SpaceShip {
         }
     }
 
-    public boolean getType() {
+    public Customization getType() {
         return custom;
     }
 
-    public void setType(boolean custom) {
+    public void setType(Customization custom) {
         this.custom = custom;
         setCostMCr(this.bldCost); 
     }
@@ -133,7 +134,11 @@ public class SpaceShip {
     }
 
     public void setCostMCr(double cost) {
-        this.costMCr = cRound(cost * (custom ? 1.01 : 0.9) / 1E6, 2); 
+        this.costMCr = cRound(cost * (isCustomized() ? 1.01 : 0.9) / 1E6, 2); 
+    }
+
+    public boolean isCustomized() {
+        return custom == CUSTOMIZED;
     }
 
 

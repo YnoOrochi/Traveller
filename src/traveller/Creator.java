@@ -5,6 +5,8 @@
  */
 package traveller;
 
+import static traveller.Customization.OFF_THE_SHELF;
+
 /**
  *
  * @author PR3J
@@ -21,7 +23,7 @@ public class Creator {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        SpaceShip a = new SpaceShip("A", "tst", 100, false);
+        SpaceShip a = new SpaceShip("A", "tst", 100, OFF_THE_SHELF);
         
 //        a.changeCost(2345678);
 //        a.changePower(50);
