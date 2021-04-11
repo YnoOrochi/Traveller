@@ -29,7 +29,7 @@ public class Creator {
 //        a.changePower(50);
 //        a.changeTon(33);
 //        System.out.println(a.getHull().getHP());
-        System.out.println(a.hull.hullOpt[1].toString());
+        System.out.println(a.hull.hullOpt[3].toString());
         System.out.println(a.toString());
     }
     
