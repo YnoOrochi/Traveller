@@ -12,7 +12,7 @@ package traveller.hull;
 public class NonGHull extends Options {
     
     /* ---------
-    *  Non-gravity Hull maximum hullSize is 500,000 tons
+    *  Non-gravity Hull maximum optHullSize is 500,000 tons
     --------- */
     private final int NONG_MAX = 500000;
 
@@ -28,7 +28,7 @@ public class NonGHull extends Options {
     --------- */
     @Override
     public boolean setOption(boolean opt) {
-        if (opt && this.hullSize > NONG_MAX) return this.option = false;
+        if (opt && this.optHullSize > NONG_MAX) return this.option = false;
         
         this.option = opt;
         return true;

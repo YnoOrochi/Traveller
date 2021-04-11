@@ -32,7 +32,7 @@ public class EAGrid extends Options {
     --------- */
     @Override
     public double getOptUsedTon() {
-        if (isOption()) return 0.02 * hullSize;
+        if (isOption()) return 0.02 * optHullSize;
         else return 0;
     }
     

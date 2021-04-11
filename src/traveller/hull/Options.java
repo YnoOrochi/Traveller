@@ -10,7 +10,7 @@ package traveller.hull;
  * @author PR3J
  */
 public class Options {
-    protected int hullSize;
+    protected static int optHullSize;
     protected int optSize = 0;
     protected boolean option = false;
 
@@ -18,7 +18,7 @@ public class Options {
     *  Option constructor
     --------- */
     public Options(int size) {
-        this.hullSize = size;
+        this.optHullSize = size;
     }
 
     /* ---------
@@ -50,10 +50,14 @@ public class Options {
     }
 
     /* ---------
-    *  Option Specific Tonnage
+    *  Option Specific Size in ton
     --------- */
     public int getOptSize() {
         return this.optSize;
+    }
+    
+    public void setOptSize(int size) {
+        this.optSize = size;
     }
 
     /* ---------
@@ -82,7 +86,7 @@ public class Options {
     --------- */
     @Override
     public String toString() {
-        return "Options{" + "size=" + hullSize + ", option=" + option + '}';
+        return "Options{" + "size=" + optHullSize + ", option=" + option + '}';
     }
 
 }
