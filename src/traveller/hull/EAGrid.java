@@ -9,29 +9,39 @@ package traveller.hull;
  *
  * @author PR3J
  */
-public class HeatShield extends Options {
+public class EAGrid extends Options {
 
-    public HeatShield(int size) {
+    /* ---------
+    *  Constructor
+    --------- */
+    public EAGrid(int size) {
         super(size);
+    }
+
+    @Override
+    public int getOptTL() {
+        if (isOption()) return 8;
+        else return 0;
     }
     
     @Override
-    public int getOptTL() {
-        if (isOption()) return 6;
+    public double getOptUsedTon() {
+        if (isOption()) return 0.02 * size;
         else return 0;
     }
     
     @Override
     public int getOptCost() {
-        if (isOption()) return 100000;
+        if (isOption()) return 40000;
         else return 0;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(HeatShield=").append(isOption());
+        sb.append("Option(EAGrig=").append(isOption());
         if (getOptTL() != 0) sb.append(", TL=").append(getOptTL());
+        if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
         if (getOptCost() != 0) sb.append(", Cost=").append(getOptCost());
         sb.append('}');
         return sb.toString();

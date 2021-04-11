@@ -9,28 +9,28 @@ package traveller.hull;
  *
  * @author PR3J
  */
-public class HeatShield extends Options {
-
-    public HeatShield(int size) {
+public class RadShield extends Options {
+    
+    public RadShield(int size) {
         super(size);
     }
     
     @Override
     public int getOptTL() {
-        if (isOption()) return 6;
+        if (isOption()) return 7;
         else return 0;
     }
     
     @Override
     public int getOptCost() {
-        if (isOption()) return 100000;
+        if (isOption()) return 25000;
         else return 0;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(HeatShield=").append(isOption());
+        sb.append("Option(RadShield=").append(isOption());
         if (getOptTL() != 0) sb.append(", TL=").append(getOptTL());
         if (getOptCost() != 0) sb.append(", Cost=").append(getOptCost());
         sb.append('}');

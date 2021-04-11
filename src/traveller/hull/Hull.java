@@ -5,7 +5,6 @@
  */
 package traveller.hull;
 
-import traveller.hull.Definitions;
 import java.util.Arrays;
 import traveller.hull.Definitions.Coating;
 import traveller.hull.Definitions.HullConfiguration;
@@ -42,6 +41,10 @@ public class Hull {
         this.setDoubleHull(outerHull);
         this.setHamsterCase(hmsSize);
         test("Change Size:" + this.size);
+        return this.size;
+    }
+    
+    public int getHullSize() {
         return this.size;
     }
 
@@ -98,6 +101,17 @@ public class Hull {
         return this.coating;
     }
 
+    // --------------
+    // Hull Options
+    // --------------
+
+//    Options[] hullOpt = { 
+    public Options[] hullOpt = { 
+        new EAGrid(size),
+        new HeatShield(size),
+        new RadShield(size)
+    };
+    
     // --------------
     // Emissions Absortion Grid
     // --------------

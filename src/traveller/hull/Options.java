@@ -10,43 +10,75 @@ package traveller.hull;
  * @author PR3J
  */
 public class Options {
-    static boolean option = false;
-    static int optTL = 0;
-    static int optValue = 0;
-    static double optUsedTon = 0;
-    static int optCost = 0;
-    static double optCostModf = 0;
+    protected int size;
+    protected boolean option = false;
 
+    /* ---------
+    *  Option constructor
+    --------- */
+    public Options(int size) {
+        this.size = size;
+    }
+
+    /* ---------
+    *  Option setter
+    --------- */
     public boolean setOption(boolean opt) {
-        return option = opt;
+        return this.option = opt;
     }
     
+    /* ---------
+    *  is Option on?
+    --------- */
     public boolean isOption() {
-        return option;
+        return this.option;
+    }
+
+    /* ---------
+    *  Tech Level
+    --------- */
+    public int getOptTL() {
+        return 0;
     }
 
     public int maxOptTL(int tl) {
-        return Math.max(optTL, tl);
+        return Math.max(this.getOptTL(), tl);
     }
 
-    public int getOptTL() {
-        return optTL;
+    /* ---------
+    *  Option Specific Tonnage
+    --------- */
+    public int getOptSize() {
+        return 0;
     }
 
-    public int getOptValue() {
-        return optValue;
-    }
-
+    /* ---------
+    *  Tonnage Used by Option
+    --------- */
     public double getOptUsedTon() {
-        return optUsedTon;
+        return 0;
     }
 
+    /* ---------
+    *  Option Specific Cost
+    --------- */
     public int getOptCost() {
-        return optCost;
+        return 0;
     }
 
+    /* ---------
+    *  Option Hull Cost Modifier
+    --------- */
     public double getOptCostModf() {
-        return optCostModf;
+        return 0;
+    }
+
+    /* ---------
+    *  basic toString
+    --------- */
+    @Override
+    public String toString() {
+        return "Options{" + "size=" + size + ", option=" + option + '}';
     }
 
 }

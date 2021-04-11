@@ -55,7 +55,8 @@ public class SpaceShip {
     // other component classes
     // -------------
     //
-    private Hull hull = new Hull(tonnage, HullType.STRD, Coating.NONE, HullConfiguration.SLND, true, 60, 20, true, true, true);
+    public Hull hull = new Hull(tonnage, HullType.STRD, Coating.NONE, HullConfiguration.SLND, true, 60, 20, true, true, true);
+    
     private Armour armour = new Armour();
     private MDrive mDrive = new MDrive();
     private JDrive jDrive = new JDrive();
