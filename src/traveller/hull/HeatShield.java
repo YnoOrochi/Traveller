@@ -11,22 +11,34 @@ package traveller.hull;
  */
 public class HeatShield extends Options {
 
+    /* ---------
+    *  Constructor
+    --------- */
     public HeatShield(int size) {
         super(size);
     }
     
+    /* ---------
+    *  Tech Level
+    --------- */
     @Override
     public int getOptTL() {
         if (isOption()) return 6;
         else return 0;
     }
     
+    /* ---------
+    *  Option Specific Cost
+    --------- */
     @Override
     public int getOptCost() {
         if (isOption()) return 100000;
         else return 0;
     }
 
+    /* ---------
+    *  toString
+    --------- */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

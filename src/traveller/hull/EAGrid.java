@@ -18,24 +18,36 @@ public class EAGrid extends Options {
         super(size);
     }
 
+    /* ---------
+    *  Tech Level
+    --------- */
     @Override
     public int getOptTL() {
         if (isOption()) return 8;
         else return 0;
     }
     
+    /* ---------
+    *  Tonnage Used by Option
+    --------- */
     @Override
     public double getOptUsedTon() {
-        if (isOption()) return 0.02 * size;
+        if (isOption()) return 0.02 * hullSize;
         else return 0;
     }
     
+    /* ---------
+    *  Option Specific Cost
+    --------- */
     @Override
     public int getOptCost() {
         if (isOption()) return 40000;
         else return 0;
     }
 
+    /* ---------
+    *  toString
+    --------- */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

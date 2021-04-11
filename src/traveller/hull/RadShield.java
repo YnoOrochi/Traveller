@@ -11,22 +11,34 @@ package traveller.hull;
  */
 public class RadShield extends Options {
     
+    /* ---------
+    *  Option constructor
+    --------- */
     public RadShield(int size) {
         super(size);
     }
     
+    /* ---------
+    *  Tech Level
+    --------- */
     @Override
     public int getOptTL() {
         if (isOption()) return 7;
         else return 0;
     }
     
+    /* ---------
+    *  Option Specific Cost
+    --------- */
     @Override
     public int getOptCost() {
         if (isOption()) return 25000;
         else return 0;
     }
 
+    /* ---------
+    *  toString
+    --------- */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
