@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package traveller.hull;
+package traveller.hull.options;
 
 /**
  *
@@ -11,7 +11,6 @@ package traveller.hull;
  */
 public class Options {
     protected static int optHullSize;
-    protected int optSize = 0;
     protected boolean option = false;
 
     /* ---------
@@ -47,17 +46,6 @@ public class Options {
 
     public int maxOptTL(int tl) {
         return Math.max(this.getOptTL(), tl);
-    }
-
-    /* ---------
-    *  Option Specific Size in ton
-    --------- */
-    public int getOptSize() {
-        return this.optSize;
-    }
-    
-    public void setOptSize(int size) {
-        this.optSize = size;
     }
 
     /* ---------

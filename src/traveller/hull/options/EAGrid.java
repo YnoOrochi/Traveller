@@ -3,27 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package traveller.hull;
+package traveller.hull.options;
 
 /**
  *
  * @author PR3J
  */
-public class RadShield extends Options {
-    
+public class EAGrid extends Options {
+
     /* ---------
-    *  Option constructor
+    *  Constructor
     --------- */
-    public RadShield(int size) {
+    public EAGrid(int size) {
         super(size);
     }
-    
+
     /* ---------
     *  Tech Level
     --------- */
     @Override
     public int getOptTL() {
-        if (isOption()) return 7;
+        if (isOption()) return 8;
+        else return 0;
+    }
+    
+    /* ---------
+    *  Tonnage Used by Option
+    --------- */
+    @Override
+    public double getOptUsedTon() {
+        if (isOption()) return 0.02 * optHullSize;
         else return 0;
     }
     
@@ -32,7 +41,7 @@ public class RadShield extends Options {
     --------- */
     @Override
     public int getOptCost() {
-        if (isOption()) return 25000;
+        if (isOption()) return 40000;
         else return 0;
     }
 
@@ -42,8 +51,9 @@ public class RadShield extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(RadShield=").append(isOption());
+        sb.append("Option(EAGrig=").append(isOption());
         if (getOptTL() != 0) sb.append(", TL=").append(getOptTL());
+        if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
         if (getOptCost() != 0) sb.append(", Cost=").append(getOptCost());
         sb.append('}');
         return sb.toString();

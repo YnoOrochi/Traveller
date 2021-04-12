@@ -5,11 +5,20 @@
  */
 package traveller.hull;
 
-import java.util.Arrays;
-import traveller.hull.Definitions.Coating;
+import traveller.hull.options.Configuration;
+import traveller.hull.options.DoubleHull;
+import traveller.hull.options.RadShield;
+import traveller.hull.options.Options;
+import traveller.hull.options.HeatShield;
+import traveller.hull.options.Type;
+import traveller.hull.options.Coating;
+import traveller.hull.options.EAGrid;
+import traveller.hull.options.HamsterCase;
+import traveller.hull.Definitions.CoatOptions;
 import traveller.hull.Definitions.HullConfiguration;
 import traveller.hull.Definitions.HullType;
 import traveller.hull.Definitions.Streamlined;
+import java.util.Arrays;
 
 /**
  *
@@ -89,15 +98,15 @@ public class Hull {
     }
     
     // --------------
-    // Coating
+    // CoatOptions
     // --------------
-    private Definitions.Coating coating = Definitions.Coating.NONE;
+    private Definitions.CoatOptions coating = Definitions.CoatOptions.NONE;
     
-    public void changeCoating(Definitions.Coating coating) {
+    public void changeCoating(Definitions.CoatOptions coating) {
         this.coating = coating;
     }
     
-    public Definitions.Coating getCoating() {
+    public Definitions.CoatOptions getCoating() {
         return this.coating;
     }
 
@@ -107,6 +116,9 @@ public class Hull {
 
 //    Options[] hullOpt = { 
     public Options[] hullOpt = { 
+        new Configuration(hullSize),
+        new Type(hullSize),
+        new Coating(hullSize),
         new EAGrid(hullSize),
         new HeatShield(hullSize),
         new RadShield(hullSize),
@@ -310,7 +322,7 @@ public class Hull {
     
     public Hull(int size,
                 HullType hullType,
-                Coating coating,
+                CoatOptions coating,
                 HullConfiguration hullConfig,
                 boolean nonGravity,
                 int doubleHull,

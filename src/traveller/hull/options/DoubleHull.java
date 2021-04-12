@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package traveller.hull;
+package traveller.hull.options;
 
 /**
  *
@@ -30,22 +30,30 @@ public class DoubleHull extends Options {
     --------- */
     public boolean setOption(int size) {
         if (size >= MIN || size <= MAX * optHullSize) {
-            this.setOptSize(size);
+            this.outerHull = size;
             return this.setOption(true);
         } else {
-            this.setOptSize(0);
+            this.outerHull = 0;
             this.setOption(false);
             return false;
         }
     }
     
     /* ---------
+    *  Outer Hull Size
+    --------- */
+    protected int outerHull = 0;
+    public int getOutHullSize() {
+        return this.outerHull;
+    }
+
+    /* ---------
     *  Tonnage Used by Option
     *       uses 0.1 ton for every ton of outer hull.
     --------- */
     @Override
     public double getOptUsedTon() {
-        if (isOption()) return 0.1 * getOptSize();
+        if (isOption()) return 0.1 * getOutHullSize();
         else return 0;
     }
     
@@ -56,7 +64,7 @@ public class DoubleHull extends Options {
     --------- */
     @Override
     public double getOptCostModf() {
-        if (isOption()) return 1 * (int) (getOptSize() / optHullSize);
+        if (isOption()) return 1 * (int) (getOutHullSize() / optHullSize);
         else return 0;
     }
 
@@ -67,7 +75,7 @@ public class DoubleHull extends Options {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Option(DoubleHull=").append(isOption());
-        if (getOptSize() != 0) sb.append(", OuterHull=").append(getOptSize());
+        if (getOutHullSize() != 0) sb.append(", OuterHull=").append(getOutHullSize());
         if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
         if (getOptCostModf() != 0) sb.append(", Cost=").append(getOptCostModf());
         sb.append('}');

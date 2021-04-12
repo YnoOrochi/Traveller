@@ -3,37 +3,51 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package traveller.hull;
+package traveller.hull.options;
+
+import traveller.hull.Definitions.CoatOptions;
+import static traveller.hull.Definitions.CoatOptions.*;
 
 /**
  *
  * @author PR3J
  */
-public class EAGrid extends Options {
-
+public class Coating extends Options {
+    
     /* ---------
-    *  Constructor
+    *  Option constructor
     --------- */
-    public EAGrid(int size) {
+    public Coating(int size) {
         super(size);
     }
+    
+    /* ---------
+    *  Coating Options
+    --------- */
+    private CoatOptions coat = NONE;
 
+    public CoatOptions getCoat() {
+        return coat;
+    }
+
+    public void setCoat(CoatOptions coat) {
+        this.coat = coat;
+    }
+
+    /* ---------
+    *  have special coating?
+    --------- */
+    @Override
+    public boolean isOption() {
+        return this.coat != NONE;
+    }
+    
     /* ---------
     *  Tech Level
     --------- */
     @Override
     public int getOptTL() {
-        if (isOption()) return 8;
-        else return 0;
-    }
-    
-    /* ---------
-    *  Tonnage Used by Option
-    --------- */
-    @Override
-    public double getOptUsedTon() {
-        if (isOption()) return 0.02 * optHullSize;
-        else return 0;
+        return this.coat.getCoatTL();
     }
     
     /* ---------
@@ -41,8 +55,7 @@ public class EAGrid extends Options {
     --------- */
     @Override
     public int getOptCost() {
-        if (isOption()) return 40000;
-        else return 0;
+        return this.coat.getCoatCost();
     }
 
     /* ---------
@@ -51,9 +64,8 @@ public class EAGrid extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(EAGrig=").append(isOption());
+        sb.append("Option(Coating=").append(this.coat.getCoatType());
         if (getOptTL() != 0) sb.append(", TL=").append(getOptTL());
-        if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
         if (getOptCost() != 0) sb.append(", Cost=").append(getOptCost());
         sb.append('}');
         return sb.toString();

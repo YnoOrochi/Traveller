@@ -7,7 +7,7 @@ package traveller;
 
 import traveller.hull.Hull;
 import static traveller.Customization.CUSTOMIZED;
-import traveller.hull.Definitions.Coating;
+import traveller.hull.Definitions.CoatOptions;
 import traveller.hull.Definitions.HullConfiguration;
 import traveller.hull.Definitions.HullType;
 
@@ -55,7 +55,7 @@ public class SpaceShip {
     // other component classes
     // -------------
     //
-    public Hull hull = new Hull(tonnage, HullType.STRD, Coating.NONE, HullConfiguration.SLND, true, 60, 20, true, true, true);
+    public Hull hull = new Hull(tonnage, HullType.STRD, CoatOptions.NONE, HullConfiguration.SLND, true, 60, 20, true, true, true);
     
     private Armour armour = new Armour();
     private MDrive mDrive = new MDrive();

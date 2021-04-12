@@ -21,12 +21,6 @@ public class Definitions {
     // ----------------
     // Hull Types
     // ----------------
-    public enum Streamlined {
-        Yes,
-        Partial,
-        No
-    }
-    
     public enum HullType {
         LGHT("Light", -0.25, -0.10), 
         STRD("Standard", 0, 0), 
@@ -66,6 +60,12 @@ public class Definitions {
     // ----------------
     // Hull Configurations
     // ----------------
+    public enum Streamlined {
+        Yes,
+        Partial,
+        No
+    }
+    
     public enum HullConfiguration {
         STRD("Standard", Partial, 0, 0, BSIC_COST, 1, " "),
         SLND("Streamlined", Yes, 0, 0.2, BSIC_COST, 1, " "),
@@ -135,28 +135,28 @@ public class Definitions {
     }
 
     // ----------------
-    // Coating - Reflec, Stealth or Superior Stealth
+    // CoatOptions - Reflec, Stealth or Superior Stealth
     // ----------------
-    public enum Coating {
+    public enum CoatOptions {
         NONE("None", 0, 0, "Standard hull"),
         RFLC("Reflec", 10, 100000, " "),
         STTH("Stealth", 10, 100000, " "),
         SSTH("Superior Stealth", 12, 1000000, " ");
         
-        private final String coating;
+        private final String coatType;
         private final int coatTL;
         private final int coatCost;
         private final String text;
 
-        private Coating(String coating, int coatTL, int coatCost, String text) {
-            this.coating = coating;
+        private CoatOptions(String coating, int coatTL, int coatCost, String text) {
+            this.coatType = coating;
             this.coatTL = coatTL;
             this.coatCost = coatCost;
             this.text = text;
         }
         
-        public String getCoating() {
-            return this.coating;
+        public String getCoatType() {
+            return this.coatType;
         }
         
         public int getCoatTL() {
@@ -174,7 +174,7 @@ public class Definitions {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append("Coating{").append(coating);
+            sb.append("Coating{").append(coatType);
             sb.append('}');
             return sb.toString();
         }
