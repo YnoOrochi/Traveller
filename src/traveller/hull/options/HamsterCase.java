@@ -12,13 +12,6 @@ package traveller.hull.options;
 public class HamsterCase extends Options {
 
     /* ---------
-    *  Option constructor
-    --------- */
-    public HamsterCase(int size) {
-        super(size);
-    }
-    
-    /* ---------
     *  Option setter
     --------- */
     public boolean setOption(int size) {
@@ -46,7 +39,7 @@ public class HamsterCase extends Options {
     --------- */
     @Override
     public double getOptUsedTon() {
-        if (isOption()) return 0.1 * getHmsSize();
+        if (isOptiOn()) return 0.1 * getHmsSize();
         else return 0;
     }
     
@@ -57,7 +50,7 @@ public class HamsterCase extends Options {
     --------- */
     @Override
     public double getOptCostModf() {
-        if (isOption()) return 2 * (int) (getHmsSize() / optHullSize);
+        if (isOptiOn()) return 2 * (int) (getHmsSize() / Options.hullSize);
         else return 0;
     }
 
@@ -67,10 +60,10 @@ public class HamsterCase extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(HamsterCase=").append(isOption());
+        sb.append("Option(HamsterCase=").append(isOptiOn());
         if (getHmsSize() != 0) sb.append(", OaseSize=").append(getHmsSize());
         if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
-        if (getOptCostModf() != 0) sb.append(", Cost=").append(getOptCostModf());
+        if (getOptCostModf() != 0) sb.append(", CostModf=").append(getOptCostModf());
         sb.append('}');
         return sb.toString();
     }

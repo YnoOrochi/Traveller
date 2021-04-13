@@ -12,24 +12,17 @@ package traveller.hull.options;
 public class DoubleHull extends Options {
     
     /* ---------
-    *  Minimum Double Hull optHullSize is 60 tons
+    *  Minimum Double Hull hullSize is 60 tons
     *  Maximun is 90% of ship hull
     --------- */
     private final int MIN = 60;
     private final double MAX = 0.9;
 
     /* ---------
-    *  Option constructor
-    --------- */
-    public DoubleHull(int size) {
-        super(size);
-    }
-    
-    /* ---------
     *  Option setter
     --------- */
     public boolean setOption(int size) {
-        if (size >= MIN || size <= MAX * optHullSize) {
+        if (size >= MIN || size <= MAX * Options.hullSize) {
             this.outerHull = size;
             return this.setOption(true);
         } else {
@@ -53,7 +46,7 @@ public class DoubleHull extends Options {
     --------- */
     @Override
     public double getOptUsedTon() {
-        if (isOption()) return 0.1 * getOutHullSize();
+        if (isOptiOn()) return 0.1 * getOutHullSize();
         else return 0;
     }
     
@@ -64,7 +57,7 @@ public class DoubleHull extends Options {
     --------- */
     @Override
     public double getOptCostModf() {
-        if (isOption()) return 1 * (int) (getOutHullSize() / optHullSize);
+        if (isOptiOn()) return 1 * (int) (getOutHullSize() / hullSize);
         else return 0;
     }
 
@@ -74,7 +67,7 @@ public class DoubleHull extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(DoubleHull=").append(isOption());
+        sb.append("Option(DoubleHull=").append(isOptiOn());
         if (getOutHullSize() != 0) sb.append(", OuterHull=").append(getOutHullSize());
         if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
         if (getOptCostModf() != 0) sb.append(", Cost=").append(getOptCostModf());

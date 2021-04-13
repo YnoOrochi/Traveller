@@ -6,6 +6,7 @@
 package traveller.hull.options;
 
 import traveller.hull.Definitions;
+import traveller.hull.Definitions.HullConfiguration;
 import static traveller.hull.Definitions.HullConfiguration.*;
 import traveller.hull.Definitions.Streamlined;
 
@@ -16,45 +17,45 @@ import traveller.hull.Definitions.Streamlined;
 public class Configuration extends Options {
     
     /* ---------
-    *  Option constructor
+    *  Hull Size
     --------- */
-    public Configuration(int size) {
-        super(size);
+    public int getHullSize() {
+        return Options.hullSize;
     }
     
-    /* ---------
-    *  Type Options
-    --------- */
-    private Definitions.HullConfiguration config = STRD;
+    public int setHullSize(int size) {
+        return Options.hullSize = Math.max(size, MIN_HULL);
+    }
 
-    public Definitions.HullConfiguration getConfig() {
+    /* ---------
+    *  Specific Methods
+    --------- */
+    private HullConfiguration config = STRD;
+
+    public HullConfiguration getConfig() {
         return config;
     }
 
-    public void setConfig(Definitions.HullConfiguration config) {
+    public void setConfig(HullConfiguration config) {
         this.config = config;
     }
-
-    /* ---------
-    *  is not standard?
-    --------- */
-    @Override
-    public boolean isOption() {
-        return this.config != STRD;
-    }
     
-    /* ---------
-    *  Streamlined ?
-    --------- */
+    /* Streamlined ? */
     public Streamlined isStreamlined() {
         return this.config.getStrLined();
     }
 
-    /* ---------
-    *  Hull Points Modifier
-    --------- */
+    /* Hull Points Modifier */
     public double getHPModf() {
         return this.config.getHPModf();
+    }
+    
+    /* ---------
+    *  is not standard?
+    --------- */
+    @Override
+    public boolean isOptiOn() {
+        return this.config != STRD;
     }
     
     /* ---------
@@ -77,7 +78,7 @@ public class Configuration extends Options {
     --------- */
     @Override
     public double getOptUsedTon() {
-        return (1 - this.config.getUseable()) * optHullSize;
+        return (1 - this.config.getUseable()) * hullSize;
     }
 
     /* ---------

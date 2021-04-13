@@ -15,13 +15,6 @@ import static traveller.hull.Definitions.HullType.*;
 public class Type extends Options {
     
     /* ---------
-    *  Option constructor
-    --------- */
-    public Type(int size) {
-        super(size);
-    }
-    
-    /* ---------
     *  Type Options
     --------- */
     private HullType type = STRD;
@@ -38,7 +31,7 @@ public class Type extends Options {
     *  is not standard?
     --------- */
     @Override
-    public boolean isOption() {
+    public boolean isOptiOn() {
         return this.type != STRD;
     }
     

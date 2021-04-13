@@ -24,7 +24,7 @@ import java.util.Arrays;
  *
  * @author PR3J
  */
-public class Hull {
+public class AttHull {
     // --------------
     // Constants
     // --------------
@@ -32,12 +32,12 @@ public class Hull {
     private final int NONG_MAX = 500000;
     
     // --------------
-    // Hull Size
+    // AttHull Size
     // --------------
     private int hullSize;
 
     public int hullUpdate(int size) {
-        this.hullSize = (size > MIN_HULL) ? size : MIN_HULL;
+        this.hullSize = Math.max(size, MIN_HULL);
         if (getNonGHull() && this.hullSize > NONG_MAX) this.hullSize = NONG_MAX;
         
         this.changeHullType(hullType);
@@ -58,7 +58,7 @@ public class Hull {
     }
 
     // --------------
-    // Hull Type
+    // AttHull Type
     // --------------
     private double typCostModf;
     private double typHPModf;
@@ -75,7 +75,7 @@ public class Hull {
     }
     
     // --------------
-    // Hull Configuration
+    // AttHull Configuration
     // --------------
     private int cfgHullCost;
     private double cfgCostModf;
@@ -110,22 +110,6 @@ public class Hull {
         return this.coating;
     }
 
-    // --------------
-    // Hull Options
-    // --------------
-
-//    Options[] hullOpt = { 
-    public Options[] hullOpt = { 
-        new Configuration(hullSize),
-        new Type(hullSize),
-        new Coating(hullSize),
-        new EAGrid(hullSize),
-        new HeatShield(hullSize),
-        new RadShield(hullSize),
-        new DoubleHull(hullSize),
-        new HamsterCase(hullSize)
-    };
-    
     // --------------
     // Emissions Absortion Grid
     // --------------
@@ -196,7 +180,7 @@ public class Hull {
     }
 
     // --------------
-    // Non-gravity Hull
+    // Non-gravity AttHull
     //  cost Cr25000 per ton, maximum hullSize of 500,000 tons
     // --------------
     private final int NONG_COST = 25000;
@@ -211,7 +195,7 @@ public class Hull {
     }
     
     // --------------
-    // Double Hull
+    // Double AttHull
     //  Min 60T, uses 0.1 ton * outer hull and the outer hull cost 1% more
     // --------------
     private double dbUsedTon;
@@ -239,10 +223,10 @@ public class Hull {
     
     // --------------
     // Hamster Case
-    //  Uses 0.1 ton * cage tonnage and it costs 2% more for every 1% of Hull
+    //  Uses 0.1 ton * cage tonnage and it costs 2% more for every 1% of AttHull
     // --------------
     private double hmsUsedTon;
-    private int hmsSize;                // in Ton, 0-90% of the Hull
+    private int hmsSize;                // in Ton, 0-90% of the AttHull
     private double hmsCostModf;
     private boolean hamsterCase = false;
 
@@ -269,7 +253,7 @@ public class Hull {
     }
 
     // --------------
-    // Breakaway Hull
+    // Breakaway AttHull
     // --------------
     private boolean bAwayHull = false;
     
@@ -316,11 +300,11 @@ public class Hull {
     // Other Methods
     // --------------
     
-    public Hull(int size) {
+    public AttHull(int size) {
         this.hullUpdate(size);
     }
     
-    public Hull(int size,
+    public AttHull(int size,
                 HullType hullType,
                 CoatOptions coating,
                 HullConfiguration hullConfig,

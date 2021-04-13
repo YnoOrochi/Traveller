@@ -12,18 +12,11 @@ package traveller.hull.options;
 public class EAGrid extends Options {
 
     /* ---------
-    *  Constructor
-    --------- */
-    public EAGrid(int size) {
-        super(size);
-    }
-
-    /* ---------
     *  Tech Level
     --------- */
     @Override
     public int getOptTL() {
-        if (isOption()) return 8;
+        if (isOptiOn()) return 8;
         else return 0;
     }
     
@@ -32,7 +25,7 @@ public class EAGrid extends Options {
     --------- */
     @Override
     public double getOptUsedTon() {
-        if (isOption()) return 0.02 * optHullSize;
+        if (isOptiOn()) return 0.02 * Options.hullSize;
         else return 0;
     }
     
@@ -41,7 +34,7 @@ public class EAGrid extends Options {
     --------- */
     @Override
     public int getOptCost() {
-        if (isOption()) return 40000;
+        if (isOptiOn()) return 40000;
         else return 0;
     }
 
@@ -51,7 +44,7 @@ public class EAGrid extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(EAGrig=").append(isOption());
+        sb.append("Option(EAGrig=").append(isOptiOn());
         if (getOptTL() != 0) sb.append(", TL=").append(getOptTL());
         if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
         if (getOptCost() != 0) sb.append(", Cost=").append(getOptCost());

@@ -12,23 +12,16 @@ package traveller.hull.options;
 public class NonGHull extends Options {
     
     /* ---------
-    *  Non-gravity Hull maximum optHullSize is 500,000 tons
+    *  Non-gravity Hull maximum hullSize is 500,000 tons
     --------- */
     private final int NONG_MAX = 500000;
 
-    /* ---------
-    *  Option constructor
-    --------- */
-    public NonGHull(int size) {
-        super(size);
-    }
-    
     /* ---------
     *  Option setter
     --------- */
     @Override
     public boolean setOption(boolean opt) {
-        if (opt && this.optHullSize > NONG_MAX) return this.option = false;
+        if (opt && Options.hullSize > NONG_MAX) return this.option = false;
         
         this.option = opt;
         return true;
@@ -41,7 +34,7 @@ public class NonGHull extends Options {
     --------- */
     @Override
     public double getOptCostModf() {
-        if (isOption()) return -0.5;
+        if (isOptiOn()) return -0.5;
         else return 0;
     }
 
@@ -51,9 +44,9 @@ public class NonGHull extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(RadShield=").append(isOption());
+        sb.append("Option(NonGHull=").append(isOptiOn());
         sb.append(", MAXTon=").append(NONG_MAX);
-        if (getOptCostModf() != 0) sb.append(", Cost=").append(getOptCostModf());
+        if (getOptCostModf() != 0) sb.append(", CostModf=").append(getOptCostModf());
         sb.append('}');
         return sb.toString();
     }

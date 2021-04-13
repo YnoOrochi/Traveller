@@ -9,16 +9,22 @@ package traveller.hull.options;
  *
  * @author PR3J
  */
-public class Options {
-    protected static int optHullSize;
-    protected boolean option = false;
+public abstract class Options {
 
     /* ---------
-    *  Option constructor
+    *  Atributes
     --------- */
-    public Options(int size) {
-        this.optHullSize = size;
-    }
+    protected final int MIN_HULL = 10;
+    
+    protected static int hullSize;
+    protected boolean option = false;
+
+//    /* ---------
+//    *  Option constructor
+//    --------- */
+//    public Options(int size) {
+//        this.hullSize = size;
+//    }
 
     /* ---------
     *  Option setter
@@ -30,10 +36,21 @@ public class Options {
         return true;
     }
     
+//    /* ---------
+//    *  Huls Size
+//    --------- */
+//    public int getHullSize() {
+//        return this.hullSize;
+//    }
+//    
+//    public int setHullSize(int size) {
+//        return this.hullSize = Math.max(size, MIN_HULL);
+//    }
+
     /* ---------
     *  is Option on?
     --------- */
-    public boolean isOption() {
+    public boolean isOptiOn() {
         return this.option;
     }
 
@@ -74,7 +91,7 @@ public class Options {
     --------- */
     @Override
     public String toString() {
-        return "Options{" + "size=" + optHullSize + ", option=" + option + '}';
+        return "Options{" + "size=" + hullSize + ", option=" + option + '}';
     }
 
 }

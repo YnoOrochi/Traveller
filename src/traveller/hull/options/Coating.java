@@ -15,13 +15,6 @@ import static traveller.hull.Definitions.CoatOptions.*;
 public class Coating extends Options {
     
     /* ---------
-    *  Option constructor
-    --------- */
-    public Coating(int size) {
-        super(size);
-    }
-    
-    /* ---------
     *  Coating Options
     --------- */
     private CoatOptions coat = NONE;
@@ -38,7 +31,7 @@ public class Coating extends Options {
     *  have special coating?
     --------- */
     @Override
-    public boolean isOption() {
+    public boolean isOptiOn() {
         return this.coat != NONE;
     }
     
