@@ -39,5 +39,6 @@ public class Creator {
             System.out.println(a.cHull.hullOpt[i].toString());
         }
         System.out.println("HullSize:" + a.cHull.getHullSize());
+        System.out.println(a.cHull.toString());
     }
 }
