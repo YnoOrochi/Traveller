@@ -5,9 +5,10 @@
  */
 package traveller;
 
-import traveller.hull.Hull;
+//import traveller.hull.AttHull;
+import traveller.hull.ClsHull;
 import static traveller.Customization.CUSTOMIZED;
-import traveller.hull.Definitions.Coating;
+import traveller.hull.Definitions.CoatOptions;
 import traveller.hull.Definitions.HullConfiguration;
 import traveller.hull.Definitions.HullType;
 
@@ -35,7 +36,7 @@ public class SpaceShip {
     private double useable = 1.00;      // % of tonnage useable
     private int tl = 7;                 // Tech Level (TL)
     private int ap = 0;                 // Armour Points
-    private int hp = 0;                 // Hull Points
+    private int hp = 0;                 // AttHull Points
     private int power = 0;              // Power plant generation
     private int mCostMaint = 0;         // Monthly maintenance costMCr
     private int mCostLifeS = 0;         // Monthly Life Support costMCr
@@ -55,8 +56,12 @@ public class SpaceShip {
     // other component classes
     // -------------
     //
-    private Hull hull = new Hull(tonnage, HullType.STRD, Coating.NONE, HullConfiguration.SLND, true, 60, 20, true, true, true);
-    private Armour armour = new Armour();
+//    public AttHull aHull = new AttHull(tonnage, HullType.STRD, CoatOptions.NONE, HullConfiguration.SLND, true, 60, 20, true, true, true);
+    
+    public ClsHull cHull = new ClsHull(tonnage, HullType.RFCD, 
+            CoatOptions.STTH, HullConfiguration.PNTD, 
+            true, 60, 20, true, true, true);
+    
     private MDrive mDrive = new MDrive();
     private JDrive jDrive = new JDrive();
     private PwrPlant pwrPlant = new PwrPlant();
@@ -106,7 +111,8 @@ public class SpaceShip {
     public void setTonnage(int ton) {
         this.tonnage = ton;
         
-        this.hull.hullUpdate(ton);
+//        this.aHull.hullUpdate(ton);
+        this.cHull.setHullSize(ton);
         
         // calcula cargo tonnage
         this.cargo = this.useable * ton - this.bldTon;
@@ -189,8 +195,7 @@ public class SpaceShip {
         sb.append(", usdPwr=").append(usdPwr);
         sb.append(", bldCost=").append(bldCost);
         sb.append(", bldTon=").append(bldTon);
-        sb.append(", hull=").append(hull);
-        sb.append(", armour=").append(armour);
+        sb.append(", hull=").append(cHull);
         sb.append(", mDrive=").append(mDrive);
         sb.append(", jDrive=").append(jDrive);
         sb.append(", pwrPlant=").append(pwrPlant);

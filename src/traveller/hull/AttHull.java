@@ -5,18 +5,26 @@
  */
 package traveller.hull;
 
-import traveller.hull.Definitions;
-import java.util.Arrays;
-import traveller.hull.Definitions.Coating;
+import traveller.hull.options.Configuration;
+import traveller.hull.options.DoubleHull;
+import traveller.hull.options.RadShield;
+import traveller.hull.options.Options;
+import traveller.hull.options.HeatShield;
+import traveller.hull.options.Type;
+import traveller.hull.options.Coating;
+import traveller.hull.options.EAGrid;
+import traveller.hull.options.HamsterCase;
+import traveller.hull.Definitions.CoatOptions;
 import traveller.hull.Definitions.HullConfiguration;
 import traveller.hull.Definitions.HullType;
 import traveller.hull.Definitions.Streamlined;
+import java.util.Arrays;
 
 /**
  *
  * @author PR3J
  */
-public class Hull {
+public class AttHull {
     // --------------
     // Constants
     // --------------
@@ -24,13 +32,13 @@ public class Hull {
     private final int NONG_MAX = 500000;
     
     // --------------
-    // Hull Size
+    // AttHull Size
     // --------------
-    private int size;
+    private int hullSize;
 
     public int hullUpdate(int size) {
-        this.size = (size > MIN_HULL) ? size : MIN_HULL;
-        if (getNonGHull() && this.size > NONG_MAX) this.size = NONG_MAX;
+        this.hullSize = Math.max(size, MIN_HULL);
+        if (getNonGHull() && this.hullSize > NONG_MAX) this.hullSize = NONG_MAX;
         
         this.changeHullType(hullType);
         this.changeHullConfig(hullConfig);
@@ -41,12 +49,16 @@ public class Hull {
         this.setNonGHull(nonGHull);
         this.setDoubleHull(outerHull);
         this.setHamsterCase(hmsSize);
-        test("Change Size:" + this.size);
-        return this.size;
+        test("Change Size:" + this.hullSize);
+        return this.hullSize;
+    }
+    
+    public int getHullSize() {
+        return this.hullSize;
     }
 
     // --------------
-    // Hull Type
+    // AttHull Type
     // --------------
     private double typCostModf;
     private double typHPModf;
@@ -63,7 +75,7 @@ public class Hull {
     }
     
     // --------------
-    // Hull Configuration
+    // AttHull Configuration
     // --------------
     private int cfgHullCost;
     private double cfgCostModf;
@@ -86,15 +98,15 @@ public class Hull {
     }
     
     // --------------
-    // Coating
+    // CoatOptions
     // --------------
-    private Definitions.Coating coating = Definitions.Coating.NONE;
+    private Definitions.CoatOptions coating = Definitions.CoatOptions.NONE;
     
-    public void changeCoating(Definitions.Coating coating) {
+    public void changeCoating(Definitions.CoatOptions coating) {
         this.coating = coating;
     }
     
-    public Definitions.Coating getCoating() {
+    public Definitions.CoatOptions getCoating() {
         return this.coating;
     }
 
@@ -110,7 +122,7 @@ public class Hull {
         this.eAGrid = grid;
         if (grid) {
             eagTL = 8;
-            eagUsedTon = 0.02 * this.size;
+            eagUsedTon = 0.02 * this.hullSize;
             eagCost = 40000;
         } else {
             eagTL = 0;
@@ -168,8 +180,8 @@ public class Hull {
     }
 
     // --------------
-    // Non-gravity Hull
-    //  cost Cr25000 per ton, maximum size of 500,000 tons
+    // Non-gravity AttHull
+    //  cost Cr25000 per ton, maximum hullSize of 500,000 tons
     // --------------
     private final int NONG_COST = 25000;
     private boolean nonGHull = false;
@@ -183,7 +195,7 @@ public class Hull {
     }
     
     // --------------
-    // Double Hull
+    // Double AttHull
     //  Min 60T, uses 0.1 ton * outer hull and the outer hull cost 1% more
     // --------------
     private double dbUsedTon;
@@ -193,14 +205,14 @@ public class Hull {
 
     public boolean setDoubleHull(int size) {
         this.outerHull = size;
-        if (size < 60 || size > 0.9 * this.size) {
+        if (size < 60 || size > 0.9 * this.hullSize) {
             this.doubleHull = false;
             this.dbUsedTon = 0;
             this.dbCostModf = 0;
         } else {
             this.doubleHull = true;
             this.dbUsedTon = 0.1 * size;
-            this.dbCostModf = 0.01 * (int) (size / this.size);
+            this.dbCostModf = (int) (size / this.hullSize);
         }
         return this.doubleHull;
     }
@@ -211,22 +223,22 @@ public class Hull {
     
     // --------------
     // Hamster Case
-    //  Uses 0.1 ton * cage tonnage and it costs 2% more for every 1% of Hull
+    //  Uses 0.1 ton * cage tonnage and it costs 2% more for every 1% of AttHull
     // --------------
     private double hmsUsedTon;
-    private int hmsSize;                // in Ton, 0-90% of the Hull
+    private int hmsSize;                // in Ton, 0-90% of the AttHull
     private double hmsCostModf;
     private boolean hamsterCase = false;
 
     public boolean setHamsterCase(int size) {
         this.hmsSize = size;
-        if (size <= 0 || size > 0.9 * this.size) {
+        if (size <= 0 || size > 0.9 * this.hullSize) {
             this.hamsterCase = false;
             this.hmsCostModf = 0;
             this.hmsUsedTon = 0;
         } else {
             this.hamsterCase = true;
-            this.hmsCostModf = 0.02 * (int) (size / this.size);
+            this.hmsCostModf = 2 * (int) (size / this.hullSize);
             this.hmsUsedTon = 0.1 * size;
         }
         return this.hamsterCase;
@@ -241,7 +253,7 @@ public class Hull {
     }
 
     // --------------
-    // Breakaway Hull
+    // Breakaway AttHull
     // --------------
     private boolean bAwayHull = false;
     
@@ -255,13 +267,13 @@ public class Hull {
         double oCost = this.eagCost + this.hshCost + 
                        this.radCost + this.getCoating().getCoatCost();
 
-        return this.size * ((hCost * hModf) + oCost);
+        return this.hullSize * ((hCost * hModf) + oCost);
     }
     
     public int getHP() {
-        int hp = (int) (this.size / (
-                        (this.size <= 25000) ? 2.5 : (
-                            (this.size <= 100000) ? 2 : 1.5)));
+        int hp = (int) (this.hullSize / (
+                        (this.hullSize <= 25000) ? 2.5 : (
+                            (this.hullSize <= 100000) ? 2 : 1.5)));
         return (int) ((1 + typHPModf + cfgHPModf) * hp);
     }
     
@@ -288,13 +300,13 @@ public class Hull {
     // Other Methods
     // --------------
     
-    public Hull(int size) {
+    public AttHull(int size) {
         this.hullUpdate(size);
     }
     
-    public Hull(int size,
+    public AttHull(int size,
                 HullType hullType,
-                Coating coating,
+                CoatOptions coating,
                 HullConfiguration hullConfig,
                 boolean nonGravity,
                 int doubleHull,
@@ -318,7 +330,7 @@ public class Hull {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Hull{tl=").append(getTL());
-        sb.append(", size=").append(size);
+        sb.append(", size=").append(hullSize);
         sb.append(", usedTon=").append(getUsedTon());
         sb.append(", ").append(getHullType());
         sb.append(", ").append(getHullConfig());

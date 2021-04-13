@@ -5,7 +5,8 @@
  */
 package traveller;
 
-import static traveller.Customization.OFF_THE_SHELF;
+import static java.lang.System.in;
+import static traveller.Customization.*;
 
 /**
  *
@@ -29,7 +30,15 @@ public class Creator {
 //        a.changePower(50);
 //        a.changeTon(33);
 //        System.out.println(a.getHull().getHP());
-        System.out.println(a.toString());
+//        System.out.println(a.toString());
+
+//  VER SINTAXE DISSO
+//        traveller.hull.options.Options opt;
+//        for (traveller.hull.options.Options opt in a.cHull.hullOpt) {
+        for (int i = 0; i <= 8; i++) {
+            System.out.println(a.cHull.hullOpt[i].toString());
+        }
+        System.out.println("HullSize:" + a.cHull.getHullSize());
+        System.out.println(a.cHull.toString());
     }
-    
 }
