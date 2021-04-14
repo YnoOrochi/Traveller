@@ -5,25 +5,16 @@
  */
 package traveller.hull;
 
-import static traveller.hull.Definitions.CoatOptions;
-import static traveller.hull.Definitions.HullConfiguration;
-import static traveller.hull.Definitions.HullType;
-import traveller.hull.options.Coating;
-import traveller.hull.options.Configuration;
-import traveller.hull.options.DoubleHull;
-import traveller.hull.options.EAGrid;
-import traveller.hull.options.HamsterCase;
-import traveller.hull.options.HeatShield;
-import traveller.hull.options.NonGHull;
-import traveller.hull.options.Options;
-import traveller.hull.options.RadShield;
-import traveller.hull.options.Type;
+import static traveller.hull.Definitions.*;
+import traveller.hull.options.*;
 
 /**
  *
  * @author PR3J
  */
 public class ClsHull {
+    
+    private final int OPT = 10;
 
     /* ---------
     *  Hull Size
@@ -34,6 +25,37 @@ public class ClsHull {
     
     public int getHullSize() {
         return config.getHullSize();
+    }
+
+    /* ---------
+    *  Hull Constructor
+    --------- */
+    public ClsHull(int size) {
+        this.setHullSize(size);
+    }
+    
+    public ClsHull( int size,
+                    HullType hullType,
+                    CoatOptions coating,
+                    HullConfiguration hullConfig,
+                    boolean nonGravity,
+                    int doubleHull,
+                    int hamsterCase,
+                    boolean eAGrid,
+                    boolean heatShield,
+                    boolean radShield,
+                    ArmourOptions armour) {
+        this.setHullSize(size);
+        this.type.setType(hullType);
+        this.coat.setCoat(coating);
+        this.config.setConfig(hullConfig);
+        this.nonGHull.setOption(nonGravity);
+        this.dblHull.setOption(doubleHull);
+        this.hmsCase.setOption(hamsterCase);
+        this.eAGrid.setOption(eAGrid);
+        this.hShield.setOption(heatShield);
+        this.rShield.setOption(radShield);
+        this.armour.setArmourType(armour);
     }
 
     /* ---------
@@ -48,35 +70,91 @@ public class ClsHull {
     private EAGrid eAGrid = new EAGrid();
     private HeatShield hShield = new HeatShield();
     private RadShield rShield = new RadShield();
+    private Armour armour = new Armour();
 
     public Options[] hullOpt = { 
 //      0       1     2     3         4        5        6       7        8
-        config, type, coat, nonGHull, dblHull, hmsCase, eAGrid, hShield, rShield
+        config, type, coat, nonGHull, dblHull, hmsCase, eAGrid, hShield, rShield, armour
     };
     
-    public ClsHull(int size) {
-        this.setHullSize(size);
+    /* ---------
+    *  Method: Hull cost
+    --------- */
+    public double getHullCost() {
+        double base = hullOpt[0].getOptCost();
+        double modf = 1 + hullOpt[0].getOptCostModf();
+        double othr = 0;
+        for (int i=1; i<OPT; i++) {
+            othr += hullOpt[i].getOptCost();
+            modf += hullOpt[i].getOptCostModf();
+        }
+
+        return config.getHullSize() * ((base * modf) + othr);
     }
     
-    public ClsHull(int size,
-                HullType hullType,
-                CoatOptions coating,
-                HullConfiguration hullConfig,
-                boolean nonGravity,
-                int doubleHull,
-                int hamsterCase,
-                boolean eAGrid,
-                boolean heatShield,
-                boolean radShield) {
-        this.setHullSize(size);
-        this.type.setType(hullType);
-        this.coat.setCoat(coating);
-        this.config.setConfig(hullConfig);
-        this.nonGHull.setOption(nonGravity);
-        this.dblHull.setOption(doubleHull);
-        this.hmsCase.setOption(hamsterCase);
-        this.eAGrid.setOption(eAGrid);
-        this.hShield.setOption(heatShield);
-        this.rShield.setOption(radShield);
+    /* ---------
+    *  Hull Armour
+    --------- */
+    
+    
+    /* ---------
+    *  Hull Points
+    --------- */
+    public int getHP() {
+        int size = config.getHullSize();
+
+        double hp;
+        if (size <= 25000) hp = 2.5 * size;
+            else if (size <= 100000) hp = 2 * size;
+                else hp = 1.5 * size;
+
+        double hpModf = 1;
+        for (int i=0; i<OPT; i++) {
+            hpModf += hullOpt[i].getHPModf();
+        }
+        
+        return (int) (hpModf * hp);
+    }
+    
+    /* ---------
+    *  Hull TL
+    --------- */
+    public int getTL() {
+        int tl = 0;
+        for (int i=0; i<OPT; i++) {
+            tl = Math.max(tl, hullOpt[i].getOptTL());
+        }
+        return tl;
+    }
+    
+    /* ---------
+    *  Hull Weight
+    --------- */
+    public int getUsedTon() {
+        double usedTon = 0;
+        for (int i=0; i<OPT; i++) {
+            usedTon += hullOpt[i].getOptUsedTon();
+        }
+        return (int) Math.round(usedTon);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ClsHull{Cost=").append(getHullCost());
+        sb.append(", HP=").append(getHP());
+        sb.append(", TL=").append(getTL());
+        sb.append(", UsedTon=").append(getUsedTon());
+        sb.append(", config=").append(config);
+        sb.append(", type=").append(type);
+        sb.append(", coat=").append(coat);
+        sb.append(", nonGHull=").append(nonGHull.isOptiOn());
+        sb.append(", dblHull=").append(dblHull);
+        sb.append(", hmsCase=").append(hmsCase);
+        sb.append(", eAGrid=").append(eAGrid.isOptiOn());
+        sb.append(", hShield=").append(hShield.isOptiOn());
+        sb.append(", rShield=").append(rShield.isOptiOn());
+        sb.append('}');
+        return sb.toString();
     }
 }

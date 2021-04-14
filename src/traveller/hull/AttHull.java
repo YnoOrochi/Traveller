@@ -5,15 +5,6 @@
  */
 package traveller.hull;
 
-import traveller.hull.options.Configuration;
-import traveller.hull.options.DoubleHull;
-import traveller.hull.options.RadShield;
-import traveller.hull.options.Options;
-import traveller.hull.options.HeatShield;
-import traveller.hull.options.Type;
-import traveller.hull.options.Coating;
-import traveller.hull.options.EAGrid;
-import traveller.hull.options.HamsterCase;
 import traveller.hull.Definitions.CoatOptions;
 import traveller.hull.Definitions.HullConfiguration;
 import traveller.hull.Definitions.HullType;
