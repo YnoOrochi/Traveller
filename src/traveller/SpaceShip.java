@@ -7,10 +7,8 @@ package traveller;
 
 //import traveller.hull.AttHull;
 import traveller.hull.ClsHull;
-import static traveller.Customization.CUSTOMIZED;
-import traveller.hull.Definitions.CoatOptions;
-import traveller.hull.Definitions.HullConfiguration;
-import traveller.hull.Definitions.HullType;
+import traveller.hull.Definitions.*;
+import static traveller.Customization.*;
 
 /**
  *
@@ -60,7 +58,7 @@ public class SpaceShip {
     
     public ClsHull cHull = new ClsHull(tonnage, HullType.RFCD, 
             CoatOptions.STTH, HullConfiguration.PNTD, 
-            true, 60, 20, true, true, true);
+            true, 60, 20, true, true, true, ArmourOptions.TTST);
     
     private MDrive mDrive = new MDrive();
     private JDrive jDrive = new JDrive();
