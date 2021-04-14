@@ -38,6 +38,7 @@ public class Type extends Options {
     /* ---------
     *  Hull Points Modifier
     --------- */
+    @Override
     public double getHPModf() {
         return this.type.getHPModf();
     }

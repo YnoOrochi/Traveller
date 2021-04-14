@@ -87,6 +87,13 @@ public abstract class Options {
     }
 
     /* ---------
+    * Hull Points Modifier
+    --------- */
+    public double getHPModf() {
+        return 0;
+    }
+
+    /* ---------
     *  basic toString
     --------- */
     @Override

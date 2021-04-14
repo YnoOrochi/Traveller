@@ -61,7 +61,7 @@ public class HamsterCase extends Options {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Option(HamsterCase=").append(isOptiOn());
-        if (getHmsSize() != 0) sb.append(", OaseSize=").append(getHmsSize());
+        if (getHmsSize() != 0) sb.append(", HmsSize=").append(getHmsSize());
         if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
         if (getOptCostModf() != 0) sb.append(", CostModf=").append(getOptCostModf());
         sb.append('}');

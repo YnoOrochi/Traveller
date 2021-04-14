@@ -46,6 +46,7 @@ public class Configuration extends Options {
     }
 
     /* Hull Points Modifier */
+    @Override
     public double getHPModf() {
         return this.config.getHPModf();
     }
@@ -78,7 +79,7 @@ public class Configuration extends Options {
     --------- */
     @Override
     public double getOptUsedTon() {
-        return (1 - this.config.getUseable()) * hullSize;
+        return (1 - this.config.getUseable()) * Options.hullSize;
     }
 
     /* ---------
