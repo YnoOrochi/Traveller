@@ -15,7 +15,7 @@ public class HamsterCase extends Options {
     *  Option setter
     --------- */
     public boolean setOption(int size) {
-        if (size >= 0) {
+        if (size > 0) {
             this.hmsSize = size;
             return this.setOption(true);
         } else {
