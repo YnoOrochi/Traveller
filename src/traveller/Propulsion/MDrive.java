@@ -5,10 +5,75 @@
  */
 package traveller.Propulsion;
 
+import static traveller.Propulsion.MDrive.MDriveTypes.*;
+
 /**
  *
  * @author PR3J
  */
 public class MDrive {
+    /* ---------
+    *  MDriveTypes Enum
+    --------- */
+    public enum MDriveTypes {
+        None(0, 0),
+        Manoeuvere(2, 11),
+        Reaction(0.2, 16);
+        
+        private final double mDriveCostModf;
+        private final int mDriveMax;
+        
+        private MDriveTypes (double costModf, int max) {
+            this.mDriveCostModf = costModf;
+            this.mDriveMax = max;
+        }
+    }
+    
+    /* ---------
+    *  MDriveType
+    --------- */
+    private MDriveTypes MDriveType = Manoeuvere;
+
+    /* ---------
+    *  MDriveRating
+    --------- */
+    private int mDriveRating = 0;
+    
+    public int getMDriveRating() {
+        return this.mDriveRating;
+    }
+    
+    public boolean setMDriveRating(int rating) {
+        if (rating > 0)
+            if (rating <= MDriveType.mDriveMax) {
+                this.mDriveRating = rating;
+                return true;
+            } else {
+                this.mDriveRating = MDriveType.mDriveMax;
+                return false;
+            }    
+        else { 
+            mDriveRating = 0;
+            return false;
+        } 
+    }
+    
+    /* ---------
+    *  MDriveWeight
+    --------- */
+    public double getMDriveWeight() {
+        switch(MDriveType) {
+            case Manoeuvere:
+                if (mDriveRating == 0) return 0.005;
+                else return mDriveRating / 100;
+            case Reaction:
+                return 2 * mDriveRating / 100;
+            default: return 0;
+        }
+    }
+    
+    /* ---------
+    *  MDriveTL
+    --------- */
     
 }

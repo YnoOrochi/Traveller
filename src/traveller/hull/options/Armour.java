@@ -99,7 +99,7 @@ public class Armour extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Armour{armourType=").append(armourType);
+        sb.append("Armour{armourType=").append(armourType.getArmourType());
         sb.append(", armourPoints=").append(armourPoints);
         sb.append(", armourTL=").append(armourTL);
         sb.append('}');
