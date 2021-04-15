@@ -22,7 +22,7 @@ public class DoubleHull extends Options {
     *  Option setter
     --------- */
     public boolean setOption(int size) {
-        if (size >= MIN || size <= MAX * Options.hullSize) {
+        if (size >= MIN && size <= MAX * Options.hullSize) {
             this.outerHull = size;
             return this.setOption(true);
         } else {

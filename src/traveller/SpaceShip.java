@@ -6,6 +6,7 @@
 package traveller;
 
 //import traveller.hull.AttHull;
+import traveller.Propulsion.*;
 import traveller.hull.ClsHull;
 import traveller.hull.Definitions.*;
 import static traveller.Customization.*;
@@ -56,12 +57,13 @@ public class SpaceShip {
     //
 //    public AttHull aHull = new AttHull(tonnage, HullType.STRD, CoatOptions.NONE, HullConfiguration.SLND, true, 60, 20, true, true, true);
     
-    public ClsHull cHull = new ClsHull(tonnage, HullType.RFCD, 
-            CoatOptions.STTH, HullConfiguration.PNTD, 
-            true, 60, 20, true, true, true, ArmourOptions.TTST);
+    public ClsHull cHull = new ClsHull(tonnage, HullType.STRD, 
+            CoatOptions.NONE, HullConfiguration.SLND, 
+            false, 0, 0, false, false, false, ArmourOptions.TTST);
     
     private MDrive mDrive = new MDrive();
     private JDrive jDrive = new JDrive();
+    
     private PwrPlant pwrPlant = new PwrPlant();
     private Tanks tanks = new Tanks();
     private Bridge bridge = new Bridge();
