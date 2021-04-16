@@ -5,7 +5,7 @@
  */
 package io.ynoorochi.traveller.propulsion;
 
-import io.ynoorochi.traveller.propulsion.Drives.MDriveTypes;
+import io.ynoorochi.traveller.propulsion.DriveTypes.MDriveTypes;
 
 /**
  *
@@ -26,7 +26,7 @@ public class MDrive {
     --------- */
     private MDriveTypes mDriveType = MDriveTypes.Maneuver;
     
-    public MDriveTypes getmDriveType () {
+    public MDriveTypes getMDriveType () {
         return this.mDriveType;
     }
     
@@ -109,5 +109,4 @@ public class MDrive {
         sb.append('}');
         return sb.toString();
     }
-
 }

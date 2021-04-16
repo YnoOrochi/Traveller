@@ -12,8 +12,7 @@ import io.ynoorochi.traveller.propulsion.JDrive;
 import io.ynoorochi.traveller.propulsion.MDrive;
 
 import static io.ynoorochi.traveller.Customization.*;
-import io.ynoorochi.traveller.propulsion.Drives;
-import io.ynoorochi.traveller.propulsion.Drives.MDriveTypes;
+import io.ynoorochi.traveller.propulsion.DriveTypes.*;
 
 /**
  *
@@ -63,10 +62,10 @@ public class SpaceShip {
     
     public ClsHull cHull = new ClsHull(tonnage, HullType.STRD,
             CoatOptions.NONE, HullConfiguration.SLND,
-            false, 0, 0, false, false, false, ArmourOptions.TTST);
+            false, 0, 0, false, false, false, false, ArmourOptions.TTST);
     
     public MDrive mDrive = new MDrive(MDriveTypes.Maneuver, 1);
-    private JDrive jDrive = new JDrive();
+    public JDrive jDrive = new JDrive(JDriveTypes.Jump, 2);
 
     private PwrPlant pwrPlant = new PwrPlant();
     private Tanks tanks = new Tanks();

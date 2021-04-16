@@ -35,10 +35,13 @@ public class Creator {
 //  VER SINTAXE DISSO
 //        traveller.hull.options.Options opt;
 //        for (traveller.hull.options.Options opt in a.cHull.hullOpt) {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 11; i++) {
             System.out.println(a.cHull.hullOpt[i].toString());
         }
         System.out.println(a.mDrive);
+        System.out.println(a.jDrive);
+
+
         System.out.println("HullSize:" + a.cHull.getHullSize());
         System.out.println(a.cHull.toString());
     }

@@ -14,7 +14,7 @@ import io.ynoorochi.traveller.hull.options.*;
  */
 public class ClsHull {
     
-    private final int OPT = 10;
+    private final int OPT = 11;
 
     /* ---------
     *  Hull Size
@@ -44,6 +44,7 @@ public class ClsHull {
                     boolean eAGrid,
                     boolean heatShield,
                     boolean radShield,
+                    boolean breakaway,
                     ArmourOptions armour) {
         this.setHullSize(size);
         this.type.setType(hullType);
@@ -55,6 +56,7 @@ public class ClsHull {
         this.eAGrid.setOption(eAGrid);
         this.hShield.setOption(heatShield);
         this.rShield.setOption(radShield);
+        this.breakaway.setOption(breakaway);
         this.armour.setArmourType(armour);
     }
 
@@ -70,11 +72,14 @@ public class ClsHull {
     private EAGrid eAGrid = new EAGrid();
     private HeatShield hShield = new HeatShield();
     private RadShield rShield = new RadShield();
+    private Breakaway breakaway = new Breakaway();
     private Armour armour = new Armour();
 
     public Options[] hullOpt = { 
-//      0       1     2     3         4        5        6       7        8
-        config, type, coat, nonGHull, dblHull, hmsCase, eAGrid, hShield, rShield, armour
+//      0       1     2     3         4        5        6       7
+        config, type, coat, nonGHull, dblHull, hmsCase, eAGrid, hShield,
+//      8        10         11
+        rShield, breakaway, armour
     };
     
     /* ---------
@@ -135,7 +140,7 @@ public class ClsHull {
         for (int i=0; i<OPT; i++) {
             usedTon += hullOpt[i].getOptUsedTon();
         }
-        return (int) Math.round(usedTon);
+        return (int) Math.ceil(usedTon);
     }
 
     @Override
@@ -154,6 +159,8 @@ public class ClsHull {
         sb.append(", eAGrid=").append(eAGrid.isOptiOn());
         sb.append(", hShield=").append(hShield.isOptiOn());
         sb.append(", rShield=").append(rShield.isOptiOn());
+        sb.append(", Breakaway=").append(breakaway.isOptiOn());
+        sb.append(", Armour=").append(armour);
         sb.append('}');
         return sb.toString();
     }
