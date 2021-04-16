@@ -1,9 +1,10 @@
 package io.ynoorochi.traveller;
 
+import io.ynoorochi.traveller.ship.SpaceShip;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static io.ynoorochi.traveller.Customization.OFF_THE_SHELF;
+import static io.ynoorochi.traveller.ship.Customization.OFF_THE_SHELF;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;

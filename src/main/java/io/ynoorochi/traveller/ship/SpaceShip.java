@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller;
+package io.ynoorochi.traveller.ship;
 
-//import traveller.hull.AttHull;
-import io.ynoorochi.traveller.hull.ClsHull;
-import io.ynoorochi.traveller.hull.Definitions.*;
-import io.ynoorochi.traveller.propulsion.JDrive;
-import io.ynoorochi.traveller.propulsion.MDrive;
+import io.ynoorochi.traveller.ship.hull.Hull;
+import io.ynoorochi.traveller.ship.hull.Definitions.*;
+import io.ynoorochi.traveller.ship.propulsion.JDrive;
+import io.ynoorochi.traveller.ship.propulsion.MDrive;
+import io.ynoorochi.traveller.ship.power.PwrPlant;
 
-import static io.ynoorochi.traveller.Customization.*;
-import io.ynoorochi.traveller.propulsion.DriveTypes.*;
+import static io.ynoorochi.traveller.ship.Customization.*;
+import io.ynoorochi.traveller.ship.propulsion.DriveTypes.*;
 
 /**
  *
@@ -39,7 +39,7 @@ public class SpaceShip {
     private int tl = 7;                 // Tech Level (TL)
     private int ap = 0;                 // Armour Points
     private int hp = 0;                 // AttHull Points
-    private int power = 0;              // Power plant generation
+    private int power = 0;              // PwrPlant plant generation
     private int mCostMaint = 0;         // Monthly maintenance costMCr
     private int mCostLifeS = 0;         // Monthly Life Support costMCr
     private int mCostCrewS = 0;         // Monthly Crew Salary costMCr
@@ -60,7 +60,7 @@ public class SpaceShip {
     //
 //    public AttHull aHull = new AttHull(tonnage, HullType.STRD, CoatOptions.NONE, HullConfiguration.SLND, true, 60, 20, true, true, true);
     
-    public ClsHull cHull = new ClsHull(tonnage, HullType.STRD,
+    public Hull cHull = new Hull(tonnage, HullType.STRD,
             CoatOptions.NONE, HullConfiguration.SLND,
             false, 0, 0, false, false, false, false, ArmourOptions.TTST);
     
@@ -68,6 +68,7 @@ public class SpaceShip {
     public JDrive jDrive = new JDrive(JDriveTypes.Jump, 2);
 
     private PwrPlant pwrPlant = new PwrPlant();
+    
     private Tanks tanks = new Tanks();
     private Bridge bridge = new Bridge();
     private Computer computer = new Computer();

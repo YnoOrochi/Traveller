@@ -3,44 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.hull.options;
-
-import io.ynoorochi.traveller.hull.Definitions.CoatOptions;
-import static io.ynoorochi.traveller.hull.Definitions.CoatOptions.*;
+package io.ynoorochi.traveller.ship.hull.options;
 
 /**
  *
  * @author PR3J
  */
-public class Coating extends Options {
-    
-    /* ---------
-    *  Coating Options
-    --------- */
-    private CoatOptions coat = NONE;
+public class EAGrid extends Options {
 
-    public CoatOptions getCoat() {
-        return coat;
-    }
-
-    public void setCoat(CoatOptions coat) {
-        this.coat = coat;
-    }
-
-    /* ---------
-    *  have special coating?
-    --------- */
-    @Override
-    public boolean isOptiOn() {
-        return this.coat != NONE;
-    }
-    
     /* ---------
     *  Tech Level
     --------- */
     @Override
     public int getOptTL() {
-        return this.coat.getCoatTL();
+        if (isOptiOn()) return 8;
+        else return 0;
+    }
+    
+    /* ---------
+    *  Tonnage Used by Option
+    --------- */
+    @Override
+    public double getOptUsedTon() {
+        if (isOptiOn()) return 0.02 * Options.hullSize;
+        else return 0;
     }
     
     /* ---------
@@ -48,7 +34,8 @@ public class Coating extends Options {
     --------- */
     @Override
     public int getOptCost() {
-        return this.coat.getCoatCost();
+        if (isOptiOn()) return 40000;
+        else return 0;
     }
 
     /* ---------
@@ -57,8 +44,9 @@ public class Coating extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(Coating=").append(this.coat.getCoatType());
+        sb.append("Option(EAGrig=").append(isOptiOn());
         if (getOptTL() != 0) sb.append(", TL=").append(getOptTL());
+        if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
         if (getOptCost() != 0) sb.append(", Cost=").append(getOptCost());
         sb.append('}');
         return sb.toString();

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.hull.options;
+package io.ynoorochi.traveller.ship.hull.options;
 
-import io.ynoorochi.traveller.hull.Definitions.*;
-import static io.ynoorochi.traveller.hull.Definitions.ArmourOptions.*;
+import io.ynoorochi.traveller.ship.hull.Definitions.*;
+import static io.ynoorochi.traveller.ship.hull.Definitions.ArmourOptions.*;
 
 /**
  *

@@ -3,41 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.hull.options;
+package io.ynoorochi.traveller.ship.hull.options;
 
 /**
  *
  * @author PR3J
  */
-public class DoubleHull extends Options {
-    
-    /* ---------
-    *  Minimum Double Hull hullSize is 60 tons
-    *  Maximun is 90% of ship hull
-    --------- */
-    private final int MIN = 60;
-    private final double MAX = 0.9;
+public class HamsterCase extends Options {
 
     /* ---------
     *  Option setter
     --------- */
     public boolean setOption(int size) {
-        if (size >= MIN && size <= MAX * Options.hullSize) {
-            this.outerHull = size;
+        if (size > 0) {
+            this.hmsSize = size;
             return this.setOption(true);
         } else {
-            this.outerHull = 0;
+            this.hmsSize = 0;
             this.setOption(false);
             return false;
         }
     }
     
     /* ---------
-    *  Outer Hull Size
+    *  get Hamster Case Size
     --------- */
-    protected int outerHull = 0;
-    public int getOutHullSize() {
-        return this.outerHull;
+    private int hmsSize = 0;
+    public int getHmsSize() {
+        return this.hmsSize;
     }
 
     /* ---------
@@ -46,18 +39,18 @@ public class DoubleHull extends Options {
     --------- */
     @Override
     public double getOptUsedTon() {
-        if (isOptiOn()) return 0.1 * getOutHullSize();
+        if (isOptiOn()) return 0.1 * getHmsSize();
         else return 0;
     }
     
     /* ---------
     *  Option Hull Cost Modifier
     *       For each full percent of the total hull which is made part of
-    *       the spun hull, the cost of the hull must be increased by +1% 
+    *       the spun hull, the cost of the hull must be increased by +2% 
     --------- */
     @Override
     public double getOptCostModf() {
-        if (isOptiOn()) return 1 * (int) (getOutHullSize() / hullSize);
+        if (isOptiOn()) return 2 * (int) (getHmsSize() / Options.hullSize);
         else return 0;
     }
 
@@ -67,10 +60,10 @@ public class DoubleHull extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(DoubleHull=").append(isOptiOn());
-        if (getOutHullSize() != 0) sb.append(", OuterHull=").append(getOutHullSize());
+        sb.append("Option(HamsterCase=").append(isOptiOn());
+        if (getHmsSize() != 0) sb.append(", HmsSize=").append(getHmsSize());
         if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
-        if (getOptCostModf() != 0) sb.append(", Cost=").append(getOptCostModf());
+        if (getOptCostModf() != 0) sb.append(", CostModf=").append(getOptCostModf());
         sb.append('}');
         return sb.toString();
     }

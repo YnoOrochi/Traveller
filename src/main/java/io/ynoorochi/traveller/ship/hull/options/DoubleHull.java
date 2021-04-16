@@ -3,34 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.hull.options;
+package io.ynoorochi.traveller.ship.hull.options;
 
 /**
  *
  * @author PR3J
  */
-public class HamsterCase extends Options {
+public class DoubleHull extends Options {
+    
+    /* ---------
+    *  Minimum Double Hull hullSize is 60 tons
+    *  Maximun is 90% of ship hull
+    --------- */
+    private final int MIN = 60;
+    private final double MAX = 0.9;
 
     /* ---------
     *  Option setter
     --------- */
     public boolean setOption(int size) {
-        if (size > 0) {
-            this.hmsSize = size;
+        if (size >= MIN && size <= MAX * Options.hullSize) {
+            this.outerHull = size;
             return this.setOption(true);
         } else {
-            this.hmsSize = 0;
+            this.outerHull = 0;
             this.setOption(false);
             return false;
         }
     }
     
     /* ---------
-    *  get Hamster Case Size
+    *  Outer Hull Size
     --------- */
-    private int hmsSize = 0;
-    public int getHmsSize() {
-        return this.hmsSize;
+    protected int outerHull = 0;
+    public int getOutHullSize() {
+        return this.outerHull;
     }
 
     /* ---------
@@ -39,18 +46,18 @@ public class HamsterCase extends Options {
     --------- */
     @Override
     public double getOptUsedTon() {
-        if (isOptiOn()) return 0.1 * getHmsSize();
+        if (isOptiOn()) return 0.1 * getOutHullSize();
         else return 0;
     }
     
     /* ---------
     *  Option Hull Cost Modifier
     *       For each full percent of the total hull which is made part of
-    *       the spun hull, the cost of the hull must be increased by +2% 
+    *       the spun hull, the cost of the hull must be increased by +1% 
     --------- */
     @Override
     public double getOptCostModf() {
-        if (isOptiOn()) return 2 * (int) (getHmsSize() / Options.hullSize);
+        if (isOptiOn()) return 1 * (int) (getOutHullSize() / hullSize);
         else return 0;
     }
 
@@ -60,10 +67,10 @@ public class HamsterCase extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(HamsterCase=").append(isOptiOn());
-        if (getHmsSize() != 0) sb.append(", HmsSize=").append(getHmsSize());
+        sb.append("Option(DoubleHull=").append(isOptiOn());
+        if (getOutHullSize() != 0) sb.append(", OuterHull=").append(getOutHullSize());
         if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
-        if (getOptCostModf() != 0) sb.append(", CostModf=").append(getOptCostModf());
+        if (getOptCostModf() != 0) sb.append(", Cost=").append(getOptCostModf());
         sb.append('}');
         return sb.toString();
     }

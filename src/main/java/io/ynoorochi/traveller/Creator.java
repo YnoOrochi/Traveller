@@ -5,8 +5,9 @@
  */
 package io.ynoorochi.traveller;
 
+import io.ynoorochi.traveller.ship.SpaceShip;
 import static java.lang.System.in;
-import static io.ynoorochi.traveller.Customization.*;
+import static io.ynoorochi.traveller.ship.Customization.*;
 
 /**
  *

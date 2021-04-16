@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller;
+package io.ynoorochi.traveller.ship;
 
 /**
  *
- * @author PR3J
+ * @author rslima
  */
-class Tanks {
+public enum Customization {
+    CUSTOMIZED,
+    OFF_THE_SHELF
     
 }

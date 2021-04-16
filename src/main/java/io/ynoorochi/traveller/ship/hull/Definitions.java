@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.hull;
+package io.ynoorochi.traveller.ship.hull;
 
-import static io.ynoorochi.traveller.hull.Definitions.Streamlined.*;
+import static io.ynoorochi.traveller.ship.hull.Definitions.Streamlined.*;
 
 /**
  *

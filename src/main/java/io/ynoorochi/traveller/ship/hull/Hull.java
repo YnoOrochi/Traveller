@@ -3,16 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.hull;
+package io.ynoorochi.traveller.ship.hull;
 
-import static io.ynoorochi.traveller.hull.Definitions.*;
-import io.ynoorochi.traveller.hull.options.*;
+import io.ynoorochi.traveller.ship.hull.options.Coating;
+import io.ynoorochi.traveller.ship.hull.options.EAGrid;
+import io.ynoorochi.traveller.ship.hull.options.Armour;
+import io.ynoorochi.traveller.ship.hull.options.HamsterCase;
+import io.ynoorochi.traveller.ship.hull.options.NonGHull;
+import io.ynoorochi.traveller.ship.hull.options.Type;
+import io.ynoorochi.traveller.ship.hull.options.Breakaway;
+import io.ynoorochi.traveller.ship.hull.options.RadShield;
+import io.ynoorochi.traveller.ship.hull.options.Configuration;
+import io.ynoorochi.traveller.ship.hull.options.DoubleHull;
+import io.ynoorochi.traveller.ship.hull.options.HeatShield;
+import io.ynoorochi.traveller.ship.hull.options.Options;
+import static io.ynoorochi.traveller.ship.hull.Definitions.*;
 
 /**
  *
  * @author PR3J
  */
-public class ClsHull {
+public class Hull {
     
     private final int OPT = 11;
 
@@ -30,11 +41,11 @@ public class ClsHull {
     /* ---------
     *  Hull Constructor
     --------- */
-    public ClsHull(int size) {
+    public Hull(int size) {
         this.setHullSize(size);
     }
     
-    public ClsHull( int size,
+    public Hull( int size,
                     HullType hullType,
                     CoatOptions coating,
                     HullConfiguration hullConfig,
