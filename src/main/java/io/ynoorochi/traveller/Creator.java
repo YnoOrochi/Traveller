@@ -38,6 +38,7 @@ public class Creator {
         for (int i = 0; i < 10; i++) {
             System.out.println(a.cHull.hullOpt[i].toString());
         }
+        System.out.println(a.mDrive);
         System.out.println("HullSize:" + a.cHull.getHullSize());
         System.out.println(a.cHull.toString());
     }

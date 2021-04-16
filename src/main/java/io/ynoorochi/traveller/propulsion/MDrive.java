@@ -5,32 +5,36 @@
  */
 package io.ynoorochi.traveller.propulsion;
 
+import io.ynoorochi.traveller.propulsion.Drives.MDriveTypes;
+
 /**
  *
  * @author PR3J
  */
 public class MDrive {
+
     /* ---------
-    *  MDriveTypes Enum
+     *  Constructor
     --------- */
-    public enum MDriveTypes {
-        None(0, 0),
-        Maneuver(2, 11),
-        Reaction(0.2, 16);
-
-        private final double mDriveCostModf;
-        private final int mDriveMax;
-
-        private MDriveTypes (double costModf, int max) {
-            this.mDriveCostModf = costModf;
-            this.mDriveMax = max;
-        }
+    public MDrive(MDriveTypes type, int rating) {
+        this.setMDriveType(type);
+        this.setMDriveRating(rating);
     }
 
     /* ---------
-    *  MDriveType
+    *  mDriveType
     --------- */
-    private MDriveTypes MDriveType = MDriveTypes.Maneuver;
+    private MDriveTypes mDriveType = MDriveTypes.Maneuver;
+    
+    public MDriveTypes getmDriveType () {
+        return this.mDriveType;
+    }
+    
+    public boolean setMDriveType(MDriveTypes type) {
+        this.mDriveType = type;
+        setMDriveRating(this.mDriveRating);
+        return true;
+    }
 
     /* ---------
     *  MDriveRating
@@ -43,11 +47,11 @@ public class MDrive {
 
     public boolean setMDriveRating(int rating) {
         if (rating > 0)
-            if (rating <= MDriveType.mDriveMax) {
+            if (rating <= mDriveType.getMDriveMax()) {
                 this.mDriveRating = rating;
                 return true;
             } else {
-                this.mDriveRating = MDriveType.mDriveMax;
+                this.mDriveRating = mDriveType.getMDriveMax();
                 return false;
             }
         else {
@@ -57,10 +61,32 @@ public class MDrive {
     }
 
     /* ---------
+    *  MDriveCost
+    --------- */
+    public double getMDriveCost(int hullSize) {
+        return hullSize * getMDriveCost();
+    }
+    
+    public double getMDriveCost() {
+        return mDriveType.getMDriveCost();
+    }
+
+    /* ---------
+    *  MDriveTL
+    --------- */
+    public int getMDriveTL(int rating) {
+        return mDriveType.getMDriveTL(rating);
+    }
+    
+    /* ---------
     *  MDriveWeight
     --------- */
+    public double getMDriveWeight(int hullSize) {
+        return hullSize * getMDriveWeight();
+    }
+    
     public double getMDriveWeight() {
-        switch(MDriveType) {
+        switch(mDriveType) {
             case Maneuver:
                 if (mDriveRating == 0) return 0.005;
                 else return mDriveRating / 100;
@@ -71,7 +97,17 @@ public class MDrive {
     }
 
     /* ---------
-    *  MDriveTL
+    *  MDriveWeight
     --------- */
-    
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("MDrive{Type=").append(mDriveType);
+        sb.append(", Rating=").append(mDriveRating);
+        sb.append(", TL=").append(getMDriveTL(mDriveRating));
+        sb.append('}');
+        return sb.toString();
+    }
+
 }

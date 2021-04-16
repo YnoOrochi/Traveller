@@ -12,6 +12,8 @@ import io.ynoorochi.traveller.propulsion.JDrive;
 import io.ynoorochi.traveller.propulsion.MDrive;
 
 import static io.ynoorochi.traveller.Customization.*;
+import io.ynoorochi.traveller.propulsion.Drives;
+import io.ynoorochi.traveller.propulsion.Drives.MDriveTypes;
 
 /**
  *
@@ -63,7 +65,7 @@ public class SpaceShip {
             CoatOptions.NONE, HullConfiguration.SLND,
             false, 0, 0, false, false, false, ArmourOptions.TTST);
     
-    private MDrive mDrive = new MDrive();
+    public MDrive mDrive = new MDrive(MDriveTypes.Maneuver, 1);
     private JDrive jDrive = new JDrive();
 
     private PwrPlant pwrPlant = new PwrPlant();
