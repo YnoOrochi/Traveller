@@ -5,14 +5,15 @@
  */
 package io.ynoorochi.traveller.ship;
 
-import io.ynoorochi.traveller.ship.hull.Hull;
-import io.ynoorochi.traveller.ship.hull.Definitions.*;
-import io.ynoorochi.traveller.ship.propulsion.JDrive;
-import io.ynoorochi.traveller.ship.propulsion.MDrive;
-import io.ynoorochi.traveller.ship.power.PwrPlant;
+import io.ynoorochi.traveller.ship.equip.*;
+import io.ynoorochi.traveller.ship.hull.*;
+import io.ynoorochi.traveller.ship.space.*;
+import io.ynoorochi.traveller.ship.systems.*;
+import io.ynoorochi.traveller.ship.weapons.*;
 
 import static io.ynoorochi.traveller.ship.Customization.*;
-import io.ynoorochi.traveller.ship.propulsion.DriveTypes.*;
+import static io.ynoorochi.traveller.ship.hull.Definitions.*;
+import static io.ynoorochi.traveller.ship.equip.Definitions.*;
 
 /**
  *
@@ -67,15 +68,15 @@ public class SpaceShip {
     public MDrive mDrive = new MDrive(MDriveTypes.Maneuver, 1);
     public JDrive jDrive = new JDrive(JDriveTypes.Jump, 2);
 
-    private PwrPlant pwrPlant = new PwrPlant();
+    public PwrPlant pwrPlant = new PwrPlant(PwrPlants.Fission, 80);
     
-    private Tanks tanks = new Tanks();
-    private Bridge bridge = new Bridge();
-    private Computer computer = new Computer();
-    private Sensors sensors = new Sensors();
-    private WeaponPoints[] wPoints;
-    private Systems[] systems;
-    private Rooms[] rooms;
+//    private Tanks tanks = new Tanks();
+//    private Bridge bridge = new Bridge();
+//    private Computer computer = new Computer();
+//    private Sensors sensors = new Sensors();
+//    private Weapons[] wPoints;
+//    private Systems[] systems;
+//    private Rooms[] rooms;
 
     // -------------
     // class alternative constructors
@@ -115,7 +116,6 @@ public class SpaceShip {
     public void setTonnage(int ton) {
         this.tonnage = ton;
         
-//        this.aHull.hullUpdate(ton);
         this.cHull.setSize(ton);
         
         // calcula cargo tonnage
@@ -145,21 +145,13 @@ public class SpaceShip {
     }
 
     public void setCostMCr(double cost) {
-        this.costMCr = cRound(cost * (isCustomized() ? 1.01 : 0.9) / 1E6, 2); 
+        this.costMCr = Math.round(cost * (isCustomized() ? 1.01 : 0.9) / 1E6); 
     }
 
     public boolean isCustomized() {
         return custom == CUSTOMIZED;
     }
 
-
-    // -------------
-    // aux methods
-    // -------------
-    //
-    public double cRound (double number, int dec) {
-        return Math.round(number * Math.pow(10, dec)) / Math.pow(10, dec);
-    }
 
     // -------------
     // object methods
@@ -203,13 +195,13 @@ public class SpaceShip {
         sb.append(", mDrive=").append(mDrive);
         sb.append(", jDrive=").append(jDrive);
         sb.append(", pwrPlant=").append(pwrPlant);
-        sb.append(", tanks=").append(tanks);
-        sb.append(", bridge=").append(bridge);
-        sb.append(", computer=").append(computer);
-        sb.append(", sensors=").append(sensors);
-        sb.append(", wPoints=").append(wPoints);
-        sb.append(", systems=").append(systems);
-        sb.append(", rooms=").append(rooms);
+//        sb.append(", tanks=").append(tanks);
+//        sb.append(", bridge=").append(bridge);
+//        sb.append(", computer=").append(computer);
+//        sb.append(", sensors=").append(sensors);
+//        sb.append(", wPoints=").append(weapons);
+//        sb.append(", systems=").append(systems);
+//        sb.append(", rooms=").append(rooms);
         sb.append('}');
         return sb.toString();
     }

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.ship.propulsion;
+package io.ynoorochi.traveller.ship.equip;
 
-import io.ynoorochi.traveller.ship.propulsion.DriveTypes.MDriveTypes;
+import io.ynoorochi.traveller.ship.equip.Definitions.MDriveTypes;
 
 /**
  *

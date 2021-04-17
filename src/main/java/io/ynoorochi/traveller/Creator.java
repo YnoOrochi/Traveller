@@ -41,6 +41,7 @@ public class Creator {
         }
         System.out.println(a.mDrive);
         System.out.println(a.jDrive);
+        System.out.println(a.pwrPlant);
 
 
         System.out.println("HullSize:" + a.cHull.getSize());

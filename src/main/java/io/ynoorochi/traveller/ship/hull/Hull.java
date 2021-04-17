@@ -5,18 +5,8 @@
  */
 package io.ynoorochi.traveller.ship.hull;
 
-import io.ynoorochi.traveller.ship.hull.options.Coating;
-import io.ynoorochi.traveller.ship.hull.options.EAGrid;
-import io.ynoorochi.traveller.ship.hull.options.Armour;
-import io.ynoorochi.traveller.ship.hull.options.HamsterCase;
-import io.ynoorochi.traveller.ship.hull.options.NonGHull;
-import io.ynoorochi.traveller.ship.hull.options.Type;
-import io.ynoorochi.traveller.ship.hull.options.Breakaway;
-import io.ynoorochi.traveller.ship.hull.options.RadShield;
-import io.ynoorochi.traveller.ship.hull.options.Configuration;
-import io.ynoorochi.traveller.ship.hull.options.DoubleHull;
-import io.ynoorochi.traveller.ship.hull.options.HeatShield;
-import io.ynoorochi.traveller.ship.hull.options.Options;
+import io.ynoorochi.traveller.ship.hull.options.*;
+
 import static io.ynoorochi.traveller.ship.hull.Definitions.*;
 
 /**

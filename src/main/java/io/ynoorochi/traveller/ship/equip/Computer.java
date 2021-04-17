@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.ship;
+package io.ynoorochi.traveller.ship.equip;
 
 /**
  *
  * @author PR3J
  */
-class Systems {
+class Computer {
     
 }

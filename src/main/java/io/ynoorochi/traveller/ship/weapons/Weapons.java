@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.ship.power;
+package io.ynoorochi.traveller.ship.weapons;
 
 /**
  *
  * @author PR3J
  */
-public class PwrPlant {
+class Weapons {
     
 }
