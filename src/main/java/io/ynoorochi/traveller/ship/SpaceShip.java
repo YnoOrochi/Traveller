@@ -27,7 +27,7 @@ public class SpaceShip {
     //
     private String name;
     private String version;
-    private static int tonnage;
+    private int tonnage;
     private Customization custom;             // Custom or Standard Type
     
     // -------------
