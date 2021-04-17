@@ -43,7 +43,7 @@ public class Creator {
         System.out.println(a.jDrive);
 
 
-        System.out.println("HullSize:" + a.cHull.getHullSize());
+        System.out.println("HullSize:" + a.cHull.getSize());
         System.out.println(a.cHull.toString());
     }
 }

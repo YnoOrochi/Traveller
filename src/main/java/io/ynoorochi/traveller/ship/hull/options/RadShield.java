@@ -15,7 +15,7 @@ public class RadShield extends Options {
     *  Tech Level
     --------- */
     @Override
-    public int getOptTL() {
+    public int getTL() {
         if (isOptiOn()) return 7;
         else return 0;
     }
@@ -24,7 +24,7 @@ public class RadShield extends Options {
     *  Option Specific Cost
     --------- */
     @Override
-    public int getOptCost() {
+    public int getCost() {
         if (isOptiOn()) return 25000;
         else return 0;
     }
@@ -36,8 +36,8 @@ public class RadShield extends Options {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Option(RadShield=").append(isOptiOn());
-        if (getOptTL() != 0) sb.append(", TL=").append(getOptTL());
-        if (getOptCost() != 0) sb.append(", Cost=").append(getOptCost());
+        if (getTL() != 0) sb.append(", TL=").append(getTL());
+        if (getCost() != 0) sb.append(", Cost=").append(getCost());
         sb.append('}');
         return sb.toString();
     }

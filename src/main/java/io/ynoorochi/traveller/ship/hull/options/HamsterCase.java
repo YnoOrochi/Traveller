@@ -38,7 +38,7 @@ public class HamsterCase extends Options {
     *       uses 0.1 ton for every ton of outer hull.
     --------- */
     @Override
-    public double getOptUsedTon() {
+    public double getWeight() {
         if (isOptiOn()) return 0.1 * getHmsSize();
         else return 0;
     }
@@ -49,8 +49,8 @@ public class HamsterCase extends Options {
     *       the spun hull, the cost of the hull must be increased by +2% 
     --------- */
     @Override
-    public double getOptCostModf() {
-        if (isOptiOn()) return 2 * (int) (getHmsSize() / Options.hullSize);
+    public double getCostModf() {
+        if (isOptiOn()) return 2 * (int) (getHmsSize() / getHullSize());
         else return 0;
     }
 
@@ -61,9 +61,9 @@ public class HamsterCase extends Options {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Option(HamsterCase=").append(isOptiOn());
-        if (getHmsSize() != 0) sb.append(", HmsSize=").append(getHmsSize());
-        if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
-        if (getOptCostModf() != 0) sb.append(", CostModf=").append(getOptCostModf());
+        if (getHmsSize() != 0) sb.append(", Size=").append(getHmsSize());
+        if (getWeight() != 0) sb.append(", Weight=").append(getWeight());
+        if (getCostModf() != 0) sb.append(", CostModf=").append(getCostModf());
         sb.append('}');
         return sb.toString();
     }

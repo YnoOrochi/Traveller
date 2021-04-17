@@ -47,7 +47,7 @@ public class Type extends Options {
     *  Option Specific Cost Modifier
     --------- */
     @Override
-    public double getOptCostModf() {
+    public double getCostModf() {
         return this.type.getCostModf();
     }
 
@@ -59,7 +59,7 @@ public class Type extends Options {
         StringBuilder sb = new StringBuilder();
         sb.append("Option(HullType=").append(type.getType());
         sb.append(", HPModf=").append(getHPModf());
-        sb.append(", CostModf=").append(getOptCostModf());
+        sb.append(", CostModf=").append(getCostModf());
         sb.append('}');
         return sb.toString();
     }

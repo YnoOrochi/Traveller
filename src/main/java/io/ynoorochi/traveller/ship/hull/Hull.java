@@ -28,21 +28,10 @@ public class Hull {
     private final int OPT = 11;
 
     /* ---------
-    *  Hull Size
-    --------- */
-    public void setHullSize(int size) {
-        config.setHullSize(size);
-    }
-    
-    public int getHullSize() {
-        return config.getHullSize();
-    }
-
-    /* ---------
     *  Hull Constructor
     --------- */
     public Hull(int size) {
-        this.setHullSize(size);
+        this.setSize(size);
     }
     
     public Hull( int size,
@@ -57,7 +46,7 @@ public class Hull {
                     boolean radShield,
                     boolean breakaway,
                     ArmourOptions armour) {
-        this.setHullSize(size);
+        this.setSize(size);
         this.type.setType(hullType);
         this.coat.setCoat(coating);
         this.config.setConfig(hullConfig);
@@ -68,7 +57,7 @@ public class Hull {
         this.hShield.setOption(heatShield);
         this.rShield.setOption(radShield);
         this.breakaway.setOption(breakaway);
-        this.armour.setArmourType(armour);
+        this.armour.setType(armour);
     }
 
     /* ---------
@@ -94,30 +83,44 @@ public class Hull {
     };
     
     /* ---------
+    *  Hull Size
+    --------- */
+    public void setSize(int size) {
+        config.setHullSize(size);
+    }
+    
+    public int getSize() {
+        return config.getHullSize();
+    }
+
+    /* ---------
     *  Method: Hull cost
     --------- */
-    public double getHullCost() {
-        double base = hullOpt[0].getOptCost();
-        double modf = 1 + hullOpt[0].getOptCostModf();
+    public double getCost() {
+        double base = hullOpt[0].getCost();
+        double modf = 1 + hullOpt[0].getCostModf();
         double othr = 0;
         for (int i=1; i<OPT; i++) {
-            othr += hullOpt[i].getOptCost();
-            modf += hullOpt[i].getOptCostModf();
+            othr += hullOpt[i].getCost();
+            modf += hullOpt[i].getCostModf();
         }
 
-        return config.getHullSize() * ((base * modf) + othr);
+        return getSize() * ((base * modf) + othr);
     }
     
     /* ---------
-    *  Hull Armour
+    *  Hull Basic Systems Power
+    *       20% of the total tonnage of the hull.
     --------- */
-    
+    public double getPower() {
+        return 0.2 * getSize();
+    }
     
     /* ---------
     *  Hull Points
     --------- */
     public int getHP() {
-        int size = config.getHullSize();
+        int size = getSize();
 
         double hp;
         if (size <= 25000) hp = 2.5 * size;
@@ -138,7 +141,7 @@ public class Hull {
     public int getTL() {
         int tl = 0;
         for (int i=0; i<OPT; i++) {
-            tl = Math.max(tl, hullOpt[i].getOptTL());
+            tl = Math.max(tl, hullOpt[i].getTL());
         }
         return tl;
     }
@@ -149,7 +152,7 @@ public class Hull {
     public int getUsedTon() {
         double usedTon = 0;
         for (int i=0; i<OPT; i++) {
-            usedTon += hullOpt[i].getOptUsedTon();
+            usedTon += hullOpt[i].getWeight();
         }
         return (int) Math.ceil(usedTon);
     }
@@ -157,7 +160,7 @@ public class Hull {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ClsHull{Cost=").append(getHullCost());
+        sb.append("ClsHull{Cost=").append(getCost());
         sb.append(", HP=").append(getHP());
         sb.append(", TL=").append(getTL());
         sb.append(", UsedTon=").append(getUsedTon());

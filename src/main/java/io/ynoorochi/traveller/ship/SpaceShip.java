@@ -116,7 +116,7 @@ public class SpaceShip {
         this.tonnage = ton;
         
 //        this.aHull.hullUpdate(ton);
-        this.cHull.setHullSize(ton);
+        this.cHull.setSize(ton);
         
         // calcula cargo tonnage
         this.cargo = this.useable * ton - this.bldTon;

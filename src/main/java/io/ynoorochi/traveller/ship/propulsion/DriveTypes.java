@@ -23,26 +23,26 @@ public class DriveTypes {
         Maneuver(2000000, 11, mTL),
         Reaction(200000, 16, rTL);
 
-        private final double mDriveCost;
-        private final int mDriveMax;
-        private final int[] mDriveTL;
+        private final double cost;
+        private final int max;
+        private final int[] tl;
 
         private MDriveTypes (double cost, int max, int[] tl) {
-            this.mDriveCost = cost;
-            this.mDriveMax = max;
-            this.mDriveTL = tl;
+            this.cost = cost;
+            this.max = max;
+            this.tl = tl;
         }
         
-        public double getMDriveCost() {
-            return this.mDriveCost;
+        public double getCost() {
+            return this.cost;
         }
         
-        public int getMDriveMax() {
-            return this.mDriveMax;
+        public int getMax() {
+            return this.max;
         }
         
-        public int getMDriveTL(int rating) {
-            if (rating <= getMDriveMax()) return this.mDriveTL[rating];
+        public int getTL(int rating) {
+            if (rating <= getMax()) return this.tl[rating];
             else return 0;
         }
     }
@@ -54,26 +54,26 @@ public class DriveTypes {
         None(0, 0, nTL),
         Jump(1500000, 9, jTL);
 
-        private final double jDriveCost;
-        private final int jDriveMax;
-        private final int[] jDriveTL;
+        private final double cost;
+        private final int max;
+        private final int[] tl;
 
         private JDriveTypes (double cost, int max, int[] tl) {
-            this.jDriveCost = cost;
-            this.jDriveMax = max;
-            this.jDriveTL = tl;
+            this.cost = cost;
+            this.max = max;
+            this.tl = tl;
         }
         
-        public double getJDriveCost() {
-            return this.jDriveCost;
+        public double getCost() {
+            return this.cost;
         }
         
-        public int getJDriveMax() {
-            return this.jDriveMax;
+        public int getMax() {
+            return this.max;
         }
         
-        public int getJDriveTL(int rating) {
-            if (rating <= getJDriveMax()) return this.jDriveTL[rating];
+        public int getTL(int rating) {
+            if (rating <= getMax()) return this.tl[rating];
             else return 0;
         }
     }

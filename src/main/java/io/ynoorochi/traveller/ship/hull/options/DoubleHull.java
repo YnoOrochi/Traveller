@@ -22,7 +22,7 @@ public class DoubleHull extends Options {
     *  Option setter
     --------- */
     public boolean setOption(int size) {
-        if (size >= MIN && size <= MAX * Options.hullSize) {
+        if (size >= MIN && size <= MAX * getHullSize()) {
             this.outerHull = size;
             return this.setOption(true);
         } else {
@@ -45,7 +45,7 @@ public class DoubleHull extends Options {
     *       uses 0.1 ton for every ton of outer hull.
     --------- */
     @Override
-    public double getOptUsedTon() {
+    public double getWeight() {
         if (isOptiOn()) return 0.1 * getOutHullSize();
         else return 0;
     }
@@ -56,8 +56,8 @@ public class DoubleHull extends Options {
     *       the spun hull, the cost of the hull must be increased by +1% 
     --------- */
     @Override
-    public double getOptCostModf() {
-        if (isOptiOn()) return 1 * (int) (getOutHullSize() / hullSize);
+    public double getCostModf() {
+        if (isOptiOn()) return 1 * (int) (getOutHullSize() / getHullSize());
         else return 0;
     }
 
@@ -69,8 +69,8 @@ public class DoubleHull extends Options {
         StringBuilder sb = new StringBuilder();
         sb.append("Option(DoubleHull=").append(isOptiOn());
         if (getOutHullSize() != 0) sb.append(", OuterHull=").append(getOutHullSize());
-        if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
-        if (getOptCostModf() != 0) sb.append(", Cost=").append(getOptCostModf());
+        if (getWeight() != 0) sb.append(", Weight=").append(getWeight());
+        if (getCostModf() != 0) sb.append(", Cost=").append(getCostModf());
         sb.append('}');
         return sb.toString();
     }

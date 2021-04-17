@@ -15,7 +15,7 @@ public class EAGrid extends Options {
     *  Tech Level
     --------- */
     @Override
-    public int getOptTL() {
+    public int getTL() {
         if (isOptiOn()) return 8;
         else return 0;
     }
@@ -24,8 +24,8 @@ public class EAGrid extends Options {
     *  Tonnage Used by Option
     --------- */
     @Override
-    public double getOptUsedTon() {
-        if (isOptiOn()) return 0.02 * Options.hullSize;
+    public double getWeight() {
+        if (isOptiOn()) return 0.02 * getHullSize();
         else return 0;
     }
     
@@ -33,7 +33,7 @@ public class EAGrid extends Options {
     *  Option Specific Cost
     --------- */
     @Override
-    public int getOptCost() {
+    public int getCost() {
         if (isOptiOn()) return 40000;
         else return 0;
     }
@@ -45,9 +45,9 @@ public class EAGrid extends Options {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Option(EAGrig=").append(isOptiOn());
-        if (getOptTL() != 0) sb.append(", TL=").append(getOptTL());
-        if (getOptUsedTon() != 0) sb.append(", UsedTon=").append(getOptUsedTon());
-        if (getOptCost() != 0) sb.append(", Cost=").append(getOptCost());
+        if (getTL() != 0) sb.append(", TL=").append(getTL());
+        if (getWeight() != 0) sb.append(", Weight=").append(getWeight());
+        if (getCost() != 0) sb.append(", Cost=").append(getCost());
         sb.append('}');
         return sb.toString();
     }

@@ -19,13 +19,6 @@ public abstract class Options {
     protected static int hullSize;
     protected boolean option = false;
 
-//    /* ---------
-//    *  Option constructor
-//    --------- */
-//    public Options(int size) {
-//        this.hullSize = size;
-//    }
-
     /* ---------
     *  Option setter
     *      returns the operation result
@@ -36,17 +29,6 @@ public abstract class Options {
         return true;
     }
     
-//    /* ---------
-//    *  Huls Size
-//    --------- */
-//    public int getHullSize() {
-//        return this.hullSize;
-//    }
-//    
-//    public int setHullSize(int size) {
-//        return this.hullSize = Math.max(size, MIN_HULL);
-//    }
-
     /* ---------
     *  is Option on?
     --------- */
@@ -55,34 +37,41 @@ public abstract class Options {
     }
 
     /* ---------
+    *  Hull Size
+    --------- */
+    public int getHullSize() {
+        return this.hullSize;
+    }
+    
+    /* ---------
     *  Tech Level
     --------- */
-    public int getOptTL() {
+    public int getTL() {
         return 0;
     }
 
-    public int maxOptTL(int tl) {
-        return Math.max(this.getOptTL(), tl);
+    public int maxTL(int tl) {
+        return Math.max(this.getTL(), tl);
     }
 
     /* ---------
     *  Tonnage Used by Option
     --------- */
-    public double getOptUsedTon() {
+    public double getWeight() {
         return 0;
     }
 
     /* ---------
     *  Option Specific Cost
     --------- */
-    public int getOptCost() {
+    public int getCost() {
         return 0;
     }
 
     /* ---------
     *  Option Hull Cost Modifier
     --------- */
-    public double getOptCostModf() {
+    public double getCostModf() {
         return 0;
     }
 

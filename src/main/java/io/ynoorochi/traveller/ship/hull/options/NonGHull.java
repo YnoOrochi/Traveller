@@ -21,7 +21,7 @@ public class NonGHull extends Options {
     --------- */
     @Override
     public boolean setOption(boolean opt) {
-        if (opt && Options.hullSize > NONG_MAX) return this.option = false;
+        if (opt && getHullSize() > NONG_MAX) return this.option = false;
         
         this.option = opt;
         return true;
@@ -33,7 +33,7 @@ public class NonGHull extends Options {
     *      problem: PLNT basic cost is Cr4000 per ton, then I used 2000 ...
     --------- */
     @Override
-    public double getOptCostModf() {
+    public double getCostModf() {
         if (isOptiOn()) return -0.5;
         else return 0;
     }
@@ -46,7 +46,7 @@ public class NonGHull extends Options {
         StringBuilder sb = new StringBuilder();
         sb.append("Option(NonGHull=").append(isOptiOn());
         sb.append(", MAXTon=").append(NONG_MAX);
-        if (getOptCostModf() != 0) sb.append(", CostModf=").append(getOptCostModf());
+        if (getCostModf() != 0) sb.append(", CostModf=").append(getCostModf());
         sb.append('}');
         return sb.toString();
     }

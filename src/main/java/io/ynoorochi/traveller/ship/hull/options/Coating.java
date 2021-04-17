@@ -39,16 +39,16 @@ public class Coating extends Options {
     *  Tech Level
     --------- */
     @Override
-    public int getOptTL() {
-        return this.coat.getCoatTL();
+    public int getTL() {
+        return this.coat.getTl();
     }
     
     /* ---------
     *  Option Specific Cost
     --------- */
     @Override
-    public int getOptCost() {
-        return this.coat.getCoatCost();
+    public int getCost() {
+        return this.coat.getCost();
     }
 
     /* ---------
@@ -57,9 +57,9 @@ public class Coating extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(Coating=").append(this.coat.getCoatType());
-        if (getOptTL() != 0) sb.append(", TL=").append(getOptTL());
-        if (getOptCost() != 0) sb.append(", Cost=").append(getOptCost());
+        sb.append("Option(Coating=").append(this.coat.getType());
+        if (getTL() != 0) sb.append(", TL=").append(getTL());
+        if (getCost() != 0) sb.append(", Cost=").append(getCost());
         sb.append('}');
         return sb.toString();
     }

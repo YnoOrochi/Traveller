@@ -17,45 +17,63 @@ public class MDrive {
      *  Constructor
     --------- */
     public MDrive(MDriveTypes type, int rating) {
-        this.setMDriveType(type);
-        this.setMDriveRating(rating);
+        this.setType(type);
+        this.setRating(rating);
     }
 
     /* ---------
-    *  mDriveType
+    *  type
     --------- */
-    private MDriveTypes mDriveType = MDriveTypes.Maneuver;
+    private MDriveTypes type = MDriveTypes.Maneuver;
     
-    public MDriveTypes getMDriveType () {
-        return this.mDriveType;
+    public MDriveTypes getType () {
+        return this.type;
     }
     
-    public boolean setMDriveType(MDriveTypes type) {
-        this.mDriveType = type;
-        setMDriveRating(this.mDriveRating);
+    public boolean setType(MDriveTypes type) {
+        this.type = type;
+        setRating(this.rating);
         return true;
     }
 
     /* ---------
     *  MDriveRating
+    *           10% of the hull’s total tonnage multiplied by the
+    *       maximum Thrust the drive is capable of (multiply by
+    *       0.25 if the ship is capable only of Thrust 0)
     --------- */
-    private int mDriveRating = 0;
+    public double getPower() {
+        switch (getType()) {
+            case Maneuver:
+                return 0.1 * Math.max(0.25, getRating());
+            default: return 0;
+        }
+    }
+    
+    public double getPower(int hullSize) {
+        return this.getPower() * hullSize;
+    }
+    
+    /* ---------
+    *  MDriveRating
+    --------- */
+    private int rating = 0;
 
-    public int getMDriveRating() {
-        return this.mDriveRating;
+    public int getRating() {
+        return this.rating;
     }
 
-    public boolean setMDriveRating(int rating) {
+    public boolean setRating(int rating) {
         if (rating > 0)
-            if (rating <= mDriveType.getMDriveMax()) {
-                this.mDriveRating = rating;
+            if (rating <= type.getMax()) {
+                this.rating = rating;
                 return true;
             } else {
-                this.mDriveRating = mDriveType.getMDriveMax();
+                this.rating = type.getMax();
                 return false;
             }
         else {
-            mDriveRating = 0;
+            this.rating = 0;
             return false;
         }
     }
@@ -63,35 +81,35 @@ public class MDrive {
     /* ---------
     *  MDriveCost
     --------- */
-    public double getMDriveCost(int hullSize) {
-        return hullSize * getMDriveCost();
+    public double getCost(int hullSize) {
+        return hullSize * getCost();
     }
     
-    public double getMDriveCost() {
-        return mDriveType.getMDriveCost();
+    public double getCost() {
+        return type.getCost();
     }
 
     /* ---------
     *  MDriveTL
     --------- */
-    public int getMDriveTL(int rating) {
-        return mDriveType.getMDriveTL(rating);
+    public int getTL(int rating) {
+        return type.getTL(rating);
     }
     
     /* ---------
     *  MDriveWeight
     --------- */
-    public double getMDriveWeight(int hullSize) {
-        return hullSize * getMDriveWeight();
+    public double getWeight(int hullSize) {
+        return hullSize * getWeight();
     }
     
-    public double getMDriveWeight() {
-        switch(mDriveType) {
+    public double getWeight() {
+        switch(type) {
             case Maneuver:
-                if (mDriveRating == 0) return 0.005;
-                else return mDriveRating / 100;
+                if (rating == 0) return 0.005;
+                else return rating / 100;
             case Reaction:
-                return 2 * mDriveRating / 100;
+                return 2 * rating / 100;
             default: return 0;
         }
     }
@@ -103,9 +121,9 @@ public class MDrive {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("MDrive{Type=").append(mDriveType);
-        sb.append(", Rating=").append(mDriveRating);
-        sb.append(", TL=").append(getMDriveTL(mDriveRating));
+        sb.append("MDrive{Type=").append(type);
+        sb.append(", Rating=").append(rating);
+        sb.append(", TL=").append(getTL(rating));
         sb.append('}');
         return sb.toString();
     }

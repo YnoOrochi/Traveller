@@ -5,8 +5,7 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
-import io.ynoorochi.traveller.ship.hull.Definitions;
-import io.ynoorochi.traveller.ship.hull.Definitions.HullConfiguration;
+import io.ynoorochi.traveller.ship.hull.Definitions.*;
 import static io.ynoorochi.traveller.ship.hull.Definitions.HullConfiguration.*;
 import io.ynoorochi.traveller.ship.hull.Definitions.Streamlined;
 
@@ -19,12 +18,9 @@ public class Configuration extends Options {
     /* ---------
     *  Hull Size
     --------- */
-    public int getHullSize() {
-        return Options.hullSize;
-    }
-    
-    public int setHullSize(int size) {
-        return Options.hullSize = Math.max(size, MIN_HULL);
+    public boolean setHullSize(int size) {
+        Options.hullSize = Math.max(size, MIN_HULL);
+        return (getHullSize() == size);
     }
 
     /* ---------
@@ -63,7 +59,7 @@ public class Configuration extends Options {
     *  Option Specific Cost Modifier
     --------- */
     @Override
-    public double getOptCostModf() {
+    public double getCostModf() {
         return this.config.getCostModf();
     }
 
@@ -71,15 +67,15 @@ public class Configuration extends Options {
     *  Define the basic cost of hull
     --------- */
     public int getHullCost() {
-        return this.config.getHullCost();
+        return this.config.getCost();
     }
     
     /* ---------
     *  Tonnage Used by Option
     --------- */
     @Override
-    public double getOptUsedTon() {
-        return (1 - this.config.getUseable()) * Options.hullSize;
+    public double getWeight() {
+        return (1 - this.config.getUseable()) * getHullSize();
     }
 
     /* ---------
@@ -89,11 +85,11 @@ public class Configuration extends Options {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Option(HullConf=").append(config.getConfig());
-        sb.append(", ").append(isStreamlined());
+        sb.append("/").append(isStreamlined());
         sb.append(", HPModf=").append(getHPModf());
-        sb.append(", CostModf=").append(getOptCostModf());
+        sb.append(", CostModf=").append(getCostModf());
         sb.append(", HullCost=").append(getHullCost());
-        sb.append(", UsedTon=").append(getOptUsedTon());
+        sb.append(", UsedTon=").append(getWeight());
         sb.append('}');
         return sb.toString();
     }

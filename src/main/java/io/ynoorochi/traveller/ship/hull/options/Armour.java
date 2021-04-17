@@ -16,15 +16,15 @@ public class Armour extends Options {
     /* ---------
     *  Armour Type
     --------- */
-    private ArmourOptions armourType = NONE;
+    private ArmourOptions type = NONE;
     
-    public ArmourOptions getArmourType() {
-        return this.armourType;
+    public ArmourOptions getType() {
+        return this.type;
     }
     
-    public void setArmourType(ArmourOptions armour) {
-        this.armourType = armour;
-        this.setOptTL(this.armourTL);
+    public void setType(ArmourOptions armour) {
+        this.type = armour;
+        this.setTL(this.tl);
     }
 
     /* ---------
@@ -45,11 +45,11 @@ public class Armour extends Options {
     }
     
     public int getArmourMax(){
-        switch(getArmourType()) {
-            case TTST: return Math.min(this.getOptTL(), 9);
-            case CRIR: return Math.min(this.getOptTL(), 13);
-            case BDSD: return this.getOptTL();
-            case MLBD: return this.getOptTL() + 4;
+        switch(getType()) {
+            case TTST: return Math.min(this.getTL(), 9);
+            case CRIR: return Math.min(this.getTL(), 13);
+            case BDSD: return this.getTL();
+            case MLBD: return this.getTL() + 4;
             default: return 0;
         }
     }
@@ -57,32 +57,32 @@ public class Armour extends Options {
     /* ---------
     *  Armour TL
     --------- */
-    private int armourTL = getArmourType().getArmourBaseTL();
+    private int tl = getType().getBaseTL();
     
     @Override
-    public int getOptTL() {
-        return this.armourTL;
+    public int getTL() {
+        return this.tl;
     }
     
-    public boolean setOptTL(int tl) {
-        this.armourTL = Math.max(getArmourType().getArmourBaseTL(), tl);
-        return getArmourType().getArmourBaseTL() == tl;
+    public boolean setTL(int tl) {
+        this.tl = Math.max(getType().getBaseTL(), tl);
+        return getType().getBaseTL() == tl;
     }
     
     /* ---------
     *  Tonnage Used by Option
     --------- */
     @Override
-    public double getOptUsedTon() {
-        return armourPoints * getArmourType().getArmourWeight() * Options.hullSize;
+    public double getWeight() {
+        return armourPoints * getType().getWeight() * getHullSize();
     }
 
     /* ---------
     *  Option Specific Cost
     --------- */
     @Override
-    public double getOptCostModf() {
-        return armourPoints * getArmourType().getArmourCostModf();
+    public double getCostModf() {
+        return armourPoints * getType().getCostModf();
     }
 
 /* ---------
@@ -99,9 +99,9 @@ public class Armour extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Armour{armourType=").append(armourType.getArmourType());
-        sb.append(", armourPoints=").append(armourPoints);
-        sb.append(", armourTL=").append(armourTL);
+        sb.append("Armour{Type=").append(type.getType());
+        sb.append(", Points=").append(armourPoints);
+        sb.append(", TL=").append(tl);
         sb.append('}');
         return sb.toString();
     }

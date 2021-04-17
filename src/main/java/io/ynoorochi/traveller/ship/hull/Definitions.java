@@ -26,35 +26,35 @@ public class Definitions {
         TTST("Titanium Steel", 7, 0.025, 0.025),        // max: TL or 9 (less)
         CRIR("Crystalion", 10, 0.0125, 0.05),           // max: TL or 13 (less)
         BDSD("Bonded Superdense", 14, 0.008, 0.08),     // max: TL
-        MLBD("Molecular Bonded", 16, 0.005, 0.15);      // max: TL + 4
+        MLBD("Molecular Bonded", 16, 0.005, 0.15);      // max: TL + 4// max: TL + 4
         
-        private final String armourType;
-        private final int armourBaseTL;
-        private final double armourWeight;
-        private final double armourCostModf;
+        private final String type;
+        private final int baseTL;
+        private final double weight;
+        private final double costModf;
         
-        private ArmourOptions(String armourType, int armourBaseTL, 
-                double armourWeight, double armourCostModf) {
-            this.armourType = armourType;
-            this.armourBaseTL = armourBaseTL;
-            this.armourWeight = armourWeight;
-            this.armourCostModf = armourCostModf;
+        private ArmourOptions(String type, int baseTL, 
+                double weight, double costModf) {
+            this.type = type;
+            this.baseTL = baseTL;
+            this.weight = weight;
+            this.costModf = costModf;
         }
         
-        public String getArmourType() {
-            return this.armourType;
+        public String getType() {
+            return this.type;
         }
         
-        public int getArmourBaseTL() {
-            return this.armourBaseTL;
+        public int getBaseTL() {
+            return this.baseTL;
         }
         
-        public double getArmourWeight() {
-            return this.armourWeight;
+        public double getWeight() {
+            return this.weight;
         }
         
-        public double getArmourCostModf() {
-            return this.armourCostModf;
+        public double getCostModf() {
+            return this.costModf;
         }
     }
     
@@ -67,38 +67,38 @@ public class Definitions {
         STTH("Stealth", 10, 100000, " "),
         SSTH("Superior Stealth", 12, 1000000, " ");
         
-        private final String coatType;
-        private final int coatTL;
-        private final int coatCost;
+        private final String type;
+        private final int tl;
+        private final int cost;
         private final String text;
 
-        private CoatOptions(String coating, int coatTL, int coatCost, String text) {
-            this.coatType = coating;
-            this.coatTL = coatTL;
-            this.coatCost = coatCost;
+        private CoatOptions(String coating, int tl, int cost, String text) {
+            this.type = coating;
+            this.tl = tl;
+            this.cost = cost;
             this.text = text;
         }
         
-        public String getCoatType() {
-            return this.coatType;
+        public String getType() {
+            return this.type;
         }
         
-        public int getCoatTL() {
-            return this.coatTL;
+        public int getTl() {
+            return this.tl;
         }
         
-        public int getCoatCost() {
-            return this.coatCost;
+        public int getCost() {
+            return this.cost;
         }
         
-        public String getCoatText() {
+        public String getText() {
             return this.text;
         }
 
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append("Coating{").append(coatType);
+            sb.append("Coating{").append(type);
             sb.append('}');
             return sb.toString();
         }
@@ -120,7 +120,7 @@ public class Definitions {
         private final Streamlined streamlined;
         private final double hpModf;
         private final double costModf;
-        private final int hullCost;
+        private final int cost;
         private final double useable;
         private final String text;
         
@@ -131,7 +131,7 @@ public class Definitions {
             this.streamlined = strlined;
             this.hpModf = hpModf;
             this.costModf = costModf;
-            this.hullCost = hullCost;
+            this.cost = hullCost;
             this.useable = useable;
             this.text = text;
         };
@@ -144,8 +144,8 @@ public class Definitions {
             return this.streamlined;
         }
         
-        public int getHullCost() {
-            return this.hullCost;
+        public int getCost() {
+            return this.cost;
         }
         
         public double getCostModf() {
@@ -182,18 +182,18 @@ public class Definitions {
         STRD("Standard", 0, 0), 
         RFCD("Reinforced", +0.50, +0.10);
         
-        private final String hullType;
+        private final String type;
         private final double costModf;
         private final double hpModf;
         
-        private HullType(String hullType, double costModf, double hpModf) {
-            this.hullType = hullType;
+        private HullType(String type, double costModf, double hpModf) {
+            this.type = type;
             this.costModf = costModf;
             this.hpModf = hpModf;
         }
         
         public String getType() {
-            return this.hullType;
+            return this.type;
         }
         
         public double getCostModf() {
@@ -207,7 +207,7 @@ public class Definitions {
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            sb.append("HullType{").append(hullType);
+            sb.append("HullType{").append(type);
             sb.append('}');
             return sb.toString();
         }
