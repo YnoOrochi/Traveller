@@ -6,7 +6,6 @@
 package io.ynoorochi.traveller;
 
 import io.ynoorochi.traveller.ship.SpaceShip;
-import static java.lang.System.in;
 import static io.ynoorochi.traveller.ship.Customization.*;
 
 /**
@@ -15,7 +14,7 @@ import static io.ynoorochi.traveller.ship.Customization.*;
  */
 public class Creator {
 
-    /**
+    /*
      * Auxiliar methods
      */
 
@@ -36,9 +35,12 @@ public class Creator {
 //  VER SINTAXE DISSO
 //        traveller.hull.options.Options opt;
 //        for (traveller.hull.options.Options opt in a.cHull.hullOpt) {
-        for (int i = 0; i < 11; i++) {
-            System.out.println(a.cHull.hullOpt[i].toString());
+        final var opts = a.cHull.hullOpt;
+
+        for (var opt : opts) {
+            System.out.println(opt.toString());
         }
+
         System.out.println(a.mDrive);
         System.out.println(a.jDrive);
         System.out.println(a.pwrPlant);
