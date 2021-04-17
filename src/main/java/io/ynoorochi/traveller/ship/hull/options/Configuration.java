@@ -41,18 +41,20 @@ public class Configuration extends Options {
         return this.config.getStrLined();
     }
 
-    /* Hull Points Modifier */
-    @Override
-    public double getHPModf() {
-        return this.config.getHPModf();
-    }
-    
     /* ---------
     *  is not standard?
     --------- */
     @Override
     public boolean isOptiOn() {
         return this.config != STRD;
+    }
+    
+    /* ---------
+    *  Define the basic cost of hull
+    --------- */
+    @Override
+    public int getCost() {
+        return this.config.getCost();
     }
     
     /* ---------
@@ -63,11 +65,10 @@ public class Configuration extends Options {
         return this.config.getCostModf();
     }
 
-    /* ---------
-    *  Define the basic cost of hull
-    --------- */
-    public int getHullCost() {
-        return this.config.getCost();
+    /* Hull Points Modifier */
+    @Override
+    public double getHPModf() {
+        return this.config.getHPModf();
     }
     
     /* ---------
@@ -87,9 +88,9 @@ public class Configuration extends Options {
         sb.append("Option(HullConf=").append(config.getConfig());
         sb.append("/").append(isStreamlined());
         sb.append(", HPModf=").append(getHPModf());
+        sb.append(", Cost=").append(getCost());
         sb.append(", CostModf=").append(getCostModf());
-        sb.append(", HullCost=").append(getHullCost());
-        sb.append(", UsedTon=").append(getWeight());
+        sb.append(", Weight=").append(getWeight());
         sb.append('}');
         return sb.toString();
     }

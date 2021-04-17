@@ -47,6 +47,7 @@ public class Creator {
 
 
         System.out.println("HullSize:" + a.cHull.getSize());
+        System.out.println("HullCost:" + a.cHull.getCost());
         System.out.println(a.cHull.toString());
     }
 }

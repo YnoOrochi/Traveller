@@ -15,8 +15,6 @@ import static io.ynoorochi.traveller.ship.hull.Definitions.*;
  */
 public class Hull {
     
-    private final int OPT = 11;
-
     /* ---------
     *  Hull Constructor
     --------- */
@@ -66,10 +64,8 @@ public class Hull {
     private Armour armour = new Armour();
 
     public Options[] hullOpt = { 
-//      0       1     2     3         4        5        6       7
         config, type, coat, nonGHull, dblHull, hmsCase, eAGrid, hShield,
-//      8        10         11
-        rShield, breakaway, armour
+            rShield, breakaway, armour
     };
     
     /* ---------
@@ -87,15 +83,15 @@ public class Hull {
     *  Method: Hull cost
     --------- */
     public double getCost() {
-        double base = hullOpt[0].getCost();
-        double modf = 1 + hullOpt[0].getCostModf();
         double othr = 0;
-        for (int i=1; i<OPT; i++) {
-            othr += hullOpt[i].getCost();
-            modf += hullOpt[i].getCostModf();
+        double modf = 0;
+        
+        for (var opt : hullOpt) {
+            othr += opt.getCost();
+            modf += opt.getCostModf();
         }
 
-        return getSize() * ((base * modf) + othr);
+        return getSize() * ((config.getCost() * modf) + othr);
     }
     
     /* ---------
@@ -118,8 +114,8 @@ public class Hull {
                 else hp = 1.5 * size;
 
         double hpModf = 1;
-        for (int i=0; i<OPT; i++) {
-            hpModf += hullOpt[i].getHPModf();
+        for (var opt : hullOpt) {
+            hpModf += opt.getHPModf();
         }
         
         return (int) (hpModf * hp);
@@ -130,8 +126,8 @@ public class Hull {
     --------- */
     public int getTL() {
         int tl = 0;
-        for (int i=0; i<OPT; i++) {
-            tl = Math.max(tl, hullOpt[i].getTL());
+        for (var opt : hullOpt) {
+            tl = Math.max(tl, opt.getTL());
         }
         return tl;
     }
@@ -139,10 +135,10 @@ public class Hull {
     /* ---------
     *  Hull Weight
     --------- */
-    public int getUsedTon() {
+    public int getWeight() {
         double usedTon = 0;
-        for (int i=0; i<OPT; i++) {
-            usedTon += hullOpt[i].getWeight();
+        for (var opt : hullOpt) {
+            usedTon += opt.getWeight();
         }
         return (int) Math.ceil(usedTon);
     }
@@ -153,18 +149,10 @@ public class Hull {
         sb.append("ClsHull{Cost=").append(getCost());
         sb.append(", HP=").append(getHP());
         sb.append(", TL=").append(getTL());
-        sb.append(", UsedTon=").append(getUsedTon());
-        sb.append(", config=").append(config);
-        sb.append(", type=").append(type);
-        sb.append(", coat=").append(coat);
-        sb.append(", nonGHull=").append(nonGHull.isOptiOn());
-        sb.append(", dblHull=").append(dblHull);
-        sb.append(", hmsCase=").append(hmsCase);
-        sb.append(", eAGrid=").append(eAGrid.isOptiOn());
-        sb.append(", hShield=").append(hShield.isOptiOn());
-        sb.append(", rShield=").append(rShield.isOptiOn());
-        sb.append(", Breakaway=").append(breakaway.isOptiOn());
-        sb.append(", Armour=").append(armour);
+        sb.append(", Weight=").append(getWeight());
+        for (var opt : hullOpt) {
+            sb.append(", ").append(opt);
+        }
         sb.append('}');
         return sb.toString();
     }

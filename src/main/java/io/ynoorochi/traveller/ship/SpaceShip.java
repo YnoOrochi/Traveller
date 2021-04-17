@@ -27,7 +27,7 @@ public class SpaceShip {
     //
     private String name;
     private String version;
-    private int tonnage;
+    private static int tonnage;
     private Customization custom;             // Custom or Standard Type
     
     // -------------
@@ -64,9 +64,9 @@ public class SpaceShip {
     public Hull cHull = new Hull(tonnage, HullType.STRD,
             CoatOptions.NONE, HullConfiguration.SLND,
             false, 0, 0, false, false, false, false, ArmourOptions.TTST);
-    
+
     public MDrive mDrive = new MDrive(MDriveTypes.Maneuver, 1);
-    public JDrive jDrive = new JDrive(JDriveTypes.Jump, 2);
+    public JDrive jDrive = new JDrive(JDriveTypes.Jump, 2, tonnage);
 
     public PwrPlant pwrPlant = new PwrPlant(PwrPlants.Fission, 80);
     
