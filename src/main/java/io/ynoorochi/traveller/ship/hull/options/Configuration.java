@@ -18,9 +18,8 @@ public class Configuration extends Options {
     /* ---------
     *  Hull Size
     --------- */
-    public boolean setHullSize(int size) {
-        Options.hullSize = Math.max(size, MIN_HULL);
-        return (getHullSize() == size);
+    public int setHullSize(int size) {
+        return Options.hullSize = Math.max(size, MIN_HULL);
     }
 
     /* ---------

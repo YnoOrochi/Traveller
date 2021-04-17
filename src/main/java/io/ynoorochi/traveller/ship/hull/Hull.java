@@ -19,7 +19,7 @@ public class Hull {
     *  Hull Constructor
     --------- */
     public Hull(int size) {
-        this.setSize(size);
+        this.setHullSize(size);
     }
     
     public Hull( int size,
@@ -34,7 +34,7 @@ public class Hull {
                     boolean radShield,
                     boolean breakaway,
                     ArmourOptions armour) {
-        this.setSize(size);
+        this.setHullSize(size);
         this.type.setType(hullType);
         this.coat.setCoat(coating);
         this.config.setConfig(hullConfig);
@@ -71,11 +71,11 @@ public class Hull {
     /* ---------
     *  Hull Size
     --------- */
-    public void setSize(int size) {
-        config.setHullSize(size);
+    public int setHullSize(int size) {
+        return config.setHullSize(size);
     }
     
-    public int getSize() {
+    public int getHullSize() {
         return config.getHullSize();
     }
 
@@ -91,7 +91,7 @@ public class Hull {
             modf += opt.getCostModf();
         }
 
-        return getSize() * ((config.getCost() * modf) + othr);
+        return getHullSize() * ((config.getCost() * modf) + othr);
     }
     
     /* ---------
@@ -99,14 +99,14 @@ public class Hull {
     *       20% of the total tonnage of the hull.
     --------- */
     public double getPower() {
-        return 0.2 * getSize();
+        return 0.2 * getHullSize();
     }
     
     /* ---------
     *  Hull Points
     --------- */
     public int getHP() {
-        int size = getSize();
+        int size = getHullSize();
 
         double hp;
         if (size <= 25000) hp = 2.5 * size;
@@ -146,7 +146,7 @@ public class Hull {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ClsHull{Cost=").append(getCost());
+        sb.append("Hull{Cost=").append(getCost());
         sb.append(", HP=").append(getHP());
         sb.append(", TL=").append(getTL());
         sb.append(", Weight=").append(getWeight());

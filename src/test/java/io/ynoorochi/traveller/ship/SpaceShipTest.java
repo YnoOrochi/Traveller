@@ -25,7 +25,7 @@ class SpaceShipTest {
 
     @Test
     void hullOptions() {
-        final var opts = this.ship.cHull.hullOpt;
+        final var opts = this.ship.hull.hullOpt;
 
         for (var option: opts) {
             System.out.println(option);

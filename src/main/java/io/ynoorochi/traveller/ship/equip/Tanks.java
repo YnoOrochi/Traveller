@@ -9,6 +9,6 @@ package io.ynoorochi.traveller.ship.equip;
  *
  * @author PR3J
  */
-class Tanks {
+class Tanks extends Equipment {
     
 }

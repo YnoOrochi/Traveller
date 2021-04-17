@@ -34,8 +34,8 @@ public class Creator {
 
 //  VER SINTAXE DISSO
 //        traveller.hull.options.Options opt;
-//        for (traveller.hull.options.Options opt in a.cHull.hullOpt) {
-        final var opts = a.cHull.hullOpt;
+//        for (traveller.hull.options.Options opt in a.hull.hullOpt) {
+        final var opts = a.hull.hullOpt;
 
         for (var opt : opts) {
             System.out.println(opt.toString());
@@ -46,8 +46,8 @@ public class Creator {
         System.out.println(a.pwrPlant);
 
 
-        System.out.println("HullSize:" + a.cHull.getSize());
-        System.out.println("HullCost:" + a.cHull.getCost());
-        System.out.println(a.cHull.toString());
+        System.out.println("HullSize:" + a.hull.getHullSize());
+        System.out.println("HullCost:" + a.hull.getCost());
+        System.out.println(a.hull.toString());
     }
 }

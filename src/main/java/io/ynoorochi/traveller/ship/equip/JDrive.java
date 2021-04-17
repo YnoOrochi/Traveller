@@ -45,6 +45,7 @@ public class JDrive extends Equipment {
     *       hull’s total tonnage multiplied by the maximum jump
     *       number the drive is capable of.
     --------- */
+    @Override
     public double getPower() {
         return 0.1 * getRating() * getHullSize();
     }
@@ -114,7 +115,6 @@ public class JDrive extends Equipment {
         if(getType() == Jump) sb.append(", Pwr=").append(getPower());
         if(getType() == Jump) sb.append(", TL=").append(getTL());
         if(getType() == Jump) sb.append(", Weight=").append(getWeight());
-        sb.append(", TL=").append(getTL());
         sb.append('}');
         return sb.toString();
     }

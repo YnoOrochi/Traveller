@@ -14,6 +14,8 @@ import io.ynoorochi.traveller.ship.weapons.*;
 import static io.ynoorochi.traveller.ship.Customization.*;
 import static io.ynoorochi.traveller.ship.hull.Definitions.*;
 import static io.ynoorochi.traveller.ship.equip.Definitions.*;
+import static io.ynoorochi.traveller.ship.equip.Definitions.JDriveTypes.*;
+import static io.ynoorochi.traveller.ship.equip.Definitions.MDriveTypes.*;
 
 /**
  *
@@ -31,12 +33,85 @@ public class SpaceShip {
     private Customization custom;             // Custom or Standard Type
     
     // -------------
+    // Class Constructor
+    // -------------
+    //
+    public SpaceShip(String name, String version, int tonnage, Customization custom) {
+        this.setName(name);
+        this.setVersion(version);
+        this.setHullSize(tonnage);
+        this.setType(custom);
+    }
+
+    /* ---------
+    *  Hull Size
+    --------- */
+    public int getHullSize() {
+        return hull.getHullSize();
+    }
+
+    public void setHullSize(int size) {
+        this.tonnage = hull.setHullSize(size);
+        
+        this.jDrive.setHullSize(hull.getHullSize());
+        this.mDrive.setHullSize(hull.getHullSize());
+    }
+    
+    /* ---------
+    *  Object Methods
+    --------- */
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public Customization getType() {
+        return custom;
+    }
+
+    public void setType(Customization custom) {
+        this.custom = custom;
+        setCostMCr(this.bldCost); 
+    }
+
+    /* ---------
+    *  Intialize other components classes
+    --------- */
+    public Hull hull = new Hull(tonnage, HullType.STRD,
+            CoatOptions.NONE, HullConfiguration.SLND,
+            false, 0, 0, false, false, false, false, ArmourOptions.TTST);
+
+    public MDrive mDrive = new MDrive(Maneuver, 1, getHullSize());
+    public JDrive jDrive = new JDrive(Jump, 2, getHullSize());
+
+    public PwrPlant pwrPlant = new PwrPlant(PwrPlants.Fission, 80);
+    
+//    private Tanks tanks = new Tanks();
+//    private Bridge bridge = new Bridge();
+//    private Computer computer = new Computer();
+//    private Sensors sensors = new Sensors();
+//    private Weapons[] wPoints;
+//    private Systems[] systems;
+//    private Rooms[] rooms;
+
+    // -------------
     // calculated variables
     // -------------
     //
     private double costMCr = 0;         // Custom/Standard ship MCr costMCr
-    private double cargo = 0;           // Cargo tonnage
-    private double useable = 1.00;      // % of tonnage useable
+    private double cargo = 0;           // Cargo hullSize
+    private double useable = 1.00;      // % of hullSize useable
     private int tl = 7;                 // Tech Level (TL)
     private int ap = 0;                 // Armour Points
     private int hp = 0;                 // AttHull Points
@@ -55,70 +130,13 @@ public class SpaceShip {
     private double bldCost = 0;
     private double bldTon = 0;
 
-    // -------------
-    // other component classes
-    // -------------
-    //
-//    public AttHull aHull = new AttHull(tonnage, HullType.STRD, CoatOptions.NONE, HullConfiguration.SLND, true, 60, 20, true, true, true);
-    
-    public Hull cHull = new Hull(tonnage, HullType.STRD,
-            CoatOptions.NONE, HullConfiguration.SLND,
-            false, 0, 0, false, false, false, false, ArmourOptions.TTST);
-
-    public MDrive mDrive = new MDrive(MDriveTypes.Maneuver, 1);
-    public JDrive jDrive = new JDrive(JDriveTypes.Jump, 2, tonnage);
-
-    public PwrPlant pwrPlant = new PwrPlant(PwrPlants.Fission, 80);
-    
-//    private Tanks tanks = new Tanks();
-//    private Bridge bridge = new Bridge();
-//    private Computer computer = new Computer();
-//    private Sensors sensors = new Sensors();
-//    private Weapons[] wPoints;
-//    private Systems[] systems;
-//    private Rooms[] rooms;
-
-    // -------------
-    // class alternative constructors
-    // -------------
-    //
-    public SpaceShip(String name, String version, int tonnage, Customization custom) {
-        setName(name);
-        setVersion(version);
-        setTonnage(tonnage);
-        setType(custom);
-    }
-
-    // -------------
-    // object constructors
-    // -------------
-    //
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public int getTonnage() {
-        return tonnage;
-    }
-
-    public void setTonnage(int ton) {
+    /* ---------
+    *  Object Methods
+    --------- */
+    public void updateTonnage(int ton) {
         this.tonnage = ton;
         
-        this.cHull.setSize(ton);
-        
-        // calcula cargo tonnage
+        // calcula cargo hullSize
         this.cargo = this.useable * ton - this.bldTon;
         
         // calcula weapon points
@@ -129,15 +147,6 @@ public class SpaceShip {
             this.wpPointType = "Firmpoints";
             this.wpPoints = 1 + ((ton - 1) / 35);
         }
-    }
-
-    public Customization getType() {
-        return custom;
-    }
-
-    public void setType(Customization custom) {
-        this.custom = custom;
-        setCostMCr(this.bldCost); 
     }
 
     public double getCostMCr() {
@@ -176,7 +185,7 @@ public class SpaceShip {
         StringBuilder sb = new StringBuilder();
         sb.append("SpaceShip{name=").append(name);
         sb.append(", version=").append(version);
-        sb.append(", tonnage=").append(tonnage);
+        sb.append(", tonnage=").append(hull.getHullSize());
         sb.append(", cost=MCr").append(costMCr);
         sb.append(", cargo=").append(cargo);
         sb.append(", tl=").append(tl);
@@ -191,7 +200,7 @@ public class SpaceShip {
         sb.append(", usdPwr=").append(usdPwr);
         sb.append(", bldCost=").append(bldCost);
         sb.append(", bldTon=").append(bldTon);
-        sb.append(", hull=").append(cHull);
+        sb.append(", hull=").append(hull);
         sb.append(", mDrive=").append(mDrive);
         sb.append(", jDrive=").append(jDrive);
         sb.append(", pwrPlant=").append(pwrPlant);

@@ -37,7 +37,7 @@ public abstract class Equipment {
     /* ---------
     *  Power used
     --------- */
-    public int getPwr() {
+    public double getPower() {
         return 0;
     }
 
@@ -71,7 +71,7 @@ public abstract class Equipment {
         StringBuilder sb = new StringBuilder();
         sb.append("Equipment{Base").append("");
         sb.append(", Cost=").append(getCost());
-        sb.append(", Pwr=").append(getPwr());
+        sb.append(", Pwr=").append(getPower());
         sb.append(", Rating=").append(getRating());
         sb.append(", TL=").append(getTL());
         sb.append(", Weight=").append(getWeight());

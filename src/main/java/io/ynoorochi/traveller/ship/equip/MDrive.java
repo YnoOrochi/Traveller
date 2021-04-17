@@ -11,14 +11,15 @@ import io.ynoorochi.traveller.ship.equip.Definitions.MDriveTypes;
  *
  * @author PR3J
  */
-public class MDrive {
+public class MDrive extends Equipment{
 
     /* ---------
      *  Constructor
     --------- */
-    public MDrive(MDriveTypes type, int rating) {
+    public MDrive(MDriveTypes type, int rating, int size) {
         this.setType(type);
         this.setRating(rating);
+        this.setHullSize(size);
     }
 
     /* ---------
@@ -42,16 +43,13 @@ public class MDrive {
     *       maximum Thrust the drive is capable of (multiply by
     *       0.25 if the ship is capable only of Thrust 0)
     --------- */
+    @Override
     public double getPower() {
         switch (getType()) {
             case Maneuver:
-                return 0.1 * Math.max(0.25, getRating());
+                return 0.1 * Math.max(0.25, getRating()) * getHullSize();
             default: return 0;
         }
-    }
-    
-    public double getPower(int hullSize) {
-        return this.getPower() * hullSize;
     }
     
     /* ---------
@@ -59,17 +57,18 @@ public class MDrive {
     --------- */
     private int rating = 0;
 
+    @Override
     public int getRating() {
         return this.rating;
     }
 
     public boolean setRating(int rating) {
         if (rating > 0)
-            if (rating <= type.getMax()) {
+            if (rating <= getType().getMax()) {
                 this.rating = rating;
                 return true;
             } else {
-                this.rating = type.getMax();
+                this.rating = getType().getMax();
                 return false;
             }
         else {
@@ -81,49 +80,47 @@ public class MDrive {
     /* ---------
     *  MDriveCost
     --------- */
-    public double getCost(int hullSize) {
-        return hullSize * getCost();
-    }
-    
+    @Override
     public double getCost() {
-        return type.getCost();
+        return getType().getCost() * getHullSize();
     }
 
     /* ---------
     *  MDriveTL
     --------- */
-    public int getTL(int rating) {
-        return type.getTL(rating);
+    @Override
+    public int getTL() {
+        return getType().getTL(getRating());
     }
     
     /* ---------
     *  MDriveWeight
     --------- */
-    public double getWeight(int hullSize) {
-        return hullSize * getWeight();
-    }
-    
+    @Override
     public double getWeight() {
-        switch(type) {
+        switch(getType()) {
             case Maneuver:
-                if (rating == 0) return 0.005;
-                else return rating / 100;
+                if (getRating() == 0) return 0.005 * getHullSize();
+                else return getRating() * getHullSize() / 100;
             case Reaction:
-                return 2 * rating / 100;
+                return 2 * getRating() * getHullSize() / 100;
             default: return 0;
         }
     }
 
     /* ---------
-    *  MDriveWeight
+    *  toString
     --------- */
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("MDrive{Type=").append(type);
-        sb.append(", Rating=").append(rating);
-        sb.append(", TL=").append(getTL(rating));
+        sb.append("MDrive{").append(getType());
+        sb.append(" ").append(getRating());
+        sb.append(", HullSize=").append(getHullSize());
+        sb.append(", Cost=").append(getCost());
+        sb.append(", Pwr=").append(getPower());
+        sb.append(", TL=").append(getTL());
+        sb.append(", Weight=").append(getWeight());
         sb.append('}');
         return sb.toString();
     }
