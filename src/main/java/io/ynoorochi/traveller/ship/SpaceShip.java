@@ -5,17 +5,19 @@
  */
 package io.ynoorochi.traveller.ship;
 
-import io.ynoorochi.traveller.ship.equip.*;
-import io.ynoorochi.traveller.ship.hull.*;
-import io.ynoorochi.traveller.ship.space.*;
-import io.ynoorochi.traveller.ship.systems.*;
-import io.ynoorochi.traveller.ship.weapons.*;
+import io.ynoorochi.traveller.ship.equip.JDrive;
+import io.ynoorochi.traveller.ship.equip.MDrive;
+import io.ynoorochi.traveller.ship.equip.PwrPlant;
+import io.ynoorochi.traveller.ship.hull.Hull;
 
-import static io.ynoorochi.traveller.ship.Customization.*;
-import static io.ynoorochi.traveller.ship.hull.Definitions.*;
-import static io.ynoorochi.traveller.ship.equip.Definitions.*;
-import static io.ynoorochi.traveller.ship.equip.Definitions.JDriveTypes.*;
-import static io.ynoorochi.traveller.ship.equip.Definitions.MDriveTypes.*;
+import static io.ynoorochi.traveller.ship.Customization.CUSTOMIZED;
+import static io.ynoorochi.traveller.ship.equip.Definitions.JDriveTypes.Jump;
+import static io.ynoorochi.traveller.ship.equip.Definitions.MDriveTypes.Maneuver;
+import static io.ynoorochi.traveller.ship.equip.Definitions.PwrPlants;
+import static io.ynoorochi.traveller.ship.hull.Definitions.ArmourOptions;
+import static io.ynoorochi.traveller.ship.hull.Definitions.CoatOptions;
+import static io.ynoorochi.traveller.ship.hull.Definitions.HullConfiguration;
+import static io.ynoorochi.traveller.ship.hull.Definitions.HullType;
 
 /**
  *
@@ -31,16 +33,75 @@ public class SpaceShip {
     private String version;
     private int tonnage;
     private Customization custom;             // Custom or Standard Type
+    public Hull hull;
+    public MDrive mDrive;
+    public JDrive jDrive;
+
+    public PwrPlant pwrPlant;
+
+//    private Tanks tanks = new Tanks();
+//    private Bridge bridge = new Bridge();
+//    private Computer computer = new Computer();
+//    private Sensors sensors = new Sensors();
+//    private Weapons[] wPoints;
+//    private Systems[] systems;
+//    private Rooms[] rooms;
+
+    // -------------
+    // calculated variables
+    // -------------
+    //
+    private double costMCr;         // Custom/Standard ship MCr costMCr
+    private double cargo;           // Cargo hullSize
+    private double useable;      // % of hullSize useable
+    private int tl;                 // Tech Level (TL)
+    private int ap;                 // Armour Points
+    private int hp;                 // AttHull Points
+    private int power;              // PwrPlant plant generation
+    private int mCostMaint;         // Monthly maintenance costMCr
+    private int mCostLifeS;         // Monthly Life Support costMCr
+    private int mCostCrewS;         // Monthly Crew Salary costMCr
+    private int wpPoints;           // qty of ...
+    private String wpPointType;         //   firmpoints ou hardpoints
+
+    // -------------
+    // construction variables
+    // -------------
+    //
+    private int usdPwr;
+    private double bldCost;
+    private double bldTon;
     
     // -------------
     // Class Constructor
     // -------------
     //
     public SpaceShip(String name, String version, int tonnage, Customization custom) {
-        this.setName(name);
-        this.setVersion(version);
-        this.setHullSize(tonnage);
-        this.setType(custom);
+        this.name = name;
+        this.version = version;
+        this.custom = custom;
+        this.bldCost = 0;
+        this.bldTon = 0;
+        this.costMCr = Math.round(this.bldCost * (isCustomized() ? 1.01 : 0.9) / 1E6);
+
+        this.hull = new Hull(tonnage, HullType.STRD,
+                 CoatOptions.NONE, HullConfiguration.SLND,
+                 false, 0, 0, false, false, false, false, ArmourOptions.TTST);
+        this.mDrive = new MDrive(Maneuver, 1, tonnage);
+        this.jDrive = new JDrive(Jump, 2, tonnage);
+        this.pwrPlant  = new PwrPlant(PwrPlants.Fission, 80);
+        this.cargo = 0.0;
+        this.useable = 1.0;
+        this.tl = 7;
+        this.ap = 0;
+        this.hp = 0;
+        this.power = 0;
+        this.mCostMaint = 0;         // Monthly maintenance costMCr
+        this.mCostLifeS = 0;         // Monthly Life Support costMCr
+        this.mCostCrewS = 0;         // Monthly Crew Salary costMCr
+        this.wpPoints = 1;
+        this.usdPwr = 0;
+
     }
 
     /* ---------
@@ -88,47 +149,7 @@ public class SpaceShip {
     /* ---------
     *  Intialize other components classes
     --------- */
-    public Hull hull = new Hull(tonnage, HullType.STRD,
-            CoatOptions.NONE, HullConfiguration.SLND,
-            false, 0, 0, false, false, false, false, ArmourOptions.TTST);
 
-    public MDrive mDrive = new MDrive(Maneuver, 1, getHullSize());
-    public JDrive jDrive = new JDrive(Jump, 2, getHullSize());
-
-    public PwrPlant pwrPlant = new PwrPlant(PwrPlants.Fission, 80);
-    
-//    private Tanks tanks = new Tanks();
-//    private Bridge bridge = new Bridge();
-//    private Computer computer = new Computer();
-//    private Sensors sensors = new Sensors();
-//    private Weapons[] wPoints;
-//    private Systems[] systems;
-//    private Rooms[] rooms;
-
-    // -------------
-    // calculated variables
-    // -------------
-    //
-    private double costMCr = 0;         // Custom/Standard ship MCr costMCr
-    private double cargo = 0;           // Cargo hullSize
-    private double useable = 1.00;      // % of hullSize useable
-    private int tl = 7;                 // Tech Level (TL)
-    private int ap = 0;                 // Armour Points
-    private int hp = 0;                 // AttHull Points
-    private int power = 0;              // PwrPlant plant generation
-    private int mCostMaint = 0;         // Monthly maintenance costMCr
-    private int mCostLifeS = 0;         // Monthly Life Support costMCr
-    private int mCostCrewS = 0;         // Monthly Crew Salary costMCr
-    private int wpPoints = 1;           // qty of ...
-    private String wpPointType;         //   firmpoints ou hardpoints
-    
-    // -------------
-    // construction variables
-    // -------------
-    //
-    private int usdPwr = 0;
-    private double bldCost = 0;
-    private double bldTon = 0;
 
     /* ---------
     *  Object Methods
