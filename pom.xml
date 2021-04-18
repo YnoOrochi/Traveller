@@ -12,7 +12,7 @@
     <description>Gerador de naves para o RPG Traveller</description>
 
     <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <url>https://www.example.com</url>
     <inceptionYear>2021</inceptionYear>
 
     <properties>
