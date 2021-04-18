@@ -5,19 +5,12 @@
  */
 package io.ynoorochi.traveller.ship;
 
-import io.ynoorochi.traveller.ship.equip.JDrive;
-import io.ynoorochi.traveller.ship.equip.MDrive;
-import io.ynoorochi.traveller.ship.equip.PwrPlant;
-import io.ynoorochi.traveller.ship.hull.Hull;
+import io.ynoorochi.traveller.ship.equip.*;
+import io.ynoorochi.traveller.ship.hull.*;
 
-import static io.ynoorochi.traveller.ship.Customization.CUSTOMIZED;
-import static io.ynoorochi.traveller.ship.equip.Definitions.JDriveTypes.Jump;
-import static io.ynoorochi.traveller.ship.equip.Definitions.MDriveTypes.Maneuver;
-import static io.ynoorochi.traveller.ship.equip.Definitions.PwrPlants;
-import static io.ynoorochi.traveller.ship.hull.Definitions.ArmourOptions;
-import static io.ynoorochi.traveller.ship.hull.Definitions.CoatOptions;
-import static io.ynoorochi.traveller.ship.hull.Definitions.HullConfiguration;
-import static io.ynoorochi.traveller.ship.hull.Definitions.HullType;
+import static io.ynoorochi.traveller.ship.Customization.*;
+import static io.ynoorochi.traveller.ship.equip.Definitions.*;
+import static io.ynoorochi.traveller.ship.hull.Definitions.*;
 
 /**
  *
@@ -33,13 +26,15 @@ public class SpaceShip {
     private String version;
     private int tonnage;
     private Customization custom;             // Custom or Standard Type
+    
+    /* ---------
+    *  Create variables for classes
+    --------- */
     public Hull hull;
     public MDrive mDrive;
     public JDrive jDrive;
-
     public PwrPlant pwrPlant;
-
-//    private Tanks tanks = new Tanks();
+    public FTanks fTank;
 //    private Bridge bridge = new Bridge();
 //    private Computer computer = new Computer();
 //    private Sensors sensors = new Sensors();
@@ -72,24 +67,25 @@ public class SpaceShip {
     private double bldCost;
     private double bldTon;
     
-    // -------------
-    // Class Constructor
-    // -------------
-    //
+    /* ---------
+    *  Class Constructor
+    --------- */
     public SpaceShip(String name, String version, int tonnage, Customization custom) {
         this.name = name;
         this.version = version;
         this.custom = custom;
+
+        this.hull = new Hull(HullConfiguration.SLND, tonnage);
+        this.mDrive = new MDrive(MDriveTypes.Maneuver, 1, tonnage);
+        this.jDrive = new JDrive(JDriveTypes.Jump, 2, tonnage);
+        this.pwrPlant = new PwrPlant(PwrPlants.Fission, 80);
+        this.fTank = new FTanks();
+
+        this.tonnage = this.hull.getHullSize();
+
+        this.costMCr = Math.round(this.bldCost * (isCustomized() ? 1.01 : 0.9) / 1E6);
         this.bldCost = 0;
         this.bldTon = 0;
-        this.costMCr = Math.round(this.bldCost * (isCustomized() ? 1.01 : 0.9) / 1E6);
-
-        this.hull = new Hull(tonnage, HullType.STRD,
-                 CoatOptions.NONE, HullConfiguration.SLND,
-                 false, 0, 0, false, false, false, false, ArmourOptions.TTST);
-        this.mDrive = new MDrive(Maneuver, 1, tonnage);
-        this.jDrive = new JDrive(Jump, 2, tonnage);
-        this.pwrPlant  = new PwrPlant(PwrPlants.Fission, 80);
         this.cargo = 0.0;
         this.useable = 1.0;
         this.tl = 7;
@@ -101,7 +97,6 @@ public class SpaceShip {
         this.mCostCrewS = 0;         // Monthly Crew Salary costMCr
         this.wpPoints = 1;
         this.usdPwr = 0;
-
     }
 
     /* ---------
@@ -111,11 +106,11 @@ public class SpaceShip {
         return hull.getHullSize();
     }
 
-    public void setHullSize(int size) {
-        this.tonnage = hull.setHullSize(size);
+    public void setHullSize(int tonnage) {
+        this.tonnage = hull.setHullSize(tonnage);
         
-        this.jDrive.setHullSize(hull.getHullSize());
-        this.mDrive.setHullSize(hull.getHullSize());
+        this.jDrive.setHullSize(this.tonnage);
+        this.mDrive.setHullSize(this.tonnage);
     }
     
     /* ---------
@@ -145,11 +140,6 @@ public class SpaceShip {
         this.custom = custom;
         setCostMCr(this.bldCost); 
     }
-
-    /* ---------
-    *  Intialize other components classes
-    --------- */
-
 
     /* ---------
     *  Object Methods

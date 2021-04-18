@@ -6,14 +6,14 @@
 package io.ynoorochi.traveller.ship.hull.options;
 
 import static io.ynoorochi.traveller.ship.hull.Definitions.HullType;
-import static io.ynoorochi.traveller.ship.hull.Definitions.HullType.STRD;
+import static io.ynoorochi.traveller.ship.hull.Definitions.HullType.*;
 
 /**
  *
  * @author PR3J
  */
 public class Type extends Options {
-    
+
     /* ---------
     *  Type Options
     --------- */

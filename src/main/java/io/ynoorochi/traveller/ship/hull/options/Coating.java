@@ -13,7 +13,7 @@ import static io.ynoorochi.traveller.ship.hull.Definitions.CoatOptions.*;
  * @author PR3J
  */
 public class Coating extends Options {
-    
+
     /* ---------
     *  Coating Options
     --------- */

@@ -14,12 +14,11 @@ import io.ynoorochi.traveller.ship.hull.Definitions.Streamlined;
  * @author PR3J
  */
 public class Configuration extends Options {
-    
     /* ---------
-    *  Hull Size
+    *  Constructor
     --------- */
-    public int setHullSize(int size) {
-        return Options.hullSize = Math.max(size, MIN_HULL);
+    public Configuration(int size) {
+        this.setHullSize(size);
     }
 
     /* ---------

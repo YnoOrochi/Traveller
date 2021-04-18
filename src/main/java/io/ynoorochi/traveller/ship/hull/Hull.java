@@ -6,7 +6,6 @@
 package io.ynoorochi.traveller.ship.hull;
 
 import io.ynoorochi.traveller.ship.hull.options.*;
-
 import static io.ynoorochi.traveller.ship.hull.Definitions.*;
 
 /**
@@ -15,44 +14,15 @@ import static io.ynoorochi.traveller.ship.hull.Definitions.*;
  */
 public class Hull {
     
-    /* ---------
-    *  Hull Constructor
-    --------- */
-    public Hull(int size) {
-        this.setHullSize(size);
-    }
+    private final int MIN_HULL = 10;
+    private int hullSize;
     
-    public Hull( int size,
-                    HullType hullType,
-                    CoatOptions coating,
-                    HullConfiguration hullConfig,
-                    boolean nonGravity,
-                    int doubleHull,
-                    int hamsterCase,
-                    boolean eAGrid,
-                    boolean heatShield,
-                    boolean radShield,
-                    boolean breakaway,
-                    ArmourOptions armour) {
-        this.setHullSize(size);
-        this.type.setType(hullType);
-        this.coat.setCoat(coating);
-        this.config.setConfig(hullConfig);
-        this.nonGHull.setOption(nonGravity);
-        this.dblHull.setOption(doubleHull);
-        this.hmsCase.setOption(hamsterCase);
-        this.eAGrid.setOption(eAGrid);
-        this.hShield.setOption(heatShield);
-        this.rShield.setOption(radShield);
-        this.breakaway.setOption(breakaway);
-        this.armour.setType(armour);
-    }
-
     /* ---------
     *  Hull Options
     --------- */
-    private Configuration config = new Configuration();
+    private Configuration config = new Configuration(MIN_HULL);
     private Type type = new Type();
+    private Armour armour = new Armour();
     private Coating coat = new Coating();
     private NonGHull nonGHull = new NonGHull();
     private DoubleHull dblHull = new DoubleHull();
@@ -61,22 +31,32 @@ public class Hull {
     private HeatShield hShield = new HeatShield();
     private RadShield rShield = new RadShield();
     private Breakaway breakaway = new Breakaway();
-    private Armour armour = new Armour();
 
-    public Options[] hullOpt = { 
-        config, type, coat, nonGHull, dblHull, hmsCase, eAGrid, hShield,
-            rShield, breakaway, armour
+    public Options[] hullOpt = { config, type, coat, armour, nonGHull, 
+        dblHull, hmsCase, eAGrid, hShield, rShield, breakaway
     };
+    
+    /* ---------
+    *  Hull Constructor
+    --------- */
+    public Hull(HullConfiguration config, int size) {
+        this.setHullSize(size);
+        this.config.setConfig(config);
+    }
     
     /* ---------
     *  Hull Size
     --------- */
     public int setHullSize(int size) {
-        return config.setHullSize(size);
+        this.hullSize = Math.max(size, MIN_HULL);
+        for (var opt : hullOpt) {
+            opt.setHullSize(this.hullSize);
+        }
+        return this.hullSize;
     }
     
     public int getHullSize() {
-        return config.getHullSize();
+        return this.hullSize;
     }
 
     /* ---------
@@ -106,19 +86,17 @@ public class Hull {
     *  Hull Points
     --------- */
     public int getHP() {
-        int size = getHullSize();
-
         double hp;
-        if (size <= 25000) hp = 2.5 * size;
-            else if (size <= 100000) hp = 2 * size;
-                else hp = 1.5 * size;
+        if (getHullSize() <= 25000)           hp = 2.5;
+            else if (getHullSize() <= 100000) hp = 2;
+                else                          hp = 1.5;
 
         double hpModf = 1;
         for (var opt : hullOpt) {
             hpModf += opt.getHPModf();
         }
         
-        return (int) (hpModf * hp);
+        return (int) (hpModf * getHullSize() / hp);
     }
     
     /* ---------

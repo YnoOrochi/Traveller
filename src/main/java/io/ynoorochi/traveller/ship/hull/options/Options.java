@@ -14,9 +14,7 @@ public abstract class Options {
     /* ---------
     *  Atributes
     --------- */
-    protected final int MIN_HULL = 10;
-    
-    protected static int hullSize;
+    protected int hullSize;
     protected boolean option = false;
 
     /* ---------
@@ -41,6 +39,10 @@ public abstract class Options {
     --------- */
     public int getHullSize() {
         return this.hullSize;
+    }
+    
+    public void setHullSize(int size) {
+        this.hullSize = size;
     }
     
     /* ---------

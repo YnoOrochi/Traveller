@@ -9,6 +9,6 @@ package io.ynoorochi.traveller.ship.equip;
  *
  * @author PR3J
  */
-class Sensors {
+public class Sensors {
     
 }
