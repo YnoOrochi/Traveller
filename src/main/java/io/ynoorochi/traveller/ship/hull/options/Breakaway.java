@@ -5,11 +5,13 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
+
 /**
  *
  * @author PR3J
  */
-public class Breakaway extends Options {
+public class Breakaway extends Items {
     private final double WHT = 0.02;          // 2%
     
     /* ---------
@@ -17,8 +19,8 @@ public class Breakaway extends Options {
     *       costs an additional MCr2 per ton consumed
     --------- */
     @Override
-    public int getCost() {
-        if (isOptiOn()) return (int) (WHT * 2000000); // * hullSize 
+    public double getCost() {
+        if (isOptiOn()) return WHT * 2000000; // * hullSize 
         else return 0;
     }
 

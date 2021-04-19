@@ -5,35 +5,29 @@
  */
 package io.ynoorochi.traveller.ship.fuel;
 
+import io.ynoorochi.traveller.ship.Items;
+
 /**
  *
  * @author PR3J
  */
-public class Hidden extends Options {
+public class Hidden extends Items {
     
     /* ---------
-    *  Jump Drive rating
+    *  Set Hidden Tonnage
     --------- */
     @Override
-    public void setRating(int rating) {
+    public void setAttribute(double rating) {
         this.rating = rating;
         
         setOptiOn(rating > 0);
     }
 
     /* ---------
-     *  Fuel Tank Weight
-    --------- */
-    @Override
-    public int getWeight() {
-        return getRating();
-    }
-    
-    /* ---------
      *  Fuel Tank Cost
     --------- */
     @Override
-    public int getCost() {
-        return 40000 * getRating();
+    public double getCost() {
+        return 40000 * getAttribute();
     }
 }

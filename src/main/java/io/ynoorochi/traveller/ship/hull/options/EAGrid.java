@@ -5,11 +5,13 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
+
 /**
  *
  * @author PR3J
  */
-public class EAGrid extends Options {
+public class EAGrid extends Items {
 
     /* ---------
     *  Tech Level
@@ -33,7 +35,7 @@ public class EAGrid extends Options {
     *  Option Specific Cost
     --------- */
     @Override
-    public int getCost() {
+    public double getCost() {
         if (isOptiOn()) return 40000;
         else return 0;
     }

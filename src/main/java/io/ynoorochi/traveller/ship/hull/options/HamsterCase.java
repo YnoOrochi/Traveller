@@ -5,41 +5,35 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
+
 /**
  *
  * @author PR3J
  */
-public class HamsterCase extends Options {
+public class HamsterCase extends Items {
 
     /* ---------
     *  Option setter
     --------- */
     public boolean setOption(int size) {
         if (size > 0) {
-            this.hmsSize = size;
-            return this.setOptiOn(true);
+            setAttribute(size);
+            return setOptiOn(true);
         } else {
-            this.hmsSize = 0;
-            this.setOptiOn(false);
+            setAttribute(0);
+            setOptiOn(false);
             return false;
         }
     }
     
-    /* ---------
-    *  get Hamster Case Size
-    --------- */
-    private int hmsSize = 0;
-    public int getHmsSize() {
-        return this.hmsSize;
-    }
-
     /* ---------
     *  Tonnage Used by Option
     *       uses 0.1 ton for every ton of outer hull.
     --------- */
     @Override
     public double getWeight() {
-        if (isOptiOn()) return 0.1 * getHmsSize();
+        if (isOptiOn()) return 0.1 * getAttribute();
         else return 0;
     }
     
@@ -50,7 +44,7 @@ public class HamsterCase extends Options {
     --------- */
     @Override
     public double getCostModf() {
-        if (isOptiOn()) return 2 * (int) (getHmsSize() / getHullSize());
+        if (isOptiOn()) return 2 * (int) (getAttribute() / getHullSize());
         else return 0;
     }
 
@@ -61,7 +55,7 @@ public class HamsterCase extends Options {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getClass().getSimpleName()).append("(").append(isOptiOn());
-        if (getHmsSize() != 0) sb.append(", Size=").append(getHmsSize());
+        if (getAttribute() != 0) sb.append(", Size=").append(getAttribute());
         if (getWeight() != 0) sb.append(", Weight=").append(getWeight());
         if (getCostModf() != 0) sb.append(", CostModf=").append(getCostModf());
         sb.append('}');

@@ -5,6 +5,7 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
 import io.ynoorochi.traveller.ship.hull.Definitions.*;
 import static io.ynoorochi.traveller.ship.hull.Definitions.HullConfiguration.*;
 import io.ynoorochi.traveller.ship.hull.Definitions.Streamlined;
@@ -13,7 +14,7 @@ import io.ynoorochi.traveller.ship.hull.Definitions.Streamlined;
  *
  * @author PR3J
  */
-public class Configuration extends Options {
+public class Configuration extends Items {
     /* ---------
     *  Constructor
     --------- */
@@ -51,7 +52,7 @@ public class Configuration extends Options {
     *  Define the basic cost of hull
     --------- */
     @Override
-    public int getCost() {
+    public double getCost() {
         return this.config.getCost();
     }
     
@@ -65,7 +66,7 @@ public class Configuration extends Options {
 
     /* Hull Points Modifier */
     @Override
-    public double getHPModf() {
+    public double getAttModf() {
         return this.config.getHPModf();
     }
     
@@ -86,7 +87,7 @@ public class Configuration extends Options {
         sb.append(this.getClass().getSimpleName());
         sb.append("(").append(config.getConfig());
         sb.append("/").append(isStreamlined());
-        sb.append(", HPModf=").append(getHPModf());
+        sb.append(", HPModf=").append(getAttModf());
         sb.append(", Cost=").append(getCost());
         sb.append(", CostModf=").append(getCostModf());
         sb.append(", Weight=").append(getWeight());

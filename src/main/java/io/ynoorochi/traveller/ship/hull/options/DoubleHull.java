@@ -5,11 +5,13 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
+
 /**
  *
  * @author PR3J
  */
-public class DoubleHull extends Options {
+public class DoubleHull extends Items {
     
     /* ---------
     *  Minimum Double Hull hullSize is 60 tons
@@ -23,30 +25,22 @@ public class DoubleHull extends Options {
     --------- */
     public boolean setOption(int size) {
         if (size >= MIN && size <= MAX * getHullSize()) {
-            this.outerHull = size;
-            return this.setOptiOn(true);
+            setAttribute(size);
+            return setOptiOn(true);
         } else {
-            this.outerHull = 0;
-            this.setOptiOn(false);
+            setAttribute(0);
+            setOptiOn(false);
             return false;
         }
     }
     
-    /* ---------
-    *  Outer Hull Size
-    --------- */
-    protected int outerHull = 0;
-    public int getOutHullSize() {
-        return this.outerHull;
-    }
-
     /* ---------
     *  Tonnage Used by Option
     *       uses 0.1 ton for every ton of outer hull.
     --------- */
     @Override
     public double getWeight() {
-        if (isOptiOn()) return 0.1 * getOutHullSize();
+        if (isOptiOn()) return 0.1 * getAttribute();
         else return 0;
     }
     
@@ -57,7 +51,7 @@ public class DoubleHull extends Options {
     --------- */
     @Override
     public double getCostModf() {
-        if (isOptiOn()) return 1 * (int) (getOutHullSize() / getHullSize());
+        if (isOptiOn()) return 1 * (int) (getAttribute() / getHullSize());
         else return 0;
     }
 
@@ -68,7 +62,7 @@ public class DoubleHull extends Options {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getClass().getSimpleName()).append("(").append(isOptiOn());
-        if (getOutHullSize() != 0) sb.append(", OuterHull=").append(getOutHullSize());
+        if (getAttribute() != 0) sb.append(", OuterHull=").append(getAttribute());
         if (getWeight() != 0) sb.append(", Weight=").append(getWeight());
         if (getCostModf() != 0) sb.append(", Cost=").append(getCostModf());
         sb.append('}');

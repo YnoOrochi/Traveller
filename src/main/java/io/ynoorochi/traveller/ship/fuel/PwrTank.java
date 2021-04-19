@@ -5,13 +5,14 @@
  */
 package io.ynoorochi.traveller.ship.fuel;
 
+import io.ynoorochi.traveller.ship.Items;
 import io.ynoorochi.traveller.ship.equip.Definitions.*;
 
 /**
  *
  * @author PR3J
  */
-public class PwrTank extends Options {
+public class PwrTank extends Items {
     /* ---------
     *  Atributes
     --------- */
@@ -24,7 +25,7 @@ public class PwrTank extends Options {
     public PwrTank(PwrPlants type, double size, int weeks) {    
         this.setType(type);
         this.setPlantSize(size);
-        this.setTime(weeks);
+        this.setAutonomy(weeks);
 
         setOptiOn(true);
     }
@@ -37,17 +38,17 @@ public class PwrTank extends Options {
      *       their plantSize (rounding up, minimum 1 ton) per month (week).
     --------- */
     @Override
-    public int getWeight() {
+    public double getWeight() {
         switch (getType()) {
-            case Chemical: return 5 * getTime();
-            default: return (int) Math.ceil(0.025 * getPlantSize() * getTime());
+            case Chemical: return 5 * getAutonomy();
+            default: return Math.ceil(0.025 * getPlantSize() * getAutonomy());
         }
     }
     
-    public int getWeight(PwrPlants type, double size, int weeks) {
+    public double getWeight(PwrPlants type, double size, int weeks) {
         this.setType(type);
         this.setPlantSize(size);
-        this.setTime(weeks);
+        this.setAutonomy(weeks);
         
         return getWeight();
     }
@@ -81,7 +82,7 @@ public class PwrTank extends Options {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("PwrTank{weight=").append(getWeight());
-        sb.append(", Weeks=").append(getTime());
+        sb.append(", Weeks=").append(getAutonomy());
         sb.append('}');
         return sb.toString();
     }

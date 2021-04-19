@@ -5,18 +5,20 @@
  */
 package io.ynoorochi.traveller.ship.fuel;
 
+import io.ynoorochi.traveller.ship.Items;
+
 /**
  *
  * @author PR3J
  */
-public class JmpTank extends Options{
+public class JmpTank extends Items{
     /* ---------
     *  Constructor
     --------- */
-    public JmpTank(int rating, int jumps, int hullSize) {
+    public JmpTank(double rating, int jumps, int hullSize) {
         this.setHullSize(hullSize);
-        this.setRating(rating);
-        this.setTime(jumps);
+        this.setAttribute(rating);
+        this.setAutonomy(jumps);
         
         setOptiOn(true);
     }
@@ -27,14 +29,14 @@ public class JmpTank extends Options{
      *       maximum jump score of the drive, per jump.
     --------- */
     @Override
-    public int getWeight() {
-        return (int) Math.ceil(0.1 * getHullSize() * getRating() * getTime());
+    public double getWeight() {
+        return Math.ceil(0.1 * getHullSize() * getAttribute() * getAutonomy());
     }
 
-    public int getWeight(int rating, int jumps, int hullSize) {
+    public double getWeight(double rating, int jumps, int hullSize) {
         this.setHullSize(hullSize);
-        this.setRating(rating);
-        this.setTime(jumps);
+        this.setAttribute(rating);
+        this.setAutonomy(jumps);
 
         return getWeight();
     }
@@ -46,7 +48,7 @@ public class JmpTank extends Options{
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("JmpTank{weight=").append(getWeight());
-        sb.append(", Jump").append(getRating()).append("s=").append(getTime());
+        sb.append(", Jump").append(getAttribute()).append("s=").append(getAutonomy());
         sb.append('}');
         return sb.toString();
     }

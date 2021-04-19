@@ -5,11 +5,13 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
+
 /**
  *
  * @author PR3J
  */
-public class HeatShield extends Options {
+public class HeatShield extends Items {
 
     /* ---------
     *  Tech Level
@@ -24,7 +26,7 @@ public class HeatShield extends Options {
     *  Option Specific Cost
     --------- */
     @Override
-    public int getCost() {
+    public double getCost() {
         if (isOptiOn()) return 100000;
         else return 0;
     }

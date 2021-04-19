@@ -5,6 +5,7 @@
  */
 package io.ynoorochi.traveller.ship.hull;
 
+import io.ynoorochi.traveller.ship.Items;
 import io.ynoorochi.traveller.ship.hull.options.*;
 import static io.ynoorochi.traveller.ship.hull.Definitions.*;
 
@@ -18,7 +19,7 @@ public class Hull {
     private int hullSize;
     
     /* ---------
-    *  Hull Options
+    *  Hull Equipment
     --------- */
     private Configuration config = new Configuration(MIN_HULL);
     private Type type = new Type();
@@ -34,7 +35,7 @@ public class Hull {
     private RadShield rShield = new RadShield();
     private Breakaway breakaway = new Breakaway();
 
-    public Options[] hullOpt = { config, type, coat, bridge, armour, armBulk,
+    public Items[] hullOpt = { config, type, coat, bridge, armour, armBulk,
         nonGHull, dblHull, hmsCase, eAGrid, hShield, rShield, breakaway
     };
     
@@ -95,7 +96,7 @@ public class Hull {
 
         double hpModf = 1;
         for (var opt : hullOpt) {
-            hpModf += opt.getHPModf();
+            hpModf += opt.getAttModf();
         }
         
         return (int) (hpModf * getHullSize() / hp);

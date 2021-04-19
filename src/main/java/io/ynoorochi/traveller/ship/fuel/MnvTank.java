@@ -5,21 +5,22 @@
  */
 package io.ynoorochi.traveller.ship.fuel;
 
+import io.ynoorochi.traveller.ship.Items;
 import io.ynoorochi.traveller.ship.equip.Definitions.*;
 
 /**
  *
  * @author PR3J
  */
-public class MnvTank extends Options {
+public class MnvTank extends Items {
     /* ---------
     *  Constructor
     --------- */
-    public MnvTank(MDriveTypes type, int thrust, int hours, int hullSize) {
+    public MnvTank(MDriveTypes type, double thrust, int hours, int hullSize) {
         this.setHullSize(hullSize);
         this.setDrive(type);
-        this.setRating(thrust);
-        this.setTime(hours);
+        this.setAttribute(thrust);
+        this.setAutonomy(hours);
 
         setOptiOn(true);
     }
@@ -30,17 +31,17 @@ public class MnvTank extends Options {
     *       Reaction drive: 2.5% of ship tonnage per Thrust per hour
     --------- */
     @Override
-    public int getWeight() {
+    public double getWeight() {
         if (getDrive() == MDriveTypes.Reaction)
-            return (int) Math.ceil(0.025 * getHullSize() * getRating() * getTime());
+            return Math.ceil(0.025 * getHullSize() * getAttribute() * getAutonomy());
         else return 0;
     }
     
-    public int getWeight(MDriveTypes type, int thrust, int hours, int hullSize) {
+    public double getWeight(MDriveTypes type, double thrust, int hours, int hullSize) {
         this.setDrive(type);
-        this.setRating(thrust);
+        this.setAttribute(thrust);
         this.setHullSize(hullSize);
-        this.setTime(hours);
+        this.setAutonomy(hours);
         
         return getWeight();
     }
@@ -54,7 +55,7 @@ public class MnvTank extends Options {
     --------- */
     public int getThrustPoints() {
         if (getDrive() == MDriveTypes.Reaction) 
-            return 10 * getRating() * getTime();
+            return (int) Math.floor(10 * getAttribute() * getAutonomy());
         else return 0;
     }
 
@@ -76,7 +77,7 @@ public class MnvTank extends Options {
     --------- */
     @Override
     public boolean isOptiOn() {
-        return getRating() > 0;
+        return getAttribute() > 0;
     }
 
     /* ---------
@@ -86,8 +87,8 @@ public class MnvTank extends Options {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("MnvTank{weight=").append(getWeight());
-        if (getDrive() == MDriveTypes.Reaction) sb.append(", thrust=").append(getRating());
-        if (getDrive() == MDriveTypes.Reaction) sb.append(" per ").append(getTime()).append("h");
+        if (getDrive() == MDriveTypes.Reaction) sb.append(", thrust=").append(getAttribute());
+        if (getDrive() == MDriveTypes.Reaction) sb.append(" per ").append(getAutonomy()).append("h");
         if (getDrive() == MDriveTypes.Reaction) sb.append(", CTP=").append(getThrustPoints());
         sb.append('}');
         return sb.toString();

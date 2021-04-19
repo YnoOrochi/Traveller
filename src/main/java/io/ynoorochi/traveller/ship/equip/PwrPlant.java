@@ -5,23 +5,23 @@
  */
 package io.ynoorochi.traveller.ship.equip;
 
+import io.ynoorochi.traveller.ship.Items;
 import static io.ynoorochi.traveller.ship.equip.Definitions.*;
 
 /**
  *
  * @author PR3J
  */
-public class PwrPlant extends Equipment {
+public class PwrPlant extends Items {
     
     private PwrPlants type;
-    private int rating;
     
     /* ---------
     *  Constructor
     --------- */
     public PwrPlant(PwrPlants type, int rating) {
         this.setType(type);
-        this.setRating(rating);
+        this.setAttribute(rating);
     }
 
     /* ---------
@@ -35,18 +35,6 @@ public class PwrPlant extends Equipment {
         this.type = type;
     }
 
-    /* ---------
-    *  Power Plant Power Rating
-    --------- */
-    @Override
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-    
     /* ---------
     *  Power Plant TL
     --------- */
@@ -79,7 +67,7 @@ public class PwrPlant extends Equipment {
         StringBuilder sb = new StringBuilder();
         sb.append("PwrPlant{type=").append(type);
         sb.append(", Cost=").append(getCost());
-        sb.append(", Rating=").append(rating);
+        sb.append(", Rating=").append(getAttribute());
         sb.append(", TL=").append(getTL());
         sb.append(", Weight=").append(getWeight());
         sb.append('}');

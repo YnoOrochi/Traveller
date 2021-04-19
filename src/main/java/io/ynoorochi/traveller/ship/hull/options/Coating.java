@@ -5,6 +5,7 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
 import io.ynoorochi.traveller.ship.hull.Definitions.CoatOptions;
 import static io.ynoorochi.traveller.ship.hull.Definitions.CoatOptions.*;
 
@@ -12,10 +13,10 @@ import static io.ynoorochi.traveller.ship.hull.Definitions.CoatOptions.*;
  *
  * @author PR3J
  */
-public class Coating extends Options {
+public class Coating extends Items {
 
     /* ---------
-    *  Coating Options
+    *  Coating Equipment
     --------- */
     private CoatOptions coat = NONE;
 
@@ -47,7 +48,7 @@ public class Coating extends Options {
     *  Option Specific Cost
     --------- */
     @Override
-    public int getCost() {
+    public double getCost() {
         return this.coat.getCost();
     }
 

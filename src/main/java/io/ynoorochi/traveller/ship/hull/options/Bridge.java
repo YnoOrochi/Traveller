@@ -5,6 +5,7 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
 import io.ynoorochi.traveller.ship.hull.Definitions.BridgeTypes;
 import static io.ynoorochi.traveller.ship.hull.Definitions.BridgeTypes.*;
 
@@ -12,7 +13,7 @@ import static io.ynoorochi.traveller.ship.hull.Definitions.BridgeTypes.*;
  *
  * @author PR3J
  */
-public class Bridge extends Options {
+public class Bridge extends Items {
     /* ---------
      *  Constructor
     --------- */
@@ -84,7 +85,7 @@ public class Bridge extends Options {
     *       Otherwise the cost is MCr0.5 per 100 tons (or part of) of the ship
     --------- */
     @Override
-    public int getCost() {
+    public double getCost() {
         int modf = 1;
         int optCost = 0;
         if (isDetach()) optCost += 300000 * Math.ceil(getHullSize());
@@ -99,8 +100,7 @@ public class Bridge extends Options {
             case Smaller: modf = 2;
             default: optCost += 5000 * getHullSize() / modf;
         }
-        return (int) Math.ceil((isHolog() ? 1.25 : 1) * optCost) +
-                     500000 * getSStations();
+        return Math.ceil((isHolog() ? 1.25 : 1) * optCost) + 500000 * getSStations();
     }
 
     /* ---------

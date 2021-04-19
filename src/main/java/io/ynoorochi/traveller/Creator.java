@@ -33,8 +33,8 @@ public class Creator {
 //        System.out.println(a.toString());
 
 //  VER SINTAXE DISSO
-//        traveller.hull.options.Options opt;
-//        for (traveller.hull.options.Options opt in a.hull.hullOpt) {
+//        traveller.hull.options.Equipment opt;
+//        for (traveller.hull.options.Equipment opt in a.hull.hullOpt) {
 //        final var opts = a.hull.hullOpt;
 
         for (var opt : a.hull.hullOpt) {

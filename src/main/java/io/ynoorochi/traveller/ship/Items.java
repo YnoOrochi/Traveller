@@ -3,31 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.ship.fuel;
+package io.ynoorochi.traveller.ship;
 
 /**
  *
  * @author PR3J
  */
-public abstract class Options {
+public abstract class Items {
     /* ---------
      *  Attributes
     --------- */
     private boolean option = false;
-    
-    /* ---------
-     *  Fuel Tank Weight
-    --------- */
-    public int getWeight() {
-        return 0;
-    }
-    
-    /* ---------
-     *  Fuel Tank Cost
-    --------- */
-    public int getCost() {
-        return 0;
-    }
     
     /* ---------
     *  Option setter
@@ -60,28 +46,74 @@ public abstract class Options {
     }
 
     /* ---------
-    *  Auxiliar rating
+    *  Tech Level
     --------- */
-    protected int rating;
+    public int getTL() {
+        return 0;
+    }
 
-    public int getRating() {
+    public int maxTL(int tl) {
+        return Math.max(this.getTL(), tl);
+    }
+
+    /* ---------
+    *  Power used
+    --------- */
+    public double getPower() {
+        return 0;
+    }
+
+    /* ---------
+     *  Tonnage Used by Option
+    --------- */
+    public double getWeight() {
+        return 0;
+    }
+    
+    /* ---------
+     *  Option Specific Cost
+    --------- */
+    public double getCost() {
+        return 0;
+    }
+    
+    /* ---------
+    *  Option Cost Modifier
+    --------- */
+    public double getCostModf() {
+        return 0;
+    }
+
+    /* ---------
+    *  Auxiliar Attribute Rating
+    --------- */
+    protected double rating = 0;
+
+    public double getAttribute() {
         return this.rating;
     }
 
-    public void setRating(int rating) {
+    public void setAttribute(double rating) {
         this.rating = rating;
+    }
+
+    /* ---------
+    *  Auxiliar Attribute Rating Modifier
+    --------- */
+    public double getAttModf() {
+        return 0;
     }
 
     /* ---------
     *  Autonomy (Hours, Weeks, Jumps ...)
     --------- */
-    protected int time;
+    protected int time = 0;
 
-    public int getTime() {
+    public int getAutonomy() {
         return this.time;
     }
 
-    public void setTime(int time) {
+    public void setAutonomy(int time) {
         this.time = time;
     }
 

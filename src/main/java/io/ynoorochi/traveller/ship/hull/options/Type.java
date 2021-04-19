@@ -5,6 +5,7 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
 import static io.ynoorochi.traveller.ship.hull.Definitions.HullType;
 import static io.ynoorochi.traveller.ship.hull.Definitions.HullType.*;
 
@@ -12,10 +13,10 @@ import static io.ynoorochi.traveller.ship.hull.Definitions.HullType.*;
  *
  * @author PR3J
  */
-public class Type extends Options {
+public class Type extends Items {
 
     /* ---------
-    *  Type Options
+    *  Type Equipment
     --------- */
     private HullType type = STRD;
 
@@ -39,7 +40,7 @@ public class Type extends Options {
     *  Hull Points Modifier
     --------- */
     @Override
-    public double getHPModf() {
+    public double getAttModf() {
         return this.type.getHPModf();
     }
     
@@ -59,7 +60,7 @@ public class Type extends Options {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getClass().getSimpleName());
         sb.append("(").append(type.getType());
-        sb.append(", HPModf=").append(getHPModf());
+        sb.append(", HPModf=").append(getAttModf());
         sb.append(", CostModf=").append(getCostModf());
         sb.append('}');
         return sb.toString();

@@ -5,26 +5,23 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
+
 /**
  *
  * @author PR3J
  */
-public class ArmBulkhead extends Options {
+public class ArmBulkhead extends Items {
     /* ---------
     *  Bulkhead Tonnage
     --------- */
-    private int bulkTon = 0;
-    
-    public int getBulkTon() {
-        return bulkTon;
-    }
-
-    public void setBulkTon(int bulkTon) {
-        if (bulkTon > 0) {
-            this.bulkTon = bulkTon;
+    @Override
+    public void setAttribute(double rating) {
+        if (rating > 0) {
+            this.rating = rating;
             setOptiOn(true);
         } else {
-            this.bulkTon = 0;
+            this.rating = 0;
             setOptiOn(false);
         }
     }
@@ -34,22 +31,22 @@ public class ArmBulkhead extends Options {
     --------- */
     @Override
     public double getWeight() {
-        return 0.1 * getBulkTon();
+        return 0.1 * getAttribute();
     }
 
     /* ---------
     *  Option Specific Cost
     --------- */
     @Override
-    public int getCost() {
-        return 200000 * getBulkTon();
+    public double getCost() {
+        return 200000 * getAttribute();
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getClass().getSimpleName()).append("(");
-        sb.append(bulkTon).append(" Ton");
+        sb.append(rating).append(" Ton");
         sb.append(", Weight=").append(getWeight());
         sb.append(", Cost=").append(getCost());
         sb.append('}');

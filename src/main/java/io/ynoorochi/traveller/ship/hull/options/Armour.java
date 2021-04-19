@@ -5,6 +5,7 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
 import io.ynoorochi.traveller.ship.hull.Definitions.*;
 import static io.ynoorochi.traveller.ship.hull.Definitions.ArmourOptions.*;
 
@@ -12,7 +13,7 @@ import static io.ynoorochi.traveller.ship.hull.Definitions.ArmourOptions.*;
  *
  * @author PR3J
  */
-public class Armour extends Options {
+public class Armour extends Items {
     /* ---------
     *  Armour Type
     --------- */

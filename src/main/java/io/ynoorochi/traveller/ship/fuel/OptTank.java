@@ -5,33 +5,34 @@
  */
 package io.ynoorochi.traveller.ship.fuel;
 
+import io.ynoorochi.traveller.ship.Items;
+
 /**
  *
  * @author PR3J
  */
-public class OptTank {
+public class OptTank extends Items {
     /* ---------
      *  Attributes
     --------- */
     private Hidden hidden = new Hidden();
     
-    private final Options[] optTanks = {
+    private final Items[] optTanks = {
         hidden
     };
     
-    public Options[] getOptions() {
+    public Items[] getOptions() {
         return this.optTanks;
     }
 
     /* ---------
-     *  Attributes
+     *  toString
     --------- */
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (Options opt : optTanks) 
+        for (var opt : optTanks) 
             sb.append(opt.toString()).append("\n");
 
         sb.append('}');

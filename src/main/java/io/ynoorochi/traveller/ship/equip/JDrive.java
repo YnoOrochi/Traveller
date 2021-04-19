@@ -5,6 +5,7 @@
  */
 package io.ynoorochi.traveller.ship.equip;
 
+import io.ynoorochi.traveller.ship.Items;
 import io.ynoorochi.traveller.ship.equip.Definitions.JDriveTypes;
 import static io.ynoorochi.traveller.ship.equip.Definitions.JDriveTypes.*;
 
@@ -12,7 +13,7 @@ import static io.ynoorochi.traveller.ship.equip.Definitions.JDriveTypes.*;
  *
  * @author PR3J
  */
-public class JDrive extends Equipment {
+public class JDrive extends Items {
     private final int MINW = 10;
     
     /* ---------
@@ -47,20 +48,18 @@ public class JDrive extends Equipment {
     --------- */
     @Override
     public double getPower() {
-        return 0.1 * getRating() * getHullSize();
+        return 0.1 * getAttribute() * getHullSize();
     }
     
     /* ---------
     *  JDriveRating
     --------- */
-    private int rating = 0;
-
     @Override
-    public int getRating() {
+    public double getAttribute() {
         return this.rating;
     }
 
-    public boolean setRating(int rating) {
+    public boolean setRating(double rating) {
         if (rating > 0)
             if (rating <= getType().getMax()) {
                 this.rating = rating;
@@ -88,7 +87,7 @@ public class JDrive extends Equipment {
     --------- */
     @Override
     public int getTL() {
-        return getType().getTL(getRating());
+        return getType().getTL((int) Math.ceil(getAttribute()));
     }
     
     /* ---------
@@ -97,7 +96,7 @@ public class JDrive extends Equipment {
     @Override
     public double getWeight() {
         switch(getType()) {
-            case Jump: return 0.025 * getRating() * getHullSize();
+            case Jump: return 0.025 * getAttribute() * getHullSize();
             default: return 0;
         }
     }
@@ -109,7 +108,7 @@ public class JDrive extends Equipment {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("JDrive{").append(getRating());
+        sb.append("JDrive{").append(getAttribute());
         sb.append(", HullSize=").append(getHullSize());
         if(getType() == Jump) sb.append(", Cost=").append(getCost());
         if(getType() == Jump) sb.append(", Pwr=").append(getPower());

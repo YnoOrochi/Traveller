@@ -83,8 +83,8 @@ public class SpaceShip {
         this.mDrive = new MDrive(MDriveTypes.Maneuver, 1, tonnage);
         this.jDrive = new JDrive(JDriveTypes.Jump, 2, tonnage);
         this.pwrPlant = new PwrPlant(PwrPlants.Fission, 80);
-        this.mTank = new MnvTank(mDrive.getType(), mDrive.getRating(), 1, tonnage);
-        this.jTank = new JmpTank(jDrive.getRating(), 1, tonnage);
+        this.mTank = new MnvTank(mDrive.getType(), mDrive.getAttribute(), 1, tonnage);
+        this.jTank = new JmpTank(jDrive.getAttribute(), 1, tonnage);
         this.pTank = new PwrTank(pwrPlant.getType(), pwrPlant.getWeight(), 4);
         this.oTank = new OptTank();
 

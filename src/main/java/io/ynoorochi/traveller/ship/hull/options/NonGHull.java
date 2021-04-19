@@ -5,11 +5,13 @@
  */
 package io.ynoorochi.traveller.ship.hull.options;
 
+import io.ynoorochi.traveller.ship.Items;
+
 /**
  *
  * @author PR3J
  */
-public class NonGHull extends Options {
+public class NonGHull extends Items {
     
     /* ---------
     *  Non-gravity Hull maximum hullSize is 500,000 tons
@@ -21,9 +23,9 @@ public class NonGHull extends Options {
     --------- */
     @Override
     public boolean setOptiOn(boolean opt) {
-        if (opt && getHullSize() > NONG_MAX) return this.option = false;
+        if (opt && getHullSize() > NONG_MAX) return setOptiOn(false);
         
-        this.option = opt;
+        setOptiOn(opt);
         return true;
     }
     
