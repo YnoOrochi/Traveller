@@ -31,18 +31,4 @@ public class Breakaway extends Options {
         if (isOptiOn()) return WHT * getHullSize();
         else return 0;
     }
-    
-    /* ---------
-    *  toString
-    --------- */
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Option(Breakaway=").append(isOptiOn());
-        if (isOptiOn()) sb.append(", Cost=").append(getCost());
-        if (isOptiOn()) sb.append(", Weight=").append(getWeight());
-        sb.append('}');
-        return sb.toString();
-    }
 }

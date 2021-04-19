@@ -57,7 +57,8 @@ public class Coating extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(Coating=").append(this.coat.getType());
+        sb.append(this.getClass().getSimpleName());
+        sb.append("(").append(this.coat.getType());
         if (getTL() != 0) sb.append(", TL=").append(getTL());
         if (getCost() != 0) sb.append(", Cost=").append(getCost());
         sb.append('}');

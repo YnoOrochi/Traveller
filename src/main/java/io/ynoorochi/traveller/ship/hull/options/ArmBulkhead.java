@@ -9,46 +9,51 @@ package io.ynoorochi.traveller.ship.hull.options;
  *
  * @author PR3J
  */
-public class EAGrid extends Options {
-
+public class ArmBulkhead extends Options {
     /* ---------
-    *  Tech Level
+    *  Bulkhead Tonnage
     --------- */
-    @Override
-    public int getTL() {
-        if (isOptiOn()) return 8;
-        else return 0;
-    }
+    private int bulkTon = 0;
     
+    public int getBulkTon() {
+        return bulkTon;
+    }
+
+    public void setBulkTon(int bulkTon) {
+        if (bulkTon > 0) {
+            this.bulkTon = bulkTon;
+            setOptiOn(true);
+        } else {
+            this.bulkTon = 0;
+            setOptiOn(false);
+        }
+    }
+
     /* ---------
     *  Tonnage Used by Option
     --------- */
     @Override
     public double getWeight() {
-        if (isOptiOn()) return 0.02 * getHullSize();
-        else return 0;
+        return 0.1 * getBulkTon();
     }
-    
+
     /* ---------
     *  Option Specific Cost
     --------- */
     @Override
     public int getCost() {
-        if (isOptiOn()) return 40000;
-        else return 0;
+        return 200000 * getBulkTon();
     }
 
-    /* ---------
-    *  toString
-    --------- */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("(").append(isOptiOn());
-        if (getTL() != 0) sb.append(", TL=").append(getTL());
-        if (getWeight() != 0) sb.append(", Weight=").append(getWeight());
-        if (getCost() != 0) sb.append(", Cost=").append(getCost());
+        sb.append(this.getClass().getSimpleName()).append("(");
+        sb.append(bulkTon).append(" Ton");
+        sb.append(", Weight=").append(getWeight());
+        sb.append(", Cost=").append(getCost());
         sb.append('}');
         return sb.toString();
     }
+
 }

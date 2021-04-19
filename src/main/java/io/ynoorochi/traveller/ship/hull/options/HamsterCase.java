@@ -17,10 +17,10 @@ public class HamsterCase extends Options {
     public boolean setOption(int size) {
         if (size > 0) {
             this.hmsSize = size;
-            return this.setOption(true);
+            return this.setOptiOn(true);
         } else {
             this.hmsSize = 0;
-            this.setOption(false);
+            this.setOptiOn(false);
             return false;
         }
     }
@@ -60,7 +60,7 @@ public class HamsterCase extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(HamsterCase=").append(isOptiOn());
+        sb.append(this.getClass().getSimpleName()).append("(").append(isOptiOn());
         if (getHmsSize() != 0) sb.append(", Size=").append(getHmsSize());
         if (getWeight() != 0) sb.append(", Weight=").append(getWeight());
         if (getCostModf() != 0) sb.append(", CostModf=").append(getCostModf());

@@ -35,7 +35,7 @@ public class HeatShield extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(HeatShield=").append(isOptiOn());
+        sb.append(this.getClass().getSimpleName()).append("(").append(isOptiOn());
         if (getTL() != 0) sb.append(", TL=").append(getTL());
         if (getCost() != 0) sb.append(", Cost=").append(getCost());
         sb.append('}');

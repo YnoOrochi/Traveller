@@ -59,6 +59,18 @@ public class Definitions {
     }
     
     /* ---------
+    *  Armour
+    --------- */
+    public enum BridgeTypes {
+        Normal,
+        Hardened,
+        Smaller,
+        Command,
+        Cockpit,
+        DualCockpit
+    }
+
+    /* ---------
     *  CoatOptions - Reflec, Stealth or Superior Stealth
     --------- */
     public enum CoatOptions {

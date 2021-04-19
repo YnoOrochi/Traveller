@@ -57,7 +57,8 @@ public class Type extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(HullType=").append(type.getType());
+        sb.append(this.getClass().getSimpleName());
+        sb.append("(").append(type.getType());
         sb.append(", HPModf=").append(getHPModf());
         sb.append(", CostModf=").append(getCostModf());
         sb.append('}');

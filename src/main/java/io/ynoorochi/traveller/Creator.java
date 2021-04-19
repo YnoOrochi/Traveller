@@ -44,10 +44,11 @@ public class Creator {
         System.out.println(a.mDrive);
         System.out.println(a.jDrive);
         System.out.println(a.pwrPlant);
+        System.out.println(a.mTank);
+        System.out.println(a.jTank);
+        System.out.println(a.pTank);
+        System.out.println(a.oTank);
 
-
-        System.out.println("HullSize:" + a.hull.getHullSize());
-        System.out.println("HullCost:" + a.hull.getCost());
-        System.out.println(a.hull.toString());
+//        System.out.println(a.hull.toString());
     }
 }

@@ -3,20 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.ship.hull.options;
+package io.ynoorochi.traveller.ship.fuel;
 
 /**
  *
  * @author PR3J
  */
 public abstract class Options {
-
     /* ---------
-    *  Atributes
+     *  Attributes
     --------- */
-    protected int hullSize;
-    protected boolean option = false;
-
+    private boolean option = false;
+    
+    /* ---------
+     *  Fuel Tank Weight
+    --------- */
+    public int getWeight() {
+        return 0;
+    }
+    
+    /* ---------
+     *  Fuel Tank Cost
+    --------- */
+    public int getCost() {
+        return 0;
+    }
+    
     /* ---------
     *  Option setter
     *      returns the operation result
@@ -37,55 +49,44 @@ public abstract class Options {
     /* ---------
     *  Hull Size
     --------- */
+    private int hullSize;
+
     public int getHullSize() {
         return this.hullSize;
     }
-    
-    public void setHullSize(int size) {
-        this.hullSize = size;
+
+    public void setHullSize(int hullSize) {
+        this.hullSize = hullSize;
     }
-    
+
     /* ---------
-    *  Tech Level
+    *  Auxiliar rating
     --------- */
-    public int getTL() {
-        return 0;
+    protected int rating;
+
+    public int getRating() {
+        return this.rating;
     }
 
-    public int maxTL(int tl) {
-        return Math.max(this.getTL(), tl);
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     /* ---------
-    *  Tonnage Used by Option
+    *  Autonomy (Hours, Weeks, Jumps ...)
     --------- */
-    public double getWeight() {
-        return 0;
+    protected int time;
+
+    public int getTime() {
+        return this.time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 
     /* ---------
-    *  Option Specific Cost
-    --------- */
-    public int getCost() {
-        return 0;
-    }
-
-    /* ---------
-    *  Option Hull Cost Modifier
-    --------- */
-    public double getCostModf() {
-        return 0;
-    }
-
-    /* ---------
-    * Hull Points Modifier
-    --------- */
-    public double getHPModf() {
-        return 0;
-    }
-
-    /* ---------
-    *  basic toString
+     *  toString
     --------- */
     @Override
     public String toString() {

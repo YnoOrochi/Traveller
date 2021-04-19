@@ -20,7 +20,7 @@ public class NonGHull extends Options {
     *  Option setter
     --------- */
     @Override
-    public boolean setOption(boolean opt) {
+    public boolean setOptiOn(boolean opt) {
         if (opt && getHullSize() > NONG_MAX) return this.option = false;
         
         this.option = opt;
@@ -44,7 +44,7 @@ public class NonGHull extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(NonGHull=").append(isOptiOn());
+        sb.append(this.getClass().getSimpleName()).append("(").append(isOptiOn());
         sb.append(", MAXTon=").append(NONG_MAX);
         if (getCostModf() != 0) sb.append(", CostModf=").append(getCostModf());
         sb.append('}');

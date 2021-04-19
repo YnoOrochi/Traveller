@@ -5,8 +5,9 @@
  */
 package io.ynoorochi.traveller.ship;
 
-import io.ynoorochi.traveller.ship.equip.*;
 import io.ynoorochi.traveller.ship.hull.*;
+import io.ynoorochi.traveller.ship.equip.*;
+import io.ynoorochi.traveller.ship.fuel.*;
 
 import static io.ynoorochi.traveller.ship.Customization.*;
 import static io.ynoorochi.traveller.ship.equip.Definitions.*;
@@ -34,7 +35,10 @@ public class SpaceShip {
     public MDrive mDrive;
     public JDrive jDrive;
     public PwrPlant pwrPlant;
-    public FTanks fTank;
+    public MnvTank mTank;
+    public JmpTank jTank;
+    public PwrTank pTank;
+    public OptTank oTank;
 //    private Bridge bridge = new Bridge();
 //    private Computer computer = new Computer();
 //    private Sensors sensors = new Sensors();
@@ -79,7 +83,10 @@ public class SpaceShip {
         this.mDrive = new MDrive(MDriveTypes.Maneuver, 1, tonnage);
         this.jDrive = new JDrive(JDriveTypes.Jump, 2, tonnage);
         this.pwrPlant = new PwrPlant(PwrPlants.Fission, 80);
-        this.fTank = new FTanks();
+        this.mTank = new MnvTank(mDrive.getType(), mDrive.getRating(), 1, tonnage);
+        this.jTank = new JmpTank(jDrive.getRating(), 1, tonnage);
+        this.pTank = new PwrTank(pwrPlant.getType(), pwrPlant.getWeight(), 4);
+        this.oTank = new OptTank();
 
         this.tonnage = this.hull.getHullSize();
 
@@ -215,7 +222,9 @@ public class SpaceShip {
         sb.append(", mDrive=").append(mDrive);
         sb.append(", jDrive=").append(jDrive);
         sb.append(", pwrPlant=").append(pwrPlant);
-//        sb.append(", tanks=").append(tanks);
+        sb.append(", MnvTank=").append(mTank);
+        sb.append(", JmpTank=").append(jTank);
+        sb.append(", PwrTank=").append(pTank);
 //        sb.append(", bridge=").append(bridge);
 //        sb.append(", computer=").append(computer);
 //        sb.append(", sensors=").append(sensors);

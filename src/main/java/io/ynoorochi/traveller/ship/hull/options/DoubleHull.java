@@ -24,10 +24,10 @@ public class DoubleHull extends Options {
     public boolean setOption(int size) {
         if (size >= MIN && size <= MAX * getHullSize()) {
             this.outerHull = size;
-            return this.setOption(true);
+            return this.setOptiOn(true);
         } else {
             this.outerHull = 0;
-            this.setOption(false);
+            this.setOptiOn(false);
             return false;
         }
     }
@@ -67,7 +67,7 @@ public class DoubleHull extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(DoubleHull=").append(isOptiOn());
+        sb.append(this.getClass().getSimpleName()).append("(").append(isOptiOn());
         if (getOutHullSize() != 0) sb.append(", OuterHull=").append(getOutHullSize());
         if (getWeight() != 0) sb.append(", Weight=").append(getWeight());
         if (getCostModf() != 0) sb.append(", Cost=").append(getCostModf());

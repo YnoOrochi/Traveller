@@ -22,7 +22,9 @@ public class Hull {
     --------- */
     private Configuration config = new Configuration(MIN_HULL);
     private Type type = new Type();
+    private Bridge bridge = new Bridge();
     private Armour armour = new Armour();
+    private ArmBulkhead armBulk = new ArmBulkhead();
     private Coating coat = new Coating();
     private NonGHull nonGHull = new NonGHull();
     private DoubleHull dblHull = new DoubleHull();
@@ -32,8 +34,8 @@ public class Hull {
     private RadShield rShield = new RadShield();
     private Breakaway breakaway = new Breakaway();
 
-    public Options[] hullOpt = { config, type, coat, armour, nonGHull, 
-        dblHull, hmsCase, eAGrid, hShield, rShield, breakaway
+    public Options[] hullOpt = { config, type, coat, bridge, armour, armBulk,
+        nonGHull, dblHull, hmsCase, eAGrid, hShield, rShield, breakaway
     };
     
     /* ---------

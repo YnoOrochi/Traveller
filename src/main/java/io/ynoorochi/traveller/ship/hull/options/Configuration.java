@@ -83,7 +83,8 @@ public class Configuration extends Options {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Option(HullConf=").append(config.getConfig());
+        sb.append(this.getClass().getSimpleName());
+        sb.append("(").append(config.getConfig());
         sb.append("/").append(isStreamlined());
         sb.append(", HPModf=").append(getHPModf());
         sb.append(", Cost=").append(getCost());
