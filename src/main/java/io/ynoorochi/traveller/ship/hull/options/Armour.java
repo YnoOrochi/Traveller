@@ -25,7 +25,6 @@ public class Armour extends Items {
     
     public void setType(ArmourOptions armour) {
         this.type = armour;
-        this.setTL(this.tl);
     }
 
     /* ---------
@@ -47,10 +46,10 @@ public class Armour extends Items {
     
     public int getArmourMax(){
         switch(getType()) {
-            case TTST: return Math.min(this.getTL(), 9);
-            case CRIR: return Math.min(this.getTL(), 13);
-            case BDSD: return this.getTL();
-            case MLBD: return this.getTL() + 4;
+            case TTST: return 9;
+            case CRIR: return 13;
+            case BDSD: return getTL();
+            case MLBD: return getTL() + 4;
             default: return 0;
         }
     }
@@ -58,16 +57,9 @@ public class Armour extends Items {
     /* ---------
     *  Armour TL
     --------- */
-    private int tl = getType().getBaseTL();
-    
     @Override
     public int getTL() {
-        return this.tl;
-    }
-    
-    public boolean setTL(int tl) {
-        this.tl = Math.max(getType().getBaseTL(), tl);
-        return getType().getBaseTL() == tl;
+        return Math.max(getType().getBaseTL(), getArmourMax());
     }
     
     /* ---------
@@ -103,7 +95,7 @@ public class Armour extends Items {
         sb.append(this.getClass().getSimpleName()).append("(");
         sb.append("Type=").append(type.getType());
         sb.append(", Points=").append(armourPoints);
-        sb.append(", TL=").append(tl);
+        sb.append(", TL=").append(getTL());
         sb.append('}');
         return sb.toString();
     }

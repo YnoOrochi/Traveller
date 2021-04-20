@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.ship.equip;
+package io.ynoorochi.traveller.ship.fuel;
 
 import io.ynoorochi.traveller.ship.Items;
 
@@ -11,6 +11,13 @@ import io.ynoorochi.traveller.ship.Items;
  *
  * @author PR3J
  */
-public class Sensors extends Items {
+public class Scoop extends Items {
     
+    /* ---------
+     *  Option Specific Cost
+    --------- */
+    @Override
+    public double getCost() {
+        return 0;
+    }
 }

@@ -39,9 +39,8 @@ public class SpaceShip {
     public JmpTank jTank;
     public PwrTank pTank;
     public OptTank oTank;
-//    private Bridge bridge = new Bridge();
-//    private Computer computer = new Computer();
-//    private Sensors sensors = new Sensors();
+    public Computer computer;
+    public Sensors sensors;
 //    private Weapons[] wPoints;
 //    private Systems[] systems;
 //    private Rooms[] rooms;
@@ -83,10 +82,12 @@ public class SpaceShip {
         this.mDrive = new MDrive(MDriveTypes.Maneuver, 1, tonnage);
         this.jDrive = new JDrive(JDriveTypes.Jump, 2, tonnage);
         this.pwrPlant = new PwrPlant(PwrPlants.Fission, 80);
-        this.mTank = new MnvTank(mDrive.getType(), mDrive.getAttribute(), 1, tonnage);
-        this.jTank = new JmpTank(jDrive.getAttribute(), 1, tonnage);
+        this.mTank = new MnvTank(mDrive.getType(), mDrive.getRating(), 1, tonnage);
+        this.jTank = new JmpTank(jDrive.getRating(), 1, tonnage);
         this.pTank = new PwrTank(pwrPlant.getType(), pwrPlant.getWeight(), 4);
         this.oTank = new OptTank();
+        this.computer = new Computer();
+        this.sensors = new Sensors();
 
         this.tonnage = this.hull.getHullSize();
 
@@ -225,9 +226,8 @@ public class SpaceShip {
         sb.append(", MnvTank=").append(mTank);
         sb.append(", JmpTank=").append(jTank);
         sb.append(", PwrTank=").append(pTank);
-//        sb.append(", bridge=").append(bridge);
-//        sb.append(", computer=").append(computer);
-//        sb.append(", sensors=").append(sensors);
+        sb.append(", computer=").append(computer);
+        sb.append(", sensors=").append(sensors);
 //        sb.append(", wPoints=").append(weapons);
 //        sb.append(", systems=").append(systems);
 //        sb.append(", rooms=").append(rooms);

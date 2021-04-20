@@ -48,6 +48,8 @@ public class Creator {
         System.out.println(a.jTank);
         System.out.println(a.pTank);
         System.out.println(a.oTank);
+        System.out.println(a.sensors);
+        System.out.println(a.computer);
 
 //        System.out.println(a.hull.toString());
     }

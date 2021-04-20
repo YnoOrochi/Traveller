@@ -21,7 +21,7 @@ public class PwrPlant extends Items {
     --------- */
     public PwrPlant(PwrPlants type, int rating) {
         this.setType(type);
-        this.setAttribute(rating);
+        this.setRating(rating);
     }
 
     /* ---------
@@ -36,6 +36,17 @@ public class PwrPlant extends Items {
     }
 
     /* ---------
+    *  Power Plant Rating
+    --------- */
+    public double getRating() {
+        return getAttribute();
+    }
+    
+    public void setRating(double rating) {
+        setAttribute(rating);
+    }
+    
+    /* ---------
     *  Power Plant TL
     --------- */
     @Override
@@ -48,7 +59,7 @@ public class PwrPlant extends Items {
     --------- */
     @Override
     public double getWeight() {
-        return this.rating / getType().getRating();
+        return getRating() / getType().getRating();
     }
     
     /* ---------
@@ -67,7 +78,7 @@ public class PwrPlant extends Items {
         StringBuilder sb = new StringBuilder();
         sb.append("PwrPlant{type=").append(type);
         sb.append(", Cost=").append(getCost());
-        sb.append(", Rating=").append(getAttribute());
+        sb.append(", Rating=").append(getRating());
         sb.append(", TL=").append(getTL());
         sb.append(", Weight=").append(getWeight());
         sb.append('}');

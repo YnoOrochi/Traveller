@@ -19,12 +19,34 @@ public class MnvTank extends Items {
     public MnvTank(MDriveTypes type, double thrust, int hours, int hullSize) {
         this.setHullSize(hullSize);
         this.setDrive(type);
-        this.setAttribute(thrust);
+        this.setThrust(thrust);
         this.setAutonomy(hours);
 
         setOptiOn(true);
     }
  
+    /* ---------
+    *  JDrive Rating
+    --------- */
+    public double getThrust() {
+        return getAttribute();
+    }
+    
+    public void setThrust(double thrust) {
+        if (thrust >= 0) setAttribute(thrust);
+    }
+
+    /* ---------
+    *  Autonomy
+    --------- */
+    public int getAutonomy() {
+        return getIntAtt();
+    }
+    
+    public void setAutonomy(int hours) {
+        if (hours >= 0) setIntAtt(hours);
+    }
+
     /* ---------
     *  Maneuver Fuel
     *       Maneuver drive does not use fuel.
@@ -33,13 +55,13 @@ public class MnvTank extends Items {
     @Override
     public double getWeight() {
         if (getDrive() == MDriveTypes.Reaction)
-            return Math.ceil(0.025 * getHullSize() * getAttribute() * getAutonomy());
+            return Math.ceil(0.025 * getHullSize() * getThrust() * getAutonomy());
         else return 0;
     }
     
     public double getWeight(MDriveTypes type, double thrust, int hours, int hullSize) {
         this.setDrive(type);
-        this.setAttribute(thrust);
+        this.setThrust(thrust);
         this.setHullSize(hullSize);
         this.setAutonomy(hours);
         
@@ -55,7 +77,7 @@ public class MnvTank extends Items {
     --------- */
     public int getThrustPoints() {
         if (getDrive() == MDriveTypes.Reaction) 
-            return (int) Math.floor(10 * getAttribute() * getAutonomy());
+            return (int) Math.floor(10 * getThrust() * getAutonomy());
         else return 0;
     }
 
@@ -77,7 +99,7 @@ public class MnvTank extends Items {
     --------- */
     @Override
     public boolean isOptiOn() {
-        return getAttribute() > 0;
+        return getThrust() > 0;
     }
 
     /* ---------
@@ -87,7 +109,7 @@ public class MnvTank extends Items {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("MnvTank{weight=").append(getWeight());
-        if (getDrive() == MDriveTypes.Reaction) sb.append(", thrust=").append(getAttribute());
+        if (getDrive() == MDriveTypes.Reaction) sb.append(", thrust=").append(getThrust());
         if (getDrive() == MDriveTypes.Reaction) sb.append(" per ").append(getAutonomy()).append("h");
         if (getDrive() == MDriveTypes.Reaction) sb.append(", CTP=").append(getThrustPoints());
         sb.append('}');

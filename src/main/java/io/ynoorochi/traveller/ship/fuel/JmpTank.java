@@ -17,10 +17,32 @@ public class JmpTank extends Items{
     --------- */
     public JmpTank(double rating, int jumps, int hullSize) {
         this.setHullSize(hullSize);
-        this.setAttribute(rating);
-        this.setAutonomy(jumps);
+        this.setRating(rating);
+        this.setJumps(jumps);
         
         setOptiOn(true);
+    }
+
+    /* ---------
+    *  JDrive Rating
+    --------- */
+    public double getRating() {
+        return getAttribute();
+    }
+    
+    public void setRating(double rating) {
+        if (rating >= 0) setAttribute(rating);
+    }
+
+    /* ---------
+    *  Intended Jumps
+    --------- */
+    public int getJumps() {
+        return getIntAtt();
+    }
+    
+    public void setJumps(int jumps) {
+        if (jumps >= 0) setIntAtt(jumps);
     }
 
     /* ---------
@@ -30,13 +52,13 @@ public class JmpTank extends Items{
     --------- */
     @Override
     public double getWeight() {
-        return Math.ceil(0.1 * getHullSize() * getAttribute() * getAutonomy());
+        return Math.ceil(0.1 * getHullSize() * getRating() * getJumps());
     }
 
     public double getWeight(double rating, int jumps, int hullSize) {
         this.setHullSize(hullSize);
-        this.setAttribute(rating);
-        this.setAutonomy(jumps);
+        this.setRating(rating);
+        this.setJumps(jumps);
 
         return getWeight();
     }
@@ -48,7 +70,7 @@ public class JmpTank extends Items{
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("JmpTank{weight=").append(getWeight());
-        sb.append(", Jump").append(getAttribute()).append("s=").append(getAutonomy());
+        sb.append(", Jumps/").append(getRating()).append("=").append(getJumps());
         sb.append('}');
         return sb.toString();
     }

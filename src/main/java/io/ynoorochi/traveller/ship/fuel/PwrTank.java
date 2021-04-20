@@ -17,7 +17,6 @@ public class PwrTank extends Items {
     *  Atributes
     --------- */
     private PwrPlants type;
-    private double plantSize;
 
     /* ---------
     *  Constructor
@@ -68,11 +67,22 @@ public class PwrTank extends Items {
     *  Power Plant Size
     --------- */
     public double getPlantSize() {
-        return this.plantSize;
+        return getAttribute();
     }
 
     public void setPlantSize(double size) {
-        this.plantSize = size;
+        if (size >= 0) setAttribute(size);
+    }
+
+    /* ---------
+    *  Autonomy
+    --------- */
+    public int getAutonomy() {
+        return getIntAtt();
+    }
+    
+    public void setAutonomy(int weeks) {
+        if (weeks >= 0) setIntAtt(weeks);
     }
 
     /* ---------

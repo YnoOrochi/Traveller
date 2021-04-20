@@ -5,10 +5,12 @@
  */
 package io.ynoorochi.traveller.ship.equip;
 
+import io.ynoorochi.traveller.ship.Items;
+
 /**
  *
  * @author PR3J
  */
-public class Computer {
+public class Computer extends Items {
     
 }

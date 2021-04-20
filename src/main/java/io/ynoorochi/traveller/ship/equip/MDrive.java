@@ -34,7 +34,7 @@ public class MDrive extends Items {
     
     public boolean setType(MDriveTypes type) {
         this.type = type;
-        setRating(this.rating);
+        setRating(getRating());
         return true;
     }
 
@@ -48,7 +48,7 @@ public class MDrive extends Items {
     public double getPower() {
         switch (getType()) {
             case Maneuver:
-                return 0.1 * Math.max(0.25, getAttribute()) * getHullSize();
+                return 0.1 * Math.max(0.25, getRating()) * getHullSize();
             default: return 0;
         }
     }
@@ -56,27 +56,26 @@ public class MDrive extends Items {
     /* ---------
     *  MDriveRating
     --------- */
-    @Override
-    public double getAttribute() {
-        return this.rating;
+    public double getRating() {
+        return getAttribute();
     }
-
+    
     public boolean setRating(double rating) {
         if (rating > 0)
             if (rating <= getType().getMax()) {
-                this.rating = rating;
+                setAttribute(rating);
                 return true;
             } else {
-                this.rating = getType().getMax();
+                setAttribute(getType().getMax());
                 return false;
             }
         else {
-            this.rating = 0;
+            setAttribute(0);
             return false;
         }
     }
 
-    /* ---------
+        /* ---------
     *  MDriveCost
     --------- */
     @Override
@@ -89,7 +88,7 @@ public class MDrive extends Items {
     --------- */
     @Override
     public int getTL() {
-        return getType().getTL((int) Math.ceil(getAttribute()));
+        return getType().getTL((int) Math.ceil(getRating()));
     }
     
     /* ---------
@@ -99,10 +98,10 @@ public class MDrive extends Items {
     public double getWeight() {
         switch(getType()) {
             case Maneuver:
-                if (getAttribute() == 0) return 0.005 * getHullSize();
-                else return getAttribute() * getHullSize() / 100;
+                if (getRating() == 0) return 0.005 * getHullSize();
+                else return getRating() * getHullSize() / 100;
             case Reaction:
-                return 2 * getAttribute() * getHullSize() / 100;
+                return 2 * getRating() * getHullSize() / 100;
             default: return 0;
         }
     }
@@ -114,7 +113,7 @@ public class MDrive extends Items {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("MDrive{").append(getType());
-        sb.append(" ").append(getAttribute());
+        sb.append(" ").append(getRating());
         sb.append(", HullSize=").append(getHullSize());
         sb.append(", Cost=").append(getCost());
         sb.append(", Pwr=").append(getPower());

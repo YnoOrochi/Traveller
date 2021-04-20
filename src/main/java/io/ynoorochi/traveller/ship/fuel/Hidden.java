@@ -12,15 +12,17 @@ import io.ynoorochi.traveller.ship.Items;
  * @author PR3J
  */
 public class Hidden extends Items {
-    
     /* ---------
     *  Set Hidden Tonnage
     --------- */
     @Override
-    public void setAttribute(double rating) {
-        this.rating = rating;
-        
-        setOptiOn(rating > 0);
+    public double getWeight() {
+        return getAttribute();
+    }
+    
+    public void setWeight(double tonnage) {
+        setAttribute(tonnage);
+        setOptiOn(tonnage > 0);
     }
 
     /* ---------

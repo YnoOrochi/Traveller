@@ -85,36 +85,38 @@ public abstract class Items {
     }
 
     /* ---------
-    *  Auxiliar Attribute Rating
+    *  Auxiliar double Attribute 
+    *       Rating
     --------- */
     protected double rating = 0;
 
-    public double getAttribute() {
+    protected double getAttribute() {
         return this.rating;
     }
 
-    public void setAttribute(double rating) {
+    protected void setAttribute(double rating) {
         this.rating = rating;
     }
 
     /* ---------
-    *  Auxiliar Attribute Rating Modifier
+    *  Auxiliar Attribute Modifier
     --------- */
     public double getAttModf() {
         return 0;
     }
 
     /* ---------
-    *  Autonomy (Hours, Weeks, Jumps ...)
+    * Auxiliar int Attribute
+    *       Autonomy (Hours, Weeks, Jumps ...)
     --------- */
-    protected int time = 0;
+    protected int nAtt = 0;
 
-    public int getAutonomy() {
-        return this.time;
+    public int getIntAtt() {
+        return this.nAtt;
     }
 
-    public void setAutonomy(int time) {
-        this.time = time;
+    public void setIntAtt(int time) {
+        this.nAtt = time;
     }
 
     /* ---------
@@ -123,7 +125,7 @@ public abstract class Items {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("(").append(isOptiOn());
+        sb.append(this.getClass().getSimpleName()).append("{").append(isOptiOn());
         if (isOptiOn()) sb.append(", Weight=").append(getWeight());
         if (isOptiOn()) sb.append(", Cost=").append(getCost());
         sb.append('}');

@@ -15,13 +15,12 @@ public class ArmBulkhead extends Items {
     /* ---------
     *  Bulkhead Tonnage
     --------- */
-    @Override
-    public void setAttribute(double rating) {
-        if (rating > 0) {
-            this.rating = rating;
+    public void setWeight(double tonnage) {
+        if (tonnage > 0) {
+            setAttribute(tonnage);
             setOptiOn(true);
         } else {
-            this.rating = 0;
+            setAttribute(0);
             setOptiOn(false);
         }
     }
@@ -46,7 +45,7 @@ public class ArmBulkhead extends Items {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getClass().getSimpleName()).append("(");
-        sb.append(rating).append(" Ton");
+        sb.append(getAttribute()).append(" Ton");
         sb.append(", Weight=").append(getWeight());
         sb.append(", Cost=").append(getCost());
         sb.append('}');
