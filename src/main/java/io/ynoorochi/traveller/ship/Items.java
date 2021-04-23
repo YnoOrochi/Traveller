@@ -5,33 +5,51 @@
  */
 package io.ynoorochi.traveller.ship;
 
+import io.ynoorochi.traveller.ship.Definitions.Hardened;
+import static io.ynoorochi.traveller.ship.Definitions.Hardened.*;
+
 /**
  *
  * @author PR3J
  */
 public abstract class Items {
     /* ---------
-     *  Attributes
-    --------- */
-    private boolean option = false;
-    
-    /* ---------
     *  Option setter
     *      returns the operation result
     *      false means: the option has some constraint that was not observed
     --------- */
+    private boolean option = false;
+
     public boolean setOptiOn(boolean opt) {
         this.option = opt;
         return true;
     }
     
-    /* ---------
-    *  is Option on?
-    --------- */
+    /* is Option on? */
     public boolean isOptiOn() {
         return this.option;
     }
 
+    /* ---------
+     *  Hardened Item
+    --------- */
+    private Hardened hardened = NOTHARDENED;
+    
+    public double getHardened() {
+        if (getPower() > 0) return this.hardened.getModf();
+        else return NOTHARDENED.getModf();
+    }
+    
+    public void setHardened(Hardened opt) {
+        if (getPower() > 0) this.hardened = opt;
+        else this.hardened = NOTHARDENED;
+    }
+    
+    /* is Hardened? */
+    public boolean isHardened() {
+        return (this.hardened == HARDENED);
+    }
+    
     /* ---------
     *  Hull Size
     --------- */
@@ -111,11 +129,11 @@ public abstract class Items {
     --------- */
     protected int nAtt = 0;
 
-    public int getIntAtt() {
+    protected int getIntAtt() {
         return this.nAtt;
     }
 
-    public void setIntAtt(int time) {
+    protected void setIntAtt(int time) {
         this.nAtt = time;
     }
 
@@ -126,8 +144,11 @@ public abstract class Items {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getClass().getSimpleName()).append("{").append(isOptiOn());
-        if (isOptiOn()) sb.append(", Weight=").append(getWeight());
-        if (isOptiOn()) sb.append(", Cost=").append(getCost());
+        if (isOptiOn()) {
+            sb.append(", Weight=").append(getWeight());
+            sb.append(", Cost=").append(getCost());
+            if (isHardened()) sb.append(", Hardened");
+        }
         sb.append('}');
         return sb.toString();
     }

@@ -46,8 +46,10 @@ public class ArmBulkhead extends Items {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getClass().getSimpleName()).append("(");
         sb.append(getAttribute()).append(" Ton");
-        sb.append(", Weight=").append(getWeight());
-        sb.append(", Cost=").append(getCost());
+        if (isOptiOn()) {
+            sb.append(", Weight=").append(getWeight());
+            sb.append(", Cost=").append(getCost());
+        }
         sb.append('}');
         return sb.toString();
     }

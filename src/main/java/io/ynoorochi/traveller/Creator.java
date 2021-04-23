@@ -6,7 +6,7 @@
 package io.ynoorochi.traveller;
 
 import io.ynoorochi.traveller.ship.SpaceShip;
-import static io.ynoorochi.traveller.ship.Customization.*;
+import static io.ynoorochi.traveller.ship.Definitions.Customization.*;
 
 /**
  *

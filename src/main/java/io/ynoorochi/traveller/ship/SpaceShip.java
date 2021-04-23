@@ -5,13 +5,16 @@
  */
 package io.ynoorochi.traveller.ship;
 
-import io.ynoorochi.traveller.ship.hull.*;
 import io.ynoorochi.traveller.ship.equip.*;
 import io.ynoorochi.traveller.ship.fuel.*;
+import io.ynoorochi.traveller.ship.hull.*;
+import io.ynoorochi.traveller.ship.sensors.*;
 
-import static io.ynoorochi.traveller.ship.Customization.*;
+import static io.ynoorochi.traveller.ship.Definitions.*;
 import static io.ynoorochi.traveller.ship.equip.Definitions.*;
 import static io.ynoorochi.traveller.ship.hull.Definitions.*;
+
+import static io.ynoorochi.traveller.ship.Definitions.Customization.*;
 
 /**
  *
@@ -173,7 +176,7 @@ public class SpaceShip {
     }
 
     public void setCostMCr(double cost) {
-        this.costMCr = Math.round(cost * (isCustomized() ? 1.01 : 0.9) / 1E6); 
+        this.costMCr = Math.round(cost * custom.getCostModf() / 1E6); 
     }
 
     public boolean isCustomized() {

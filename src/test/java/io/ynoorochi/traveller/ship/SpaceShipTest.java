@@ -3,7 +3,7 @@ package io.ynoorochi.traveller.ship;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static io.ynoorochi.traveller.ship.Customization.OFF_THE_SHELF;
+import static io.ynoorochi.traveller.ship.Definitions.OFF_THE_SHELF;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
