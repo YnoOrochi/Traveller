@@ -11,26 +11,87 @@ import io.ynoorochi.traveller.ship.Items;
  *
  * @author PR3J
  */
-public class Sensors {
+public class Sensors extends Items {
+
     /* ---------
      *  Attributes
     --------- */
     private Base base = new Base();
     private Countermeasures cmSuit = new Countermeasures();
     private DeepPenetration dpScan = new DeepPenetration();
-    private DistArrays dArrays = new DistArrays();
+    private DistArrays dArrays = new DistArrays(getHullSize());
+    private ExtensionNet extNet = new ExtensionNet(getHullSize());
     private LifeScanner lScan = new LifeScanner();
     private MailDistArray mdArray = new MailDistArray();
+    private MineralDetection mineral = new MineralDetection();
+    private ShallowSuite shallow = new ShallowSuite();
+    private SignalProcess signal = new SignalProcess();
     
     /* ---------
      *  Item list
     --------- */
     private final Items[] sensors = {
-        base, cmSuit, dpScan, dArrays, lScan, mdArray
+        base, cmSuit, dpScan, dArrays, extNet, lScan, mdArray, mineral, 
+        shallow, signal 
     };
     
     public Items[] getItems() {
         return sensors;
+    }
+
+    /* ---------
+     *  Constructor
+    --------- */
+    public Sensors(int hullSize) {
+        setHullSize(hullSize);
+    }
+
+    /* ---------
+    *  Tech Level
+    --------- */
+    @Override
+    public int getTL() { 
+        int tl = 0;
+        for (var sensor : sensors ) {
+            tl = Math.max(tl, sensor.getTL());
+        }
+        return tl;
+    }
+
+    /* ---------
+    *  Power used
+    --------- */
+    @Override
+    public double getPower() { 
+        double aux = 0;
+        for (var sensor : sensors ) {
+            aux += sensor.getPower();
+        }
+        return aux;
+    }
+
+    /* ---------
+     *  Tonnage Used by Option
+    --------- */
+    @Override
+    public double getWeight() { 
+        double aux = 0;
+        for (var sensor : sensors ) {
+            aux += sensor.getWeight();
+        }
+        return aux;
+    }
+
+    /* ---------
+     *  Option Specific Cost
+    --------- */
+    @Override
+    public double getCost() { 
+        double aux = 0;
+        for (var sensor : sensors ) {
+            aux += sensor.getCost();
+        }
+        return aux;
     }
 
     /* ---------
@@ -39,10 +100,14 @@ public class Sensors {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Sensors {\n");
+        sb.append("Sensors {");
+        sb.append("TL=").append(getTL());
+        sb.append(", Cost=").append(getCost());
+        sb.append(", Weight=").append(getWeight());
+        sb.append(", Power=").append(getPower());
+        sb.append("}\n");
         for (var opt : sensors) 
             sb.append("    ").append(opt.toString()).append("\n");
-        sb.append("}");
         return sb.toString();
     }
     

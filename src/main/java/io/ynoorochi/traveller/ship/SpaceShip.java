@@ -5,6 +5,7 @@
  */
 package io.ynoorochi.traveller.ship;
 
+import io.ynoorochi.traveller.ship.computer.*;
 import io.ynoorochi.traveller.ship.equip.*;
 import io.ynoorochi.traveller.ship.fuel.*;
 import io.ynoorochi.traveller.ship.hull.*;
@@ -43,6 +44,7 @@ public class SpaceShip {
     public PwrTank pTank;
     public OptTank oTank;
     public Computer computer;
+    public BackupComputer backup;
     public Sensors sensors;
 //    private Weapons[] wPoints;
 //    private Systems[] systems;
@@ -90,7 +92,8 @@ public class SpaceShip {
         this.pTank = new PwrTank(pwrPlant.getType(), pwrPlant.getWeight(), 4);
         this.oTank = new OptTank();
         this.computer = new Computer();
-        this.sensors = new Sensors();
+        this.backup = new BackupComputer(computer.getBandwidth());
+        this.sensors = new Sensors(tonnage);
 
         this.tonnage = this.hull.getHullSize();
 

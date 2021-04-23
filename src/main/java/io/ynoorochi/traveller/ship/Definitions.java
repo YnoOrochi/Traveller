@@ -29,8 +29,8 @@ public class Definitions {
     }
     
     public enum Hardened {
-        HARDENED(   1.5),
-        NOTHARDENED(1.0);
+        HARDENED(   0.5),
+        NOTHARDENED(0.0);
         
         private final double modf;
         
@@ -38,8 +38,6 @@ public class Definitions {
             this.modf = modf;
         }
         
-        public double getModf() {
-            return this.modf;
-        }
+        public double getModf() { return this.modf; }
     }
 }

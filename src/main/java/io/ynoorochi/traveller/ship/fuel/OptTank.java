@@ -35,15 +35,54 @@ public class OptTank extends Items {
     }
 
     /* ---------
+    *  Tech Level
+    --------- */
+    @Override
+    public int getTL() { 
+        int tl = 0;
+        for (var opt : optTanks ) {
+            tl = Math.max(tl, opt.getTL());
+        }
+        return tl;
+    }
+
+    /* ---------
+     *  Tonnage Used by Option
+    --------- */
+    @Override
+    public double getWeight() { 
+        double aux = 0;
+        for (var opt : optTanks ) {
+            aux += opt.getWeight();
+        }
+        return aux;
+    }
+
+    /* ---------
+     *  Option Specific Cost
+    --------- */
+    @Override
+    public double getCost() { 
+        double aux = 0;
+        for (var opt : optTanks ) {
+            aux += opt.getCost();
+        }
+        return aux;
+    }
+
+    /* ---------
      *  toString
     --------- */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Tank Options {\n");
+        sb.append("Tank Options {");
+        sb.append("TL=").append(getTL());
+        sb.append(", Cost=").append(getCost());
+        sb.append(", Weight=").append(getWeight());
+        sb.append("}\n");
         for (var opt : optTanks) 
             sb.append("    ").append(opt.toString()).append("\n");
-        sb.append("}");
         return sb.toString();
     }
 }

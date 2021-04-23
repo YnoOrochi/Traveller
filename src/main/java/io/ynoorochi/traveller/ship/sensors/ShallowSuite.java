@@ -11,54 +11,30 @@ import io.ynoorochi.traveller.ship.Items;
  *
  * @author PR3J
  */
-public class DeepPenetration extends Items {
-    
-    /* ---------
-     *  Tonnage Used by Option
-    --------- */
-    @Override
-    public double getWeight() {
-        return getAttribute();
-    }
-    
-    public void setWeight(double tonnage) {
-        setAttribute(tonnage);
-        super.setOptiOn(tonnage > 0);
-    }
-
-    /* ---------
-    *  OptiOn
-    --------- */
-    @Override
-    public boolean setOptiOn(boolean opt) {
-        setAttribute(opt ? 1 : 0);
-        return true;
-    }
-
+public class ShallowSuite extends Items {
     /* ---------
     *  Tech Level
     --------- */
     @Override
-    public int getTL() {
-        if (isOptiOn()) return 13;
-        else return 0;
-    }
+    public int getTL() { return (isOptiOn() ? 10 : 0); }
+
     /* ---------
     *  Power used
     --------- */
     @Override
-    public double getPower() {
-        if (isOptiOn()) return 1;
-        else return 0;
-    }
+    public double getPower() { return (isOptiOn() ? 1 : 0); }
+
+    /* ---------
+     *  Tonnage Used by Option
+    --------- */
+    @Override
+    public double getWeight() { return (isOptiOn() ? 10 : 0); }
 
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        return (1 + getHardened()) * 1000000 * getWeight();
-    }
+    public double getCost() { return (isOptiOn() ? (1 + getHardened()) * 5000000 : 0); }
 
     /* ---------
      *  toString

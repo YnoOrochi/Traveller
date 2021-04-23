@@ -34,7 +34,7 @@ public class Countermeasures extends Items {
     @Override
     public boolean setOptiOn(boolean opt) {
         setType(NONE);
-        return true;
+        return !opt;
     }
 
     /* ---------
@@ -42,7 +42,7 @@ public class Countermeasures extends Items {
     --------- */
     @Override
     public int getTL() {
-        return type.getTl();
+        return type.getTL();
     }
     /* ---------
     *  Power used
@@ -65,7 +65,7 @@ public class Countermeasures extends Items {
     --------- */
     @Override
     public double getCost() {
-        return getHardened() * type.getCost();
+        return (1 + getHardened()) * type.getCost();
     }
 
     /* ---------

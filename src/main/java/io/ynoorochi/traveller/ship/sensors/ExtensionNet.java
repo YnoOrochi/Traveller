@@ -11,54 +11,34 @@ import io.ynoorochi.traveller.ship.Items;
  *
  * @author PR3J
  */
-public class DeepPenetration extends Items {
+public class ExtensionNet extends Items {
+
+    /* ---------
+    *  Constructor
+    --------- */
+    public ExtensionNet(int hullSize) {
+        setHullSize(hullSize);
+    }
     
     /* ---------
-     *  Tonnage Used by Option
+    *  Tech Level  10 
     --------- */
     @Override
-    public double getWeight() {
-        return getAttribute();
-    }
+    public int getTL() { return (isOptiOn() ? 10 : 0); }
+
+    /* ---------
+    *  Tonnage Used by Option
+    *       size / 100 round down
+    --------- */
+    @Override
+    public double getWeight() { return (isOptiOn() ? 0.01 * getHullSize() : 0); }
     
-    public void setWeight(double tonnage) {
-        setAttribute(tonnage);
-        super.setOptiOn(tonnage > 0);
-    }
-
     /* ---------
-    *  OptiOn
+    *  Option Specific Cost 5000000
+    *       does not allow hardening
     --------- */
     @Override
-    public boolean setOptiOn(boolean opt) {
-        setAttribute(opt ? 1 : 0);
-        return true;
-    }
-
-    /* ---------
-    *  Tech Level
-    --------- */
-    @Override
-    public int getTL() {
-        if (isOptiOn()) return 13;
-        else return 0;
-    }
-    /* ---------
-    *  Power used
-    --------- */
-    @Override
-    public double getPower() {
-        if (isOptiOn()) return 1;
-        else return 0;
-    }
-
-    /* ---------
-     *  Option Specific Cost
-    --------- */
-    @Override
-    public double getCost() {
-        return (1 + getHardened()) * 1000000 * getWeight();
-    }
+    public double getCost() { return (isOptiOn() ? 1000000 * getWeight() : 0); }
 
     /* ---------
      *  toString
@@ -72,7 +52,6 @@ public class DeepPenetration extends Items {
             sb.append(", Cost=").append(getCost());
             sb.append(", Weight=").append(getWeight());
             sb.append(", Power=").append(getPower());
-            if (isHardened()) sb.append(", Hardened");
         }
         sb.append('}');
         return sb.toString();

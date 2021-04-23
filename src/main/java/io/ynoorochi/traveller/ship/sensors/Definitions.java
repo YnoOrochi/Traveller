@@ -64,7 +64,7 @@ public class Definitions {
             this.cost = cst;
         }
 
-        public int    getTl()     { return tl; }
+        public int    getTL()     { return tl; }
         public int    getPower()  { return power; }
         public int    getWeight() { return weight; }
         public double getCost()   { return cost; }
@@ -150,5 +150,34 @@ public class Definitions {
         public int    getPower()  { return power; }
         public int    getWeight() { return weight; }
         public double getCost()   { return cost; }
+    }
+
+    /* ---------
+    *  Signal Processing
+    --------- */
+    public enum SignalProcessing {
+        Basic(    0, 0, 0,       0, 0),
+        Improved(11, 1, 1, 4000000, 2),
+        Enhanced(13, 2, 2, 8000000, 4);
+        
+        private final int tl;
+        private final int power;
+        private final int weight;
+        private final double cost;
+        private final int dm;
+        
+        private SignalProcessing(int tl, int pwr, int wgt, double cst, int dm) {
+            this.tl = tl;
+            this.power = pwr;
+            this.weight = wgt;
+            this.cost = cst;
+            this.dm = dm;
+        }
+
+        public int    getTl()     { return tl; }
+        public int    getPower()  { return power; }
+        public int    getWeight() { return weight; }
+        public double getCost()   { return cost; }
+        public int    getDM()     { return dm; }
     }
 }

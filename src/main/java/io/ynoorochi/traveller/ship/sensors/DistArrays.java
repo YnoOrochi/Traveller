@@ -14,6 +14,14 @@ import static io.ynoorochi.traveller.ship.sensors.Definitions.DistributedArrays.
  * @author PR3J
  */
 public class DistArrays extends Items {
+
+    /* ---------
+    *  Constructor
+    --------- */
+    public DistArrays(int hullSize) {
+        setHullSize(hullSize);
+    }
+
     /* ---------
     *  type
     --------- */
@@ -24,8 +32,9 @@ public class DistArrays extends Items {
     }
     
     public void setType(DistributedArrays type) {
-        this.type = type;
-        super.setOptiOn(type != NONE);
+        if (getHullSize() >= 5000) this.type = type;
+        else this.type = NONE;
+        super.setOptiOn(this.type != NONE);
     }
 
     /* ---------
@@ -34,7 +43,7 @@ public class DistArrays extends Items {
     @Override
     public boolean setOptiOn(boolean opt) {
         setType(NONE);
-        return true;
+        return !opt;
     }
 
     /* ---------
@@ -65,7 +74,7 @@ public class DistArrays extends Items {
     --------- */
     @Override
     public double getCost() {
-        return getHardened() * type.getCost();
+        return (1 + getHardened()) * type.getCost();
     }
 
     /* ---------

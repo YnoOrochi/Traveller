@@ -131,10 +131,10 @@ public class Hull {
         sb.append(", HP=").append(getHP());
         sb.append(", TL=").append(getTL());
         sb.append(", Weight=").append(getWeight());
+        sb.append("}\n");
         for (var opt : hullOpt) {
-            sb.append(", ").append(opt);
+            sb.append("    ").append(opt).append("\n");
         }
-        sb.append('}');
         return sb.toString();
     }
 }

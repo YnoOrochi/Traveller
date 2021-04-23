@@ -34,7 +34,7 @@ public class MailDistArray extends Items {
     @Override
     public boolean setOptiOn(boolean opt) {
         setType(NONE);
-        return true;
+        return !opt;
     }
 
     /* ---------
@@ -65,7 +65,7 @@ public class MailDistArray extends Items {
     --------- */
     @Override
     public double getCost() {
-        return getHardened() * type.getCost();
+        return type.getCost();
     }
 
     /* ---------

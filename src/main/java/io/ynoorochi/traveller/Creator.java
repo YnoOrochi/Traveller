@@ -37,10 +37,11 @@ public class Creator {
 //        for (traveller.hull.options.Equipment opt in a.hull.hullOpt) {
 //        final var opts = a.hull.hullOpt;
 
-        for (var opt : a.hull.hullOpt) {
-            System.out.println(opt.toString());
-        }
+//        for (var opt : a.hull.hullOpt) {
+//            System.out.println(opt.toString());
+//        }
 
+        System.out.println(a.hull);
         System.out.println(a.mDrive);
         System.out.println(a.jDrive);
         System.out.println(a.pwrPlant);
@@ -48,8 +49,9 @@ public class Creator {
         System.out.println(a.jTank);
         System.out.println(a.pTank);
         System.out.println(a.oTank);
-        System.out.println(a.sensors);
         System.out.println(a.computer);
+        System.out.println(a.backup);
+        System.out.println(a.sensors);
 
 //        System.out.println(a.hull.toString());
     }

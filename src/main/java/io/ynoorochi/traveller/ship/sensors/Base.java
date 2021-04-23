@@ -74,7 +74,7 @@ public class Base extends Items {
     --------- */
     @Override
     public double getCost() {
-        return getHardened() * type.getCost();
+        return (1 + getHardened()) * type.getCost();
     }
 
     /* ---------

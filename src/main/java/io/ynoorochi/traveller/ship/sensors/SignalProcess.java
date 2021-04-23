@@ -6,33 +6,35 @@
 package io.ynoorochi.traveller.ship.sensors;
 
 import io.ynoorochi.traveller.ship.Items;
+import io.ynoorochi.traveller.ship.sensors.Definitions.SignalProcessing;
+import static io.ynoorochi.traveller.ship.sensors.Definitions.SignalProcessing.*;
 
 /**
  *
  * @author PR3J
  */
-public class DeepPenetration extends Items {
-    
+public class SignalProcess extends Items {
     /* ---------
-     *  Tonnage Used by Option
+    *  type
     --------- */
-    @Override
-    public double getWeight() {
-        return getAttribute();
+    private SignalProcessing type = Basic;
+    
+    public SignalProcessing getType () {
+        return this.type;
     }
     
-    public void setWeight(double tonnage) {
-        setAttribute(tonnage);
-        super.setOptiOn(tonnage > 0);
+    public void setType(SignalProcessing type) {
+        this.type = type;
+        super.setOptiOn(type != Basic);
     }
 
     /* ---------
-    *  OptiOn
+    *  setOptiOn
     --------- */
     @Override
     public boolean setOptiOn(boolean opt) {
-        setAttribute(opt ? 1 : 0);
-        return true;
+        setType(Basic);
+        return !opt;
     }
 
     /* ---------
@@ -40,16 +42,22 @@ public class DeepPenetration extends Items {
     --------- */
     @Override
     public int getTL() {
-        if (isOptiOn()) return 13;
-        else return 0;
+        return type.getTl();
     }
     /* ---------
     *  Power used
     --------- */
     @Override
     public double getPower() {
-        if (isOptiOn()) return 1;
-        else return 0;
+        return type.getPower();
+    }
+
+    /* ---------
+     *  Tonnage Used by Option
+    --------- */
+    @Override
+    public double getWeight() {
+        return type.getWeight();
     }
 
     /* ---------
@@ -57,7 +65,7 @@ public class DeepPenetration extends Items {
     --------- */
     @Override
     public double getCost() {
-        return (1 + getHardened()) * 1000000 * getWeight();
+        return (1 + getHardened()) * type.getCost();
     }
 
     /* ---------
@@ -66,7 +74,7 @@ public class DeepPenetration extends Items {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("{").append(isOptiOn());
+        sb.append(this.getClass().getSimpleName()).append("{").append(getType());
         if (isOptiOn()) {
             sb.append(", TL=").append(getTL());
             sb.append(", Cost=").append(getCost());
@@ -74,6 +82,7 @@ public class DeepPenetration extends Items {
             sb.append(", Power=").append(getPower());
             if (isHardened()) sb.append(", Hardened");
         }
+        sb.append(", DM=").append(type.getDM());
         sb.append('}');
         return sb.toString();
     }

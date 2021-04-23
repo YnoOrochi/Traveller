@@ -70,10 +70,6 @@ public abstract class Items {
         return 0;
     }
 
-    public int maxTL(int tl) {
-        return Math.max(this.getTL(), tl);
-    }
-
     /* ---------
     *  Power used
     --------- */
