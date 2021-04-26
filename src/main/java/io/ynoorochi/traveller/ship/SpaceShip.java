@@ -16,6 +16,7 @@ import static io.ynoorochi.traveller.ship.equip.Definitions.*;
 import static io.ynoorochi.traveller.ship.hull.Definitions.*;
 
 import static io.ynoorochi.traveller.ship.Definitions.Customization.*;
+import io.ynoorochi.traveller.ship.computer.software.Software;
 
 /**
  *
@@ -45,6 +46,7 @@ public class SpaceShip {
     public OptTank oTank;
     public Computer computer;
     public BackupComputer backup;
+    public Software software;
     public Sensors sensors;
 //    private Weapons[] wPoints;
 //    private Systems[] systems;
@@ -93,6 +95,7 @@ public class SpaceShip {
         this.oTank = new OptTank();
         this.computer = new Computer();
         this.backup = new BackupComputer(computer.getBandwidth());
+        this.software = new Software(computer.getBandwidth(), jDrive.getRating());
         this.sensors = new Sensors(tonnage);
 
         this.tonnage = this.hull.getHullSize();

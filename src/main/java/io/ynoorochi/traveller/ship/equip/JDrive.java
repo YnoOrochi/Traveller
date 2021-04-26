@@ -107,7 +107,7 @@ public class JDrive extends Items {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("JDrive{").append(getRating());
+        sb.append("JDrive{").append((int) getRating());
         sb.append(", HullSize=").append(getHullSize());
         if(getType() == Jump) sb.append(", Cost=").append(getCost());
         if(getType() == Jump) sb.append(", Pwr=").append(getPower());

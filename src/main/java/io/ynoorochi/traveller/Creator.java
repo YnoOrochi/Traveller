@@ -51,6 +51,7 @@ public class Creator {
         System.out.println(a.oTank);
         System.out.println(a.computer);
         System.out.println(a.backup);
+        System.out.println(a.software);
         System.out.println(a.sensors);
 
 //        System.out.println(a.hull.toString());

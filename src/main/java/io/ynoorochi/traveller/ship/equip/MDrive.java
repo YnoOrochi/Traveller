@@ -113,7 +113,7 @@ public class MDrive extends Items {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("MDrive{").append(getType());
-        sb.append(" ").append(getRating());
+        sb.append(" ").append((int) getRating());
         sb.append(", HullSize=").append(getHullSize());
         sb.append(", Cost=").append(getCost());
         sb.append(", Pwr=").append(getPower());
