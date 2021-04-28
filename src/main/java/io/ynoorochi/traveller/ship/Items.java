@@ -33,7 +33,7 @@ public abstract class Items {
     /* ---------
      *  Hardened Item
     --------- */
-    private Hardened hardened = NOTHARDENED;
+    protected Hardened hardened = NOTHARDENED;
     
     public double getHardened() {
         if (getPower() > 0) return this.hardened.getModf();
@@ -46,22 +46,15 @@ public abstract class Items {
     }
     
     /* is Hardened? */
-    public boolean isHardened() {
-        return (this.hardened == HARDENED);
-    }
+    public boolean isHardened() { return (this.hardened == HARDENED); }
+
     
     /* ---------
     *  Hull Size
     --------- */
     private int hullSize;
-
-    public int getHullSize() {
-        return this.hullSize;
-    }
-
-    public void setHullSize(int hullSize) {
-        this.hullSize = hullSize;
-    }
+    public int getHullSize() { return this.hullSize; }
+    public void setHullSize(int hullSize) { this.hullSize = hullSize; }
 
     /* ---------
     *  Tech Level
@@ -103,14 +96,8 @@ public abstract class Items {
     *       Rating
     --------- */
     protected double rating = 0;
-
-    protected double getAttribute() {
-        return this.rating;
-    }
-
-    protected void setAttribute(double rating) {
-        this.rating = rating;
-    }
+    protected double getAttribute() { return this.rating; }
+    protected void setAttribute(double rating) { this.rating = rating; }
 
     /* ---------
     *  Auxiliar Attribute Modifier
@@ -124,14 +111,8 @@ public abstract class Items {
     *       Autonomy (Hours, Weeks, Jumps ...)
     --------- */
     protected int nAtt = 0;
-
-    protected int getIntAtt() {
-        return this.nAtt;
-    }
-
-    protected void setIntAtt(int time) {
-        this.nAtt = time;
-    }
+    protected int getIntAtt() { return this.nAtt; }
+    protected void setIntAtt(int att) { this.nAtt = att; }
 
     /* ---------
      *  toString

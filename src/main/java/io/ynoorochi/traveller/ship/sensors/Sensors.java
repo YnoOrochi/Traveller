@@ -16,16 +16,16 @@ public class Sensors extends Items {
     /* ---------
      *  Attributes
     --------- */
-    private Base base = new Base();
-    private Countermeasures cmSuit = new Countermeasures();
-    private DeepPenetration dpScan = new DeepPenetration();
-    private DistArrays dArrays = new DistArrays(getHullSize());
-    private ExtensionNet extNet = new ExtensionNet(getHullSize());
-    private LifeScanner lScan = new LifeScanner();
-    private MailDistArray mdArray = new MailDistArray();
-    private MineralDetection mineral = new MineralDetection();
-    private ShallowSuite shallow = new ShallowSuite();
-    private SignalProcess signal = new SignalProcess();
+    public Base base = new Base();
+    public Countermeasures cmSuit = new Countermeasures();
+    public DeepPenetration dpScan = new DeepPenetration();
+    public DistArrays dArrays = new DistArrays(getHullSize());
+    public ExtensionNet extNet = new ExtensionNet(getHullSize());
+    public LifeScanner lScan = new LifeScanner();
+    public MailDistArray mdArray = new MailDistArray();
+    public MineralDetection mineral = new MineralDetection();
+    public ShallowSuite shallow = new ShallowSuite();
+    public SignalProcess signal = new SignalProcess();
     
     /* ---------
      *  Item list

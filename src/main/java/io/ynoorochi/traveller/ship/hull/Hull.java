@@ -21,19 +21,19 @@ public class Hull {
     /* ---------
     *  Hull Equipment
     --------- */
-    private Configuration config = new Configuration(MIN_HULL);
-    private Type type = new Type();
-    private Bridge bridge = new Bridge();
-    private Armour armour = new Armour();
-    private ArmBulkhead armBulk = new ArmBulkhead();
-    private Coating coat = new Coating();
-    private NonGHull nonGHull = new NonGHull();
-    private DoubleHull dblHull = new DoubleHull();
-    private HamsterCase hmsCase = new HamsterCase();
-    private EAGrid eAGrid = new EAGrid();
-    private HeatShield hShield = new HeatShield();
-    private RadShield rShield = new RadShield();
-    private Breakaway breakaway = new Breakaway();
+    public Configuration config = new Configuration(MIN_HULL);
+    public Type type = new Type();
+    public Bridge bridge = new Bridge();
+    public Armour armour = new Armour();
+    public ArmBulkhead armBulk = new ArmBulkhead();
+    public Coating coat = new Coating();
+    public NonGHull nonGHull = new NonGHull();
+    public DoubleHull dblHull = new DoubleHull();
+    public HamsterCase hmsCase = new HamsterCase();
+    public EAGrid eAGrid = new EAGrid();
+    public HeatShield hShield = new HeatShield();
+    public RadShield rShield = new RadShield();
+    public Breakaway breakaway = new Breakaway();
 
     public Items[] hullOpt = { config, type, coat, bridge, armour, armBulk,
         nonGHull, dblHull, hmsCase, eAGrid, hShield, rShield, breakaway

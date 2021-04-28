@@ -9,70 +9,54 @@ package io.ynoorochi.traveller.ship.computer.software;
  *
  * @author PR3J
  */
-public class BaseSW {
+public abstract class BaseSW {
 
     /* ---------
      *  Attributes
     --------- */
     private int maxBW = 5;
-
-    /* ---------
-     *  Constructor
-    --------- */
-    public BaseSW(int max) {
-        setMaxBW(max);
-    }
-    
-    /* ---------
-     *  Software Version
-    --------- */
-    public enum Version {
-        NO( 0,  0,        0);
-        
-        private int tl;
-        private int bw;
-        private double cost;
-        
-        private Version(int tl, int bw, double cost) {
-            this.tl = tl;
-            this.bw = bw;
-            this.cost = cost;
-        }
-        
-        public int getTL() { return this.tl; }
-        public int getBW() { return this.bw; }
-        public double getCost() { return this.cost; }
-    }
+    private int bis = 0;
+    private int jump = 0;
 
     /* ---------
      *  Maximum Bandwidth
     --------- */
-    public int getMaxBW() { return this.maxBW; }
-    public void setMaxBW(int max) { this.maxBW = max; }
+    public int getMaxBW() { 
+        System.out.println("Passei no get:" + maxBW);
+        return this.maxBW; }
+    public void setMaxBW(int max) { 
+        System.out.println("Passei no set:" + max);
+        this.maxBW = max; }
+    
+    /* ---------
+     *  /bis modifier
+    --------- */
+    public int getBIS() { return this.bis; }
+    public void setBIS(int bis) { this.bis = bis; }
+
+    /* ---------
+     *  Jump Rating
+    --------- */
+    public int getJump() { return this.jump; }
+    public void setJump(double jump) { this.jump = (int) jump; }
     
     /* ---------
     *  isOptiOn
     --------- */
-    public boolean isOptiOn() { return this.version != Version.NO; }
+    public abstract boolean isOptiOn();
 
     /* ---------
      *  Version Attribute
     --------- */
-    private Version version = Version.NO;
-    public Version getVersion() { return this.version; }
-    public boolean setVersion(Version ver) { 
-        if (ver.getBW() <= getMaxBW()) {  
-            this.version = version;
-            return true;
-        } else return false;
-    }
+    public abstract Object getVersion();
+    public abstract boolean setVersion(double ver);
 
     /* ---------
     *  Get Methods
     --------- */
-    public int getTL() { return this.version.getTL(); }
-    public int getBW() { return this.version.getBW(); }
-    public double getCost() { return this.version.getCost(); }
+    public abstract int getTL();
+    public abstract int getBW();
+    public abstract double getCost();
 
     /* ---------
     *  toString

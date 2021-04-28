@@ -7,6 +7,7 @@ package io.ynoorochi.traveller;
 
 import io.ynoorochi.traveller.ship.SpaceShip;
 import static io.ynoorochi.traveller.ship.Definitions.Customization.*;
+import io.ynoorochi.traveller.ship.computer.software.JumpControl.Version;
 
 /**
  *
@@ -51,6 +52,7 @@ public class Creator {
         System.out.println(a.oTank);
         System.out.println(a.computer);
         System.out.println(a.backup);
+        a.software.jCtrl.setVersion(2);
         System.out.println(a.software);
         System.out.println(a.sensors);
 

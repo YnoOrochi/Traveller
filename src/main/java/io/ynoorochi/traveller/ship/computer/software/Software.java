@@ -11,32 +11,36 @@ package io.ynoorochi.traveller.ship.computer.software;
  */
 public class Software {
     /* ---------
+     *  Attributes
+    --------- */
+    private int max;
+    private int bis;
+    private int jmp;
+
+    /* ---------
      *  Constructor
     --------- */
-    private int maxBW = 5;
-    private double jump = 0;
-    
-    public Software(int maxBW, double jump) {
-        this.maxBW = maxBW;
-        this.jump = jump;
+    public Software(int max, int bis, int jmp) {
+        this.max = max;
+        this.bis = bis;
+        this.jmp = jmp;
     }
 
     /* ---------
     *  Default Softwares
     --------- */
-    private JumpControl jCtrl = new JumpControl(maxBW, jump);
-    
+    public JumpControl jCtrl = new JumpControl(max, jmp);
+
     /* ---------
     *  Other Softwares
     --------- */
-    private FireControl fCtrl = new FireControl(maxBW);
-    
-    
+    public FireControl fCtrl = new FireControl(max);
+
     /* ---------
     *  Softwares list
     --------- */
     private final BaseSW[] softwares = {
-        jCtrl, fCtrl 
+        jCtrl, fCtrl
     };
     
     public BaseSW[] getSoftwares() {
@@ -82,7 +86,7 @@ public class Software {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Sensors {");
+        sb.append(this.getClass().getSimpleName()).append("{");
         sb.append("TL=").append(getTL());
         sb.append(", Cost=").append(getCost());
         sb.append(", Total Bandwidth=").append(getTotBW());

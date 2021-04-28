@@ -13,15 +13,14 @@ public class JumpControl extends BaseSW {
     /* ---------
     *  Attributes
     --------- */
-    private Version jump = Version.NO;
+    private Version jump = Version.V1;
     
     /* ---------
     *  Constructor
     --------- */
-    public JumpControl(int max, double jump) {
-        super(max);
-        setJump(jump);
-        System.out.println("Passei" + jump);
+    public JumpControl(int maxBW, int jump) {
+        setMaxBW(maxBW);
+        setVersion(jump);
     }
     
     /* ---------
@@ -52,31 +51,51 @@ public class JumpControl extends BaseSW {
     }
 
     /* ---------
-    *  Jump
+    *  isOptiOn
     --------- */
-    public void setJump(double jump) {
-        switch((int) jump) {
-            case 1:
-                this.jump = Version.V1;
-                break;
-            case 2:
-                this.jump = Version.V2;
-                break;
-            case 3:
-                this.jump = Version.V3;
-                break;
-            case 4:
-                this.jump = Version.V4;
-                break;
-            case 5:
-                this.jump = Version.V5;
-                break;
-            case 6:
-                this.jump = Version.V6;
-                break;
-            default: this.jump = Version.NO;
-        System.out.println("Passei" + jump);
-        }
-        
+    @Override
+    public boolean isOptiOn() { 
+        return (getVersion() != Version.NO);
     }
+
+    /* ---------
+     *  Version Attribute
+    --------- */
+    private Version version = Version.NO;
+
+    @Override
+    public Version getVersion() { return this.version; }
+
+    @Override
+    public boolean setVersion(double jump) {
+        switch((int) jump) {
+            case 1: return setVersion(version.V1);
+            case 2: return setVersion(version.V2);
+            case 3: return setVersion(version.V3);
+            case 4: return setVersion(version.V4);
+            case 5: return setVersion(version.V5);
+            case 6: return setVersion(version.V6);
+            default: return setVersion(version.NO);
+        }
+    }
+
+    public boolean setVersion(Version ver) { 
+        System.out.println("Version:" + ver + " Max:" + getMaxBW());
+        if (ver.getBW() <= getMaxBW()) {  
+            this.version = ver;
+            return true;
+        } else return false;
+    }
+
+    /* ---------
+    *  Get Methods
+    --------- */
+    @Override
+    public int getTL() { return this.version.getTL(); }
+    
+    @Override
+    public int getBW() { return this.version.getBW(); }
+    
+    @Override
+    public double getCost() { return this.version.getCost(); }
 }

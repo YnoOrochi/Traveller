@@ -14,7 +14,7 @@ public class FireControl extends BaseSW {
      *  Constructor
     --------- */
     public FireControl(int max) {
-        super(max);
+        setMaxBW(max);
     }
     
     /* ---------
@@ -42,4 +42,51 @@ public class FireControl extends BaseSW {
         public int getBW() { return this.bw; }
         public double getCost() { return this.cost; }
     }
+
+    /* ---------
+    *  isOptiOn
+    --------- */
+    @Override
+    public boolean isOptiOn() { 
+        return (getVersion() != Version.NO);
+    }
+
+    /* ---------
+     *  Version Attribute
+    --------- */
+    private Version version = Version.NO;
+    
+    @Override
+    public Version getVersion() { return this.version; }
+    
+    @Override
+    public boolean setVersion(double ver) { 
+        switch((int) ver) {
+            case 1: return setVersion(version.V1);
+            case 2: return setVersion(version.V2);
+            case 3: return setVersion(version.V3);
+            case 4: return setVersion(version.V4);
+            case 5: return setVersion(version.V5);
+            default: return setVersion(version.NO);
+        }
+    }
+        
+    public boolean setVersion(Version ver) { 
+        if (ver.getBW() <= getMaxBW()) {  
+            this.version = ver;
+            return true;
+        } else return false;
+    }
+
+    /* ---------
+    *  Get Methods
+    --------- */
+    @Override
+    public int getTL() { return version.getTL(); }
+    
+    @Override
+    public int getBW() { return version.getBW(); }
+    
+    @Override
+    public double getCost() { return version.getCost(); }
 }

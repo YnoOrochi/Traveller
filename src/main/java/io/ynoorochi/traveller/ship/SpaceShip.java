@@ -93,9 +93,12 @@ public class SpaceShip {
         this.jTank = new JmpTank(jDrive.getRating(), 1, tonnage);
         this.pTank = new PwrTank(pwrPlant.getType(), pwrPlant.getWeight(), 4);
         this.oTank = new OptTank();
-        this.computer = new Computer();
+        this.computer = new Computer((int) jDrive.getRating());
         this.backup = new BackupComputer(computer.getBandwidth());
-        this.software = new Software(computer.getBandwidth(), jDrive.getRating());
+        this.software = new Software(
+                computer.getBandwidth(),
+                (int) computer.getBISBand(), 
+                (int) jDrive.getRating());
         this.sensors = new Sensors(tonnage);
 
         this.tonnage = this.hull.getHullSize();
