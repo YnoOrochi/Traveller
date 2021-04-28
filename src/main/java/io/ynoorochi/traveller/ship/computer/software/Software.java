@@ -14,22 +14,21 @@ public class Software {
      *  Attributes
     --------- */
     private int max;
-    private int bis;
     private int jmp;
 
     /* ---------
      *  Constructor
     --------- */
-    public Software(int max, int bis, int jmp) {
+    public Software(int max, int jmp) {
+        System.out.println("Software max:" + max + " jump:" + jmp);
         this.max = max;
-        this.bis = bis;
         this.jmp = jmp;
     }
 
     /* ---------
     *  Default Softwares
     --------- */
-    public JumpControl jCtrl = new JumpControl(max, jmp);
+    public JumpControl jCtrl = new JumpControl(jmp);
 
     /* ---------
     *  Other Softwares

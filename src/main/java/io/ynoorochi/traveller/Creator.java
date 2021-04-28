@@ -52,7 +52,7 @@ public class Creator {
         System.out.println(a.oTank);
         System.out.println(a.computer);
         System.out.println(a.backup);
-        a.software.jCtrl.setVersion(2);
+//        a.software.jCtrl.setVersion(2);
         System.out.println(a.software);
         System.out.println(a.sensors);
 

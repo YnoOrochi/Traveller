@@ -97,7 +97,6 @@ public class SpaceShip {
         this.backup = new BackupComputer(computer.getBandwidth());
         this.software = new Software(
                 computer.getBandwidth(),
-                (int) computer.getBISBand(), 
                 (int) jDrive.getRating());
         this.sensors = new Sensors(tonnage);
 

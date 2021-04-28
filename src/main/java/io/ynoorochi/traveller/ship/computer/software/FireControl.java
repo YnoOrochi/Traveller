@@ -14,6 +14,7 @@ public class FireControl extends BaseSW {
      *  Constructor
     --------- */
     public FireControl(int max) {
+        System.out.println("FireControl - max:" + max);
         setMaxBW(max);
     }
     

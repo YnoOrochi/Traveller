@@ -21,24 +21,8 @@ public abstract class BaseSW {
     /* ---------
      *  Maximum Bandwidth
     --------- */
-    public int getMaxBW() { 
-        System.out.println("Passei no get:" + maxBW);
-        return this.maxBW; }
-    public void setMaxBW(int max) { 
-        System.out.println("Passei no set:" + max);
-        this.maxBW = max; }
-    
-    /* ---------
-     *  /bis modifier
-    --------- */
-    public int getBIS() { return this.bis; }
-    public void setBIS(int bis) { this.bis = bis; }
-
-    /* ---------
-     *  Jump Rating
-    --------- */
-    public int getJump() { return this.jump; }
-    public void setJump(double jump) { this.jump = (int) jump; }
+    public int getMaxBW() { return this.maxBW; }
+    public void setMaxBW(int max) { this.maxBW = max; }
     
     /* ---------
     *  isOptiOn

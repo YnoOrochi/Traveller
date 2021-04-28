@@ -18,8 +18,8 @@ public class JumpControl extends BaseSW {
     /* ---------
     *  Constructor
     --------- */
-    public JumpControl(int maxBW, int jump) {
-        setMaxBW(maxBW);
+    public JumpControl(int jump) {
+        System.out.println("Jumpcontrol - jump:" + jump);
         setVersion(jump);
     }
     
@@ -80,11 +80,8 @@ public class JumpControl extends BaseSW {
     }
 
     public boolean setVersion(Version ver) { 
-        System.out.println("Version:" + ver + " Max:" + getMaxBW());
-        if (ver.getBW() <= getMaxBW()) {  
-            this.version = ver;
-            return true;
-        } else return false;
+        this.version = ver;
+        return true;
     }
 
     /* ---------
