@@ -12,15 +12,16 @@ package io.ynoorochi.traveller.ship.computer.software;
 public abstract class BaseSW {
 
     /* ---------
-     *  Attributes
+     *  Name Attribute
     --------- */
-    private int maxBW = 5;
-    private int bis = 0;
-    private int jump = 0;
+    private String name = "Software";
+    public String getName() { return this.name; }
+    protected void setName(String name) { this.name = name; }
 
     /* ---------
      *  Maximum Bandwidth
     --------- */
+    private int maxBW = 5;
     public int getMaxBW() { return this.maxBW; }
     public void setMaxBW(int max) { this.maxBW = max; }
     
@@ -52,6 +53,7 @@ public abstract class BaseSW {
         if (isOptiOn()) {
             sb.append(", BW=").append(getBW());
             sb.append(", TL=").append(getTL());
+            sb.append(", Cost=").append(getCost());
         }
         sb.append('}');
         return sb.toString();

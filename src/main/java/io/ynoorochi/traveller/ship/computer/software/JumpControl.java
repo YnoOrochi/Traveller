@@ -11,17 +11,14 @@ package io.ynoorochi.traveller.ship.computer.software;
  */
 public class JumpControl extends BaseSW {
     /* ---------
+     *  Constructor
+    --------- */
+    public JumpControl() { setName("Jump Control"); }
+    
+    /* ---------
     *  Attributes
     --------- */
     private Version jump = Version.V1;
-    
-    /* ---------
-    *  Constructor
-    --------- */
-    public JumpControl(int jump) {
-        System.out.println("Jumpcontrol - jump:" + jump);
-        setVersion(jump);
-    }
     
     /* ---------
     *  Software Version
@@ -79,7 +76,7 @@ public class JumpControl extends BaseSW {
         }
     }
 
-    public boolean setVersion(Version ver) { 
+    private boolean setVersion(Version ver) { 
         this.version = ver;
         return true;
     }

@@ -9,26 +9,20 @@ package io.ynoorochi.traveller.ship.computer.software;
  *
  * @author PR3J
  */
-public class FireControl extends BaseSW {
-   /* ---------
+public class AdvFireControl extends BaseSW {
+    /* ---------
      *  Constructor
     --------- */
-    public FireControl() { setName("Fire Control"); }
-    
-    /* ---------
-     *  Software Version
-    --------- */
+    public AdvFireControl() { setName("Advanced Fire Control"); }
     
     /* ---------
      *  Software Version
     --------- */
     public enum Version {
         NO( 0,  0,        0),
-        V1( 9,  5,   200000),
-        V2(10, 10,   400000),
-        V3(11, 15,   600000),
-        V4(12, 20,   800000),
-        V5(13, 25,  1000000);
+        V1(10, 15, 12000000),
+        V2(12, 25, 15000000),
+        V3(14, 30, 18000000);
         
         private int tl;
         private int bw;
@@ -67,8 +61,6 @@ public class FireControl extends BaseSW {
             case 1: return setVersion(version.V1);
             case 2: return setVersion(version.V2);
             case 3: return setVersion(version.V3);
-            case 4: return setVersion(version.V4);
-            case 5: return setVersion(version.V5);
             default: return setVersion(version.NO);
         }
     }

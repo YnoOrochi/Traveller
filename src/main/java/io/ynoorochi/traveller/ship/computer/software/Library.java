@@ -9,26 +9,17 @@ package io.ynoorochi.traveller.ship.computer.software;
  *
  * @author PR3J
  */
-public class FireControl extends BaseSW {
-   /* ---------
+public class Library extends BaseSW {
+    /* ---------
      *  Constructor
     --------- */
-    public FireControl() { setName("Fire Control"); }
-    
-    /* ---------
-     *  Software Version
-    --------- */
+    public Library() { setName("Library"); }
     
     /* ---------
      *  Software Version
     --------- */
     public enum Version {
-        NO( 0,  0,        0),
-        V1( 9,  5,   200000),
-        V2(10, 10,   400000),
-        V3(11, 15,   600000),
-        V4(12, 20,   800000),
-        V5(13, 25,  1000000);
+        VO( 0,  0,        0);
         
         private int tl;
         private int bw;
@@ -49,35 +40,20 @@ public class FireControl extends BaseSW {
     *  isOptiOn
     --------- */
     @Override
-    public boolean isOptiOn() { 
-        return (getVersion() != Version.NO);
-    }
+    public boolean isOptiOn() { return true; }
 
     /* ---------
      *  Version Attribute
     --------- */
-    private Version version = Version.NO;
+    private Version version = Version.VO;
     
     @Override
     public Version getVersion() { return this.version; }
     
     @Override
     public boolean setVersion(double ver) { 
-        switch((int) ver) {
-            case 1: return setVersion(version.V1);
-            case 2: return setVersion(version.V2);
-            case 3: return setVersion(version.V3);
-            case 4: return setVersion(version.V4);
-            case 5: return setVersion(version.V5);
-            default: return setVersion(version.NO);
-        }
-    }
-        
-    private boolean setVersion(Version ver) { 
-        if (ver.getBW() <= getMaxBW()) {  
-            this.version = ver;
-            return true;
-        } else return false;
+        this.version = Version.VO;
+        return true;
     }
 
     /* ---------
