@@ -11,15 +11,46 @@ package io.ynoorochi.traveller.ship.accomodations;
  */
 public class Rooms {
     /* ---------
-     *  Create Rooms
+     *  Create Basic Rooms
     --------- */
     public LowBerth lBerth = new LowBerth();
+    public EmergencyLowBerth eBerth = new EmergencyLowBerth();
+    public Cabins cabins = new Cabins();
+    public Staterooms sRooms = new Staterooms();
+    public DoubleRooms dRooms = new DoubleRooms();
+    public HighStaterooms hRooms = new HighStaterooms();
+    public LuxuryStaterooms lRooms = new LuxuryStaterooms();
+    public CommonAreas common = new CommonAreas();
+    public AccelerationBenches aBench = new AccelerationBenches();
+    public AccelerationSeats aSeats = new AccelerationSeats();
+    public Barracks barrack = new Barracks();
+    public Brig brig = new Brig();
+    public MultiEnvironment mEnvro = new MultiEnvironment();
+    public Biosphere bSphre = new Biosphere();
+    public Stables stable = new Stables();
     
+    /* ---------
+     *  Create Aditional Rooms
+    --------- */
+    public Armories armory = new Armories();
+    public BriefingRoom briefg = new BriefingRoom();
+    public ConcealedCompartment cnceal = new ConcealedCompartment();
+    public ConstructionDeck ctDeck = new ConstructionDeck();
+    public GamingRoom gaming = new GamingRoom();
+    public GravScreen gravSc = new GravScreen();
+    public Laboratory labtry = new Laboratory();
+    public Library librry = new Library();
+    public MedicalBay medbay = new MedicalBay();
+    public PsyonStateroom psyons = new PsyonStateroom();
+
     /* ---------
     *  Rooms list
     --------- */
     private final RoomItems[] rooms = {
-        lBerth
+        lBerth, eBerth, cabins, sRooms, dRooms, hRooms, lRooms, common,
+        aBench, aSeats, barrack, brig, mEnvro, bSphre, stable, armory,
+        briefg, cnceal, ctDeck, gaming, gravSc, labtry, librry, medbay,
+        psyons
     };
     
     public RoomItems[] getRooms() {
