@@ -29,14 +29,29 @@ public class Software {
     /* ---------
     *  Other Softwares
     --------- */
+    public Evade evade = new Evade();
     public FireControl fCtrl = new FireControl();
     public AdvFireControl advFC = new AdvFireControl();
+    public LaunchSolution launch = new LaunchSolution();
+    public AntiHijack aHjck = new AntiHijack();
+    public AutoRepair aRpr = new AutoRepair();
+    public BattleSystem bSyst = new BattleSystem();
+    public Intellect intel = new Intellect();
+    public ConsciousIntel cnInt = new ConsciousIntel();
+    public EletronicWar eWar = new EletronicWar();
+    public BroadSpectrumEW bsEW = new BroadSpectrumEW();
+    public PointDefense pDef = new PointDefense();
+    public ScreenOptimizer screen = new ScreenOptimizer();
+    public VirtualCrew vCrew = new VirtualCrew();
+    public VirtualGunner vGuns = new VirtualGunner();
+    public VirtualMining vMine = new VirtualMining();
 
     /* ---------
     *  Softwares list
     --------- */
     private final BaseSW[] softwares = {
-        jCtrl, mnvre, lib, fCtrl, advFC
+        jCtrl, mnvre, lib, evade, fCtrl, advFC, launch, aHjck, aRpr, bSyst, 
+        intel, cnInt, eWar, bsEW, pDef, screen, vCrew, vGuns, vMine
     };
     
     public BaseSW[] getSoftwares() {

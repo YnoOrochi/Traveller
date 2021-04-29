@@ -9,17 +9,20 @@ package io.ynoorochi.traveller.ship.computer.software;
  *
  * @author PR3J
  */
-public class Maneouvre extends BaseSW {
-    /* ---------
+public class EletronicWar extends BaseSW {
+   /* ---------
      *  Constructor
     --------- */
-    public Maneouvre() { setName("Maneouvre"); }
+    public EletronicWar() { setName("Eletronic Warfare"); }
     
     /* ---------
      *  Software Version
     --------- */
     public enum Version {
-        VO( 8,  0,        0);
+        NO( 0,  0,        0),
+        V1(10, 10, 15000000),
+        V2(13, 15, 18000000),
+        V3(15, 20, 24000000);
         
         private int tl;
         private int bw;
@@ -40,20 +43,33 @@ public class Maneouvre extends BaseSW {
     *  isOptiOn
     --------- */
     @Override
-    public boolean isOptiOn() { return true; }
+    public boolean isOptiOn() { 
+        return (getVersion() != Version.NO);
+    }
 
     /* ---------
      *  Version Attribute
     --------- */
-    private Version version = Version.VO;
+    private Version version = Version.NO;
     
     @Override
     public Version getVersion() { return this.version; }
     
     @Override
     public boolean setVersion(double ver) { 
-        this.version = Version.VO;
-        return true;
+        switch((int) ver) {
+            case 1: return setVersion(version.V1);
+            case 2: return setVersion(version.V2);
+            case 3: return setVersion(version.V3);
+            default: return setVersion(version.NO);
+        }
+    }
+        
+    private boolean setVersion(Version ver) { 
+        if (ver.getBW() <= getMaxBW()) {  
+            this.version = ver;
+            return true;
+        } else return false;
     }
 
     /* ---------

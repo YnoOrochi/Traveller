@@ -9,17 +9,18 @@ package io.ynoorochi.traveller.ship.computer.software;
  *
  * @author PR3J
  */
-public class Maneouvre extends BaseSW {
-    /* ---------
+public class VirtualMining extends BaseSW {
+   /* ---------
      *  Constructor
     --------- */
-    public Maneouvre() { setName("Maneouvre"); }
+    public VirtualMining() { setName("Virtual Mining"); }
     
     /* ---------
      *  Software Version
     --------- */
     public enum Version {
-        VO( 8,  0,        0);
+        NO( 0, 0,         0),
+        YES(7, 1, 100000000);
         
         private int tl;
         private int bw;
@@ -40,20 +41,34 @@ public class Maneouvre extends BaseSW {
     *  isOptiOn
     --------- */
     @Override
-    public boolean isOptiOn() { return true; }
+    public boolean isOptiOn() { 
+        return (getVersion() != Version.NO);
+    }
 
+    /* ---------
+     *  choosed Bandwidth
+    --------- */
+    private int mBandwidth = 0;
+    
     /* ---------
      *  Version Attribute
     --------- */
-    private Version version = Version.VO;
+    private Version version = Version.NO;
     
     @Override
     public Version getVersion() { return this.version; }
     
     @Override
     public boolean setVersion(double ver) { 
-        this.version = Version.VO;
-        return true;
+        if (ver > 0 && ver <= getMaxBW()) {
+            this.mBandwidth = (int) ver;
+            this.version = Version.YES;
+            return true;
+        } else {
+            this.mBandwidth = 0;
+            this.version = Version.NO;
+            return (ver == 0);
+        }
     }
 
     /* ---------
@@ -63,8 +78,8 @@ public class Maneouvre extends BaseSW {
     public int getTL() { return version.getTL(); }
     
     @Override
-    public int getBW() { return version.getBW(); }
+    public int getBW() { return this.mBandwidth * version.getBW(); }
     
     @Override
-    public double getCost() { return version.getCost(); }
+    public double getCost() { return this.mBandwidth * version.getCost(); }
 }

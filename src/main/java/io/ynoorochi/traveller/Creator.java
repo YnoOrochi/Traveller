@@ -55,6 +55,7 @@ public class Creator {
 //        a.software.jCtrl.setVersion(2);
         System.out.println(a.software);
         System.out.println(a.sensors);
+        System.out.println(a.rooms);
 
 //        System.out.println(a.hull.toString());
     }

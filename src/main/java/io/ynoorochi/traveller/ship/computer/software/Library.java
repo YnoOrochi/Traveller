@@ -19,7 +19,7 @@ public class Library extends BaseSW {
      *  Software Version
     --------- */
     public enum Version {
-        VO( 0,  0,        0);
+        VO( 8,  0,        0);
         
         private int tl;
         private int bw;

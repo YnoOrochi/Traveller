@@ -92,6 +92,13 @@ public abstract class Items {
     }
 
     /* ---------
+    *  Option Get Name
+    --------- */
+    public String getName() {
+        return this.getClass().getSimpleName();
+    }
+    
+    /* ---------
     *  Auxiliar double Attribute 
     *       Rating
     --------- */
@@ -120,7 +127,7 @@ public abstract class Items {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("{").append(isOptiOn());
+        sb.append(this.getName()).append("{").append(isOptiOn());
         if (isOptiOn()) {
             sb.append(", Weight=").append(getWeight());
             sb.append(", Cost=").append(getCost());

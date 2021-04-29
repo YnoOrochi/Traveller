@@ -18,10 +18,6 @@ public class FireControl extends BaseSW {
     /* ---------
      *  Software Version
     --------- */
-    
-    /* ---------
-     *  Software Version
-    --------- */
     public enum Version {
         NO( 0,  0,        0),
         V1( 9,  5,   200000),

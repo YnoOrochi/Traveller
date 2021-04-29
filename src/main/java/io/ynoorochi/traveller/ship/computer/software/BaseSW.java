@@ -49,7 +49,7 @@ public abstract class BaseSW {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("(").append(getVersion());
+        sb.append(getName()).append("(").append(getVersion());
         if (isOptiOn()) {
             sb.append(", BW=").append(getBW());
             sb.append(", TL=").append(getTL());
