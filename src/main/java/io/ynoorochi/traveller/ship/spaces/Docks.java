@@ -15,14 +15,14 @@ public class Docks {
     /* ---------
      *  Docks
     --------- */
-    private RoomItems[] docks = {};
+    private ShipSpaces[] docks = {};
     
-    public void addDock(RoomItems dock) {
+    public void addDock(ShipSpaces dock) {
         this.docks = Arrays.copyOf(this.docks, this.docks.length + 1);
         this.docks[this.docks.length - 1] = dock;
     }
     
-    public void delDock(RoomItems dock) {
+    public void delDock(ShipSpaces dock) {
         int pos = Arrays.binarySearch(this.docks, dock);
         if (pos >= 0) {
             if (this.docks.length > pos + 1)
@@ -33,7 +33,7 @@ public class Docks {
         }
     }
 
-    public RoomItems[] getDocks() { return this.docks; }
+    public ShipSpaces[] getDocks() { return this.docks; }
 
     /* ---------
     *  Rooms best Tech Level

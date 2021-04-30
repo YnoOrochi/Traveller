@@ -39,7 +39,7 @@ public class Definitions {
         GRAVSC(12,  1  , 2,     0, 0, 1000000, "Grav Screen (per 200T shielded)"),
         HANGAR( 0,  2  , 0,     0, 0,  200000, "Full Hangar"),
         LABTRY( 0,  4  , 0,     0, 0, 1000000, "Laboratories (per scientist)"),
-        LIBRRY( 0,  4  , 0,     0, 0,  500000, "Library"),
+        LBRARY( 0,  4  , 0,     0, 0,  500000, "Library"),
         MEDBAY( 0,  4  , 1,     0, 0, 2000000, "Medical Bay (per 5 patients)"),
         PSYONS(12,  4  , 0,     0, 0, 2000000, "Psion Stateroom"),
         RECOVR( 0,  1  , 1,     0, 0,  500000, "Recovery Deck"),

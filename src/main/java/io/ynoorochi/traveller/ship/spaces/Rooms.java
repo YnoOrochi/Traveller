@@ -5,7 +5,7 @@
  */
 package io.ynoorochi.traveller.ship.spaces;
 
-import io.ynoorochi.traveller.ship.spaces.modules.*;
+import io.ynoorochi.traveller.ship.spaces.Definitions.RoomType;
 
 /**
  *
@@ -13,55 +13,55 @@ import io.ynoorochi.traveller.ship.spaces.modules.*;
  */
 public class Rooms {
     /* ---------
-     *  Create Basic Rooms
+     *  Passenger Rooms
     --------- */
-    public LowBerth lBerth = new LowBerth();
-    public EmergencyLowBerth eBerth = new EmergencyLowBerth();
-    public Cabins cabins = new Cabins();
-    public Staterooms sRooms = new Staterooms();
-    public DoubleRooms dRooms = new DoubleRooms();
-    public HighStaterooms hRooms = new HighStaterooms();
-    public LuxuryStaterooms lRooms = new LuxuryStaterooms();
-    public CommonAreas common = new CommonAreas();
-    public AccelerationBenches aBench = new AccelerationBenches();
-    public AccelerationSeats aSeats = new AccelerationSeats();
-    public Barracks barrack = new Barracks();
-    public Brig brig = new Brig();
-    public MultiEnvironment mEnvro = new MultiEnvironment();
-    public Biosphere bSphre = new Biosphere();
-    public Stables stable = new Stables();
+    public ShipSpaces lBerth = new ShipSpaces(RoomType.LBERTH, 0);
+    public ShipSpaces eBerth = new ShipSpaces(RoomType.EBERTH, 0);
+    public ShipSpaces cabins = new ShipSpaces(RoomType.CABINS, 0);
+    public ShipSpaces sRooms = new ShipSpaces(RoomType.SROOMS, 0);
+    public ShipSpaces dRooms = new ShipSpaces(RoomType.DROOMS, 0);
+    public ShipSpaces hRooms = new ShipSpaces(RoomType.HROOMS, 0);
+    public ShipSpaces lRooms = new ShipSpaces(RoomType.LROOMS, 0);
+    public ShipSpaces psyons = new ShipSpaces(RoomType.PSYONS, 0);
+    public ShipSpaces aBench = new ShipSpaces(RoomType.ABENCH, 0);
+    public ShipSpaces aSeats = new ShipSpaces(RoomType.ASEATS, 0);
+    public ShipSpaces brrack = new ShipSpaces(RoomType.BARRCK, 0);
+    public ShipSpaces brig   = new ShipSpaces(RoomType.BRIG06, 0);
     
     /* ---------
-     *  Create Aditional Rooms
+     *  Other Rooms
     --------- */
-    public Armories armory = new Armories();
-    public BriefingRoom briefg = new BriefingRoom();
-    public ConcealedCompartment cnceal = new ConcealedCompartment();
-    public ConstructionDeck ctDeck = new ConstructionDeck();
-    public GamingRoom gaming = new GamingRoom();
-    public GravScreen gravSc = new GravScreen();
-    public Laboratory labtry = new Laboratory();
-    public Library librry = new Library();
-    public MedicalBay medBay = new MedicalBay();
-    public PsyonStateroom psyons = new PsyonStateroom();
-    public RecoveryDeck recovr = new RecoveryDeck();
-    public Studios studio = new Studios();
-    public TrainningFacilities trainF = new TrainningFacilities();
-    public UNREPSystems unrepS = new UNREPSystems();
-    public Vaults vaults = new Vaults();
-    public Workshops wrkshp = new Workshops();
-
+    public ShipSpaces armory = new ShipSpaces(RoomType.ARMORY, 0);
+    public ShipSpaces bSphre = new ShipSpaces(RoomType.BIOSPH, 0);
+    public ShipSpaces briefg = new ShipSpaces(RoomType.BRIEFG, 0);
+    public ShipSpaces common = new ShipSpaces(RoomType.COMMON, 0);
+    public ShipSpaces cnceal = new ShipSpaces(RoomType.CNCEAL, 0);
+    public ShipSpaces ctDeck = new ShipSpaces(RoomType.CTDECK, 0);
+    public ShipSpaces gaming = new ShipSpaces(RoomType.GAMING, 0);
+    public ShipSpaces gravSc = new ShipSpaces(RoomType.GRAVSC, 0);
+    public ShipSpaces labtry = new ShipSpaces(RoomType.LABTRY, 0);
+    public ShipSpaces lbrary = new ShipSpaces(RoomType.LBRARY, 0);
+    public ShipSpaces medBay = new ShipSpaces(RoomType.MEDBAY, 0);
+    public ShipSpaces mEnvro = new ShipSpaces(RoomType.MENVSP, 0);
+    public ShipSpaces recovr = new ShipSpaces(RoomType.RECOVR, 0);
+    public ShipSpaces stable = new ShipSpaces(RoomType.STABLE, 0);
+    public ShipSpaces studio = new ShipSpaces(RoomType.STUDIO, 0);
+    public ShipSpaces trainF = new ShipSpaces(RoomType.TRAINF, 0);
+    public ShipSpaces unrepS = new ShipSpaces(RoomType.UNREPS, 0);
+    public ShipSpaces vaults = new ShipSpaces(RoomType.VAULTS, 0);
+    public ShipSpaces wrkshp = new ShipSpaces(RoomType.WRKSHP, 0);
+    
     /* ---------
     *  Rooms list
     --------- */
-    private final RoomItems[] rooms = {
+    private final ShipSpaces[] rooms = {
         lBerth, eBerth, cabins, sRooms, dRooms, hRooms, lRooms, common,
-        aBench, aSeats, barrack, brig, mEnvro, bSphre, stable, armory,
-        briefg, cnceal, ctDeck, gaming, gravSc, labtry, librry, medBay,
+        aBench, aSeats, brrack, brig, mEnvro, bSphre, stable, armory,
+        briefg, cnceal, ctDeck, gaming, gravSc, labtry, lbrary, medBay,
         psyons, recovr, studio, trainF, unrepS, vaults, wrkshp
     };
     
-    public RoomItems[] getRooms() {
+    public ShipSpaces[] getRooms() {
         return this.rooms;
     }
     
