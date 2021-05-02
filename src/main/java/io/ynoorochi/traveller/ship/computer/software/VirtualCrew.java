@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class VirtualCrew extends BaseSW {
+public class VirtualCrew extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public VirtualCrew() { setName("Virtual Crew"); }
+    public VirtualCrew(int max) { 
+        setName("Virtual Crew"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

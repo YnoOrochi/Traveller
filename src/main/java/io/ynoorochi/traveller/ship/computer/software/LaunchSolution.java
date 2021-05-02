@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class LaunchSolution extends BaseSW {
+public class LaunchSolution extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public LaunchSolution() { setName("Launch Solution"); }
+    public LaunchSolution(int max) { 
+        setName("Launch Solution"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

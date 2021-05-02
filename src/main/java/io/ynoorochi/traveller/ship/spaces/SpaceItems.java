@@ -12,7 +12,15 @@ import io.ynoorochi.traveller.ship.spaces.Definitions.RoomType;
  *
  * @author PR3J
  */
-public class RoomItems extends Items {
+public class SpaceItems extends Items {
+     /* ---------
+     *  Constructor
+    --------- */
+    public SpaceItems(RoomType room, int qtty) {
+        setRoomType(room);
+        setQtty(qtty);
+    }
+
     /* ---------
      *  Room
     --------- */

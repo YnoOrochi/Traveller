@@ -11,91 +11,91 @@ import java.util.Arrays;
  *
  * @author PR3J
  */
-public class Docks {
+public class Spaces {
     /* ---------
-     *  Docks
+     *  Array Manipulation
     --------- */
-    private ShipSpaces[] docks = {};
+    private SpaceItems[] itemList = {};
     
-    public void addDock(ShipSpaces dock) {
-        this.docks = Arrays.copyOf(this.docks, this.docks.length + 1);
-        this.docks[this.docks.length - 1] = dock;
+    public void addItem(SpaceItems item) {
+        itemList = Arrays.copyOf(itemList, itemList.length + 1);
+        itemList[itemList.length - 1] = item;
     }
     
-    public void delDock(ShipSpaces dock) {
-        int pos = Arrays.binarySearch(this.docks, dock);
+    public void delItem(SpaceItems item) {
+        int pos = Arrays.binarySearch(itemList, item);
         if (pos >= 0) {
-            if (this.docks.length > pos + 1)
-                for (int i=pos; i<this.docks.length - 1; i++) {
-                    this.docks[i] = this.docks[i+1];
+            if (itemList.length > pos + 1)
+                for (int i=pos; i<itemList.length - 1; i++) {
+                    itemList[i] = itemList[i+1];
                 }
-            this.docks = Arrays.copyOf(this.docks, this.docks.length - 1);
+            itemList = Arrays.copyOf(itemList, itemList.length - 1);
         }
     }
 
-    public ShipSpaces[] getDocks() { return this.docks; }
+    public SpaceItems[] getItems() { return itemList; }
 
     /* ---------
-    *  Rooms best Tech Level
+    *  Best Tech Level
     --------- */
     public int getTL() { 
         int tl = 0;
-        for (var obj : getDocks() ) {
+        for (var obj : getItems() ) {
             tl = Math.max(tl, obj.getTL());
         }
         return tl;
     }
 
     /* ---------
-    *  Total Rooms Weight
+    *  Total Weight
     --------- */
     public double getWeight() { 
         double aux = 0;
-        for (var obj : getDocks() ) {
+        for (var obj : getItems() ) {
             aux += obj.getWeight();
         }
         return aux;
     }
 
     /* ---------
-    *  Total Rooms Power
+    *  Total Power
     --------- */
     public int getPower() { 
         int aux = 0;
-        for (var obj : getDocks() ) {
+        for (var obj : getItems() ) {
             aux += obj.getPower();
         }
         return aux;
     }
 
     /* ---------
-    *  Total Rooms Life Support
+    *  Total Life Support
     --------- */
     public int getLifeSupport() { 
         int aux = 0;
-        for (var obj : getDocks() ) {
+        for (var obj : getItems() ) {
             aux += obj.getLifeSupport();
         }
         return aux;
     }
 
     /* ---------
-    *  Total Rooms Cost
+    *  Total Passengers
     --------- */
     public int getPassengers() { 
         int aux = 0;
-        for (var obj : getDocks() ) {
+        for (var obj : getItems() ) {
             aux += obj.getPassengers();
         }
         return aux;
     }
 
     /* ---------
-    *  Total Rooms Cost
+    *  Total Cost
     --------- */
     public double getCost() { 
         double aux = 0;
-        for (var obj : getDocks() ) {
+        for (var obj : getItems() ) {
             aux += obj.getCost();
         }
         return aux;
@@ -117,9 +117,11 @@ public class Docks {
         sb.append(this.getName()).append("{");
         sb.append("TL=").append(getTL());
         sb.append(", Weight=").append(getWeight());
+        sb.append(", Life Support=").append(getLifeSupport());
+        sb.append(", Passengers=").append(getPassengers());
         sb.append(", Cost=").append(getCost());
         sb.append("}\n");
-        for (var room : getDocks()) 
+        for (var room : getItems()) 
             sb.append("    ").append(room.toString()).append("\n");
         return sb.toString();
     }

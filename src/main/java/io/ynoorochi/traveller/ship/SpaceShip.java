@@ -16,9 +16,8 @@ import static io.ynoorochi.traveller.ship.equip.Definitions.*;
 import static io.ynoorochi.traveller.ship.hull.Definitions.*;
 
 import static io.ynoorochi.traveller.ship.Definitions.Customization.*;
-import io.ynoorochi.traveller.ship.spaces.Rooms;
-import io.ynoorochi.traveller.ship.computer.software.Software;
-import io.ynoorochi.traveller.ship.spaces.Docks;
+import io.ynoorochi.traveller.ship.computer.Softwares;
+import io.ynoorochi.traveller.ship.spaces.SpaceTest;
 
 /**
  *
@@ -48,12 +47,11 @@ public class SpaceShip {
     public OptTank oTank;
     public Computer computer;
     public BackupComputer backup;
-    public Software software;
+    public Softwares software;
     public Sensors sensors;
 //    private Weapons[] wPoints;
 //    private Systems[] systems;
-    public Rooms rooms;
-    public Docks docks;
+    public SpaceTest space;
 
     // -------------
     // calculated variables
@@ -98,12 +96,11 @@ public class SpaceShip {
         this.oTank = new OptTank();
         this.computer = new Computer((int) jDrive.getRating());
         this.backup = new BackupComputer(computer.getBandwidth());
-        this.software = new Software(
+        this.software = new Softwares(
                 computer.getBandwidth(),
                 (int) jDrive.getRating());
         this.sensors = new Sensors(tonnage);
-        this.rooms = new Rooms();
-        this.docks = new Docks();
+        this.space = new SpaceTest();
 
         this.tonnage = this.hull.getHullSize();
 

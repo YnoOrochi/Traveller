@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class ConsciousIntel extends BaseSW {
+public class ConsciousIntel extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public ConsciousIntel() { setName("Conscious Intelligence"); }
+    public ConsciousIntel(int max) { 
+        setName("Conscious Intelligence"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

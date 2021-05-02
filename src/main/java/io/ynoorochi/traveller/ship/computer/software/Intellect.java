@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class Intellect extends BaseSW {
+public class Intellect extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public Intellect() { setName("Intellect"); }
+    public Intellect(int max) { 
+        setName("Intellect"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

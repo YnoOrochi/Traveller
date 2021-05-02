@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class Library extends BaseSW {
+public class Library extends SoftItems {
     /* ---------
      *  Constructor
     --------- */
     public Library() { setName("Library"); }
+    public Library(int max) { 
+        setName("Library"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

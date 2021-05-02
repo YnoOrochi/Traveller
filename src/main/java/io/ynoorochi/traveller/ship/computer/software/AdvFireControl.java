@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class AdvFireControl extends BaseSW {
+public class AdvFireControl extends SoftItems {
     /* ---------
      *  Constructor
     --------- */
     public AdvFireControl() { setName("Advanced Fire Control"); }
+    public AdvFireControl(int max) { 
+        setName("Advanced Fire Control"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class BattleSystem extends BaseSW {
+public class BattleSystem extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public BattleSystem() { setName("Battle System"); }
+    public BattleSystem(int max) { 
+        setName("Battle System"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

@@ -19,7 +19,7 @@ public class Hull {
     private int hullSize;
     
     /* ---------
-    *  Hull Equipment
+     *  Hull Equipment
     --------- */
     public Configuration config = new Configuration(MIN_HULL);
     public Type type = new Type();

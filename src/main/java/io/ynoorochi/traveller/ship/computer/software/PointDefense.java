@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class PointDefense extends BaseSW {
+public class PointDefense extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public PointDefense() { setName("Point Defense"); }
+    public PointDefense(int max) { 
+        setName("Point Defense"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

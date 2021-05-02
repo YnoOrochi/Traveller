@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class JumpControl extends BaseSW {
+public class JumpControl extends SoftItems {
     /* ---------
      *  Constructor
     --------- */
     public JumpControl() { setName("Jump Control"); }
+    public JumpControl(int jump) { 
+        setName("Jump Control");
+        setVersion(jump);
+    }
     
     /* ---------
     *  Attributes

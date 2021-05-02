@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class BroadSpectrumEW extends BaseSW {
+public class BroadSpectrumEW extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public BroadSpectrumEW() { setName("Broad Spectrum EW"); }
+    public BroadSpectrumEW(int max) { 
+        setName("Broad Spectrum EW"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class AutoRepair extends BaseSW {
+public class AutoRepair extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public AutoRepair() { setName("Auto-Repair"); }
+    public AutoRepair(int max) { 
+        setName("Auto-Repair"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

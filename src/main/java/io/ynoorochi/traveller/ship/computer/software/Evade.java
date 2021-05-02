@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class Evade extends BaseSW {
+public class Evade extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public Evade() { setName("Evade"); }
+    public Evade(int max) { 
+        setName("Evade"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

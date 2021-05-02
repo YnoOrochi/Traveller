@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.ynoorochi.traveller.ship.computer.software;
+package io.ynoorochi.traveller.ship.computer;
 
 /**
  *
  * @author PR3J
  */
-public abstract class BaseSW {
+public abstract class SoftItems {
 
     /* ---------
      *  Name Attribute

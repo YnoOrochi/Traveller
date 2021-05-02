@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class ScreenOptimizer extends BaseSW {
+public class ScreenOptimizer extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public ScreenOptimizer() { setName("Screen Optimizer"); }
+    public ScreenOptimizer(int max) { 
+        setName("Screen Optimizer"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

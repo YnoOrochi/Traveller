@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class VirtualGunner extends BaseSW {
+public class VirtualGunner extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public VirtualGunner() { setName("Virtual Gunner"); }
+    public VirtualGunner(int max) { 
+        setName("Virtual Gunner"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

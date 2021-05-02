@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class AntiHijack extends BaseSW {
+public class AntiHijack extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public AntiHijack() { setName("Anti-Hijack"); }
+    public AntiHijack(int max) { 
+        setName("Anti-Hijack");
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

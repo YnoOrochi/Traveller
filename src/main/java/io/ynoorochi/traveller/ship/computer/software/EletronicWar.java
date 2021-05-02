@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class EletronicWar extends BaseSW {
+public class EletronicWar extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public EletronicWar() { setName("Eletronic Warfare"); }
+    public EletronicWar(int max) { 
+        setName("Eletronic Warfare"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

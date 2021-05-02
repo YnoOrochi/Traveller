@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class Maneouvre extends BaseSW {
+public class Maneouvre extends SoftItems {
     /* ---------
      *  Constructor
     --------- */
     public Maneouvre() { setName("Maneouvre"); }
+    public Maneouvre(int max) { 
+        setName("Maneouvre"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version

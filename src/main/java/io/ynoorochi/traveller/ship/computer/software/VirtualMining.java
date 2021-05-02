@@ -5,15 +5,21 @@
  */
 package io.ynoorochi.traveller.ship.computer.software;
 
+import io.ynoorochi.traveller.ship.computer.SoftItems;
+
 /**
  *
  * @author PR3J
  */
-public class VirtualMining extends BaseSW {
+public class VirtualMining extends SoftItems {
    /* ---------
      *  Constructor
     --------- */
     public VirtualMining() { setName("Virtual Mining"); }
+    public VirtualMining(int max) { 
+        setName("Virtual Mining"); 
+        setMaxBW(max);
+    }
     
     /* ---------
      *  Software Version
