@@ -18,8 +18,10 @@ public class Configuration extends Items {
     /* ---------
     *  Constructor
     --------- */
-    public Configuration(int size) {
-        this.setHullSize(size);
+    public Configuration(int size) { this.setHullSize(size); }
+    public Configuration(int size, HullConfiguration cfg) { 
+        this.setHullSize(size); 
+        setConfig(config);
     }
 
     /* ---------

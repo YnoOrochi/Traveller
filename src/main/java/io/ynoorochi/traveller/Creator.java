@@ -56,6 +56,7 @@ public class Creator {
         System.out.println(a.software);
         System.out.println(a.sensors);
         System.out.println(a.space);
+        System.out.println(a.systems);
 
 //        System.out.println(a.hull.toString());
     }

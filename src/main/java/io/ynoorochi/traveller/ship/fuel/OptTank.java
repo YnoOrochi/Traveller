@@ -6,6 +6,7 @@
 package io.ynoorochi.traveller.ship.fuel;
 
 import io.ynoorochi.traveller.ship.Items;
+import java.util.Arrays;
 
 /**
  *
@@ -13,26 +14,40 @@ import io.ynoorochi.traveller.ship.Items;
  */
 public class OptTank extends Items {
     /* ---------
-     *  Attributes
+     *  Constructor
     --------- */
-    private Hidden hidden = new Hidden();
-    private MHydride mHydride = new MHydride();
-    private Collapsible collaps = new Collapsible();
-    private Demountable demount = new Demountable();
-    private Drop drop = new Drop();
-    private Processor processor = new Processor();
-    private Scoop scoop = new Scoop();
-    
-    /* ---------
-     *  Item list
-    --------- */
-    private final Items[] optTanks = {
-        hidden, mHydride, collaps, demount, drop, processor, scoop
-    };
-    
-    public Items[] getItems() {
-        return this.optTanks;
+    public OptTank() {
+        addItem(new Hidden());
+        addItem(new MHydride());
+        addItem(new Collapsible());
+        addItem(new Demountable());
+        addItem(new Drop());
+        addItem(new Processor());
+        addItem(new Scoop());
     }
+
+    /* ---------
+     *  Array Manipulation
+    --------- */
+    private Items[] itemList = {};
+    
+    public void addItem(Items item) {
+        itemList = Arrays.copyOf(itemList, itemList.length + 1);
+        itemList[itemList.length - 1] = item;
+    }
+    
+    public void delItem(Items item) {
+        int pos = Arrays.binarySearch(itemList, item);
+        if (pos >= 0) {
+            if (itemList.length > pos + 1)
+                for (int i=pos; i<itemList.length - 1; i++) {
+                    itemList[i] = itemList[i+1];
+                }
+            itemList = Arrays.copyOf(itemList, itemList.length - 1);
+        }
+    }
+
+    public Items[] getItems() { return itemList; }
 
     /* ---------
     *  Tech Level
@@ -40,7 +55,7 @@ public class OptTank extends Items {
     @Override
     public int getTL() { 
         int tl = 0;
-        for (var opt : optTanks ) {
+        for (var opt : getItems()) {
             tl = Math.max(tl, opt.getTL());
         }
         return tl;
@@ -52,7 +67,7 @@ public class OptTank extends Items {
     @Override
     public double getWeight() { 
         double aux = 0;
-        for (var opt : optTanks ) {
+        for (var opt : getItems()) {
             aux += opt.getWeight();
         }
         return aux;
@@ -64,7 +79,7 @@ public class OptTank extends Items {
     @Override
     public double getCost() { 
         double aux = 0;
-        for (var opt : optTanks ) {
+        for (var opt : getItems()) {
             aux += opt.getCost();
         }
         return aux;
@@ -81,7 +96,7 @@ public class OptTank extends Items {
         sb.append(", Cost=").append(getCost());
         sb.append(", Weight=").append(getWeight());
         sb.append("}\n");
-        for (var opt : optTanks) 
+        for (var opt : getItems()) 
             sb.append("    ").append(opt.toString()).append("\n");
         return sb.toString();
     }

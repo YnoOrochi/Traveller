@@ -23,7 +23,7 @@ public class Softwares {
         addItem(new Maneouvre());
         addItem(new Library());
         
-        testOther(max);
+        otherItems(max);
     }
 
     /* ---------
@@ -38,7 +38,7 @@ public class Softwares {
     
     public void delItem(SoftItems item) {
         int pos = Arrays.binarySearch(itemList, item);
-        if (pos >= 0) {
+        if (pos >= 3) {
             if (itemList.length > pos + 1)
                 for (int i=pos; i<itemList.length - 1; i++) {
                     itemList[i] = itemList[i+1];
@@ -52,7 +52,7 @@ public class Softwares {
     /* ---------
     *  Other Softwares for test
     --------- */
-    private void testOther(int max) {
+    private void otherItems(int max) {
         addItem(new Evade(max));
         addItem(new FireControl(max));
         addItem(new AdvFireControl(max));

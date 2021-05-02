@@ -129,6 +129,7 @@ public abstract class Items {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getName()).append("{").append(isOptiOn());
         if (isOptiOn()) {
+            sb.append(", TL=").append(getTL());
             sb.append(", Weight=").append(getWeight());
             sb.append(", Cost=").append(getCost());
             if (isHardened()) sb.append(", Hardened");
