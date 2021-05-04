@@ -11,32 +11,29 @@ import io.ynoorochi.traveller.ship.Items;
  *
  * @author PR3J
  */
-public class Drones extends Items {
+public class ForcedLink extends Items {
     /* ---------
      *  Constructor
     --------- */
-    public Drones(DroneType type) { setType(type); }
-    public Drones(DroneType type, int qtty) { 
+    public ForcedLink(FLinkType type) { setType(type);
         setType(type);
-        setQtty(qtty);
     }
-
+    
     /* ---------
      *  Drone Types
     --------- */
-    public enum DroneType {
-        PROBED( 9, 0.2, 100000, "Probe Drones"),
-        ADVPRB(12, 0.2, 160000, "Advanced Probe Drones"),
-        CARGOD( 7, 0.1,  70000, "Cargo Drones"),
-        MINING( 9, 0.2, 200000, "Mining Drones"),
-        REPAIR( 9, 1  , 200000, "Repair Drones");
+    public enum FLinkType {
+        TL07( 7, 2,  50000, "Forced Linkage Apparatus (TL07)"),
+        TL09( 9, 2,  75000, "Forced Linkage Apparatus (TL09)"),
+        TL12(12, 1, 100000, "Forced Linkage Apparatus (TL12)"),
+        TL15(15, 2, 500000, "Forced Linkage Apparatus (TL15)");
         
         private final int tl;
         private final double weight;
         private final double cost;
         private final String name;
         
-        private DroneType(int tl, double wt, double ct, String nm) {
+        private FLinkType(int tl, double wt, double ct, String nm) {
             this.tl = tl;
             this.weight = wt;
             this.cost = ct;
@@ -49,21 +46,12 @@ public class Drones extends Items {
         public String getName() { return name; }
     }
     
-    private DroneType type;
-    public DroneType getType() { return this.type; }
-    public void setType(DroneType type) { this.type = type; }
-
-    /* ---------
-     *  Number of drones
-    --------- */
-    public int getQtty() { return getIntAtt(); }
-    public void setQtty(int qtty) { setIntAtt(qtty); }
-    
-    /* ---------
-     * is Option on?
-    --------- */
-    @Override
-    public boolean isOptiOn() { return (getQtty() > 0); }
+    private FLinkType type;
+    public FLinkType getType() { return this.type; }
+    public void setType(FLinkType type) { 
+        this.type = type; 
+        setOptiOn(true);
+    }
 
     /* ---------
     *  Tech Level
@@ -75,13 +63,13 @@ public class Drones extends Items {
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() { return getQtty() * type.getWeight(); }
+    public double getWeight() { return type.getWeight(); }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() { return getQtty() * type.getCost(); }
+    public double getCost() { return type.getCost(); }
 
     /* ---------
     *  Name
@@ -95,7 +83,7 @@ public class Drones extends Items {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getName()).append("{").append(getQtty());
+        sb.append(getName()).append("{").append(getType());
         if (isOptiOn()) {
             sb.append(", TL=").append(getTL());
             sb.append(", Cost=").append(getCost());

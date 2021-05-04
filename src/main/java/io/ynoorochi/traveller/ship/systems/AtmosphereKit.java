@@ -5,38 +5,32 @@
  */
 package io.ynoorochi.traveller.ship.systems;
 
+import io.ynoorochi.traveller.ship.Definitions.Hardened;
 import io.ynoorochi.traveller.ship.Items;
 
 /**
  *
  * @author PR3J
  */
-public class Drones extends Items {
+public class AtmosphereKit extends Items {
     /* ---------
      *  Constructor
     --------- */
-    public Drones(DroneType type) { setType(type); }
-    public Drones(DroneType type, int qtty) { 
-        setType(type);
-        setQtty(qtty);
-    }
-
+    public AtmosphereKit(AtmoKitType type) { setType(type); }
+    
     /* ---------
-     *  Drone Types
+     *  Airlock Types
     --------- */
-    public enum DroneType {
-        PROBED( 9, 0.2, 100000, "Probe Drones"),
-        ADVPRB(12, 0.2, 160000, "Advanced Probe Drones"),
-        CARGOD( 7, 0.1,  70000, "Cargo Drones"),
-        MINING( 9, 0.2, 200000, "Mining Drones"),
-        REPAIR( 9, 1  , 200000, "Repair Drones");
+    public enum AtmoKitType {
+        DM1(11, 1, 1500000, "Atmosphere Maneuver Kit (DM +1)"),
+        DM2(11, 1, 1750000, "Atmosphere Maneuver Kit (DM +2)");
         
         private final int tl;
         private final double weight;
         private final double cost;
         private final String name;
         
-        private DroneType(int tl, double wt, double ct, String nm) {
+        private AtmoKitType(int tl, double wt, double ct, String nm) {
             this.tl = tl;
             this.weight = wt;
             this.cost = ct;
@@ -49,24 +43,24 @@ public class Drones extends Items {
         public String getName() { return name; }
     }
     
-    private DroneType type;
-    public DroneType getType() { return this.type; }
-    public void setType(DroneType type) { this.type = type; }
+    private AtmoKitType type;
+    public AtmoKitType getType() { return this.type; }
+    public void setType(AtmoKitType type) { 
+        this.type = type; 
+        setOptiOn(true);
+    }
 
     /* ---------
-     *  Number of drones
-    --------- */
-    public int getQtty() { return getIntAtt(); }
-    public void setQtty(int qtty) { setIntAtt(qtty); }
-    
-    /* ---------
-     * is Option on?
+     *  Hardened Item
     --------- */
     @Override
-    public boolean isOptiOn() { return (getQtty() > 0); }
+    public double getHardened() { return hardened.getModf(); }
+    
+    @Override
+    public void setHardened(Hardened opt) { hardened = opt; }
 
     /* ---------
-    *  Tech Level
+     *  Tech Level
     --------- */
     @Override
     public int getTL() { return type.getTL(); }
@@ -75,13 +69,13 @@ public class Drones extends Items {
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() { return getQtty() * type.getWeight(); }
+    public double getWeight() { return type.getWeight(); }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() { return getQtty() * type.getCost(); }
+    public double getCost() { return (1 + getHardened()) * type.getCost(); }
 
     /* ---------
     *  Name
@@ -95,7 +89,7 @@ public class Drones extends Items {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getName()).append("{").append(getQtty());
+        sb.append(getName()).append("{").append(isOptiOn());
         if (isOptiOn()) {
             sb.append(", TL=").append(getTL());
             sb.append(", Cost=").append(getCost());

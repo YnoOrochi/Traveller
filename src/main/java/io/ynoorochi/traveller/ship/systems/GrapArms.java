@@ -11,32 +11,29 @@ import io.ynoorochi.traveller.ship.Items;
  *
  * @author PR3J
  */
-public class Drones extends Items {
+public class GrapArms extends Items {
     /* ---------
      *  Constructor
     --------- */
-    public Drones(DroneType type) { setType(type); }
-    public Drones(DroneType type, int qtty) { 
+    public GrapArms(GrapArmType type) { setType(type); }
+    public GrapArms(GrapArmType type, int qtty) { 
         setType(type);
         setQtty(qtty);
     }
-
+    
     /* ---------
-     *  Drone Types
+     *  Grapping Arms Types
     --------- */
-    public enum DroneType {
-        PROBED( 9, 0.2, 100000, "Probe Drones"),
-        ADVPRB(12, 0.2, 160000, "Advanced Probe Drones"),
-        CARGOD( 7, 0.1,  70000, "Cargo Drones"),
-        MINING( 9, 0.2, 200000, "Mining Drones"),
-        REPAIR( 9, 1  , 200000, "Repair Drones");
+    public enum GrapArmType {
+        NORML( 7, 2, 1000000, "Grappling Arms"),
+        HEAVY( 8, 6, 3000000, "Heavy Grappling Arms");
         
         private final int tl;
         private final double weight;
         private final double cost;
         private final String name;
         
-        private DroneType(int tl, double wt, double ct, String nm) {
+        private GrapArmType(int tl, double wt, double ct, String nm) {
             this.tl = tl;
             this.weight = wt;
             this.cost = ct;
@@ -49,12 +46,12 @@ public class Drones extends Items {
         public String getName() { return name; }
     }
     
-    private DroneType type;
-    public DroneType getType() { return this.type; }
-    public void setType(DroneType type) { this.type = type; }
+    private GrapArmType type;
+    public GrapArmType getType() { return this.type; }
+    public void setType(GrapArmType type) { this.type = type; }
 
     /* ---------
-     *  Number of drones
+     *  Number of items
     --------- */
     public int getQtty() { return getIntAtt(); }
     public void setQtty(int qtty) { setIntAtt(qtty); }

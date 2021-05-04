@@ -18,6 +18,7 @@ import static io.ynoorochi.traveller.ship.hull.Definitions.*;
 
 import static io.ynoorochi.traveller.ship.Definitions.Customization.*;
 import io.ynoorochi.traveller.ship.computer.Softwares;
+import io.ynoorochi.traveller.ship.hull.options.Configuration;
 import io.ynoorochi.traveller.ship.spaces.SpaceTest;
 
 /**
@@ -53,6 +54,8 @@ public class SpaceShip {
 //    private Weapons[] wPoints;
     public Systems systems;
     public SpaceTest space;
+    
+    private Configuration config;
 
     // -------------
     // calculated variables
@@ -102,7 +105,9 @@ public class SpaceShip {
                 (int) jDrive.getRating());
         this.sensors = new Sensors(tonnage);
         this.space = new SpaceTest();
-        this.systems = new Systems();
+//        hull.getItems()[0].isStreamlined();
+//        this.systems = new Systems(hull.getItems()[0].isStreamlined(), tonnage);
+        this.systems = new Systems(tonnage);
 
         this.tonnage = this.hull.getHullSize();
 

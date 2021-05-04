@@ -11,32 +11,32 @@ import io.ynoorochi.traveller.ship.Items;
  *
  * @author PR3J
  */
-public class Drones extends Items {
+public class Airlocks extends Items {
     /* ---------
      *  Constructor
     --------- */
-    public Drones(DroneType type) { setType(type); }
-    public Drones(DroneType type, int qtty) { 
+    public Airlocks(AirlockType type) { setType(type); }
+    public Airlocks(AirlockType type, int qtty) { 
         setType(type);
         setQtty(qtty);
     }
-
+    
     /* ---------
-     *  Drone Types
+     *  Airlock Types
     --------- */
-    public enum DroneType {
-        PROBED( 9, 0.2, 100000, "Probe Drones"),
-        ADVPRB(12, 0.2, 160000, "Advanced Probe Drones"),
-        CARGOD( 7, 0.1,  70000, "Cargo Drones"),
-        MINING( 9, 0.2, 200000, "Mining Drones"),
-        REPAIR( 9, 1  , 200000, "Repair Drones");
+    public enum AirlockType {
+        ADDLCK( 7, 2,  200000, "Additional Airlocks"),
+        TRAP07( 7, 0,  100000, "Booby-Trapped Airlocks (Basic)"),
+        TRAP08( 8, 0,  300000, "Booby-Trapped Airlocks (TL08)"),
+        TRAP10(10, 0,  500000, "Booby-Trapped Airlocks (TL10)"),
+        TRAP12(12, 0, 1000000, "Booby-Trapped Airlocks (TL12)");
         
         private final int tl;
         private final double weight;
         private final double cost;
         private final String name;
         
-        private DroneType(int tl, double wt, double ct, String nm) {
+        private AirlockType(int tl, double wt, double ct, String nm) {
             this.tl = tl;
             this.weight = wt;
             this.cost = ct;
@@ -49,12 +49,12 @@ public class Drones extends Items {
         public String getName() { return name; }
     }
     
-    private DroneType type;
-    public DroneType getType() { return this.type; }
-    public void setType(DroneType type) { this.type = type; }
+    private AirlockType type;
+    public AirlockType getType() { return this.type; }
+    public void setType(AirlockType type) { this.type = type; }
 
     /* ---------
-     *  Number of drones
+     *  Number of airlocks
     --------- */
     public int getQtty() { return getIntAtt(); }
     public void setQtty(int qtty) { setIntAtt(qtty); }

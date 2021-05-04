@@ -11,32 +11,32 @@ import io.ynoorochi.traveller.ship.Items;
  *
  * @author PR3J
  */
-public class Drones extends Items {
+public class DockClamps extends Items {
     /* ---------
      *  Constructor
     --------- */
-    public Drones(DroneType type) { setType(type); }
-    public Drones(DroneType type, int qtty) { 
+    public DockClamps(ClampType type) { setType(type); }
+    public DockClamps(ClampType type, int qtty) { 
         setType(type);
         setQtty(qtty);
     }
-
+    
     /* ---------
      *  Drone Types
     --------- */
-    public enum DroneType {
-        PROBED( 9, 0.2, 100000, "Probe Drones"),
-        ADVPRB(12, 0.2, 160000, "Advanced Probe Drones"),
-        CARGOD( 7, 0.1,  70000, "Cargo Drones"),
-        MINING( 9, 0.2, 200000, "Mining Drones"),
-        REPAIR( 9, 1  , 200000, "Repair Drones");
+    public enum ClampType {
+        I(  7,  1,  500000, "Docking Clamps (30t)"),
+        II( 7,  5, 1000000, "Docking Clamps (99t)"),
+        III(7, 10, 2000000, "Docking Clamps (300t)"),
+        IV( 7, 20, 4000000, "Docking Clamps (2000t)"),
+        V(  7, 50, 8000000, "Docking Clamps (any)");
         
         private final int tl;
         private final double weight;
         private final double cost;
         private final String name;
         
-        private DroneType(int tl, double wt, double ct, String nm) {
+        private ClampType(int tl, double wt, double ct, String nm) {
             this.tl = tl;
             this.weight = wt;
             this.cost = ct;
@@ -49,12 +49,12 @@ public class Drones extends Items {
         public String getName() { return name; }
     }
     
-    private DroneType type;
-    public DroneType getType() { return this.type; }
-    public void setType(DroneType type) { this.type = type; }
+    private ClampType type;
+    public ClampType getType() { return this.type; }
+    public void setType(ClampType type) { this.type = type; }
 
     /* ---------
-     *  Number of drones
+     *  Number of items
     --------- */
     public int getQtty() { return getIntAtt(); }
     public void setQtty(int qtty) { setIntAtt(qtty); }

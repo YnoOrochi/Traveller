@@ -5,83 +5,77 @@
  */
 package io.ynoorochi.traveller.ship.systems;
 
+import io.ynoorochi.traveller.ship.Definitions.Hardened;
 import io.ynoorochi.traveller.ship.Items;
 
 /**
  *
  * @author PR3J
  */
-public class Drones extends Items {
+public class CargoLoadBelt extends Items {
     /* ---------
      *  Constructor
     --------- */
-    public Drones(DroneType type) { setType(type); }
-    public Drones(DroneType type, int qtty) { 
-        setType(type);
-        setQtty(qtty);
-    }
-
+    public CargoLoadBelt(LoadBeltType type) { setType(type); }
+    
     /* ---------
-     *  Drone Types
+     *  Types
     --------- */
-    public enum DroneType {
-        PROBED( 9, 0.2, 100000, "Probe Drones"),
-        ADVPRB(12, 0.2, 160000, "Advanced Probe Drones"),
-        CARGOD( 7, 0.1,  70000, "Cargo Drones"),
-        MINING( 9, 0.2, 200000, "Mining Drones"),
-        REPAIR( 9, 1  , 200000, "Repair Drones");
+    public enum LoadBeltType {
+        TL07( 7, 1, 1,  3000, "Cargo Loading Belt (TL07)"),
+        TL11(11, 1, 1, 10000, "Cargo Loading Belt (TL11)");
         
         private final int tl;
         private final double weight;
+        private final int power;
         private final double cost;
         private final String name;
         
-        private DroneType(int tl, double wt, double ct, String nm) {
+        private LoadBeltType(int tl, double wt, int pw, double ct, String nm) {
             this.tl = tl;
             this.weight = wt;
+            this.power = pw;
             this.cost = ct;
             this.name = nm;
         }
 
         public int getTL() { return tl; }
         public double getWeight() { return weight; }
+        public int getPower() { return power; }
         public double getCost() { return cost; }
         public String getName() { return name; }
     }
     
-    private DroneType type;
-    public DroneType getType() { return this.type; }
-    public void setType(DroneType type) { this.type = type; }
+    private LoadBeltType type;
+    public LoadBeltType getType() { return this.type; }
+    public void setType(LoadBeltType type) {
+        this.type = type;
+        setOptiOn(true);
+    }
 
     /* ---------
-     *  Number of drones
-    --------- */
-    public int getQtty() { return getIntAtt(); }
-    public void setQtty(int qtty) { setIntAtt(qtty); }
-    
-    /* ---------
-     * is Option on?
-    --------- */
-    @Override
-    public boolean isOptiOn() { return (getQtty() > 0); }
-
-    /* ---------
-    *  Tech Level
+     *  Tech Level
     --------- */
     @Override
     public int getTL() { return type.getTL(); }
 
     /* ---------
+     *  Option Power
+    --------- */
+    @Override
+    public double getPower() { return type.getPower(); }
+    
+    /* ---------
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() { return getQtty() * type.getWeight(); }
+    public double getWeight() { return type.getWeight(); }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() { return getQtty() * type.getCost(); }
+    public double getCost() { return (1 + getHardened()) * type.getCost(); }
 
     /* ---------
     *  Name
@@ -95,7 +89,7 @@ public class Drones extends Items {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getName()).append("{").append(getQtty());
+        sb.append(getName()).append("{").append(isOptiOn());
         if (isOptiOn()) {
             sb.append(", TL=").append(getTL());
             sb.append(", Cost=").append(getCost());
