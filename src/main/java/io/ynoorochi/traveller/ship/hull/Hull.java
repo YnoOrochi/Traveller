@@ -5,16 +5,15 @@
  */
 package io.ynoorochi.traveller.ship.hull;
 
-import io.ynoorochi.traveller.ship.Items;
+import io.ynoorochi.traveller.ship.Groups;
 import io.ynoorochi.traveller.ship.hull.options.*;
 import static io.ynoorochi.traveller.ship.hull.Definitions.*;
-import java.util.Arrays;
 
 /**
  *
  * @author PR3J
  */
-public class Hull {
+public class Hull extends Groups {
     /* ---------
      *  Attributes
     --------- */
@@ -34,29 +33,6 @@ public class Hull {
         otherItems();
     }
     
-    /* ---------
-     *  Array Manipulation
-    --------- */
-    private Items[] itemList = {};
-    
-    public void addItem(Items item) {
-        itemList = Arrays.copyOf(itemList, itemList.length + 1);
-        itemList[itemList.length - 1] = item;
-    }
-    
-    public void delItem(Items item) {
-        int pos = Arrays.binarySearch(itemList, item);
-        if (pos >= 0) {
-            if (itemList.length > pos + 1)
-                for (int i=pos; i<itemList.length - 1; i++) {
-                    itemList[i] = itemList[i+1];
-                }
-            itemList = Arrays.copyOf(itemList, itemList.length - 1);
-        }
-    }
-
-    public Items[] getItems() { return itemList; }
-
     /* ---------
      *  Add Other Hull Equipments
     --------- */
@@ -91,6 +67,7 @@ public class Hull {
     /* ---------
     *  Method: Hull cost
     --------- */
+    @Override
     public double getCost() {
         double othr = 0;
         double modf = 0;
@@ -100,15 +77,16 @@ public class Hull {
             modf += opt.getCostModf();
         }
 
-        return getHullSize() * ((getItems()[0].getCost() * modf) + othr);
+        return getHullSize() * ((getItem(0).getCost() * modf) + othr);
     }
     
     /* ---------
     *  Hull Basic Systems Power
     *       20% of the total tonnage of the hull.
     --------- */
-    public double getPower() {
-        return 0.2 * getHullSize();
+    @Override
+    public int getPower() {
+        return (int) Math.ceil(0.2 * getHullSize());
     }
     
     /* ---------
@@ -129,20 +107,10 @@ public class Hull {
     }
     
     /* ---------
-    *  Hull TL
-    --------- */
-    public int getTL() {
-        int tl = 0;
-        for (var opt : getItems()) {
-            tl = Math.max(tl, opt.getTL());
-        }
-        return tl;
-    }
-    
-    /* ---------
     *  Hull Weight
     --------- */
-    public int getWeight() {
+    @Override
+    public double getWeight() {
         double usedTon = 0;
         for (var opt : getItems()) {
             usedTon += opt.getWeight();

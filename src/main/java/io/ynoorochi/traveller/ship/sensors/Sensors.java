@@ -5,14 +5,13 @@
  */
 package io.ynoorochi.traveller.ship.sensors;
 
-import io.ynoorochi.traveller.ship.Items;
-import java.util.Arrays;
+import io.ynoorochi.traveller.ship.Groups;
 
 /**
  *
  * @author PR3J
  */
-public class Sensors extends Items {
+public class Sensors extends Groups {
     /* ---------
      *  Constructor
     --------- */
@@ -24,27 +23,10 @@ public class Sensors extends Items {
     }
 
     /* ---------
-     *  Array Manipulation
+     * Hull Size
     --------- */
-    private Items[] itemList = {};
-    
-    public void addItem(Items item) {
-        itemList = Arrays.copyOf(itemList, itemList.length + 1);
-        itemList[itemList.length - 1] = item;
-    }
-    
-    public void delItem(Items item) {
-        int pos = Arrays.binarySearch(itemList, item);
-        if (pos >= 0) {
-            if (itemList.length > pos + 1)
-                for (int i=pos; i<itemList.length - 1; i++) {
-                    itemList[i] = itemList[i+1];
-                }
-            itemList = Arrays.copyOf(itemList, itemList.length - 1);
-        }
-    }
-
-    public Items[] getItems() { return itemList; }
+    public int getHullSize() { return getAttribute() ; }
+    public void setHullSize(int hullSize) { setAttribute(hullSize); }
 
     /* ---------
      *  Adiciona todos os sensores
@@ -60,70 +42,4 @@ public class Sensors extends Items {
         addItem(new ShallowSuite());
         addItem(new SignalProcess());
     }
-    
-    /* ---------
-    *  Tech Level
-    --------- */
-    @Override
-    public int getTL() { 
-        int tl = 0;
-        for (var sensor : getItems() ) {
-            tl = Math.max(tl, sensor.getTL());
-        }
-        return tl;
-    }
-
-    /* ---------
-    *  Power used
-    --------- */
-    @Override
-    public double getPower() { 
-        double aux = 0;
-        for (var sensor : getItems() ) {
-            aux += sensor.getPower();
-        }
-        return aux;
-    }
-
-    /* ---------
-     *  Tonnage Used by Option
-    --------- */
-    @Override
-    public double getWeight() { 
-        double aux = 0;
-        for (var sensor : getItems() ) {
-            aux += sensor.getWeight();
-        }
-        return aux;
-    }
-
-    /* ---------
-     *  Option Specific Cost
-    --------- */
-    @Override
-    public double getCost() { 
-        double aux = 0;
-        for (var sensor : getItems() ) {
-            aux += sensor.getCost();
-        }
-        return aux;
-    }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Sensors {");
-        sb.append("TL=").append(getTL());
-        sb.append(", Cost=").append(getCost());
-        sb.append(", Weight=").append(getWeight());
-        sb.append(", Power=").append(getPower());
-        sb.append("}\n");
-        for (var opt : getItems()) 
-            sb.append("    ").append(opt.toString()).append("\n");
-        return sb.toString();
-    }
-    
 }

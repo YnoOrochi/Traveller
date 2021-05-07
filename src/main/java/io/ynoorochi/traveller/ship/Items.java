@@ -59,44 +59,42 @@ public abstract class Items {
     /* ---------
     *  Tech Level
     --------- */
-    public int getTL() {
-        return 0;
-    }
+    public int getTL() { return 0; }
 
     /* ---------
     *  Power used
     --------- */
-    public double getPower() {
-        return 0;
-    }
+    public double getPower() { return 0; }
 
     /* ---------
      *  Tonnage Used by Option
     --------- */
-    public double getWeight() {
-        return 0;
-    }
+    public double getWeight() { return 0; }
     
     /* ---------
      *  Option Specific Cost
     --------- */
-    public double getCost() {
-        return 0;
-    }
+    public double getCost() { return 0; }
     
     /* ---------
     *  Option Cost Modifier
     --------- */
-    public double getCostModf() {
-        return 0;
-    }
+    public double getCostModf() { return 0; }
+
+    /* ---------
+    *  Total Life Support
+    --------- */
+    public int getLifeSupport() { return 0; }
+
+    /* ---------
+    *  Total Passengers
+    --------- */
+    public int getPassengers() { return 0; }
 
     /* ---------
     *  Option Get Name
     --------- */
-    public String getName() {
-        return this.getClass().getSimpleName();
-    }
+    public String getName() { return this.getClass().getSimpleName(); }
     
     /* ---------
     *  Auxiliar double Attribute 
@@ -109,9 +107,7 @@ public abstract class Items {
     /* ---------
     *  Auxiliar Attribute Modifier
     --------- */
-    public double getAttModf() {
-        return 0;
-    }
+    public double getAttModf() { return 0; }
 
     /* ---------
     * Auxiliar int Attribute
@@ -131,6 +127,8 @@ public abstract class Items {
         if (isOptiOn()) {
             sb.append(", TL=").append(getTL());
             sb.append(", Weight=").append(getWeight());
+            sb.append(", Life Support=").append(getLifeSupport());
+            sb.append(", Passengers=").append(getPassengers());
             sb.append(", Cost=").append(getCost());
             if (isHardened()) sb.append(", Hardened");
         }

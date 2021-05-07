@@ -124,7 +124,7 @@ public class Definitions {
         SLND("Streamlined", Yes, 0, 0.2, BSIC_COST, 1, " "),
         SPHR("Sphere", Partial, 0, -0.2, BSIC_COST, 1, " "),
         CLST("Close Structure", Partial, +0.1, -0.1, BSIC_COST, 1, " "),
-        DIST("Dispersed Structure", No, -0.1, -0.5, BSIC_COST, 1, " "),
+        DISP("Dispersed Structure", No, -0.1, -0.5, BSIC_COST, 1, " "),
         PNTD("Planetoid", No, +0.25, 0, PLNT_COST, 0.85, " "),
         BFPN("Buffered Planetoid", No, +0.5, 0, PLNT_COST, 0.65, " ");
         

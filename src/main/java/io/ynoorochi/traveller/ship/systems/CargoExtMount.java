@@ -6,7 +6,7 @@
 package io.ynoorochi.traveller.ship.systems;
 
 import io.ynoorochi.traveller.ship.Items;
-import io.ynoorochi.traveller.ship.hull.Definitions.Streamlined;
+import io.ynoorochi.traveller.ship.hull.Definitions.HullConfiguration;
 
 /**
  *
@@ -16,8 +16,8 @@ public class CargoExtMount extends Items {
     /* ---------
      *  Constructor
     --------- */
-    public CargoExtMount(Streamlined str, int qtty) {
-        setNotStreamlined(str);
+    public CargoExtMount(HullConfiguration cfg, int qtty) {
+        setValidHull(cfg);
         setQtty(qtty); 
     }
 
@@ -25,20 +25,22 @@ public class CargoExtMount extends Items {
      *  Number of tonnage
     --------- */
     public int getQtty() { return getIntAtt(); }
-    public void setQtty(int qtty) { setIntAtt(isNotStreamlined() ? qtty : 0); }
+    public void setQtty(int qtty) { setIntAtt(this.isValidHull() ? qtty : 0); }
 
     /* ---------
      *  Streamlined
     --------- */
-    private boolean notStream = true;
-    public boolean isNotStreamlined() { return this.notStream; }
-    public void setNotStreamlined(Streamlined str) { this.notStream = (str == Streamlined.No); }
+    private boolean validHull = true;
+    private boolean isValidHull() { return this.validHull; }
+    private void setValidHull(HullConfiguration cfg) { 
+        this.validHull = !(cfg == HullConfiguration.SLND || cfg == HullConfiguration.DISP); 
+    }
 
     /* ---------
      * is Option on?
     --------- */
     @Override
-    public boolean isOptiOn() { return (isNotStreamlined() && getQtty() > 0); }
+    public boolean isOptiOn() { return (isValidHull() && getQtty() > 0); }
 
     /* ---------
     *  Tech Level

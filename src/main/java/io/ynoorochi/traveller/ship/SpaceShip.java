@@ -19,7 +19,7 @@ import static io.ynoorochi.traveller.ship.hull.Definitions.*;
 import static io.ynoorochi.traveller.ship.Definitions.Customization.*;
 import io.ynoorochi.traveller.ship.computer.Softwares;
 import io.ynoorochi.traveller.ship.hull.options.Configuration;
-import io.ynoorochi.traveller.ship.spaces.SpaceTest;
+import io.ynoorochi.traveller.ship.spaces.Spaces;
 
 /**
  *
@@ -53,7 +53,7 @@ public class SpaceShip {
     public Sensors sensors;
 //    private Weapons[] wPoints;
     public Systems systems;
-    public SpaceTest space;
+    public Spaces space;
     
     private Configuration config;
 
@@ -104,10 +104,8 @@ public class SpaceShip {
                 computer.getBandwidth(),
                 (int) jDrive.getRating());
         this.sensors = new Sensors(tonnage);
-        this.space = new SpaceTest();
-//        hull.getItems()[0].isStreamlined();
-//        this.systems = new Systems(hull.getItems()[0].isStreamlined(), tonnage);
-        this.systems = new Systems(tonnage);
+        this.space = new Spaces();
+        this.systems = new Systems(((Configuration) hull.getItem("Configuration")).getConfig(), tonnage);
 
         this.tonnage = this.hull.getHullSize();
 

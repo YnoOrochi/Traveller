@@ -74,7 +74,7 @@ public class LifeScanner extends Items {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("{").append(isOptiOn());
+        sb.append(getName()).append("{").append(isOptiOn());
         if (isOptiOn()) {
             sb.append(", TL=").append(getTL());
             sb.append(", Cost=").append(getCost());

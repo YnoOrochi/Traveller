@@ -5,124 +5,51 @@
  */
 package io.ynoorochi.traveller.ship.spaces;
 
-import java.util.Arrays;
+import io.ynoorochi.traveller.ship.Groups;
 
 /**
  *
  * @author PR3J
  */
-public class Spaces {
-    /* ---------
-     *  Array Manipulation
-    --------- */
-    private SpaceItems[] itemList = {};
-    
-    public void addItem(SpaceItems item) {
-        itemList = Arrays.copyOf(itemList, itemList.length + 1);
-        itemList[itemList.length - 1] = item;
-    }
-    
-    public void delItem(SpaceItems item) {
-        int pos = Arrays.binarySearch(itemList, item);
-        if (pos >= 0) {
-            if (itemList.length > pos + 1)
-                for (int i=pos; i<itemList.length - 1; i++) {
-                    itemList[i] = itemList[i+1];
-                }
-            itemList = Arrays.copyOf(itemList, itemList.length - 1);
-        }
-    }
+public class Spaces extends Groups {
 
-    public SpaceItems[] getItems() { return itemList; }
-
-    /* ---------
-    *  Best Tech Level
-    --------- */
-    public int getTL() { 
-        int tl = 0;
-        for (var obj : getItems() ) {
-            tl = Math.max(tl, obj.getTL());
-        }
-        return tl;
-    }
-
-    /* ---------
-    *  Total Weight
-    --------- */
-    public double getWeight() { 
-        double aux = 0;
-        for (var obj : getItems() ) {
-            aux += obj.getWeight();
-        }
-        return aux;
-    }
-
-    /* ---------
-    *  Total Power
-    --------- */
-    public int getPower() { 
-        int aux = 0;
-        for (var obj : getItems() ) {
-            aux += obj.getPower();
-        }
-        return aux;
-    }
-
-    /* ---------
-    *  Total Life Support
-    --------- */
-    public int getLifeSupport() { 
-        int aux = 0;
-        for (var obj : getItems() ) {
-            aux += obj.getLifeSupport();
-        }
-        return aux;
-    }
-
-    /* ---------
-    *  Total Passengers
-    --------- */
-    public int getPassengers() { 
-        int aux = 0;
-        for (var obj : getItems() ) {
-            aux += obj.getPassengers();
-        }
-        return aux;
-    }
-
-    /* ---------
-    *  Total Cost
-    --------- */
-    public double getCost() { 
-        double aux = 0;
-        for (var obj : getItems() ) {
-            aux += obj.getCost();
-        }
-        return aux;
-    }
-
-    /* ---------
-    *  Option Get Name
-    --------- */
-    public String getName() {
-        return this.getClass().getSimpleName();
-    }
-    
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getName()).append("{");
-        sb.append("TL=").append(getTL());
-        sb.append(", Weight=").append(getWeight());
-        sb.append(", Life Support=").append(getLifeSupport());
-        sb.append(", Passengers=").append(getPassengers());
-        sb.append(", Cost=").append(getCost());
-        sb.append("}\n");
-        for (var room : getItems()) 
-            sb.append("    ").append(room.toString()).append("\n");
-        return sb.toString();
+    public Spaces() {
+        /* Passenger Spaces */
+        addItem(new SpaceItems(Definitions.RoomType.LBERTH, 0));
+        addItem(new SpaceItems(Definitions.RoomType.EBERTH, 0));
+        addItem(new SpaceItems(Definitions.RoomType.CABINS, 0));
+        addItem(new SpaceItems(Definitions.RoomType.SROOMS, 0));
+        addItem(new SpaceItems(Definitions.RoomType.DROOMS, 0));
+        addItem(new SpaceItems(Definitions.RoomType.HROOMS, 0));
+        addItem(new SpaceItems(Definitions.RoomType.LROOMS, 0));
+        addItem(new SpaceItems(Definitions.RoomType.PSYONS, 0));
+        addItem(new SpaceItems(Definitions.RoomType.ABENCH, 0));
+        addItem(new SpaceItems(Definitions.RoomType.ASEATS, 0));
+        addItem(new SpaceItems(Definitions.RoomType.BARRCK, 0));
+        addItem(new SpaceItems(Definitions.RoomType.BRIG06, 0));
+        /* Docks */
+        addItem(new SpaceItems(Definitions.RoomType.DOCKSP, 0));
+        addItem(new SpaceItems(Definitions.RoomType.DOCKSP, 0));
+        addItem(new SpaceItems(Definitions.RoomType.HANGAR, 0));
+        /* Other Spaces */
+        addItem(new SpaceItems(Definitions.RoomType.ARMORY, 0));
+        addItem(new SpaceItems(Definitions.RoomType.BIOSPH, 0));
+        addItem(new SpaceItems(Definitions.RoomType.BRIEFG, 0));
+        addItem(new SpaceItems(Definitions.RoomType.COMMON, 0));
+        addItem(new SpaceItems(Definitions.RoomType.CNCEAL, 0));
+        addItem(new SpaceItems(Definitions.RoomType.CTDECK, 0));
+        addItem(new SpaceItems(Definitions.RoomType.GAMING, 0));
+        addItem(new SpaceItems(Definitions.RoomType.GRAVSC, 0));
+        addItem(new SpaceItems(Definitions.RoomType.LABTRY, 0));
+        addItem(new SpaceItems(Definitions.RoomType.LBRARY, 0));
+        addItem(new SpaceItems(Definitions.RoomType.MEDBAY, 0));
+        addItem(new SpaceItems(Definitions.RoomType.MENVSP, 0));
+        addItem(new SpaceItems(Definitions.RoomType.RECOVR, 0));
+        addItem(new SpaceItems(Definitions.RoomType.STABLE, 0));
+        addItem(new SpaceItems(Definitions.RoomType.STUDIO, 0));
+        addItem(new SpaceItems(Definitions.RoomType.TRAINF, 0));
+        addItem(new SpaceItems(Definitions.RoomType.UNREPS, 0));
+        addItem(new SpaceItems(Definitions.RoomType.VAULTS, 0));
+        addItem(new SpaceItems(Definitions.RoomType.WRKSHP, 0));
     }
 }

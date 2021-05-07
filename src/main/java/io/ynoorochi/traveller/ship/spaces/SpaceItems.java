@@ -59,13 +59,15 @@ public class SpaceItems extends Items {
     /* ---------
      *  Option Life Support
     --------- */
-    public double getLifeSupport() { return getQtty() * getRoomType().getLfSup();
+    @Override
+    public int getLifeSupport() { return getQtty() * getRoomType().getLfSup();
     }
     
     /* ---------
      *  Option Passenger
     --------- */
-    public double getPassengers() { return getQtty() * getRoomType().getPassengers(); }
+    @Override
+    public int getPassengers() { return getQtty() * getRoomType().getPassengers(); }
     
     /* ---------
      *  Option Cost
