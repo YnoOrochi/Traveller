@@ -5,14 +5,13 @@
  */
 package io.ynoorochi.traveller.ship.fuel;
 
-import io.ynoorochi.traveller.ship.Items;
 import io.ynoorochi.traveller.ship.equip.Definitions.*;
 
 /**
  *
  * @author PR3J
  */
-public class MnvTank extends Items {
+public class MnvTank extends FuelItems {
     /* ---------
     *  Constructor
     --------- */
@@ -24,28 +23,29 @@ public class MnvTank extends Items {
 
         setOptiOn(true);
     }
- 
+
     /* ---------
     *  JDrive Rating
     --------- */
-    public double getThrust() {
-        return getAttribute();
-    }
-    
-    public void setThrust(double thrust) {
-        if (thrust >= 0) setAttribute(thrust);
-    }
+    public double getThrust() { return getDblAtt(); }
+    public void setThrust(double thrust) { setDblAtt(thrust >= 0 ? thrust : 0); }
 
     /* ---------
     *  Autonomy
     --------- */
-    public int getAutonomy() {
-        return getIntAtt();
+    public int getAutonomy() { return getIntAtt(); }
+    public void setAutonomy(int hours) { setIntAtt(hours >= 0 ? hours : 0); }
+
+    /* ---------
+     *  Tank Size (ton)
+    --------- */
+    @Override
+    public int getSize() { 
+        return (int) getBaseWeight(getDrive(), getThrust(), getAutonomy(), getHullSize());
     }
-    
-    public void setAutonomy(int hours) {
-        if (hours >= 0) setIntAtt(hours);
-    }
+
+    @Override
+    public void setSize(int size) { }
 
     /* ---------
     *  Maneuver Fuel
@@ -53,19 +53,19 @@ public class MnvTank extends Items {
     *       Reaction drive: 2.5% of ship tonnage per Thrust per hour
     --------- */
     @Override
-    public double getWeight() {
+    public double getBaseWeight() {
         if (getDrive() == MDriveTypes.Reaction)
-            return Math.ceil(0.025 * getHullSize() * getThrust() * getAutonomy());
+            return Math.ceil(0.025 * getThrust() * getAutonomy() * getHullSize());
         else return 0;
     }
-    
-    public double getWeight(MDriveTypes type, double thrust, int hours, int hullSize) {
+
+    protected double getBaseWeight(MDriveTypes type, double thrust, int hours, int hullSize) {
         this.setDrive(type);
         this.setThrust(thrust);
         this.setHullSize(hullSize);
         this.setAutonomy(hours);
-        
-        return getWeight();
+
+        return getBaseWeight();
     }
 
     /* ---------
@@ -85,22 +85,20 @@ public class MnvTank extends Items {
     *  Drive type
     --------- */
     private MDriveTypes type;
-
-    public MDriveTypes getDrive() {
-        return this.type;
-    }
-
-    public void setDrive(MDriveTypes type) {
-        this.type = type;
-    }
+    public MDriveTypes getDrive() { return this.type; }
+    public void setDrive(MDriveTypes type) { this.type = type; }
 
     /* ---------
     *  is Option on?
     --------- */
     @Override
-    public boolean isOptiOn() {
-        return getThrust() > 0;
-    }
+    public boolean isOptiOn() { return getThrust() > 0; }
+
+    /* ---------
+     *  Fuel Tank Cost
+    --------- */
+    @Override
+    protected double getBaseCost() { return 0; }
 
     /* ---------
     *  toString
@@ -108,10 +106,12 @@ public class MnvTank extends Items {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("MnvTank{weight=").append(getWeight());
+        sb.append("MnvTank{Size=").append(getSize());
+        if (getDrive() == MDriveTypes.Reaction) sb.append(", weight=").append(getWeight());
         if (getDrive() == MDriveTypes.Reaction) sb.append(", thrust=").append(getThrust());
         if (getDrive() == MDriveTypes.Reaction) sb.append(" per ").append(getAutonomy()).append("h");
         if (getDrive() == MDriveTypes.Reaction) sb.append(", CTP=").append(getThrustPoints());
+        if (isArmoured()) sb.append(", Armoured Bulkheaded");
         sb.append('}');
         return sb.toString();
     }

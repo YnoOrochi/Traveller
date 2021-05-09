@@ -23,12 +23,6 @@ public class Sensors extends Groups {
     }
 
     /* ---------
-     * Hull Size
-    --------- */
-    public int getHullSize() { return getAttribute() ; }
-    public void setHullSize(int hullSize) { setAttribute(hullSize); }
-
-    /* ---------
      *  Adiciona todos os sensores
     --------- */
     private void otherItems() {

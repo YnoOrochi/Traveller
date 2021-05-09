@@ -5,13 +5,11 @@
  */
 package io.ynoorochi.traveller.ship.fuel;
 
-import io.ynoorochi.traveller.ship.Items;
-
 /**
  *
  * @author PR3J
  */
-public class JmpTank extends Items{
+public class JmpTank extends FuelItems{
     /* ---------
     *  Constructor
     --------- */
@@ -19,31 +17,32 @@ public class JmpTank extends Items{
         this.setHullSize(hullSize);
         this.setRating(rating);
         this.setJumps(jumps);
-        
+
         setOptiOn(true);
     }
 
     /* ---------
     *  JDrive Rating
     --------- */
-    public double getRating() {
-        return getAttribute();
-    }
-    
-    public void setRating(double rating) {
-        if (rating >= 0) setAttribute(rating);
-    }
+    protected double getRating() { return getDblAtt(); }
+    public void setRating(double rating) { setDblAtt(rating >= 0 ? rating : 0); }
 
     /* ---------
     *  Intended Jumps
     --------- */
-    public int getJumps() {
-        return getIntAtt();
+    public int getJumps() { return getIntAtt(); }
+    public void setJumps(int jumps) { setIntAtt(jumps >= 0 ? jumps : 0); }
+
+    /* ---------
+     *  Tank Size (ton)
+    --------- */
+    @Override
+    public int getSize() { 
+        return (int) getBaseWeight(getRating(), getJumps(), getHullSize());
     }
-    
-    public void setJumps(int jumps) {
-        if (jumps >= 0) setIntAtt(jumps);
-    }
+
+    @Override
+    public void setSize(int size) { }
 
     /* ---------
      *  Jump Fuel
@@ -51,17 +50,23 @@ public class JmpTank extends Items{
      *       maximum jump score of the drive, per jump.
     --------- */
     @Override
-    public double getWeight() {
-        return Math.ceil(0.1 * getHullSize() * getRating() * getJumps());
+    public double getBaseWeight() {
+        return Math.ceil(0.1 * getRating() * getJumps() * getHullSize());
     }
 
-    public double getWeight(double rating, int jumps, int hullSize) {
+    protected double getBaseWeight(double rating, int jumps, int hullSize) {
         this.setHullSize(hullSize);
         this.setRating(rating);
         this.setJumps(jumps);
 
-        return getWeight();
+        return getBaseWeight();
     }
+
+    /* ---------
+     *  Fuel Tank Cost
+    --------- */
+    @Override
+    protected double getBaseCost() { return 0; }
 
     /* ---------
     *  toString
@@ -69,8 +74,10 @@ public class JmpTank extends Items{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("JmpTank{weight=").append(getWeight());
+        sb.append("JmpTank{Size=").append(getSize());
+        sb.append(", weight=").append(getWeight());
         sb.append(", Jumps/").append(getRating()).append("=").append(getJumps());
+        if (isArmoured()) sb.append(", Armoured Bulkheaded");
         sb.append('}');
         return sb.toString();
     }

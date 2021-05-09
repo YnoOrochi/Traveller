@@ -27,35 +27,17 @@ public class BreachTube extends Items {
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() { return 3; }
+    public double getBaseWeight() { return 3; }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() { return 3000000; }
+    public double getBaseCost() { return 3000000; }
 
     /* ---------
      *  Option Name
     --------- */
     @Override
     public String getName() { return "Breaching Tube"; }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getName()).append("{").append(isOptiOn());
-        if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
-            sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
-            if (isHardened()) sb.append(", Hardened");
-        }
-        sb.append('}');
-        return sb.toString();
-    }
 }

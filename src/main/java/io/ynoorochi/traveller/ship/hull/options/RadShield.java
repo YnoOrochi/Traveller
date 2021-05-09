@@ -17,19 +17,19 @@ public class RadShield extends Items {
     *  Tech Level
     --------- */
     @Override
-    public int getTL() {
-        if (isOptiOn()) return 7;
-        else return 0;
-    }
+    public int getTL() { return isOptiOn() ? 7 : 0; }
     
     /* ---------
-    *  Option Specific Cost
+     *  Tonnage Used by Option
     --------- */
     @Override
-    public double getCost() {
-        if (isOptiOn()) return 25000;
-        else return 0;
-    }
+    public double getBaseWeight() { return 0; }
+
+    /* ---------
+    *  Option Cost
+    --------- */
+    @Override
+    public double getBaseCost() { return isOptiOn() ? 25000 : 0; }
 
     /* ---------
     *  toString

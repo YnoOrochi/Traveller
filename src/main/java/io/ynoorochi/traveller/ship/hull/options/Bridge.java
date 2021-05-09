@@ -27,11 +27,7 @@ public class Bridge extends Items {
     *       Instead of a bridge, ships of 50 tons or less may install a cockpit.
     --------- */
     private BridgeTypes type = Normal;
-
-    public BridgeTypes getType() {
-        return this.type;
-    }
-
+    public BridgeTypes getType() { return this.type; }
     public boolean setType(BridgeTypes type) {
         this.type = type;
         switch (type) {
@@ -54,7 +50,7 @@ public class Bridge extends Items {
     *       A ship can have a bridge one size smaller than in the Bridges table
     --------- */
     @Override
-    public double getWeight() {
+    public double getBaseWeight() {
         final int[] bgSizes = { 3,  3,  6, 10, 20, 40, 60 };
         final int[] detach = { 15, 15, 15, 15, 30, 50, 70 };
         int pos = 0;
@@ -85,7 +81,7 @@ public class Bridge extends Items {
     *       Otherwise the cost is MCr0.5 per 100 tons (or part of) of the ship
     --------- */
     @Override
-    public double getCost() {
+    public double getBaseCost() {
         int modf = 1;
         int optCost = 0;
         if (isDetach()) optCost += 300000 * Math.ceil(getHullSize());
@@ -107,40 +103,21 @@ public class Bridge extends Items {
     *  Bridge Option: Detachable
     --------- */
     private boolean detachable = false;
-            
-    public boolean isDetach() {
-        return this.detachable;
-    }
-    
-    public void setDetach(boolean opt) {
-        this.detachable = opt;
-    }
+    public boolean isDetach() { return this.detachable; }
+    public void setDetach(boolean opt) { this.detachable = opt; }
     
     /* ---------
     *  Bridge Option: Holographic Controls
     --------- */
     private boolean holographic = false ;
-    
-    public boolean isHolog() {
-        return this.holographic;
-    }
-    
-    public void setHolog(boolean opt) {
-        this.holographic = opt;
-    }
+    public boolean isHolog() { return this.holographic; }
+    public void setHolog(boolean opt) { this.holographic = opt; }
     
     /* ---------
     *  Bridge Option: Sensor Stations
     --------- */
-    private int sStations = 0;
-    
-    public int getSStations() {
-        return this.sStations;
-    }
-    
-    public void setSStations(int n) {
-        this.sStations = n;
-    }
+    public int getSStations() { return getIntAtt(); }
+    public void setSStations(int n) { setIntAtt(n); }
     
     /* ---------
     *  toString
@@ -151,6 +128,8 @@ public class Bridge extends Items {
         sb.append(this.getClass().getSimpleName()).append("(").append(getType());
         sb.append(", Weight=").append(getWeight());
         sb.append(", Cost=").append(getCost());
+        if (isHardened()) sb.append(", Hardened");
+        if (isArmoured()) sb.append(", Armoured Bulkheaded");
         if (isDetach()) sb.append(", Detachable");
         if (isHolog()) sb.append(", Holographic Controls");
         if (getSStations() > 0) sb.append(", Sensor Stations=").append(getSStations());

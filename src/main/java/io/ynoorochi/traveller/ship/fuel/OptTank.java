@@ -5,8 +5,9 @@
  */
 package io.ynoorochi.traveller.ship.fuel;
 
+import io.ynoorochi.traveller.ship.systems.FuelProcessor;
+import io.ynoorochi.traveller.ship.systems.FuelScoop;
 import io.ynoorochi.traveller.ship.Groups;
-import java.util.Arrays;
 
 /**
  *
@@ -18,11 +19,8 @@ public class OptTank extends Groups {
     --------- */
     public OptTank() {
         addItem(new Hidden());
-        addItem(new MHydride());
         addItem(new Collapsible());
         addItem(new Demountable());
         addItem(new Drop());
-        addItem(new Processor());
-        addItem(new Scoop());
     }
 }

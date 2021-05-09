@@ -11,45 +11,40 @@ import io.ynoorochi.traveller.ship.Items;
  *
  * @author PR3J
  */
-public class CargoJumpNet extends Items {
+public class FuelProcessor extends Items {
     /* ---------
      *  Constructor
     --------- */
-    public CargoJumpNet(int qtty) { setQtty(qtty); }
+    public FuelProcessor() { setSize(0); }
+    public FuelProcessor(int size) { setSize(size); }
 
     /* ---------
-     *  Number of tonnage
+    *  Processor Size 
+    *       per 20 ton / day
     --------- */
-    public int getQtty() { return getIntAtt(); }
-    public void setQtty(int qtty) { setIntAtt(qtty); }
+    public double getSize() { return getDblAtt(); }
+    public void setSize(double size) { if (size >= 0) setDblAtt(size); }
 
     /* ---------
-     * is Option on?
-    --------- */
-    @Override
-    public boolean isOptiOn() { return (getQtty() > 0); }
-
-    /* ---------
-    *  Tech Level
+     *  is Option on?
     --------- */
     @Override
-    public int getTL() { return 10; }
+    public boolean isOptiOn() { return getSize() > 0; }
 
     /* ---------
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getBaseWeight() { return getQtty(); }
+    public double getBaseWeight() { return getSize(); }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getBaseCost() { return 300000 * getQtty(); }
+    public double getBaseCost() { return 50000 * getSize(); }
 
     /* ---------
-     *  Option Name
+    *  Option Get Name
     --------- */
-    @Override
-    public String getName() { return "Cargo Jump Net (per 100t)"; }
+    public String getName() { return "Fuel Processor (per 20t day)"; }
 }

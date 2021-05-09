@@ -23,10 +23,16 @@ public class HeatShield extends Items {
     }
     
     /* ---------
-    *  Option Specific Cost
+     *  Tonnage Used by Option
     --------- */
     @Override
-    public double getCost() {
+    public double getBaseWeight() { return 0; }
+
+    /* ---------
+     *  Option Cost
+    --------- */
+    @Override
+    public double getBaseCost() {
         if (isOptiOn()) return 100000;
         else return 0;
     }

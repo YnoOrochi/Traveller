@@ -6,14 +6,24 @@
 package io.ynoorochi.traveller.ship.spaces;
 
 import io.ynoorochi.traveller.ship.Groups;
+import io.ynoorochi.traveller.ship.systems.ConfigurablePod;
 
 /**
  *
  * @author PR3J
  */
 public class Spaces extends Groups {
-
+    /* ---------
+     *  Constructor
+    --------- */
     public Spaces() {
+        otherItems();
+    }
+    
+    /* ---------
+     *  Add all Available Spaces for test
+    --------- */
+    private void otherItems() {
         /* Passenger Spaces */
         addItem(new SpaceItems(Definitions.RoomType.LBERTH, 0));
         addItem(new SpaceItems(Definitions.RoomType.EBERTH, 0));
@@ -51,5 +61,47 @@ public class Spaces extends Groups {
         addItem(new SpaceItems(Definitions.RoomType.UNREPS, 0));
         addItem(new SpaceItems(Definitions.RoomType.VAULTS, 0));
         addItem(new SpaceItems(Definitions.RoomType.WRKSHP, 0));
+    }
+
+    /* ---------
+    *  TotalLifeSupport
+    --------- */
+    public int getLifeSupport() { 
+        int aux = 0;
+        SpaceItems sItem;
+        for (var obj : getItems() ) { 
+            sItem = (SpaceItems) obj;
+            aux += sItem.getLifeSupport(); }
+        return aux;
+    }
+
+    /* ---------
+    *  Total Passengers
+    --------- */
+    public int getPassengers() { 
+        int aux = 0;
+        SpaceItems sItem;
+        for (var obj : getItems() ) { 
+            sItem = (SpaceItems) obj;
+            aux += sItem.getPassengers(); }
+        return aux;
+    }
+
+    /* ---------
+     *  toString
+    --------- */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getName()).append("{");
+        sb.append("TL=").append(getTL());
+        sb.append(", Weight=").append(getWeight());
+        sb.append(", Life Support=").append(getLifeSupport());
+        sb.append(", Passengers=").append(getPassengers());
+        sb.append(", Cost=").append(getCost());
+        sb.append("}");
+        for (var obj : getItems()) 
+            sb.append("\n    ").append(obj.toString());
+        return sb.toString();
     }
 }

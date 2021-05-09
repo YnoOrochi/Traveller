@@ -28,57 +28,45 @@ public class Configuration extends Items {
     *  Specific Methods
     --------- */
     private HullConfiguration config = STRD;
-
-    public HullConfiguration getConfig() {
-        return config;
-    }
-
-    public void setConfig(HullConfiguration config) {
-        this.config = config;
-    }
+    public HullConfiguration getConfig() { return config; }
+    public void setConfig(HullConfiguration config) { this.config = config; }
     
     /* Streamlined ? */
-    public Streamlined isStreamlined() {
-        return this.config.getStrLined();
-    }
+    public Streamlined isStreamlined() { return this.config.getStrLined(); }
 
     /* ---------
     *  is not standard?
     --------- */
     @Override
-    public boolean isOptiOn() {
-        return this.config != STRD;
-    }
+    public boolean isOptiOn() { return this.config != STRD; }
     
     /* ---------
     *  Define the basic cost of hull
     --------- */
     @Override
-    public double getCost() {
-        return this.config.getCost();
-    }
+    public double getCost() { return this.config.getCost(); }
     
     /* ---------
     *  Option Specific Cost Modifier
     --------- */
     @Override
-    public double getCostModf() {
-        return this.config.getCostModf();
-    }
+    public double getCostModf() { return this.config.getCostModf(); }
 
     /* Hull Points Modifier */
     @Override
-    public double getAttModf() {
-        return this.config.getHPModf();
-    }
+    public double getAttModf() { return this.config.getHPModf(); }
     
     /* ---------
     *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
-        return (1 - this.config.getUseable()) * getHullSize();
-    }
+    public double getBaseWeight() { return (1 - this.config.getUseable()) * getHullSize(); }
+
+    /* ---------
+    *  Option Cost
+    --------- */
+    @Override
+    public double getBaseCost() { return 0; }
 
     /* ---------
     *  toString

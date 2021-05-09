@@ -5,46 +5,26 @@
  */
 package io.ynoorochi.traveller.ship.fuel;
 
-import io.ynoorochi.traveller.ship.Items;
-
 /**
  *
  * @author PR3J
  */
-public class Collapsible extends Items {
-    
+public class Collapsible extends FuelItems {
     /* ---------
-    *  Tank Size (ton)
+     *  Constructor
     --------- */
-    public double getSize() {
-        return getAttribute();
-    }
+    public Collapsible() { setSize(0); }
+    public Collapsible(int size) { setSize(size); }
     
-    public void setSize(double size) {
-        setAttribute(size);
-    }
-
-    /* ---------
-    *  is Option on?
-    --------- */
-    @Override
-    public boolean isOptiOn() {
-        return getSize() > 0;
-    }
-
     /* ---------
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
-        return 0.01 * getSize();
-    }
+    protected double getBaseWeight() { return 0.01 * getSize(); }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        return 1000 * getSize();
-    }
+    protected double getBaseCost() { return 1000 * getSize(); }
 }

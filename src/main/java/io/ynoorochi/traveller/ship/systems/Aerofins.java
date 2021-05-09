@@ -30,29 +30,11 @@ public class Aerofins extends Items {
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() { return getHullSize() / 20; }
+    public double getBaseWeight() { return getHullSize() / 20; }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() { return 100000 * getWeight(); }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getName()).append("{").append(isOptiOn());
-        if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
-            sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
-            if (isHardened()) sb.append(", Hardened");
-        }
-        sb.append('}');
-        return sb.toString();
-    }
+    public double getBaseCost() { return 100000 * getWeight(); }
 }

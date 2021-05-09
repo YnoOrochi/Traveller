@@ -6,7 +6,6 @@
 package io.ynoorochi.traveller.ship;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,37 +13,13 @@ import java.util.List;
  *
  * @author PR3J
  */
-public class Groups {
-//    /* ---------
-//     *  Items Manipulation - Arrays
-//    --------- */
-//    private Items[] itemList = {};
-//    
-//    public void addItem(Items item) {
-//        itemList = Arrays.copyOf(itemList, itemList.length + 1);
-//        itemList[itemList.length - 1] = item;
-//    }
-//    
-//    public void delItem(Items item) {
-//        int pos = Arrays.binarySearch(itemList, item);
-//        if (pos >= 0) {
-//            if (itemList.length > pos + 1)
-//                for (int i=pos; i<itemList.length - 1; i++) {
-//                    itemList[i] = itemList[i+1];
-//                }
-//            itemList = Arrays.copyOf(itemList, itemList.length - 1);
-//        }
-//    }
-//
-//    public Items[] getItems() { return itemList; }
-//    public Items getItem(int index) { return itemList[index]; }
-
+public class Groups extends Items {
     /* ---------
      *  Items Manipulation - Lists
     --------- */
     private List<Items> itemList = new ArrayList<>();
-    public <S> void addItem(Items item) { this.itemList.add(item); }
-    public <S> void delItem(Items item) { this.itemList.remove(item); }
+    public void addItem(Items item) { this.itemList.add(item); }
+    public void delItem(Items item) { this.itemList.remove(item); }
     public List<Items> getItems() { return itemList; }
     
     /* Get one specific item ... */
@@ -59,15 +34,9 @@ public class Groups {
     }
     
     /* ---------
-     * Attribute
-    --------- */
-    private int attribute;
-    protected int getAttribute() { return this.attribute; }
-    protected void setAttribute(int hullSize) { this.attribute = attribute; }
-
-    /* ---------
     *  Best Tech Level
     --------- */
+    @Override
     public int getTL() { 
         int tl = 0;
         for (var obj : getItems() ) { tl = Math.max(tl, obj.getTL()); }
@@ -77,7 +46,8 @@ public class Groups {
     /* ---------
     *  Total Weight
     --------- */
-    public double getWeight() { 
+    @Override
+    protected double getBaseWeight() { 
         double aux = 0;
         for (var obj : getItems() ) { aux += obj.getWeight(); }
         return aux;
@@ -86,7 +56,8 @@ public class Groups {
     /* ---------
     *  Total Power
     --------- */
-    public int getPower() { 
+    @Override
+    public double getPower() { 
         int aux = 0;
         for (var obj : getItems() ) { aux += obj.getPower(); }
         return aux;
@@ -95,17 +66,13 @@ public class Groups {
     /* ---------
     *  Total Cost
     --------- */
-    public double getCost() { 
+    @Override
+    protected double getBaseCost() { 
         double aux = 0;
         for (var obj : getItems() ) { aux += obj.getCost(); }
         return aux;
     }
 
-    /* ---------
-    *  Option Get Name
-    --------- */
-    public String getName() { return this.getClass().getSimpleName(); }
-    
     /* ---------
      *  toString
     --------- */
@@ -115,10 +82,11 @@ public class Groups {
         sb.append(this.getName()).append("{");
         sb.append("TL=").append(getTL());
         sb.append(", Weight=").append(getWeight());
+        sb.append(", Power=").append(getPower());
         sb.append(", Cost=").append(getCost());
-        sb.append("}\n");
+        sb.append("}");
         for (var obj : getItems()) 
-            sb.append("    ").append(obj.toString()).append("\n");
+            sb.append("\n    ").append(obj.toString());
         return sb.toString();
     }
 }

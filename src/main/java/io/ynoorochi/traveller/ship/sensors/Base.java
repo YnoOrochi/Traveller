@@ -5,7 +5,6 @@
  */
 package io.ynoorochi.traveller.ship.sensors;
 
-import io.ynoorochi.traveller.ship.Definitions.Hardened;
 import io.ynoorochi.traveller.ship.Items;
 import io.ynoorochi.traveller.ship.sensors.Definitions.SensorTypes;
 import static io.ynoorochi.traveller.ship.sensors.Definitions.SensorTypes.*;
@@ -26,11 +25,7 @@ public class Base extends Items {
     *  type
     --------- */
     private SensorTypes type = Basic;
-    
-    public SensorTypes getType () {
-        return this.type;
-    }
-    
+    public SensorTypes getType () { return this.type; }
     public void setType(SensorTypes type) {
         this.type = type;
         super.setOptiOn(type != Basic);
@@ -40,42 +35,31 @@ public class Base extends Items {
     *  setOptiOn
     --------- */
     @Override
-    public boolean setOptiOn(boolean opt) {
-        setType(Basic);
-        return true;
-    }
+    public void setOptiOn(boolean opt) { setType(Basic); }
 
     /* ---------
     *  Tech Level
     --------- */
     @Override
-    public int getTL() {
-        return type.getTl();
-    }
+    public int getTL() { return type.getTl(); }
     
     /* ---------
     *  Power used
     --------- */
     @Override
-    public double getPower() {
-        return type.getPower();
-    }
+    public double getPower() { return type.getPower(); }
 
     /* ---------
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
-        return type.getWeight();
-    }
+    public double getBaseWeight() { return type.getWeight(); }
 
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        return (1 + getHardened()) * type.getCost();
-    }
+    public double getBaseCost() { return type.getCost(); }
 
     /* ---------
      *  toString
@@ -90,6 +74,7 @@ public class Base extends Items {
             sb.append(", Weight=").append(getWeight());
             sb.append(", Power=").append(getPower());
             if (isHardened()) sb.append(", Hardened");
+            if (isArmoured()) sb.append(", Armoured Bulkheaded");
         }
         sb.append(", DM=").append(type.getDmModf());
         sb.append(", Type=").append(type.getEquips());

@@ -51,15 +51,6 @@ public class AtmosphereKit extends Items {
     }
 
     /* ---------
-     *  Hardened Item
-    --------- */
-    @Override
-    public double getHardened() { return hardened.getModf(); }
-    
-    @Override
-    public void setHardened(Hardened opt) { hardened = opt; }
-
-    /* ---------
      *  Tech Level
     --------- */
     @Override
@@ -69,35 +60,17 @@ public class AtmosphereKit extends Items {
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() { return type.getWeight(); }
+    public double getBaseWeight() { return type.getWeight(); }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() { return (1 + getHardened()) * type.getCost(); }
+    public double getBaseCost() { return type.getCost(); }
 
     /* ---------
     *  Name
     --------- */
     @Override
     public String getName() { return type.getName(); }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getName()).append("{").append(isOptiOn());
-        if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
-            sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
-            if (isHardened()) sb.append(", Hardened");
-        }
-        sb.append('}');
-        return sb.toString();
-    }
 }

@@ -5,9 +5,6 @@
  */
 package io.ynoorochi.traveller.ship.computer;
 
-import io.ynoorochi.traveller.ship.Definitions.Hardened;
-import static io.ynoorochi.traveller.ship.Definitions.Hardened.HARDENED;
-import static io.ynoorochi.traveller.ship.Definitions.Hardened.NOTHARDENED;
 import io.ynoorochi.traveller.ship.Items;
 import io.ynoorochi.traveller.ship.computer.Definitions.Computers;
 import static io.ynoorochi.traveller.ship.computer.Definitions.Computers.*;
@@ -46,33 +43,30 @@ public class Computer extends Items {
      * setOptiOn
     --------- */
     @Override
-    public boolean setOptiOn(boolean opt) {
-        setType(COMP05);
-        return true;
-    }
+    public void setOptiOn(boolean opt) { setType(COMP05); }
 
     /* ---------
      * Tech Level
     --------- */
     @Override
-    public int getTL() {
-        return type.getTL();
-    }
+    public int getTL() { return type.getTL(); }
+
+    /* ---------
+     *  Tonnage Used by Option
+    --------- */
+    @Override
+    protected double getBaseWeight() { return 0; };
 
     /* ---------
      * Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        return (1 + getHardened() + getBISModf()) * type.getCost();
-    }
+    protected double getBaseCost() { return (1 + getBISModf()) * type.getCost(); }
 
     /* ---------
      * Computer Bandwidth
     --------- */
-    public int getBandwidth() {
-        return type.getBandwidth();
-    }
+    public int getBandwidth() { return type.getBandwidth(); }
     
     /* ---------
      * Jump Drive Rating
@@ -99,13 +93,10 @@ public class Computer extends Items {
     }
     
     /* ---------
-     *  Hardened Computer (/fib)
+     *  Hardened Computer (/fib) - don´t check power > 0
     --------- */
     @Override
-    public double getHardened() { return this.hardened.getModf(); }
-    
-    @Override
-    public void setHardened(Hardened opt) { this.hardened = opt; }
+    public void setHardened(boolean opt) { this.hardened = opt; }
     
     /* ---------
      * Jump Control Specialisation (/bis)

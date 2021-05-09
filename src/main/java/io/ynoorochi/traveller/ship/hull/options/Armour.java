@@ -18,14 +18,8 @@ public class Armour extends Items {
     *  Armour Type
     --------- */
     private ArmourOptions type = NONE;
-    
-    public ArmourOptions getType() {
-        return this.type;
-    }
-    
-    public void setType(ArmourOptions armour) {
-        this.type = armour;
-    }
+    public ArmourOptions getType() { return this.type; }
+    public void setType(ArmourOptions armour) { this.type = armour; }
 
     /* ---------
     *  Armour Points
@@ -58,21 +52,22 @@ public class Armour extends Items {
     *  Armour TL
     --------- */
     @Override
-    public int getTL() {
-        return Math.max(getType().getBaseTL(), getArmourMax());
-    }
+    public int getTL() { return Math.max(getType().getBaseTL(), getArmourMax()); }
     
     /* ---------
     *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
+    public double getBaseWeight() {
         return armourPoints * getType().getWeight() * getHullSize();
     }
 
     /* ---------
-    *  Option Specific Cost
+     *  Option Cost
     --------- */
+    @Override
+    public double getBaseCost() {  return 0; }
+
     @Override
     public double getCostModf() {
         return armourPoints * getType().getCostModf();
@@ -82,9 +77,7 @@ public class Armour extends Items {
     *  is not 0?
     --------- */
     @Override
-    public boolean isOptiOn() {
-        return this.armourPoints > 0;
-    }
+    public boolean isOptiOn() { return this.armourPoints > 0; }
 
     /* ---------
     *  toString

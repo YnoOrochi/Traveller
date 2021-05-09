@@ -18,11 +18,7 @@ public class SignalProcess extends Items {
     *  type
     --------- */
     private SignalProcessing type = Basic;
-    
-    public SignalProcessing getType () {
-        return this.type;
-    }
-    
+    public SignalProcessing getType () { return this.type; }
     public void setType(SignalProcessing type) {
         this.type = type;
         super.setOptiOn(type != Basic);
@@ -32,41 +28,31 @@ public class SignalProcess extends Items {
     *  setOptiOn
     --------- */
     @Override
-    public boolean setOptiOn(boolean opt) {
-        setType(Basic);
-        return !opt;
-    }
+    public void setOptiOn(boolean opt) { setType(Basic); }
 
     /* ---------
     *  Tech Level
     --------- */
     @Override
-    public int getTL() {
-        return type.getTl();
-    }
+    public int getTL() { return type.getTl(); }
+
     /* ---------
     *  Power used
     --------- */
     @Override
-    public double getPower() {
-        return type.getPower();
-    }
+    public double getPower() { return type.getPower(); }
 
     /* ---------
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
-        return type.getWeight();
-    }
+    public double getBaseWeight() { return type.getWeight(); }
 
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        return (1 + getHardened()) * type.getCost();
-    }
+    public double getBaseCost() { return type.getCost(); }
 
     /* ---------
      *  toString
@@ -76,11 +62,12 @@ public class SignalProcess extends Items {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getClass().getSimpleName()).append("{").append(getType());
         if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
+            if (getTL() > 0) sb.append(", TL=").append(getTL());
             sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
+            if (getPower() > 0) sb.append(", Power=").append(getPower());
+            sb.append(", Cost=").append(getCost());
             if (isHardened()) sb.append(", Hardened");
+            if (isArmoured()) sb.append(", Armoured Bulkheaded");
         }
         sb.append(", DM=").append(type.getDM());
         sb.append('}');

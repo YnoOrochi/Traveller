@@ -14,7 +14,6 @@ import static io.ynoorochi.traveller.ship.sensors.Definitions.DistributedArrays.
  * @author PR3J
  */
 public class DistArrays extends Items {
-
     /* ---------
     *  Constructor
     --------- */
@@ -41,57 +40,29 @@ public class DistArrays extends Items {
     *  setOptiOn
     --------- */
     @Override
-    public boolean setOptiOn(boolean opt) {
-        setType(NONE);
-        return !opt;
-    }
+    public void setOptiOn(boolean opt) { setType(NONE); }
 
     /* ---------
     *  Tech Level
     --------- */
     @Override
-    public int getTL() {
-        return type.getTl();
-    }
+    public int getTL() { return type.getTl(); }
+
     /* ---------
     *  Power used
     --------- */
     @Override
-    public double getPower() {
-        return type.getPower();
-    }
+    public double getPower() { return type.getPower(); }
 
     /* ---------
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
-        return type.getWeight();
-    }
+    public double getBaseWeight() { return type.getWeight(); }
 
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        return (1 + getHardened()) * type.getCost();
-    }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("{").append(getType().getName());
-        if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
-            sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
-            if (isHardened()) sb.append(", Hardened");
-        }
-        sb.append('}');
-        return sb.toString();
-    }
+    public double getBaseCost() { return type.getCost(); }
 }

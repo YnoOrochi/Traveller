@@ -12,7 +12,7 @@ import io.ynoorochi.traveller.ship.equip.Definitions.*;
  *
  * @author PR3J
  */
-public class PwrTank extends Items {
+public class PwrTank extends FuelItems {
     /* ---------
     *  Atributes
     --------- */
@@ -30,6 +30,17 @@ public class PwrTank extends Items {
     }
 
     /* ---------
+     *  Tank Size (ton)
+    --------- */
+    @Override
+    public int getSize() { 
+        return (int) getBaseWeight(getType(), getPlantSize(), getAutonomy());
+    }
+
+    @Override
+    public void setSize(int size) { }
+
+    /* ---------
      *  Power Plant Fuel
      *       Chemical power plants require 10 (5) tons of fuel per ton of
      *       power plant for every two time (week) of operation.
@@ -37,53 +48,44 @@ public class PwrTank extends Items {
      *       their plantSize (rounding up, minimum 1 ton) per month (week).
     --------- */
     @Override
-    public double getWeight() {
+    public double getBaseWeight() {
         switch (getType()) {
             case Chemical: return 5 * getAutonomy();
             default: return Math.ceil(0.025 * getPlantSize() * getAutonomy());
         }
     }
     
-    public double getWeight(PwrPlants type, double size, int weeks) {
+    protected double getBaseWeight(PwrPlants type, double size, int weeks) {
         this.setType(type);
         this.setPlantSize(size);
         this.setAutonomy(weeks);
         
-        return getWeight();
+        return getBaseWeight();
     }
 
     /* ---------
     *  Power Plant Type
     --------- */
-    public PwrPlants getType() {
-        return this.type;
-    }
-
-    public void setType(PwrPlants type) {
-        this.type = type;
-    }
+    public PwrPlants getType() { return this.type; }
+    public void setType(PwrPlants type) { this.type = type; }
 
     /* ---------
     *  Power Plant Size
     --------- */
-    public double getPlantSize() {
-        return getAttribute();
-    }
-
-    public void setPlantSize(double size) {
-        if (size >= 0) setAttribute(size);
-    }
+    public double getPlantSize() { return getDblAtt(); }
+    public void setPlantSize(double size) { if (size >= 0) setDblAtt(size); }
 
     /* ---------
     *  Autonomy
     --------- */
-    public int getAutonomy() {
-        return getIntAtt();
-    }
-    
-    public void setAutonomy(int weeks) {
-        if (weeks >= 0) setIntAtt(weeks);
-    }
+    public int getAutonomy() { return getIntAtt(); }
+    public void setAutonomy(int weeks) { if (weeks >= 0) setIntAtt(weeks); }
+
+    /* ---------
+     *  Fuel Tank Cost
+    --------- */
+    @Override
+    protected double getBaseCost() { return 0; }
 
     /* ---------
     *  toString
@@ -91,8 +93,10 @@ public class PwrTank extends Items {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("PwrTank{weight=").append(getWeight());
+        sb.append("PwrTank{Size=").append(getSize());
+        sb.append(", weight=").append(getWeight());
         sb.append(", Weeks=").append(getAutonomy());
+        if (isArmoured()) sb.append(", Armoured Bulkheaded");
         sb.append('}');
         return sb.toString();
     }

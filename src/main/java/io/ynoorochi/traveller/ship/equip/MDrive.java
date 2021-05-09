@@ -57,20 +57,20 @@ public class MDrive extends Items {
     *  MDriveRating
     --------- */
     public double getRating() {
-        return getAttribute();
+        return getDblAtt();
     }
     
     public boolean setRating(double rating) {
         if (rating > 0)
             if (rating <= getType().getMax()) {
-                setAttribute(rating);
+                setDblAtt(rating);
                 return true;
             } else {
-                setAttribute(getType().getMax());
+                setDblAtt(getType().getMax());
                 return false;
             }
         else {
-            setAttribute(0);
+            setDblAtt(0);
             return false;
         }
     }
@@ -79,7 +79,7 @@ public class MDrive extends Items {
     *  MDriveCost
     --------- */
     @Override
-    public double getCost() {
+    protected double getBaseCost() {
         return getType().getCost() * getHullSize();
     }
 
@@ -95,7 +95,7 @@ public class MDrive extends Items {
     *  MDriveWeight
     --------- */
     @Override
-    public double getWeight() {
+    protected double getBaseWeight() {
         switch(getType()) {
             case Maneuver:
                 if (getRating() == 0) return 0.005 * getHullSize();
@@ -119,6 +119,7 @@ public class MDrive extends Items {
         sb.append(", Pwr=").append(getPower());
         sb.append(", TL=").append(getTL());
         sb.append(", Weight=").append(getWeight());
+        if (isArmoured()) sb.append(", Armoured Bulheaded");
         sb.append('}');
         return sb.toString();
     }

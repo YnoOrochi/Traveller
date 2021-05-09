@@ -23,8 +23,8 @@ public class LaunchTubes extends Items {
     /* ---------
      *  Craft size allowed
     --------- */
-    public double getCraftSize() { return getAttribute(); }
-    public void setCraftSize(double cSize) { setAttribute(cSize); }
+    public double getCraftSize() { return getDblAtt(); }
+    public void setCraftSize(double cSize) { setDblAtt(cSize); }
     
     /* ---------
      *  Number of tubes
@@ -54,35 +54,17 @@ public class LaunchTubes extends Items {
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() { return 10 * getQtty() * getCraftSize(); }
+    public double getBaseWeight() { return 10 * getQtty() * getCraftSize(); }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() { return getQtty() * 500000; }
+    public double getBaseCost() { return getQtty() * 500000; }
 
     /* ---------
     *  Name
     --------- */
     @Override
     public String getName() { return "Launch Tubes"; }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getName()).append("{").append(getQtty());
-        if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
-            sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
-            if (isHardened()) sb.append(", Hardened");
-        }
-        sb.append('}');
-        return sb.toString();
-    }
 }

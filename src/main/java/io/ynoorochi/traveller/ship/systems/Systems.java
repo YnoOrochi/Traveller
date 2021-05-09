@@ -27,6 +27,7 @@ public class Systems extends Groups {
     public Systems(HullConfiguration cfg, int ton) {
         this.config = cfg;
         setHullSize(ton);
+        
         otherItems();
    }
     
@@ -34,12 +35,6 @@ public class Systems extends Groups {
      *  Attributes
     --------- */
     private HullConfiguration config;
-
-    /* ---------
-     * Hull Size
-    --------- */
-    public int getHullSize() { return getAttribute() ; }
-    public void setHullSize(int hullSize) { setAttribute(hullSize); }
 
     /* ---------
      * Create all items
@@ -60,6 +55,7 @@ public class Systems extends Groups {
         addItem(new CargoRetrieval());
         addItem(new CargoScoop());
         addItem(new CargoStorageNet(1));
+        addItem(new ConfigurablePod());
         addItem(new DockClamps(ClampType.I, 1));
         addItem(new DockClamps(ClampType.II, 1));
         addItem(new DockClamps(ClampType.III, 1));
@@ -71,6 +67,8 @@ public class Systems extends Groups {
         addItem(new Drones(DroneType.MINING, 1));
         addItem(new Drones(DroneType.REPAIR, 1));
         addItem(new ForcedLink(FLinkType.TL07));
+        addItem(new FuelProcessor(1));
+        addItem(new FuelScoop(config));
         addItem(new GrapArms(GrapArmType.NORML, 1));
         addItem(new GrapArms(GrapArmType.HEAVY, 1));
         addItem(new HolographicHull(getHullSize()));

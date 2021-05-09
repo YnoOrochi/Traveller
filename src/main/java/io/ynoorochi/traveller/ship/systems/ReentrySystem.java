@@ -74,35 +74,17 @@ public class ReentrySystem extends Items {
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() { return getQtty() * type.getWeight(); }
+    public double getBaseWeight() { return getQtty() * type.getWeight(); }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() { return getQtty() * type.getCost(); }
+    public double getBaseCost() { return getQtty() * type.getCost(); }
 
     /* ---------
     *  Name
     --------- */
     @Override
     public String getName() { return type.getName(); }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getName()).append("{").append(getQtty());
-        if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
-            sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
-            if (isHardened()) sb.append(", Hardened");
-        }
-        sb.append('}');
-        return sb.toString();
-    }
 }

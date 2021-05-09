@@ -32,55 +32,29 @@ public class Countermeasures extends Items {
     *  setOptiOn
     --------- */
     @Override
-    public boolean setOptiOn(boolean opt) {
-        setType(NONE);
-        return !opt;
-    }
+    public void setOptiOn(boolean opt) { setType(NONE); }
 
     /* ---------
     *  Tech Level
     --------- */
     @Override
-    public int getTL() {
-        return type.getTL();
-    }
+    public int getTL() { return type.getTL(); }
+
     /* ---------
     *  Power used
     --------- */
     @Override
-    public double getPower() {
-        return type.getPower();
-    }
+    public double getPower() { return type.getPower(); }
 
     /* ---------
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
-        return type.getWeight();
-    }
+    public double getBaseWeight() { return type.getWeight(); }
 
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        return (1 + getHardened()) * type.getCost();
-    }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("{").append(getType());
-        if (isOptiOn()) sb.append(", TL=").append(getTL());
-        if (isOptiOn()) sb.append(", Cost=").append(getCost());
-        if (isOptiOn()) sb.append(", Weight=").append(getWeight());
-        if (isOptiOn()) sb.append(", Power=").append(getPower());
-        if (isOptiOn() && isHardened()) sb.append(", Hardened");
-        sb.append('}');
-        return sb.toString();
-    }
+    public double getBaseCost() { return type.getCost(); }
 }

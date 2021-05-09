@@ -17,12 +17,9 @@ public class DeepPenetration extends Items {
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
-        return getAttribute();
-    }
-    
-    public void setWeight(double tonnage) {
-        setAttribute(tonnage);
+    public double getBaseWeight() { return getDblAtt(); }
+    public void setSize(double tonnage) {
+        setDblAtt(tonnage);
         super.setOptiOn(tonnage > 0);
     }
 
@@ -30,51 +27,23 @@ public class DeepPenetration extends Items {
     *  OptiOn
     --------- */
     @Override
-    public boolean setOptiOn(boolean opt) {
-        setAttribute(opt ? 1 : 0);
-        return true;
-    }
+    public void setOptiOn(boolean opt) { setSize(opt ? 1 : 0); }
 
     /* ---------
     *  Tech Level
     --------- */
     @Override
-    public int getTL() {
-        if (isOptiOn()) return 13;
-        else return 0;
-    }
+    public int getTL() { return isOptiOn()? 13 : 0; }
+
     /* ---------
     *  Power used
     --------- */
     @Override
-    public double getPower() {
-        if (isOptiOn()) return 1;
-        else return 0;
-    }
+    public double getPower() { return isOptiOn()? 1 : 0; }
 
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        return (1 + getHardened()) * 1000000 * getWeight();
-    }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("{").append(isOptiOn());
-        if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
-            sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
-            if (isHardened()) sb.append(", Hardened");
-        }
-        sb.append('}');
-        return sb.toString();
-    }
+    public double getBaseCost() { return 1000000 * getWeight(); }
 }

@@ -34,10 +34,8 @@ public class SpaceItems extends Items {
     *      false means: the option has some constraint that was not observed
     --------- */
     @Override
-    public boolean setOptiOn(boolean opt) {
-        setQtty(opt ? 1 : 0);
-        return true;
-    }
+    public void setOptiOn(boolean opt) { setQtty(opt ? 1 : 0); }
+
     /* ---------
      *  Tech Level
     --------- */
@@ -48,7 +46,7 @@ public class SpaceItems extends Items {
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() { return getQtty() * getRoomType().getWeight(); }
+    public double getBaseWeight() { return getQtty() * getRoomType().getWeight(); }
     
     /* ---------
      *  Power used
@@ -59,22 +57,19 @@ public class SpaceItems extends Items {
     /* ---------
      *  Option Life Support
     --------- */
-    @Override
-    public int getLifeSupport() { return getQtty() * getRoomType().getLfSup();
-    }
+    public int getLifeSupport() { return getQtty() * getRoomType().getLfSup(); }
     
     /* ---------
      *  Option Passenger
     --------- */
-    @Override
     public int getPassengers() { return getQtty() * getRoomType().getPassengers(); }
     
     /* ---------
      *  Option Cost
     --------- */
     @Override
-    public double getCost() { 
-        return (1 + getHardened()) * getQtty() * getRoomType().getCost(); 
+    public double getBaseCost() { 
+        return getQtty() * getRoomType().getCost(); 
     }
     
     /* ---------
@@ -87,9 +82,9 @@ public class SpaceItems extends Items {
     *  Input quantity of this room 
     *       Rating
     --------- */
-    public int getQtty() { return (int) getAttribute(); }
+    public int getQtty() { return (int) getDblAtt(); }
     public void setQtty(int qtty) {
-        setAttribute(qtty);
+        setDblAtt(qtty);
         super.setOptiOn(qtty > 0);
     }
 
@@ -108,6 +103,7 @@ public class SpaceItems extends Items {
             sb.append(", Passengers=").append(getPassengers());
             sb.append(", Cost=").append(getCost());
             if (isHardened()) sb.append(", Hardened");
+            if (isArmoured()) sb.append(", Armoured Bulkheaded");
         }
         sb.append('}');
         return sb.toString();

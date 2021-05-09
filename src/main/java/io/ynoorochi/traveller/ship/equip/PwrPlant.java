@@ -39,36 +39,30 @@ public class PwrPlant extends Items {
     *  Power Plant Rating
     --------- */
     public double getRating() {
-        return getAttribute();
+        return getDblAtt();
     }
     
     public void setRating(double rating) {
-        setAttribute(rating);
+        setDblAtt(rating);
     }
     
     /* ---------
     *  Power Plant TL
     --------- */
     @Override
-    public int getTL() {
-        return getType().getTL();
-    }
+    public int getTL() { return getType().getTL(); }
     
     /* ---------
     *  Power Plant Weight
     --------- */
     @Override
-    public double getWeight() {
-        return getRating() / getType().getRating();
-    }
+    protected double getBaseWeight() { return getRating() / getType().getRating(); }
     
     /* ---------
     *  Power Plant Cost
     --------- */
     @Override
-    public double getCost() {
-        return getWeight() * getType().getCost();
-    }
+    protected double getBaseCost() { return getWeight() * getType().getCost(); }
 
     /* ---------
     *  Power Plant Type
@@ -81,6 +75,7 @@ public class PwrPlant extends Items {
         sb.append(", Rating=").append(getRating());
         sb.append(", TL=").append(getTL());
         sb.append(", Weight=").append(getWeight());
+        if (isArmoured()) sb.append(", Armoured Bulheaded");
         sb.append('}');
         return sb.toString();
     }

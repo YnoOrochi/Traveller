@@ -49,32 +49,20 @@ public class CargoExtMount extends Items {
     public int getTL() { return 7; }
 
     /* ---------
+     *  Tonnage Used by Option
+    --------- */
+    @Override
+    public double getBaseWeight() { return 0; }
+
+    /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() { return 1000 * getQtty(); }
+    public double getBaseCost() { return 1000 * getQtty(); }
 
     /* ---------
      *  Option Name
     --------- */
     @Override
     public String getName() { return "Cargo External Mount (per t)"; }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getName()).append("{").append(isOptiOn());
-        if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
-            sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
-            if (isHardened()) sb.append(", Hardened");
-        }
-        sb.append('}');
-        return sb.toString();
-    }
 }

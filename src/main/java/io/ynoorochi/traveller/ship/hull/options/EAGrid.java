@@ -17,40 +17,17 @@ public class EAGrid extends Items {
     *  Tech Level
     --------- */
     @Override
-    public int getTL() {
-        if (isOptiOn()) return 8;
-        else return 0;
-    }
+    public int getTL() { return isOptiOn() ? 8 : 0; }
     
     /* ---------
     *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
-        if (isOptiOn()) return 0.02 * getHullSize();
-        else return 0;
-    }
+    public double getBaseWeight() { return isOptiOn() ? 0.02 * getHullSize() : 0; }
     
     /* ---------
     *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        if (isOptiOn()) return 40000;
-        else return 0;
-    }
-
-    /* ---------
-    *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("(").append(isOptiOn());
-        if (getTL() != 0) sb.append(", TL=").append(getTL());
-        if (getWeight() != 0) sb.append(", Weight=").append(getWeight());
-        if (getCost() != 0) sb.append(", Cost=").append(getCost());
-        sb.append('}');
-        return sb.toString();
-    }
+    public double getBaseCost() { return isOptiOn() ? 40000 : 0; }
 }

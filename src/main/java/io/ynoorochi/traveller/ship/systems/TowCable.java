@@ -30,35 +30,17 @@ public class TowCable extends Items {
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() { return 0.01 * getHullSize(); }
+    public double getBaseWeight() { return 0.01 * getHullSize(); }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() { return 5000 * getWeight(); }
+    public double getBaseCost() { return 5000 * getWeight(); }
 
     /* ---------
      *  Option Name
     --------- */
     @Override
     public String getName() { return "Tow Cable"; }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getName()).append("{").append(isOptiOn());
-        if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
-            sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
-            if (isHardened()) sb.append(", Hardened");
-        }
-        sb.append('}');
-        return sb.toString();
-    }
 }

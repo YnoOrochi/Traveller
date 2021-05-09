@@ -16,14 +16,13 @@ public class HamsterCase extends Items {
     /* ---------
     *  Option setter
     --------- */
-    public boolean setOption(int size) {
+    public void setOption(int size) {
         if (size > 0) {
-            setAttribute(size);
-            return setOptiOn(true);
+            setDblAtt(size);
+            setOptiOn(true);
         } else {
-            setAttribute(0);
+            setDblAtt(0);
             setOptiOn(false);
-            return false;
         }
     }
     
@@ -32,11 +31,17 @@ public class HamsterCase extends Items {
     *       uses 0.1 ton for every ton of outer hull.
     --------- */
     @Override
-    public double getWeight() {
-        if (isOptiOn()) return 0.1 * getAttribute();
+    public double getBaseWeight() {
+        if (isOptiOn()) return 0.1 * getDblAtt();
         else return 0;
     }
     
+    /* ---------
+    *  Option Cost
+    --------- */
+    @Override
+    public double getBaseCost() { return 0; }
+
     /* ---------
     *  Option Hull Cost Modifier
     *       For each full percent of the total hull which is made part of
@@ -44,7 +49,7 @@ public class HamsterCase extends Items {
     --------- */
     @Override
     public double getCostModf() {
-        if (isOptiOn()) return 2 * (int) (getAttribute() / getHullSize());
+        if (isOptiOn()) return 2 * (int) (getDblAtt() / getHullSize());
         else return 0;
     }
 
@@ -55,7 +60,7 @@ public class HamsterCase extends Items {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getClass().getSimpleName()).append("(").append(isOptiOn());
-        if (getAttribute() != 0) sb.append(", Size=").append(getAttribute());
+        if (getDblAtt() != 0) sb.append(", Size=").append(getDblAtt());
         if (getWeight() != 0) sb.append(", Weight=").append(getWeight());
         if (getCostModf() != 0) sb.append(", CostModf=").append(getCostModf());
         sb.append('}');

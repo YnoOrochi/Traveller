@@ -31,11 +31,7 @@ public class BackupComputer extends Items {
     *  type
     --------- */
     private Computers type = COMP05;
-    
-    public Computers getType () {
-        return this.type;
-    }
-    
+    public Computers getType () { return this.type; }
     public void setType(Computers type) {
         if (type != NONE && baseBandwidth > type.getBandwidth()) {
             this.type = type;
@@ -50,51 +46,44 @@ public class BackupComputer extends Items {
     *  setOptiOn
     --------- */
     @Override
-    public boolean setOptiOn(boolean opt) {
-        if (opt) setType(COMP05);
-        else setType(NONE);
-        return true;
-    }
+    public void setOptiOn(boolean opt) { setType(opt ? COMP05 : NONE); }
 
     /* ---------
     *  Tech Level
     --------- */
     @Override
-    public int getTL() {
-        return type.getTL();
-    }
+    public int getTL() { return type.getTL(); }
+
+    /* ---------
+     *  Tonnage Used by Option
+    --------- */
+    @Override
+    protected double getBaseWeight() { return 0; };
 
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        return (1 + getHardened() + getBIS()) * type.getCost();
-    }
+    protected double getBaseCost() { return (1 + getBIS()) * type.getCost(); }
 
     /* ---------
      *  Computer Bandwidth
     --------- */
-    public int getBandwidth() {
-        return type.getBandwidth();
-    }
+    public int getBandwidth() { return type.getBandwidth(); }
     
     /* ---------
-     *  Computer Bandwidth
+     *  Hardened Computer (/fib) - don´t check power > 0
+    --------- */
+    @Override
+    public void setHardened(boolean opt) { this.hardened = opt; }
+
+    /* ---------
+     *  Jump Control Specialisation (/bis)
     --------- */
     private boolean bis = false;
-    
-    public double getBIS() {
-        return 0.5;
-    }
-    
-    public boolean isBIS() {
-        return this.bis;
-    }
-    
-    public void setBIS(boolean opt) {
-        this.bis = opt;
-    }
+    public double getBIS() { return 0.5; }
+    public boolean isBIS() { return this.bis; }
+    public void setBIS(boolean opt) { this.bis = opt; }
 
     /* ---------
      *  toString

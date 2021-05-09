@@ -22,13 +22,23 @@ public class NonGHull extends Items {
     *  Option setter
     --------- */
     @Override
-    public boolean setOptiOn(boolean opt) {
-        if (opt && getHullSize() > NONG_MAX) return setOptiOn(false);
-        
-        setOptiOn(opt);
-        return true;
+    public void setOptiOn(boolean opt) {
+        if (opt && getHullSize() > NONG_MAX) setOptiOn(false);
+        else setOptiOn(opt);
     }
     
+    /* ---------
+     *  Tonnage Used by Option
+    --------- */
+    @Override
+    public double getBaseWeight() { return 0; }
+
+    /* ---------
+     *  Option Cost
+    --------- */
+    @Override
+    public double getBaseCost() { return 0; }
+
     /* ---------
     *  Option Hull Cost Modifier (modf -0.5)
     *      basic cost from Cr50000 to Cr25000 per ton 

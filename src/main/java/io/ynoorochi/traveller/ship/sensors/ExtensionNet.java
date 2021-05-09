@@ -31,29 +31,12 @@ public class ExtensionNet extends Items {
     *       size / 100 round down
     --------- */
     @Override
-    public double getWeight() { return (isOptiOn() ? 0.01 * getHullSize() : 0); }
+    public double getBaseWeight() { return (isOptiOn() ? 0.01 * getHullSize() : 0); }
     
     /* ---------
     *  Option Specific Cost 5000000
     *       does not allow hardening
     --------- */
     @Override
-    public double getCost() { return (isOptiOn() ? 1000000 * getWeight() : 0); }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("{").append(isOptiOn());
-        if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
-            sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
-        }
-        sb.append('}');
-        return sb.toString();
-    }
+    public double getBaseCost() { return (isOptiOn() ? 1000000 * getWeight() : 0); }
 }

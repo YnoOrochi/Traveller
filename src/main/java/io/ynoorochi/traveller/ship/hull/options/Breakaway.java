@@ -19,7 +19,7 @@ public class Breakaway extends Items {
     *       costs an additional MCr2 per ton consumed
     --------- */
     @Override
-    public double getCost() {
+    public double getBaseCost() {
         if (isOptiOn()) return WHT * 2000000; // * hullSize 
         else return 0;
     }
@@ -29,7 +29,7 @@ public class Breakaway extends Items {
     *       consumes 2% of the combined hull tonnage.
     --------- */
     @Override
-    public double getWeight() {
+    public double getBaseWeight() {
         if (isOptiOn()) return WHT * getHullSize();
         else return 0;
     }

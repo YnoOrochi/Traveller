@@ -38,7 +38,6 @@ public class Hull extends Groups {
     --------- */
     private void otherItems() {
         addItem(new Armour());
-        addItem(new ArmBulkhead());
         addItem(new Coating());
         addItem(new NonGHull());
         addItem(new DoubleHull());
@@ -52,18 +51,14 @@ public class Hull extends Groups {
     /* ---------
     *  Hull Size
     --------- */
-    public int setHullSize(int size) {
+    @Override
+    public void setHullSize(int size) {
         this.hullSize = Math.max(size, MIN_HULL);
         for (var opt : getItems()) {
             opt.setHullSize(this.hullSize);
         }
-        return this.hullSize;
     }
     
-    public int getHullSize() {
-        return this.hullSize;
-    }
-
     /* ---------
     *  Method: Hull cost
     --------- */
@@ -85,7 +80,7 @@ public class Hull extends Groups {
     *       20% of the total tonnage of the hull.
     --------- */
     @Override
-    public int getPower() {
+    public double getPower() {
         return (int) Math.ceil(0.2 * getHullSize());
     }
     
@@ -125,9 +120,9 @@ public class Hull extends Groups {
         sb.append(", HP=").append(getHP());
         sb.append(", TL=").append(getTL());
         sb.append(", Weight=").append(getWeight());
-        sb.append("}\n");
+        sb.append("}");
         for (var opt : getItems()) {
-            sb.append("    ").append(opt).append("\n");
+            sb.append("\n    ").append(opt);
         }
         return sb.toString();
     }

@@ -5,46 +5,26 @@
  */
 package io.ynoorochi.traveller.ship.fuel;
 
-import io.ynoorochi.traveller.ship.Items;
-
 /**
  *
  * @author PR3J
  */
-public class Demountable extends Items {
-    
+public class Demountable extends FuelItems {
     /* ---------
-    *  Tank Size (ton)
+     *  Constructor
     --------- */
-    public double getSize() {
-        return getAttribute();
-    }
+    public Demountable() { setSize(0); }
+    public Demountable(int size) { setSize(size); }
     
-    public void setSize(double size) {
-        setAttribute(size);
-    }
-
-    /* ---------
-    *  is Option on?
-    --------- */
-    @Override
-    public boolean isOptiOn() {
-        return getSize() > 0;
-    }
-
     /* ---------
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
-        return getSize();
-    }
+    protected double getBaseWeight() { return getSize(); }
     
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        return 1000 * getSize();
-    }
+    protected double getBaseCost() { return 1000 * getSize(); }
 }

@@ -6,7 +6,9 @@
 package io.ynoorochi.traveller.ship.computer;
 
 import io.ynoorochi.traveller.ship.computer.software.*;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -27,27 +29,23 @@ public class Softwares {
     }
 
     /* ---------
-     *  Array Manipulation
+     *  Items Manipulation - Lists
     --------- */
-    private SoftItems[] itemList = {};
+    private List<SoftItems> itemList = new ArrayList<>();
+    public void addItem(SoftItems item) { this.itemList.add(item); }
+    public void delItem(SoftItems item) { this.itemList.remove(item); }
+    public List<SoftItems> getItems() { return itemList; }
     
-    public void addItem(SoftItems item) {
-        itemList = Arrays.copyOf(itemList, itemList.length + 1);
-        itemList[itemList.length - 1] = item;
-    }
-    
-    public void delItem(SoftItems item) {
-        int pos = Arrays.binarySearch(itemList, item);
-        if (pos >= 3) {
-            if (itemList.length > pos + 1)
-                for (int i=pos; i<itemList.length - 1; i++) {
-                    itemList[i] = itemList[i+1];
-                }
-            itemList = Arrays.copyOf(itemList, itemList.length - 1);
+    /* Get one specific item ... */
+    public SoftItems getItem(int index) { return itemList.get(index); }
+    public SoftItems getItem(String classe) { 
+        Iterator<SoftItems> iter = itemList.iterator();
+        while (iter.hasNext()) {
+            SoftItems i = iter.next();
+            if (i.getClass().getSimpleName().equals(classe)) { return i; }
         }
+        return null; 
     }
-
-    public SoftItems[] getItems() { return itemList; }
 
     /* ---------
     *  Other Softwares for test
@@ -121,9 +119,9 @@ public class Softwares {
         sb.append("TL=").append(getTL());
         sb.append(", Cost=").append(getCost());
         sb.append(", Total Bandwidth=").append(getTotBW());
-        sb.append("}\n");
+        sb.append("}");
         for (var soft : getItems()) 
-            sb.append("    ").append(soft.toString()).append("\n");
+            sb.append("\n    ").append(soft.toString());
         return sb.toString();
     }
 }

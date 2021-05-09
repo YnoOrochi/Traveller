@@ -55,20 +55,20 @@ public class JDrive extends Items {
     *  JDriveRating
     --------- */
     public double getRating() {
-        return getAttribute();
+        return getDblAtt();
     }
     
     public boolean setRating(double rating) {
         if (rating > 0)
             if (rating <= getType().getMax()) {
-                setAttribute(rating);
+                setDblAtt(rating);
                 return true;
             } else {
-                setAttribute(getType().getMax());
+                setDblAtt(getType().getMax());
                 return false;
             }
         else {
-            setAttribute(0);
+            setDblAtt(0);
             return false;
         }
     }
@@ -77,9 +77,7 @@ public class JDrive extends Items {
     *  JDriveCost
     --------- */
     @Override
-    public double getCost() {
-        return getType().getCost() * getHullSize();
-    }
+    protected double getBaseCost() { return getType().getCost() * getHullSize(); }
 
     /* ---------
     *  MDriveTL
@@ -93,7 +91,7 @@ public class JDrive extends Items {
     *  JDriveWeight
     --------- */
     @Override
-    public double getWeight() {
+    protected double getBaseWeight() {
         switch(getType()) {
             case Jump: return 0.025 * getRating() * getHullSize();
             default: return 0;
@@ -113,6 +111,7 @@ public class JDrive extends Items {
         if(getType() == Jump) sb.append(", Pwr=").append(getPower());
         if(getType() == Jump) sb.append(", TL=").append(getTL());
         if(getType() == Jump) sb.append(", Weight=").append(getWeight());
+        if(getType() == Jump && isArmoured()) sb.append(", Armoured Bulkheaded");
         sb.append('}');
         return sb.toString();
     }

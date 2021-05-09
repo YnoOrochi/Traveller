@@ -91,18 +91,22 @@ public class SpaceShip {
         this.custom = custom;
 
         this.hull = new Hull(HullConfiguration.SLND, tonnage);
+
         this.mDrive = new MDrive(MDriveTypes.Maneuver, 1, tonnage);
-        this.jDrive = new JDrive(JDriveTypes.Jump, 2, tonnage);
-        this.pwrPlant = new PwrPlant(PwrPlants.Fission, 80);
         this.mTank = new MnvTank(mDrive.getType(), mDrive.getRating(), 1, tonnage);
+
+        this.jDrive = new JDrive(JDriveTypes.Jump, 2, tonnage);
         this.jTank = new JmpTank(jDrive.getRating(), 1, tonnage);
+
+        this.pwrPlant = new PwrPlant(PwrPlants.Fission, 80);
         this.pTank = new PwrTank(pwrPlant.getType(), pwrPlant.getWeight(), 4);
+
         this.oTank = new OptTank();
+
         this.computer = new Computer((int) jDrive.getRating());
         this.backup = new BackupComputer(computer.getBandwidth());
-        this.software = new Softwares(
-                computer.getBandwidth(),
-                (int) jDrive.getRating());
+        this.software = new Softwares(computer.getBandwidth(), (int) jDrive.getRating());
+
         this.sensors = new Sensors(tonnage);
         this.space = new Spaces();
         this.systems = new Systems(((Configuration) hull.getItem("Configuration")).getConfig(), tonnage);
@@ -110,6 +114,7 @@ public class SpaceShip {
         this.tonnage = this.hull.getHullSize();
 
         this.costMCr = Math.round(this.bldCost * (isCustomized() ? 1.01 : 0.9) / 1E6);
+
         this.bldCost = 0;
         this.bldTon = 0;
         this.cargo = 0.0;
@@ -133,7 +138,8 @@ public class SpaceShip {
     }
 
     public void setHullSize(int tonnage) {
-        this.tonnage = hull.setHullSize(tonnage);
+        hull.setHullSize(tonnage);
+        this.tonnage = hull.getHullSize();
         
         this.jDrive.setHullSize(this.tonnage);
         this.mDrive.setHullSize(this.tonnage);

@@ -11,25 +11,22 @@ import io.ynoorochi.traveller.ship.Items;
  *
  * @author PR3J
  */
-public class Hidden extends Items {
+public class Hidden extends FuelItems {
     /* ---------
-    *  Set Hidden Tonnage
+     *  Constructor
+    --------- */
+    public Hidden() { setSize(0); }
+    public Hidden(int size) { setSize(size); }
+    
+    /* ---------
+     *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
-        return getAttribute();
-    }
+    protected double getBaseWeight() { return 0; }
     
-    public void setWeight(double tonnage) {
-        setAttribute(tonnage);
-        setOptiOn(tonnage > 0);
-    }
-
     /* ---------
      *  Fuel Tank Cost
     --------- */
     @Override
-    public double getCost() {
-        return 40000 * getAttribute();
-    }
+    protected double getBaseCost() { return 40000 * getSize(); }
 }

@@ -18,11 +18,7 @@ public class MailDistArray extends Items {
     *  type
     --------- */
     private MailDistArrays type = NONE;
-    
-    public MailDistArrays getType () {
-        return this.type;
-    }
-    
+    public MailDistArrays getType () { return this.type; }
     public void setType(MailDistArrays type) {
         this.type = type;
         super.setOptiOn(type != NONE);
@@ -32,57 +28,29 @@ public class MailDistArray extends Items {
     *  setOptiOn
     --------- */
     @Override
-    public boolean setOptiOn(boolean opt) {
-        setType(NONE);
-        return !opt;
-    }
+    public void setOptiOn(boolean opt) { setType(NONE); }
 
     /* ---------
     *  Tech Level
     --------- */
     @Override
-    public int getTL() {
-        return type.getTl();
-    }
+    public int getTL() { return type.getTl(); }
+
     /* ---------
     *  Power used
     --------- */
     @Override
-    public double getPower() {
-        return type.getPower();
-    }
+    public double getPower() { return type.getPower(); }
 
     /* ---------
      *  Tonnage Used by Option
     --------- */
     @Override
-    public double getWeight() {
-        return type.getWeight();
-    }
+    public double getBaseWeight() { return type.getWeight(); }
 
     /* ---------
      *  Option Specific Cost
     --------- */
     @Override
-    public double getCost() {
-        return type.getCost();
-    }
-
-    /* ---------
-     *  toString
-    --------- */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName()).append("{").append(isOptiOn());
-        if (isOptiOn()) {
-            sb.append(", TL=").append(getTL());
-            sb.append(", Cost=").append(getCost());
-            sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
-            if (isHardened()) sb.append(", Hardened");
-        }
-        sb.append('}');
-        return sb.toString();
-    }
+    public double getBaseCost() { return type.getCost(); }
 }

@@ -19,38 +19,32 @@ public class Coating extends Items {
     *  Coating Equipment
     --------- */
     private CoatOptions coat = NONE;
-
-    public CoatOptions getCoat() {
-        return coat;
-    }
-
-    public void setCoat(CoatOptions coat) {
-        this.coat = coat;
-    }
+    public CoatOptions getCoat() { return coat; }
+    public void setCoat(CoatOptions coat) { this.coat = coat; }
 
     /* ---------
     *  have special coating?
     --------- */
     @Override
-    public boolean isOptiOn() {
-        return this.coat != NONE;
-    }
+    public boolean isOptiOn() { return this.coat != NONE; }
     
     /* ---------
     *  Tech Level
     --------- */
     @Override
-    public int getTL() {
-        return this.coat.getTl();
-    }
+    public int getTL() { return this.coat.getTl(); }
     
     /* ---------
-    *  Option Specific Cost
+     *  Tonnage Used by Option
     --------- */
     @Override
-    public double getCost() {
-        return this.coat.getCost();
-    }
+    public double getBaseWeight() { return 0; }
+
+    /* ---------
+    *  Option Cost
+    --------- */
+    @Override
+    public double getBaseCost() { return this.coat.getCost(); }
 
     /* ---------
     *  toString

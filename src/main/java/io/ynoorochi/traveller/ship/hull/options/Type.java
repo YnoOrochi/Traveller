@@ -19,38 +19,38 @@ public class Type extends Items {
     *  Type Equipment
     --------- */
     private HullType type = STRD;
-
-    public HullType getType() {
-        return type;
-    }
-
-    public void setType(HullType type) {
-        this.type = type;
-    }
+    public HullType getType() { return type; }
+    public void setType(HullType type) { this.type = type; }
     
     /* ---------
     *  is not standard?
     --------- */
     @Override
-    public boolean isOptiOn() {
-        return this.type != STRD;
-    }
+    public boolean isOptiOn() { return this.type != STRD; }
     
     /* ---------
     *  Hull Points Modifier
     --------- */
     @Override
-    public double getAttModf() {
-        return this.type.getHPModf();
-    }
+    public double getAttModf() { return this.type.getHPModf(); }
     
+    /* ---------
+     *  Tonnage Used by Option
+    --------- */
+    @Override
+    public double getBaseWeight() { return 0; }
+
+    /* ---------
+     *  Option Cost
+    --------- */
+    @Override
+    public double getBaseCost() { return 0; }
+
     /* ---------
     *  Option Specific Cost Modifier
     --------- */
     @Override
-    public double getCostModf() {
-        return this.type.getCostModf();
-    }
+    public double getCostModf() { return this.type.getCostModf(); }
 
     /* ---------
     *  toString
