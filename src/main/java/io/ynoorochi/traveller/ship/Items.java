@@ -5,9 +5,6 @@
  */
 package io.ynoorochi.traveller.ship;
 
-import io.ynoorochi.traveller.ship.Definitions.Hardened;
-import static io.ynoorochi.traveller.ship.Definitions.Hardened.*;
-
 /**
  *
  * @author PR3J
@@ -61,6 +58,11 @@ public abstract class Items {
     public double getWeight() { return (1 + getArmouredWgtModf()) * getBaseWeight(); }
     
     /* ---------
+    *  Item Cargo
+    --------- */
+    public double getCargo() { return 0; }
+
+    /* ---------
      *  Option Cost
     --------- */
     protected abstract double getBaseCost();
@@ -109,6 +111,7 @@ public abstract class Items {
         if (isOptiOn()) {
             if (getTL() > 0) sb.append(", TL=").append(getTL());
             sb.append(", Weight=").append(getWeight());
+            if (getCargo() > 0) sb.append(", Cargo=").append(getCargo());
             if (getPower() > 0) sb.append(", Power=").append(getPower());
             sb.append(", Cost=").append(getCost());
             if (isHardened()) sb.append(", Hardened");

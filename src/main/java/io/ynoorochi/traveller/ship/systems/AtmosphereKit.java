@@ -5,7 +5,6 @@
  */
 package io.ynoorochi.traveller.ship.systems;
 
-import io.ynoorochi.traveller.ship.Definitions.Hardened;
 import io.ynoorochi.traveller.ship.Items;
 
 /**

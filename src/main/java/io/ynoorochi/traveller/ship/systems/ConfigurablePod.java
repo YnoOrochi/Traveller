@@ -40,6 +40,16 @@ public class ConfigurablePod extends Groups {
     public double getBaseWeight() { return 10; }
 
     /* ---------
+    *  Total Cargo
+    --------- */
+    @Override
+    public double getCargo() {
+        double aux = getBaseWeight();
+        for (var obj : getItems() ) { aux -= obj.getWeight(); }
+        return aux;
+    }
+
+    /* ---------
     *  Total Cost
     --------- */
     @Override
@@ -66,7 +76,8 @@ public class ConfigurablePod extends Groups {
         sb.append(this.getName()).append("{");
         sb.append("TL=").append(getTL());
         sb.append(", Weight=").append(getWeight());
-        sb.append(", Power=").append(getPower());
+        if (getCargo() > 0) sb.append(", Cargo=").append(getCargo());
+        if (getPower() > 0) sb.append(", Power=").append(getPower());
         sb.append(", Cost=").append(getCost());
         sb.append("}");
         for (var obj : getItems()) 

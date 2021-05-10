@@ -27,17 +27,4 @@ public class Definitions {
             return this.modf;
         }
     }
-    
-    public enum Hardened {
-        HARDENED(   0.5),
-        NOTHARDENED(0.0);
-        
-        private final double modf;
-        
-        private Hardened(double modf) {
-            this.modf = modf;
-        }
-        
-        public double getModf() { return this.modf; }
-    }
 }

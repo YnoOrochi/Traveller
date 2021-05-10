@@ -65,12 +65,18 @@ public class SpaceItems extends Items {
     public int getPassengers() { return getQtty() * getRoomType().getPassengers(); }
     
     /* ---------
+     *  Option Cargo
+    --------- */
+    @Override
+    public double getCargo() {
+        return (getRoomType() == RoomType.CNCEAL) ? getBaseWeight() : 0;
+    }
+
+    /* ---------
      *  Option Cost
     --------- */
     @Override
-    public double getBaseCost() { 
-        return getQtty() * getRoomType().getCost(); 
-    }
+    public double getBaseCost() { return getQtty() * getRoomType().getCost(); }
     
     /* ---------
     *  Option Get Name
@@ -98,7 +104,8 @@ public class SpaceItems extends Items {
         if (isOptiOn()) {
             sb.append(", TL=").append(getTL());
             sb.append(", Weight=").append(getWeight());
-            sb.append(", Power=").append(getPower());
+            if (getCargo() > 0) sb.append(", Cargo=").append(getCargo());
+            if (getPower() > 0) sb.append(", Power=").append(getPower());
             sb.append(", Life Support=").append(getLifeSupport());
             sb.append(", Passengers=").append(getPassengers());
             sb.append(", Cost=").append(getCost());
