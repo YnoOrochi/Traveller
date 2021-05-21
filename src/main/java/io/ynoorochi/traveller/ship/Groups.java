@@ -21,14 +21,15 @@ public class Groups extends Items {
     public void addItem(Items item) { this.itemList.add(item); }
     public void delItem(Items item) { this.itemList.remove(item); }
     public List<Items> getItems() { return itemList; }
+    public int countItems() { return itemList.size(); }
     
     /* Get one specific item ... */
     public Items getItem(int index) { return itemList.get(index); }
-    public Items getItem(String classe) { 
+    public Items getItem(Class classe) { 
         Iterator<Items> iter = itemList.iterator();
         while (iter.hasNext()) {
             Items i = iter.next();
-            if (i.getClass().getSimpleName().equals(classe)) { return i; }
+            if (i.getClass().equals(classe)) { return i; }
         }
         return null; 
     }

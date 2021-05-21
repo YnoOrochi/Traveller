@@ -13,13 +13,19 @@ import io.ynoorochi.traveller.ship.sensors.*;
 import io.ynoorochi.traveller.ship.systems.*;
 
 import static io.ynoorochi.traveller.ship.Definitions.*;
+import static io.ynoorochi.traveller.ship.Definitions.Customization.*;
 import static io.ynoorochi.traveller.ship.equip.Definitions.*;
 import static io.ynoorochi.traveller.ship.hull.Definitions.*;
 
-import static io.ynoorochi.traveller.ship.Definitions.Customization.*;
 import io.ynoorochi.traveller.ship.computer.Softwares;
 import io.ynoorochi.traveller.ship.hull.options.Configuration;
 import io.ynoorochi.traveller.ship.spaces.Spaces;
+import io.ynoorochi.traveller.ship.weapons.AntiPersonelWeapon;
+import io.ynoorochi.traveller.ship.weapons.Definitions.APersonelWeapons;
+import io.ynoorochi.traveller.ship.weapons.Definitions.TurretTypes;
+import io.ynoorochi.traveller.ship.weapons.Definitions.TurretWeapons;
+import io.ynoorochi.traveller.ship.weapons.TurretWeapon;
+import io.ynoorochi.traveller.ship.weapons.MountTurret;
 
 /**
  *
@@ -51,7 +57,7 @@ public class SpaceShip {
     public BackupComputer backup;
     public Softwares software;
     public Sensors sensors;
-//    private Weapons[] wPoints;
+    public MountTurret turretA;
     public Systems systems;
     public Spaces space;
     
@@ -63,7 +69,7 @@ public class SpaceShip {
     //
     private double costMCr;         // Custom/Standard ship MCr costMCr
     private double cargo;           // Cargo hullSize
-    private double useable;      // % of hullSize useable
+    private double useable;         // % of hullSize useable
     private int tl;                 // Tech Level (TL)
     private int ap;                 // Armour Points
     private int hp;                 // AttHull Points
@@ -72,7 +78,7 @@ public class SpaceShip {
     private int mCostLifeS;         // Monthly Life Support costMCr
     private int mCostCrewS;         // Monthly Crew Salary costMCr
     private int wpPoints;           // qty of ...
-    private String wpPointType;         //   firmpoints ou hardpoints
+    private String wpPointType;     // Firmpoints ou hardpoints
 
     // -------------
     // construction variables
@@ -91,6 +97,7 @@ public class SpaceShip {
         this.custom = custom;
 
         this.hull = new Hull(HullConfiguration.SLND, tonnage);
+        this.tonnage = this.hull.getHullSize();
 
         this.mDrive = new MDrive(MDriveTypes.Maneuver, 1, tonnage);
         this.mTank = new MnvTank(mDrive.getType(), mDrive.getRating(), 1, tonnage);
@@ -109,9 +116,13 @@ public class SpaceShip {
 
         this.sensors = new Sensors(tonnage);
         this.space = new Spaces();
-        this.systems = new Systems(((Configuration) hull.getItem("Configuration")).getConfig(), tonnage);
+        this.systems = new Systems(((Configuration) hull.getItem(Configuration.class)).getConfig(), tonnage);
 
-        this.tonnage = this.hull.getHullSize();
+        this.turretA = new MountTurret(TurretTypes.TRIPLE);
+        this.turretA.addItem(new TurretWeapon(TurretWeapons.BEAML));
+        this.turretA.addItem(new TurretWeapon(TurretWeapons.MRACK));
+        this.turretA.addItem(new AntiPersonelWeapon(APersonelWeapons.VULCN));
+        this.turretA.addItem(new AntiPersonelWeapon(APersonelWeapons.HMGUN));
 
         this.costMCr = Math.round(this.bldCost * (isCustomized() ? 1.01 : 0.9) / 1E6);
 

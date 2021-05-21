@@ -18,18 +18,18 @@ public class Configuration extends Items {
     /* ---------
     *  Constructor
     --------- */
-    public Configuration(int size) { this.setHullSize(size); }
-    public Configuration(int size, HullConfiguration cfg) { 
-        this.setHullSize(size); 
+    public Configuration(int size) { this(size, HullConfiguration.STRD); }
+    public Configuration(int size, HullConfiguration config) { 
+        setHullSize(size);
         setConfig(config);
     }
 
     /* ---------
     *  Specific Methods
     --------- */
-    private HullConfiguration config = STRD;
-    public HullConfiguration getConfig() { return config; }
-    public void setConfig(HullConfiguration config) { this.config = config; }
+    private HullConfiguration config;
+    public HullConfiguration getConfig() { return this.config; }
+    public void setConfig(HullConfiguration cfg) { this.config = cfg; }
     
     /* Streamlined ? */
     public Streamlined isStreamlined() { return this.config.getStrLined(); }
@@ -38,29 +38,29 @@ public class Configuration extends Items {
     *  is not standard?
     --------- */
     @Override
-    public boolean isOptiOn() { return this.config != STRD; }
+    public boolean isOptiOn() { return getConfig() != STRD; }
     
     /* ---------
     *  Define the basic cost of hull
     --------- */
     @Override
-    public double getCost() { return this.config.getCost(); }
+    public double getCost() { return getConfig().getCost(); }
     
     /* ---------
     *  Option Specific Cost Modifier
     --------- */
     @Override
-    public double getCostModf() { return this.config.getCostModf(); }
+    public double getCostModf() { return getConfig().getCostModf(); }
 
     /* Hull Points Modifier */
     @Override
-    public double getAttModf() { return this.config.getHPModf(); }
+    public double getAttModf() { return getConfig().getHPModf(); }
     
     /* ---------
     *  Tonnage Used by Option
     --------- */
     @Override
-    public double getBaseWeight() { return (1 - this.config.getUseable()) * getHullSize(); }
+    public double getBaseWeight() { return (1 - getConfig().getUseable()) * getHullSize(); }
 
     /* ---------
     *  Option Cost
@@ -74,7 +74,7 @@ public class Configuration extends Items {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName());
+        sb.append(getName());
         sb.append("(").append(config.getConfig());
         sb.append("/").append(isStreamlined());
         sb.append(", HPModf=").append(getAttModf());

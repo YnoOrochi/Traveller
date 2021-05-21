@@ -34,18 +34,13 @@ public class Definitions {
     }
 
     /* ---------
-     *  Mount Types
+     *  FirmPoint Types
             Mount TL Power Tons Cost
             Fixed Mount - 0 0 MCr0.1
-            Single Turret 7 1 1 MCr0.2
-            Double Turret 8 1 1 MCr0.5
-            Triple Turret 9 1 1 MCr1
     --------- */
-    public enum MountTypes {
-        FIXEDM("Fixed Mount",   0, 0, 0, 1,  100000),
-        SINGLE("Single Turret", 7, 1, 1, 1,  200000),
-        DOUBLE("Double Turret", 8, 1, 1, 2,  500000),
-        TRIPLE("Triple Turret", 9, 1, 1, 3, 1000000);
+    public enum FirmTypes {
+        FIXED("Fixed Mount",   0, 0, 0, 1,  100000),
+        TURRT("Single Turret", 7, 1, 1, 1,  200000);
 
         private final String name;
         private final int tl;
@@ -54,7 +49,7 @@ public class Definitions {
         private final int slots;
         private final double cost;
 
-        private MountTypes(String name, int tl, int power, int weight, 
+        private FirmTypes(String name, int tl, int power, int weight, 
                             int slots, double cost){
             this.name = name;
             this.tl = tl;
@@ -73,6 +68,46 @@ public class Definitions {
     }
 
     /* ---------
+     *  Turret Types
+            Mount TL Power Tons Cost
+            Fixed Mount - 0 0 MCr0.1
+            Single Turret 7 1 1 MCr0.2
+            Double Turret 8 1 1 MCr0.5
+            Triple Turret 9 1 1 MCr1
+    --------- */
+    public enum TurretTypes {
+        FIXEDM("Fixed Mount",   0, 0, 0, 1,  100000),
+        SINGLE("Single Turret", 7, 1, 1, 1,  200000),
+        DOUBLE("Double Turret", 8, 1, 1, 2,  500000),
+        TRIPLE("Triple Turret", 9, 1, 1, 3, 1000000),
+        QUAD  ("Quad Turret",  12, 2, 1, 4, 2000000);
+
+        private final String name;
+        private final int tl;
+        private final int power;
+        private final int weight;
+        private final int slots;
+        private final double cost;
+
+        private TurretTypes(String name, int tl, int power, int weight, 
+                            int slots, double cost){
+            this.name = name;
+            this.tl = tl;
+            this.power = power;
+            this.weight = weight;
+            this.slots = slots;
+            this.cost = cost;
+        }
+
+        public String getName() { return name; }
+        public int getTL() { return tl; }
+        public int getPower() { return power; }
+        public int getWeight() { return weight; }
+        public int getSlots() { return slots; }
+        public double getCost() { return cost; }
+    }
+
+    /* ---------
      *  Turret Weapons
             Weapon TL Range Power Damage Cost Traits
             Beam Laser 10 Medium 4 1D MCr0.5 -
@@ -82,6 +117,7 @@ public class Definitions {
             Sandcaster 9 Special 0 Special MCr0.25 -
     --------- */
     public enum TurretWeapons{
+        EMPTY("Empty",               0, Special,  0, "-",            0, "-"),
         BEAML("Beam Laser",         10, Medium,   4, "1D",      500000, "-"),
         LDRIL("Laser Drill",         8, Adjacent, 4, "4D",      150000, "-"),
         MRACK("Missile Rack",        7, Special,  0, "4D",      750000, "Smart"),
@@ -109,10 +145,55 @@ public class Definitions {
         }
 
         public String getName() { return name; }
-        public int getTl() { return tl; }
+        public int getTL() { return tl; }
         public WeaponRanges getRange() { return range; }
         public int getPower() { return power; }
         public String getDamage() { return damage; }
+        public double getWeight() { return 0; }
+        public double getCost() { return cost; }
+        public String getTraits() { return traits; }
+    }
+
+    /* ---------
+     *  AntiPersonel Weapons
+            Weapon TL Range Power Damage Cost Traits
+                Heavy Machinegun 6 Adjacent 0 6D 4500 Anti-Personnel Only
+                Light Autocannon 6 Adjacent 0 4D 10000 Anti-Personnel Only
+                Vulcan Machinegun 7 Adjacent 0 6D 12000 Anti-Personnel Only
+                Rocket Pod 6 Adjacent 0 4D 8000 Anti-Personnel Only
+    --------- */
+    public enum APersonelWeapons{
+        EMPTY("Empty",             0, Special,  0, "-",      0, "-"),
+        HMGUN("Heavy Machinegun",  6, Adjacent, 0, "6D",  4500, "Anti-personel"),
+        LACNN("Light Autocannon",  6, Adjacent, 0, "4D", 10000, "Anti-personel"),
+        VULCN("Vulcan Machinegun", 7, Adjacent, 0, "6D", 12000, "Anti-personel"),
+        ROCKT("Rocket Podt",       6, Adjacent, 0, "4D",  8000, "Anti-personel");
+
+        private final String name;
+        private final int tl;
+        private final WeaponRanges range;
+        private final int power;
+        private final String damage;
+        private final double cost;
+        private final String traits;
+
+        private APersonelWeapons(String name, int tl, WeaponRanges range, int power, 
+                              String damage, double cost, String traits){
+            this.name = name;
+            this.tl = tl;
+            this.range = range;
+            this.power = power;
+            this.damage = damage;
+            this.cost = cost;
+            this.traits = traits;
+        }
+
+        public String getName() { return name; }
+        public int getTL() { return tl; }
+        public WeaponRanges getRange() { return range; }
+        public int getPower() { return power; }
+        public String getDamage() { return damage; }
+        public double getWeight() { return 0; }
         public double getCost() { return cost; }
         public String getTraits() { return traits; }
     }
@@ -130,6 +211,7 @@ public class Definitions {
             Torpedo 7 Special 2 6D MCr3 Smart
     --------- */
     public enum BarbetteWeapons {
+        EMPTY ("Empty",                  0, Special,   0, "-",             0, "-"),
         FUSION("Fusion Barbette",       12, Medium,   20, "5D",      4000000, "Radiation"),
         GRAVMT("Gravimetric Distorter", 13, Short,    10, "Special", 4000000, "-"),
         IONCNN("Ion Cannon",            12, Medium,   10, "2D x 10", 6000000, "Ion"),
@@ -159,10 +241,11 @@ public class Definitions {
         }
 
         public String getName() { return name; }
-        public int getTl() { return tl; }
+        public int getTL() { return tl; }
         public WeaponRanges getRange() { return range; }
         public int getPower() { return power; }
         public String getDamage() { return damage; }
+        public double getWeight() { return 0; }
         public double getCost() { return cost; }
         public String getTraits() { return traits; }
     }
@@ -188,6 +271,10 @@ public class Definitions {
             this.points = points;
             this.crew = crew;
         }
+
+        public double getWeight() { return weight; }
+        public int getPoints() { return points; }
+        public int getCrew() { return crew; }
     }
 
     /* ---------
@@ -209,6 +296,9 @@ public class Definitions {
             this.weight = weight;
             this.cost = cost;
         }
+
+        public int getWeight() { return weight; }
+        public double getCost() { return cost; }
     }
 
     /* ---------
@@ -224,6 +314,7 @@ public class Definitions {
             Torpedo Bay 9 Special 2 6D MCr3 Smart
     --------- */
     public enum BaySmallWeapons {
+        EMPTY ("Empty",           0, Special,   0, "-",              0, "-"),
         FUSION("Fusion Gun",     12, Medium,   50, "1DD",      8000000, "-"),
         GRAVMT("Ion Cannon",     12, Medium,   20, "6D x 10", 15000000, "Ion"),
         MASSDV("Mass Driver",     8, Short,    15, "1DD",     40000000, "-"),
@@ -251,6 +342,15 @@ public class Definitions {
             this.cost = cost;
             this.traits = traits;
         }
+
+        public String getName() { return name; }
+        public int getTL() { return tl; }
+        public WeaponRanges getRange() { return range; }
+        public int getPower() { return power; }
+        public String getDamage() { return damage; }
+        public double getWeight() { return 0; }
+        public double getCost() { return cost; }
+        public String getTraits() { return traits; }
     }
 
     /* ---------
@@ -266,6 +366,7 @@ public class Definitions {
             Torpedo Bay 9 Special 5 6D MCr6 Smart
     --------- */
     public enum BayMediumWeapons {
+        EMPTY ("Empty",           0, Special,   0, "-",        0, "-"),
         FUSION("Fusion Gun",     12, Medium,   80, "2DD",     16, "-"),
         IONCNN("Ion Cannon",     12, Medium,   30, "8D x 10", 25, "Ion"),
         MASSDV("Mass Driver",     8, Short,    25, "2DD",     70, "-"),
@@ -293,6 +394,15 @@ public class Definitions {
             this.cost = cost;
             this.traits = traits;
         }
+
+        public String getName() { return name; }
+        public int getTL() { return tl; }
+        public WeaponRanges getRange() { return range; }
+        public int getPower() { return power; }
+        public String getDamage() { return damage; }
+        public double getWeight() { return 0; }
+        public double getCost() { return cost; }
+        public String getTraits() { return traits; }
     }
 
     /* ---------
@@ -307,6 +417,7 @@ public class Definitions {
             Torpedo Bay 9 Special 25 6D MCr30 Smart
     --------- */
     public enum BayLargeWeapons {
+        EMPTY ("Empty",           0, Special,    0,  "-",    0, "-"),
         FUSION("Fusion Gun",     12, Medium,   220, "2DD",  50, "-"),
         MASSDV("Mass Driver",     8, Short,     40, "2DD", 120, "-"),
         MISSIL("Missile",         7, Special,   50, "4D",  125, "Smart"),
@@ -333,6 +444,15 @@ public class Definitions {
             this.cost = cost;
             this.traits = traits;
         }
+
+        public String getName() { return name; }
+        public int getTL() { return tl; }
+        public WeaponRanges getRange() { return range; }
+        public int getPower() { return power; }
+        public String getDamage() { return damage; }
+        public double getWeight() { return 0; }
+        public double getCost() { return cost; }
+        public String getTraits() { return traits; }
     }
 
     /* ---------
@@ -354,6 +474,9 @@ public class Definitions {
             this.weight = weight;
             this.cost = cost;
         }
+
+        public int getWeight() { return weight; }
+        public double getCost() { return cost; }
     }
 
     /* ---------
@@ -364,9 +487,10 @@ public class Definitions {
             Railgun 10 Medium 3500 tons +500 +1DD +MCr500 21000 tons —
     --------- */
     public enum SpinalWeapons {
-        MESONW("Meson",    12, Long,   7500, +1000, "+2DD", 2000000000, 75000, "AP ∞, Radiation"),
-        PARTCL("Particle", 11, Long,   3500, +1000, "+1DD", 1000000000, 28000, "Radiation"),
-        RAILGN("Railgun",  10, Medium, 3500,  +500, "+1DD",  500000000, 21000, "—");
+        EMPTY("Empty",     0, Special,   0,     0, "-",             0,     0, "-"),
+        MESON("Meson",    12, Long,   7500, +1000, "+2DD", 2000000000, 75000, "AP ∞, Radiation"),
+        PARTC("Particle", 11, Long,   3500, +1000, "+1DD", 1000000000, 28000, "Radiation"),
+        RAILG("Railgun",  10, Medium, 3500,  +500, "+1DD",  500000000, 21000, "—");
 
         private final String name;
         private final int tl;
@@ -390,6 +514,17 @@ public class Definitions {
             this.maxSize = max;
             this.traits = traits;
         }
+
+        public String getName() { return name; }
+        public int getTL() { return tl; }
+        public WeaponRanges getRange() { return range; }
+        public int getBseSize() { return bseSize; }
+        public int getPower() { return power; }
+        public String getDamage() { return damage; }
+        public double getWeight() { return 0; }
+        public double getCost() { return cost; }
+        public int getMaxSize() { return maxSize; }
+        public String getTraits() { return traits; }
     }
 
     /* ---------
@@ -413,6 +548,10 @@ public class Definitions {
             this.wgtModf = wgtModf;
             this.costModf = costModf;
         }
+
+        public int getTlModf() { return tlModf; }
+        public double getWgtModf() { return wgtModf; }
+        public double getCostModf() { return costModf; }
     }
 
     /* ---------
@@ -459,6 +598,15 @@ public class Definitions {
             this.cost = cost;
             this.traits = traits;
         }
+
+        public String getName() { return name; }
+        public int getTL() { return tl; }
+        public int getThrust() { return thrust; }
+        public String getDamage() { return damage; }
+        public int getPower() { return 0; }
+        public double getWeight() { return 0; }
+        public double getCost() { return cost; }
+        public String getTraits() { return traits; }
     }
 
     /* ---------
@@ -470,22 +618,33 @@ public class Definitions {
             Sandcutter Canister 8 20 Cr35000 -
     --------- */
     public enum SandCanisters {
-        Chaff     ( 8, 20, 30000, "-"),
-        Pebble    ( 7, 20, 25000, "-"),
-        Sand      ( 7, 20, 25000, "-"),
-        Sandcutter( 8, 20, 35000, "-");
+        CHFF("Chaff",      8, 20, 30000, "-"),
+        PBBL("Pebble",     7, 20, 25000, "-"),
+        SAND("Sand",       7, 20, 25000, "-"),
+        SCTT("Sandcutter", 8, 20, 35000, "-");
 
+        private final String name;
         private final int tl;
         private final int qtty;
         private final double cost;
         private final String traits;
 
-        private SandCanisters(int tl, int qtty, double cost, String traits) {
+        private SandCanisters(String name, int tl, int qtty, double cost, String traits) {
+            this.name = name;
             this.tl = tl;
             this.qtty = qtty;
             this.cost = cost;
             this.traits = traits;
         }
+
+        public String getName() { return name; }
+        public int getTL() { return tl; }
+        public int getQtty() { return qtty; }
+        public String getDamage() { return "-"; }
+        public int getPower() { return 0; }
+        public double getWeight() { return 0; }
+        public double getCost() { return cost; }
+        public String getTraits() { return traits; }
     }
 
     /* ---------
@@ -536,6 +695,15 @@ public class Definitions {
             this.cost = cost;
             this.traits = traits;
         }
+
+        public String getName() { return name; }
+        public int getTL() { return tl; }
+        public int getThrust() { return thrust; }
+        public String getDamage() { return damage; }
+        public int getPower() { return 0; }
+        public double getWeight() { return 0; }
+        public double getCost() { return cost; }
+        public String getTraits() { return traits; }
     }
 
     /* ---------
@@ -546,9 +714,9 @@ public class Definitions {
             Type III 14 +3D 30 20 MCr20
     --------- */
     public enum PointDefenses {
-        TYPE1("Type I",   10, "+1D", 10, 20,  5000000),
-        TYPE2("Type II",  12, "+2D", 20, 20, 10000000),
-        TYPE3("Type III", 14, "+3D", 30, 20, 20000000);
+        TYPE1("Type I",   10, "+1D", 10, 20,  5000000, "-"),
+        TYPE2("Type II",  12, "+2D", 20, 20, 10000000, "-"),
+        TYPE3("Type III", 14, "+3D", 30, 20, 20000000, "-");
 
         private final String name;
         private final int tl;
@@ -556,16 +724,26 @@ public class Definitions {
         private final int power;
         private final double weight;
         private final double cost;
+        private final String traits;
 
         private PointDefenses(String name, int tl, String damage, int power,
-                              double weight, double cost) {
+                              double weight, double cost, String traits) {
             this.name = name;
             this.tl = tl;
             this.damage = damage;
             this.power = power;
             this.weight = weight;
             this.cost = cost;
+            this.traits = traits;
         }
+
+        public String getName() { return name; }
+        public int getTL() { return tl; }
+        public String getDamage() { return damage; }
+        public int getPower() { return power; }
+        public double getWeight() { return weight; }
+        public double getCost() { return cost; }
+        public String getTraits() { return traits; }
     }
 
     /* ---------
@@ -575,21 +753,34 @@ public class Definitions {
             Nuclear Damper 12 20 10 MCr10
     --------- */
     public enum ScreenTypes {
-        MESON("Meson Screen",   13, 30, 10, 20000000),
-        NUCDP("Nuclear Damper", 12, 20, 10, 10000000);
+        MESON("Meson Screen",   13, "-", 30, 10, 20000000, "-"),
+        NUCDP("Nuclear Damper", 12, "-", 20, 10, 10000000, "-");
 
         private final String name;
         private final int tl;
+        private final String damage;
         private final int power;
         private final double weight;
         private final double cost;
+        private final String traits;
 
-        private ScreenTypes(String name, int tl, int power, double weight, double cost) {
+        private ScreenTypes(String name, int tl, String dmg, int power, 
+                double weight, double cost, String traits) {
             this.name = name;
             this.tl = tl;
+            this.damage = dmg;
             this.power = power;
             this.weight = weight;
             this.cost = cost;
+            this.traits = traits;
         }
+
+        public String getName() { return name; }
+        public int getTL() { return tl; }
+        public String getDamage() { return damage; }
+        public int getPower() { return power; }
+        public double getWeight() { return weight; }
+        public double getCost() { return cost; }
+        public String getTraits() { return traits; }
     }
 }

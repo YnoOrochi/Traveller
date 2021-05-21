@@ -25,7 +25,7 @@ public class Creator {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        SpaceShip a = new SpaceShip("A", "tst", 100, OFF_THE_SHELF);
+        SpaceShip a = new SpaceShip("A", "tst", 1000, OFF_THE_SHELF);
         
 //        a.changeCost(2345678);
 //        a.changePower(50);
@@ -52,11 +52,11 @@ public class Creator {
         System.out.println(a.oTank);
         System.out.println(a.computer);
         System.out.println(a.backup);
-//        a.software.jCtrl.setVersion(2);
         System.out.println(a.software);
         System.out.println(a.sensors);
         System.out.println(a.space);
         System.out.println(a.systems);
+        System.out.println(a.turretA);
 
 //        System.out.println(a.hull.toString());
     }

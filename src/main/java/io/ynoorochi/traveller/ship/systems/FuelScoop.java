@@ -25,7 +25,7 @@ public class FuelScoop extends Items {
     private boolean streamlined = false;
     public boolean isStreamlined() { return this.streamlined; }
     public void setStreamlined(HullConfiguration config) { 
-        streamlined = config == HullConfiguration.SLND; 
+        streamlined = config.equals(HullConfiguration.SLND);
     }
 
     /* ---------
@@ -43,5 +43,6 @@ public class FuelScoop extends Items {
     /* ---------
     *  Option Get Name
     --------- */
+    @Override
     public String getName() { return "Fuel Scoop"; }
 }

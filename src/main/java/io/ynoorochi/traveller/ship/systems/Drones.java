@@ -15,16 +15,16 @@ public class Drones extends Items {
     /* ---------
      *  Constructor
     --------- */
-    public Drones(DroneType type) { setType(type); }
-    public Drones(DroneType type, int qtty) { 
+    public Drones(ItemTypes type) { setType(type); }
+    public Drones(ItemTypes type, int qtty) { 
         setType(type);
         setQtty(qtty);
     }
 
     /* ---------
-     *  Drone Types
+     *  Item Types
     --------- */
-    public enum DroneType {
+    public enum ItemTypes {
         PROBED( 9, 0.2, 100000, "Probe Drones"),
         ADVPRB(12, 0.2, 160000, "Advanced Probe Drones"),
         CARGOD( 7, 0.1,  70000, "Cargo Drones"),
@@ -36,7 +36,7 @@ public class Drones extends Items {
         private final double cost;
         private final String name;
         
-        private DroneType(int tl, double wt, double ct, String nm) {
+        private ItemTypes(int tl, double wt, double ct, String nm) {
             this.tl = tl;
             this.weight = wt;
             this.cost = ct;
@@ -49,9 +49,9 @@ public class Drones extends Items {
         public String getName() { return name; }
     }
     
-    private DroneType type;
-    public DroneType getType() { return this.type; }
-    public void setType(DroneType type) { this.type = type; }
+    private ItemTypes type;
+    public ItemTypes getType() { return this.type; }
+    public void setType(ItemTypes type) { this.type = type; }
 
     /* ---------
      *  Number of drones
